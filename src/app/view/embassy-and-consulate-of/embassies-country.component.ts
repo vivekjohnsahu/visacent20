@@ -97,7 +97,7 @@ export class EmbassiesCountryComponent implements OnInit {
 					var country_id_uper=data.country
 					this.title.setTitle(''+country_id_uper+' Embassies and '+country_id_uper+' Consulates & Other '+country_id_uper+' Representations world');
 					this.meta.updateTag({ name:'title',content:''+country_id_uper+' Embassies and '+country_id_uper+' Consulates & Other '+country_id_uper+' Representations world'});	
-					this.meta.updateTag({ name:'description',content:'Search for '+country_id_uper+' Embassies and '+country_id_uper+' Consulates & Other '+country_id_uper+' Representations,'+country_id_uper+' have '+this.ttl_emb+' embassies/high commissions world-wide and in addition there are '+this.ttl_cons+' consulates and '+this.ttl_rep+' other representations across other countries.'});
+					this.meta.updateTag({ name:'description',content:'Search for '+country_id_uper+' Embassies and '+country_id_uper+' Consulates & Other '+country_id_uper+' Representations, '+country_id_uper+' have '+this.ttl_emb+' embassies/high commissions world-wide and in addition there are '+this.ttl_cons+' consulates and '+this.ttl_rep+' other representations across other countries.'});
 					this.meta.updateTag({ name:'keywords',content: ''+country_id_uper+' Embassies, '+country_id_uper+' Consulates, Other '+country_id_uper+' Representations, Embassies of '+country_id_uper+', All '+country_id_uper+' Embassies and Consulate General.'});
 					this.details = data;
 					if((this.details.is_embassy>0) || (this.details.is_consulate>0) || (this.details.is_represent> 0) ){

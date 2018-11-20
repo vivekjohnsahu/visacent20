@@ -43,13 +43,13 @@
         <a class="my_btn" routerLink="/embassy-and-consulate-in/{{countryid}}">Embassies in {{countryname}}</a>
     </div><br />
 <!-- </div> -->
-<div class="container">
+<div class="container" *ngIf="!form==0">
     <div class="row">
       <div style="font-size: 18px;" class="col-md-10 col-md-offset-1">
         Currently, {{countryname}} maintains <strong>{{ttl_emb}}</strong> embassies and high commissions abroad as well as <strong>{{ttl_cons}}</strong> consulates and <strong>{{ttl_rep}}</strong> other representations. 
       </div><p style="font-size: 12px;position: relative;top: 3px;float: right;left: -131px;">The page details was last updated on <strong>{{last_updated}}</strong></p>
     </div>
-  </div><br />
+</div><br />
 <div class="container pg_" id="page-wrapper">
   <section style="padding:0px;">
           <div class="row">

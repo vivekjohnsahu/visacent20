@@ -153,10 +153,10 @@ export class EmbassiesCitysComponent implements OnInit {
 						this.of_country_slug_name = this.countydetails.of_country_slug_name;
 						this.of_country=this.countydetails.of_country
 						let lenght=this.multiCountry.length+1;
-						this.title.setTitle(''+this.name+','+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.');
-						this.meta.updateTag({ name:'title',content:''+this.name+','+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.'});
+						this.title.setTitle(''+this.name+', '+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.');
+						this.meta.updateTag({ name:'title',content:''+this.name+', '+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.'});
 						this.meta.updateTag({ name:'description',content:this.name+' '+this.in_cntname+', Get addresses, telephone numbers, email addresses, websites. '+this.of_country+' have '+ lenght+' embassies/high commissions in other cities of '+this.in_cntname+'.'});
-						this.meta.updateTag({ name:'keywords',content:this.name+' '+this.in_cntname+'. '+this.of_country+' Embassy in '+this.in_cntname+', '+this.of_country+' Embassy,'+this.of_country+' Embassy address in '+this.in_cntname+'. '+this.of_country+' Embassy address in'+this.in_cntname+'.'});
+						this.meta.updateTag({ name:'keywords',content:this.name+', '+this.in_cntname+'. '+this.of_country+' Embassy in '+this.in_cntname+', '+this.of_country+' Embassy, '+this.of_country+' Embassy address in '+this.in_cntname+'. '+this.of_country+' Embassy address in '+this.in_cntname+'.'});
 
 						if(this.countydetails.in_coutnry_flag!=''){
 							this.in_coutnry_flag = this.countydetails.in_coutnry_flag; 

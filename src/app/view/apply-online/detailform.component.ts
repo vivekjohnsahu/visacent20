@@ -142,6 +142,7 @@ export class DetailformComponent implements OnInit  {
 	otp_msg_sus_show:string;
 	nextBtn_dis=0;
 	emailValidLoader:boolean;
+	emailValidLoaderRight:boolean;
 
 	constructor(
 		private router : ActivatedRoute,
@@ -201,7 +202,7 @@ export class DetailformComponent implements OnInit  {
 		});
 		$(function() {
 			var start_year = new Date().getFullYear();
-				for (var i = start_year; i > start_year-100; i++) {
+				for (var i = start_year; i > start_year-100; i--) {
 					$('.yearSelectDOF').append('<option value="' + i + '">' + i + '</option>');
 				}
 		});
@@ -253,6 +254,7 @@ export class DetailformComponent implements OnInit  {
 			this.codeCnt = user.number.split(" ")
 			this.codeCnt = this.codeCnt[0]
 			let n =user.number.split(" ")
+			this.emailValidLoaderRight = true;
 			this.registeruser ={
 				name:user.name,
 				email:user.email,
@@ -1515,7 +1517,7 @@ export class DetailformComponent implements OnInit  {
 		});
 		$(function() {
 			var start_year = new Date().getFullYear();
-				for (var i = start_year; i > start_year-100; i++) {
+				for (var i = start_year; i > start_year-100; i--) {
 					$('.yearSelectDOF').append('<option value="' + i + '">' + i + '</option>');
 				}
 		});
@@ -1642,8 +1644,11 @@ export class DetailformComponent implements OnInit  {
 	// 		telMsg.text("");
 	// 		regisTel.removeClass('err');
 	// 	}
-	// }  
-
+	// } 
+	chekHide(){
+		this.emailValidLoaderRight=false;
+	} 
+	
 	emailVerified(){	
 		this.emailValidLoader = true;
 		this.nextBtn_dis=0	
@@ -1678,6 +1683,7 @@ export class DetailformComponent implements OnInit  {
 					}else if(data.flag == 'OTP'){
 						this.nextBtn_dis=1
 						this.emailValidLoader = false;
+						this.emailValidLoaderRight = true;
 						// $('#otplVerifiedU').trigger('click');
 						// $("#otplVerifiedU").off( "click" );
 						// $('#otplVerifiedU').click(function(){
@@ -1713,15 +1719,10 @@ export class DetailformComponent implements OnInit  {
 				if(data.status == 'SUCCESS'){
 					this.nextBtn_dis=1
 					this.process=false;
+					this.emailValidLoaderRight = true;
 					localStorage.setItem('user',JSON.stringify(data));
-					// this.modify_btn = true;
-					// this.update_btn = false;
-					$(".one").attr("disabled", true);
-					$("#flagDropVlu").attr("disabled", true);
-					$("#flagDropVlu").css({"background-color":"#ebebe5"});
-					//$(".test_article").attr("disabled", true);
-					//$(".test_article").css({"background-color":"#ebebe5"});
-					$(".one").css({"background-color":"#ebebe5"});
+					$(".disTwo").attr("disabled", true);
+					$(".disTwo").css({"background-color":"#ebebe5"});
 					if(this.modify_btn == true && this.modify_btnTwo == true && this.modify_btnThree == true && this.modify_btn == true){
 						$('.my_btn_submit').css("cursor", "pointer");
 						$('.my_btn_submit').attr("disabled", false);
@@ -1788,8 +1789,7 @@ export class DetailformComponent implements OnInit  {
 
 	forgot(){
 		this.EmailForgot=this.registeruser.email
-		$('.emailPage').css({"display":"none"})
-		// this.emailPage = false;
+		$('.emailPage').css({"display":"none"});
 		this.forgotnpage=true;
 		this.loginEmail = ""
 		this.loginPassword = ""
@@ -1815,7 +1815,6 @@ export class DetailformComponent implements OnInit  {
 					this.process=false;
 					this.forgot_msg_sus = true;
 					this.forgot_msg = 'Please check your email. Password has been sent to your mail.';
-					// this.loginpage = false;
 				}else if(data.status == 'ERROR'){
 					this.process=false;
 					this.forgot_msg_error = true;
@@ -1827,7 +1826,6 @@ export class DetailformComponent implements OnInit  {
 	login(){
 		this.loginEmail=this.registeruser.email
 		$('.emailPage').css({"display":"block"})
-		// this.emailPage = true;
 		this.forgotnpage=false;
 		this.forgot_msg_sus = false;
 		this.forgot_msg_error = false;

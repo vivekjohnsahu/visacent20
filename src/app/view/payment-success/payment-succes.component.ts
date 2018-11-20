@@ -16,7 +16,9 @@ export class PaymentSuccesComponent implements OnInit {
 	ngOnInit() {
 		this.router.params.subscribe(val => {
 			this.paymentId = this.router.snapshot.params["id"];
-			this.paymentId = atob(this.paymentId)
+			console.log(this.paymentId)
+			this.paymentId = atob(this.paymentId);
+			console.log(this.paymentId)
 		})
 	}
 

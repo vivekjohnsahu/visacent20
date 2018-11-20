@@ -39,7 +39,7 @@
                                             <label id="lbl_name">Name <i class="fas fa-pencil-alt"></i></label>
                                         </div>
                                         <div class="element_container">
-                                            <input maxlength="40" [disabled]="inpu_disabled_val=='1'" class="one nameOne" [ngClass]="{'borderColor': name.invalid && ( name.dirty || name.touched),'enable_white':inpu_disabled_val=='0'}" required #name="ngModel" type="text" name="name" [(ngModel)]="registeruser.name" (focus)="cleanerror()" />
+                                            <input maxlength="40" [disabled]="inpu_disabled_val=='1'" class="one disTwo nameOne" [ngClass]="{'borderColor': name.invalid && ( name.dirty || name.touched),'enable_white':inpu_disabled_val=='0'}" required #name="ngModel" type="text" name="name" [(ngModel)]="registeruser.name" (focus)="cleanerror()" />
                                         </div>
                                     </div>
                                     <div class="col-sm-3 col-xs-6">
@@ -47,9 +47,13 @@
                                             <label id="lbl_email">Email <i class="far fa-envelope"></i></label>
                                         </div>
                                         <div class="element_container mail">
-                                            <input class="one emailOne" [disabled]="inpu_disabled_val=='1'" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched),'enable_white':inpu_disabled_val=='0'}" #email="ngModel" placeholder="demo@gmail.com" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$" type="text" name="email" [(ngModel)]="registeruser.email" (focus)="cleanerror1()" required (change)="emailVerified()"/> 
+                                            <input class="one disTwo emailOne" [disabled]="inpu_disabled_val=='1'" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched),'enable_white':inpu_disabled_val=='0'}" #email="ngModel" placeholder="demo@gmail.com" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$" type="text" name="email" [(ngModel)]="registeruser.email" (focus)="cleanerror1()" (keyup)="chekHide()" required (change)="emailVerified()"/> 
                                             <!-- (focusout)="emailVerified()" -->
                                             <img *ngIf="emailValidLoader" src="assets/images/RapidRadiantBug-small.gif" alt="image" >
+                                            <div style=" position: absolute;
+                                            top: 6px;
+                                            right: 7px;
+                                            width: 22px;" *ngIf="emailValidLoaderRight"><i style="color: green;" class="fas fa-check-circle"></i></div>
                                         <span class="emailNotVerified" style="color:red;"></span>
                                         </div>
                                     </div>
@@ -407,7 +411,7 @@
                                                     <div class="label_container" *ngFor="let visa of visa_selected">
                                                         <p><strong>Service Fees</strong>
                                                             <br />USD <span id="visa_serv_fee_id{{i}}">{{visa.service_fee}}</span></p>
-                                                        <p>{{visa.visa_type}}</p>
+                                                        <!-- <p>{{visa.visa_type}}</p> -->
                                                     </div>
                                                 </div>
                                                 <!--
@@ -515,10 +519,10 @@
                                 </select>
                             </div> -->
                             <div class="">
-                                <h4 style="margin-top: 7px;">{{priceSighn}}USD {{total_cost}}</h4>
+                                <h4 style="margin-top: 7px;font-size: 26px;">{{priceSighn}}USD {{total_cost}}</h4>
                             </div>
                         </div>
-                        <div class="col-md-3" style="text-align: center;margin-top: 20px;">
+                        <div class="col-md-3" style="text-align: center;margin-top: -24px;left: -112px;">
                             <!-- <div class="label_container" style="margin-bottom: 10px; display: inline-block;"> -->
                             <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha>
                             <div *ngIf="captchaError" style="color:red; position: relative; left: 94px;">*{{captchaError_msg}}</div>
@@ -528,7 +532,7 @@
                             <!-- <button type="button" (click)="formfilslide('modify')" *ngIf="!next_btn_hide" class="my_btn nextOne pull-right" style="margin-top: 22px;">
                                 <i class="" style="margin-right: 8px;"> </i> Next
                             </button> -->
-                            <button type="button" (click)="formfilslide('final')" *ngIf="!next_btn_hide" class="my_btn nextOne pull-right" style="margin-top: 22px;">
+                            <button type="button" (click)="formfilslide('final')" *ngIf="!next_btn_hide" class="my_btn nextOne pull-right" style="margin-top: -24px;">
                                 <i class="" style="margin-right: 8px;"> </i> Next
                             </button>
                             <button type="button" (click)="formfilslide('final')" *ngIf="submit_btn_hide" class="my_btn my_btn_submit pull-right" style="margin-top: 22px;border-color: #077080!important;background-color: #077080!important;">

@@ -625,7 +625,7 @@ export class OrderSummaryComponent implements OnInit {
 					cmt.arrivalData();
 					cmt.departureData();
 					cmt.previous_date('_dob',dob_day,dob_mon,dob_yr);
-					cmt.previous_date('_passport_issue_date',passport_day,passport_mon,passport_yr);
+					cmt.previous_date_issuey('_passport_issue_date',passport_day,passport_mon,passport_yr);
 					cmt.previous_date('_other_pass_date_of_issue',other_pass_date_day,other_pass_date_mon,other_pass_date_yr);
 					cmt.next_date('_passport_expiry_date',passport_expiry_date_day,passport_expiry_date_mon,passport_expiry_date_yr);
 					cmt.previous_date('_last_visited_date_of_issue',last_visited_date_day,last_visited_date_mon,last_visited_date_yr);
@@ -828,7 +828,7 @@ export class OrderSummaryComponent implements OnInit {
 				$('.month_tes1_1').append('<option value="' + ("0" + i).slice(-2) + '">' + monthtext[i - 1]  + '</option>');
 		}
 		var start_year = new Date().getFullYear();
-		for (var i = start_year; i < (start_year+50); i++) {
+		for (var i = start_year; i < (start_year+3); i++) {
 			if(i==this.arrival_year)
 				$('.year_1').append('<option value="' + i + '" selected>' + i + '</option>');
 			else	 
@@ -851,7 +851,7 @@ export class OrderSummaryComponent implements OnInit {
 				$('.departure_tes1_1').append('<option value="' + ("0" + i).slice(-2) + '">' + monthtext[i - 1]  + '</option>');
 		}
 		var start_year = new Date().getFullYear();
-		for (var i = this.arrival_year; i < (start_year+50); i++) {
+		for (var i = this.arrival_year; i < (start_year+20); i++) {
 			if(i==this.departure_year)
 				$('.year_departure_1').append('<option value="' + i + '"selected>' + i + '</option>');
 			else	 
@@ -874,7 +874,30 @@ export class OrderSummaryComponent implements OnInit {
 				$('.month'+vl).append('<option value="' + ("0" + i).slice(-2) + '">' + monthtext[i - 1]  + '</option>');
 		}
 		var start_year = new Date().getFullYear();
-		for (var i = start_year; i > start_year - 80; i--) {
+		for (var i = start_year; i > start_year - 100; i--) {
+			if(i==year)
+				$('.year'+vl).append('<option value="' + i + '"selected>' + i + '</option>');
+			else	 
+				$('.year'+vl).append('<option value="' + i + '">' + i + '</option>');
+		}
+	}
+
+	previous_date_issuey(vl,day,mon,year){
+		for (var i=1; i<=31; i++){
+			if(i==day)
+				 $('.day'+vl).append('<option value="' + i + '" selected>' + i + '</option>');
+			else	 
+				$('.day'+vl).append('<option value="' + i + '" >' + i + '</option>');
+		}
+		var monthtext=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+		for (var i=1; i<=12; i++){
+			if(i==mon)
+				$('.month'+vl).append('<option value="' + ("0" + i).slice(-2) + '"selected>' + monthtext[i - 1]  + '</option>');
+			else	 
+				$('.month'+vl).append('<option value="' + ("0" + i).slice(-2) + '">' + monthtext[i - 1]  + '</option>');
+		}
+		var start_year = new Date().getFullYear();
+		for (var i = start_year; i > start_year -20; i--) {
 			if(i==year)
 				$('.year'+vl).append('<option value="' + i + '"selected>' + i + '</option>');
 			else	 
@@ -897,7 +920,7 @@ export class OrderSummaryComponent implements OnInit {
 				$('.month'+vl).append('<option value="' + ("0" + i).slice(-2) + '">' + monthtext[i - 1]  + '</option>');
 		}
 		var start_year = new Date().getFullYear();
-		for (var i = start_year; i < (start_year+50); i++) {
+		for (var i = start_year; i < (start_year+20); i++) {
 			if(i==year)
 				$('.year'+vl).append('<option value="' + i + '"selected>' + i + '</option>');
 			else	 
