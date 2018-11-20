@@ -1,0 +1,117 @@
+.paypal-no-drop
+{
+  cursor: no-drop
+}
+
+.payment_method_ul
+{
+    list-style-type:none;
+    padding-left:0px;
+    margin: 0px;
+}
+.payment_method_ul li
+{
+    list-style-type:none;
+    padding-left:0px;
+    margin: 0px;
+    border:1px solid #005ea5;
+    margin-bottom: 12px;
+}
+.payment_method_ul li>label
+{
+    display:block;
+    width:100%;
+    padding:15px 10px;
+    background: #005ea5;
+    color: white;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-size: 19px;
+}
+.payment_method_ul li>div
+{
+    display: none;
+    padding:15px;
+}
+#paypal>div
+{
+    display:block;
+}
+.paypal_icon
+{
+    float: right;
+    background: #ffc439;
+    color: #043086;
+    border-radius: 50px;
+    padding: 2px 15px;
+    line-height: normal;
+    font-size: 12px;
+    font-family: 'Hammersmith One';
+}
+.payumoney_icon
+{
+    float: right;
+    background: #80ad0c;
+    color: white;
+    border-radius: 5px;
+    padding: 2px 8px;
+    line-height: normal;
+    font-size: 12px;
+    font-family: 'Hammersmith One';
+}
+.payment_sidebar
+{
+    padding: 15px;
+    margin-left: -15px;
+    /* margin-top: 35px; */
+    /* background: #edeef1; */
+    border: 1px solid #005ea5;
+    overflow: hidden;
+}
+.payment_sidebar h3
+{
+    margin-bottom: 5px;
+}
+.payment_sidebar ul
+{
+    list-style-type:none;
+    padding-left:0px;
+}
+.payment_sidebar ul li
+{
+    font-size: 17px;
+    margin-bottom: 3px;
+}
+@media (max-width:991px)
+{
+    .payment_sidebar
+    {
+            margin-top: 5px;
+        background: transparent;
+        overflow: hidden;
+        margin-right: -15px;
+        border: none;
+        border-top: 1px solid #e2e2e2;
+    }
+    
+    .payment_method_ul li
+    {
+        padding-left: 0px;
+        border: none;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .first_div,.second_div
+    {
+        width:50%;
+        float:left;
+    }
+}
+@media (max-width:572px)
+{
+    .first_div,.second_div
+    {
+        width:100%;
+        float:none;
+    }
+}

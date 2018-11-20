@@ -1,0 +1,10 @@
+.failed_art>h1>span
+{
+   
+    color: green;
+    border: 6px solid green;
+}
+.failed_art>h2
+{
+    color:green;
+}

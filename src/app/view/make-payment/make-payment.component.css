@@ -1,0 +1,32 @@
+.borderColor{
+    border: 1px solid red;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button
+{ 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+.phone_dropdown
+{
+    position: relative;
+}
+.phone_dropdown select
+{
+    position: absolute;
+    width:64px;top:0px;left:0px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.phone_dropdown input[type="number"]
+{
+    padding-left:74px;
+}
+.paypal-no-drop
+{
+  cursor: no-drop
+}
