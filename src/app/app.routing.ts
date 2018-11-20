@@ -129,6 +129,20 @@ import { PaymentFailedComponent } from './view/payment-failed/payment-failed.com
 		}
 		},
 		{
+			path: 'apply-visa-tool',
+			component: ApplyEVisaComponent,
+			data: {
+				title: 'apply-e-visa'
+		}
+		},
+		{
+			path: 'visa-requirements',
+			component: ApplyEVisaComponent,
+			data: {
+				title: 'apply-e-visa'
+		}
+		},
+		{
 			path: 'apply-e-visa/:id',
 			component: ApplyEVisaComponent,
 			data: {
@@ -142,8 +156,6 @@ import { PaymentFailedComponent } from './view/payment-failed/payment-failed.com
 				title: 'about-us'
 		}
 		},
-
-
 		{
 			path: 'contact-us',
 			component: ContactUsComponent,

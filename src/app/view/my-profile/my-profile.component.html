@@ -284,10 +284,17 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="row" *ngIf="(order1.payment_status=='pending' && order1.is_info_complete=='1')">
+                        <div  class="col-md-12" style="padding:0px;position: relative;left: 15px" *ngIf="!(order1.payment_status=='pending' && order1.is_info_complete=='1') && !(order1.payment_status=='done')">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <strong class="left_label">Please fill application details and make payment and further processing</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xs-12">
-                                <input type="button" style="margin:2px" name="btn" class="my_btn" (click)="payNow(i)" value="Pay Now">
-                                <input type="button" name="btn" class="my_btn my_btn_red pull-right" (click)="delete(i,order1.order_id)" value="Delete">
+                                <input *ngIf="(order1.payment_status=='pending' && order1.is_info_complete=='1')" type="button" style="margin:2px" name="btn" class="my_btn" (click)="payNow(i)" value="Pay Now">
+                                <input *ngIf="order1.payment_status=='pending'" type="button" name="btn" class="my_btn my_btn_red pull-right" (click)="delete(i,order1.order_id)" value="Delete">
                             </div>
                         </div>
                         <div  class="col-md-6" style="padding:0px" [hidden]="!(order1.payment_status=='done')">
@@ -298,13 +305,6 @@
                                 <div class="col-xs-8">
                                     <p>{{order1.txn_id}}</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div  class="col-md-12" style="padding:0px;position: relative;left: 15px" *ngIf="!(order1.payment_status=='pending' && order1.is_info_complete=='1') && !(order1.payment_status=='done')">
-                        <div class="row">
-                            <div class="col-xs-8">
-                                <strong class="left_label">Please fill application details and make payment and further processing</strong>
                             </div>
                         </div>
                     </div>

@@ -79,7 +79,8 @@ export class VisaStatusComponent implements OnInit {
 				}else if(data.status=='ERROR'){
 					this.process = false;
 					this.StutasError = true;
-					this.StutasErrorMsg = data.msg;  
+					this.StutasErrorMsg = data.msg;
+					localStorage.removeItem('user');  
                     $(document).ready(function(){
 						setTimeout(function(){
                             $('#myalert').fadeOut('fast');}, 3000);

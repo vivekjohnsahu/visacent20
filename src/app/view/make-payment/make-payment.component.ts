@@ -219,7 +219,7 @@ export class MakePaymentComponent implements OnInit {
 					this.emailq = data.email;
 					this.productinfo = data.productinfo;
 					this.surl = 'https://visacent.com/payu-success';
-					this.furl = 'http://visacent.com/payment-failed';
+					this.furl = 'http://visacent.com/payment-failed/'+btoa(this.orderID);
 					setTimeout(() => {
 						$("#customButtonMoney").submit();	
 					},200);	

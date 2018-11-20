@@ -270,7 +270,7 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 					this.emailq = data.email;
 					this.productinfo = data.productinfo;
 					this.surl = 'https://visacent.com/payusuccess';
-					this.furl = 'http://visacent.com/payment-failed';
+					this.furl = 'http://visacent.com/payment-failed/'+btoa(this.orderID);
 					setTimeout(() => {
 						$("#customButtonMoney").submit();	
 					},200);	

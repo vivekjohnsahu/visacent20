@@ -318,63 +318,65 @@
     </div>
 
     <!--------------------end table section ---------------------->
-    <section class="section_20" [hidden]="documents_req==null">
-        <div class="container">
-            <div class="intro_container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <article class="instruction">
-                            <div>
-                                <h2 style="text-transform: capitalize;"><i class="fas fa-clipboard-list"></i> Documents Required for {{country_ctn}} Visa-</h2>
-                            </div>
-                            <ol style="padding-left:25px;">
-                                <li><span [innerHTML]="documents_req"></span></li>
-                            </ol>
-                        </article>
+    <section [hidden]="tableRegular">
+        <section class="section_20" [hidden]="documents_req==null">
+            <div class="container">
+                <div class="intro_container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <article class="instruction">
+                                <div>
+                                    <h2 style="text-transform: capitalize;"><i class="fas fa-clipboard-list"></i> Documents Required for {{country_ctn}} Visa-</h2>
+                                </div>
+                                <ol style="padding-left:25px;">
+                                    <li><span [innerHTML]="documents_req"></span></li>
+                                </ol>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="section_20" [hidden]="visa_req==null">
-        <div class="container">
-             <div class="intro_container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <article class="instruction">
-                            <div>
-                                <h2 style="text-transform: capitalize;"><i class="fas fa-paste"></i> Entry Requirements For {{country_ctn}} EVisa</h2>
-                            </div>
-                            <ol>
-                                <li><span [innerHTML]="visa_req"></span></li>   
-                            </ol>
-                        </article>
+        </section>
+        <section class="section_20" [hidden]="visa_req==null">
+            <div class="container">
+                <div class="intro_container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <article class="instruction">
+                                <div>
+                                    <h2 style="text-transform: capitalize;"><i class="fas fa-paste"></i> Entry Requirements For {{country_ctn}} EVisa</h2>
+                                </div>
+                                <ol>
+                                    <li><span [innerHTML]="visa_req"></span></li>   
+                                </ol>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="section_20" [hidden]="faq==null">
-        <div class="container">
-            <div class="intro_container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <article class="instruction">
-                            <div>
-                                <h2><i class="fas fa-question-circle"></i> FAQs</h2>
-                            </div>
-                            <div *ngFor="let f of faqQuestionAnswArry;">
-                                    <!-- <label style="text-transform: capitalize;">Q. Define {{country_ctn}} ETA(Electronic Travel Authority)?</label> -->
-                                    <ul class="faq_list">
-                                        <li [innerHTML]="f.question"></li> 
-                                        <li [innerHTML]="f.answer"></li>    
-                                    </ul>
-                                </div>    
-                        </article>
+        </section>
+        <section class="section_20" [hidden]="faq==null">
+            <div class="container">
+                <div class="intro_container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <article class="instruction">
+                                <div>
+                                    <h2><i class="fas fa-question-circle"></i> FAQs</h2>
+                                </div>
+                                <div *ngFor="let f of faqQuestionAnswArry;">
+                                        <!-- <label style="text-transform: capitalize;">Q. Define {{country_ctn}} ETA(Electronic Travel Authority)?</label> -->
+                                        <ul class="faq_list">
+                                            <li [innerHTML]="f.question"></li> 
+                                            <li [innerHTML]="f.answer"></li>    
+                                        </ul>
+                                    </div>    
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </section>
 </section>
 <div *ngIf="pade_error_show">

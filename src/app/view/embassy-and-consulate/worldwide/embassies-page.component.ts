@@ -29,7 +29,7 @@ export class EmbassiesPageComponent implements OnInit {
 		this.title.setTitle('Get information of Embassy and consulate worldwide, Search embassies and consulates around the world');
 		this.meta.updateTag({ name:'title',content:'Get information of Embassy and consulate worldwide, Search embassies and consulates around the world'});
 		this.meta.updateTag({ name:'description',content:'Get information of Embassy and consulate worldwide Our aim is to provide a comprehensive directory that makes your searching of embassies and consulates around the world easy and accurate with all the information of embassy and consulate addresses, contact numbers, fax numbers, email addresses, working hours, etc. Apply e-Visa'});
-		this.meta.updateTag({ name:'keywords',content:'information of Embassy and consulate worldwide, Search embassies and consulates around the world,world embassies list, embassies directory, online embassy services, online visa apply, embassy and counslate'});
+		this.meta.updateTag({ name:'keywords',content:'information of Embassy and consulate worldwide, Search embassies and consulates around the world, world embassies list, embassies directory, online embassy services, online visa apply, embassy and counslate'});
 	}
 
 	country:any;
