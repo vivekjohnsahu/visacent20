@@ -7,7 +7,7 @@
                       <span><i class="fas fa-check-circle"></i></span>
                   </h1>
                   <h2 class="text-center">Payment Success</h2>
-                  <div *ngIf="!paymentId==''">
+                  <div [hidden]="paymentId==''">
                         <p class="text-center">
                             Application ID:
                             <strong>{{paymentId}}</strong>
