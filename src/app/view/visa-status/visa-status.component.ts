@@ -60,7 +60,7 @@ export class VisaStatusComponent implements OnInit {
 		}
 		this.visaStatusService.visaStatus(this.key).subscribe(
 			data =>{
-				if(this.is_login_user!== 1){
+				if(this.is_login_user == 0){
 					localStorage.setItem('user',JSON.stringify(data.user_data));
 				}
 				if(data.status=='SUCCESS'){
@@ -80,7 +80,6 @@ export class VisaStatusComponent implements OnInit {
 					this.process = false;
 					this.StutasError = true;
 					this.StutasErrorMsg = data.msg;
-					localStorage.removeItem('user');  
                     $(document).ready(function(){
 						setTimeout(function(){
                             $('#myalert').fadeOut('fast');}, 3000);

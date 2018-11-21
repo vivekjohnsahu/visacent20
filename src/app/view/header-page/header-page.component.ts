@@ -14,6 +14,8 @@ export class HeaderPageComponent implements OnInit {
 	userName:any;
 	access:any;
 	processmy:boolean;
+	profile_user:any;
+	profile_user_show:any;
 
 	constructor
 	(
@@ -71,7 +73,13 @@ export class HeaderPageComponent implements OnInit {
 			},30000);
 			
 		}); 
-				
+		
+		this.profile_user = JSON.parse(localStorage.getItem('user'));
+		if(this.profile_user!=null && this.profile_user!=undefined){
+			this.profile_user_show = 1
+		}else{
+			this.profile_user_show = 0
+		}
 	}
 
 	update_access_token_time(){
@@ -126,15 +134,17 @@ export class HeaderPageComponent implements OnInit {
 	}
 
 	userLocal(){
-		var user = JSON.parse(localStorage.getItem('user'));	
-		if(user!==null && user!==undefined){	
-			this.userName = user.name;
-			$('#login_li').hide();
-			$('#accnt_li').show();
-		}else{
-			$('#login_li').show();
-			$('#accnt_li').hide();
-		}
+		if(this.profile_user_show==1){
+			var user = JSON.parse(localStorage.getItem('user'));
+			if(user!==null && user!==undefined){
+				this.userName = user.name;
+				$('#login_li').hide();
+				$('#accnt_li').show();
+			}else{
+				$('#login_li').show();
+				$('#accnt_li').hide();
+			}
+		}		
 	}
 
 	logOut(){

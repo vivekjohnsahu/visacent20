@@ -18,15 +18,16 @@
                         <a id="profile" class="social-button google" title="Profile">
                             <i class="fa fa-user" aria-hidden="true"></i> <span style="margin-left: 5px;">{{userName}}</span></a>
                         <div id="profile_trans" class="lang_select">
-                            <a id="" routerLink="my-profile" class="social-button" title="My Profile">
+                            <a  routerLink="my-profile" class="social-button" title="My Profile">
                                 <i>My Profile</i>
                             </a>
                             <a (click)="logOut()" id="" class="social-button" title="Log Out" style="padding-top:0px;">
                                 <i>Log Out</i>
                             </a>
+                            {{this.userLocal()}}
                         </div>
                     </li>
-                    {{this.userLocal()}}
+                    
                     <!-- <li class="lang">
                         <a id="language" class="social-button" title="Language">
                             <img src="assets/images/us.png" style="width:30px;" /> <i class="fas fa-angle-down" style="margin-left: 5px;"></i>
@@ -63,7 +64,7 @@
                         <a routerLink="apply-e-visa" title="Apply e-Visa">Apply e Visa</a>
                     </li>
                     <li class="dropdown">
-                        <a routerLink="apply-visa-tool" title="Apply e-Visa">Visa Apply Tool</a>
+                        <a routerLink="apply-visa-tool" title="Visa Apply Tool">Visa Apply Tool</a>
                     </li>
                     <li class="dropdown">
                         <a routerLink="embassy-and-consulate/worldwide" title="Embassy">Embassy</a>
