@@ -174,7 +174,7 @@ export class ApplyVisaComponent implements OnInit {
 			data =>{
 				this.countydetails = data.data;
 				this.countydetailsNew = data.data;
-				if(this.countydetailsNew==''){
+				if(this.countydetailsNew=='' && this.tableViasaToggle==false){
 					this.Errortable = true;
 				}
 				this.consulateAd=new Array();

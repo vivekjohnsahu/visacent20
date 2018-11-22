@@ -35,6 +35,7 @@ export class MakePaymentComponent implements OnInit {
 	paymentButtonShow:boolean;
 	regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
 	user_phone:any;
+	order_id_random_paypal:any;
 
   	constructor(
 		private flagValueService:FlagValueService,
@@ -79,6 +80,13 @@ export class MakePaymentComponent implements OnInit {
 			}	
 		})
 
+		function guidId() {
+			function s5() {
+			  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+			}
+			return s5() + s5();
+		}
+		this.order_id_random_paypal = guidId().toUpperCase()
 	}
 
 	paypalPayment(){
@@ -114,7 +122,7 @@ export class MakePaymentComponent implements OnInit {
 				scrollTop: $("#mackPaymentScrool").offset().top
 			}, 800);
 			return;
-		}, 500);
+		}, 300);
 			
 	}
 
@@ -138,7 +146,7 @@ export class MakePaymentComponent implements OnInit {
 										price:this.amount,
 										tax: "0",
 										currency: "USD",
-										sku: this.order_id,
+										sku: this.order_id_random_paypal,
 									}
 								]
 							}
@@ -194,7 +202,7 @@ export class MakePaymentComponent implements OnInit {
 		this.paymentGateService.makePaymentComplete(key).subscribe(
 			data => {
 				if(data.status ='SUCCESS'){
-					this.routers.navigate(['payment-success']);
+					this.routers.navigate(['payment-success/'+btoa(this.order_id_random_paypal)]);
 				}else if(data.status ='ERROR') {
 					// do nothing
 				}else{
@@ -208,9 +216,9 @@ export class MakePaymentComponent implements OnInit {
 			function s4() {
 			  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 			}
-			return s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
+			return s4() + s4();
 		}
-		this.order_id_random = guid()
+		this.order_id_random = guid().toUpperCase()
 		var productinfo = 'Make Payment'
 		var key=this.order_id_random+'##'+this.amount+'##'+this.name+'##'+this.email+'##'+this.phone+'##'+productinfo;	
 		var uMoneykey = btoa(btoa(key))
