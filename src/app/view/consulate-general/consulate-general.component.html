@@ -86,7 +86,7 @@
                                         <p>
                                             <strong>Email: </strong>
                                             <span *ngIf="emai!=0">
-                                            <a href="mailto:{{port}}" title="{{port}}" *ngFor="let port of email"><span [innerHTML]="port"></span><br></a>
+                                            <a href="mailto::{{port}}" title="{{port}}" *ngFor="let port of email"><span [innerHTML]="port"></span><br></a>
                                             </span>
                                             <span *ngIf="emai==0">
                                             <span>NA</span>
@@ -181,7 +181,7 @@
                             <p style="margin-bottom:6px;">
                                 <strong>Email: </strong>
                                 <span *ngIf="multi.lnth!=0">
-                                <a href="mailto:{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                <a href="mailto::{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                                 </span>
                                 <span *ngIf="multi.lnth==0">
                                 <span>NA</span>
@@ -240,7 +240,7 @@
                         <p style="margin-bottom:6px;">
                             <strong>Email: </strong>
                             <span *ngIf="multi.lnth!=0">
-                            <a href="mailto:{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                            <a href="mailto::{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                             </span>
                             <span *ngIf="multi.lnth==0">
                             <span>NA</span>

@@ -1,0 +1,85 @@
+.no_visa_cont
+{
+    width:135px;
+    margin:15px auto 0px auto;
+    border:4px solid #F44336;
+    position:relative;
+    border-radius: 50%;
+}
+.no_visa_cont>i
+{
+    display:block;
+    width:100%;
+    height:100%;
+    
+}
+.no_visa_cont:before
+{
+    position: absolute;
+    content: "";
+    width: 103%;
+    height: 4px;
+    background-color: #F44336;
+    left: -6px;
+    top: 70px;
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.no_visa_cont>i:first-child
+{
+    display: block;
+    font-size: 85px;
+    background: white;
+    line-height: 135px;
+    text-align: center;
+    border-radius: 50%;
+}
+.e_visa
+{
+    width:100%;
+    height:500px;
+    background-color:red;
+}
+.ap_head
+{
+    position: relative;
+    margin-bottom: 25px;
+}
+.ap_head:before
+{
+    position: absolute;
+    content: "";
+    width:130px;
+    height:2px;
+    background-color:black;
+    bottom: -10px;
+    left:0px;
+    right:0px;
+    margin-right:auto;
+    margin-left:auto;
+}
+.select_cont
+{
+    width:350px;margin-left:auto;
+}
+.select_cont select
+{
+    height:40px;
+    border: 1px solid #ddd;
+}
+@media (max-width:767px)
+{
+    .select_cont
+    {
+        margin-left: auto;
+        margin-right:auto;
+    }  
+}
+@media (min-width:1400px)
+{
+    .select_cont select
+    {
+        height:45px;
+    } 
+}

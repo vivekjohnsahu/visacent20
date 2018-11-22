@@ -109,6 +109,13 @@ export class MakePaymentComponent implements OnInit {
 			return;
 		}	
 		this.paymentButtonShow=true;
+		setTimeout(() => {
+			$('html, body').animate({
+				scrollTop: $("#mackPaymentScrool").offset().top
+			}, 800);
+			return;
+		}, 500);
+			
 	}
 
     paypalConfig = {
@@ -233,7 +240,7 @@ export class MakePaymentComponent implements OnInit {
 
 	amountClear(){
 		$('.amount_req').removeClass('borderColor');
-		if(this.amount==null){
+		if(this.amount==null || this.amount==undefined || this.amount==''){
 			$('.amount_req').addClass('borderColor');
 			this.paymentButtonShow=false;
 		}
@@ -248,6 +255,13 @@ export class MakePaymentComponent implements OnInit {
 			$('.email_req').addClass('borderColor');
 			this.paymentButtonShow=false;
 		}
+	}
+
+	isNumberKey(evt){
+		var charCode = (evt.which) ? evt.which : evt.keyCode
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+			return false;
+		return true;
 	}
 
 }

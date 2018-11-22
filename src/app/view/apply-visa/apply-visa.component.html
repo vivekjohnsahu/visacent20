@@ -33,19 +33,129 @@
                 <p style="color:#005ea5;font-size: 27px;text-transform: capitalize;">visa not required</p>
             </div>
         </div>
-        <div [hidden]="!tableRegular" style="text-align: center;margin-top:15px;">
-            <div class="errorshow">
-                <p class="container" >
-                    <i class="far fa-hand-point-right" style="color:#005ea5;"></i>&nbsp; Citizens of the <span style="text-transform: capitalize;">{{country_ctn}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{bnewCnty}}</span> diplomatic mission or one of 
-                    its authorized visa agents outside <span style="text-transform: capitalize;">{{bnewCnty}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
-                    prepare the required documentation.
-                </p>
-            </div>
-        </div>
         
     </div>
 </section>
-
+<div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 200px;padding-right: 200px;">
+    <div class="errorshow">
+        <p> Citizens of the India must obtain a visa in advance. You have to apply for a visa through a Egypt diplomatic mission or one of its authorized visa agents outside 
+            Egypt. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
+    </div>
+</div>
+<div [hidden]="!tableRegular" style="text-align: center;">
+        <div class="errorshow" style="color:#333;">
+            <div class="my1">
+                <section class="section_20" *ngFor="let details of consulateAd">
+                    <div id="embassy_flex_cont">
+                        <div>
+                            <article class="embassy_info_left">
+                                <div class="info_div" style="position: relative;text-align: left;">
+                                    <div class="city_name">
+                                        <h3><a title="{{details.name}}" routerLink="/consulate-general/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
+                                    </div>
+                                    <h3><span>Address: </span></h3>
+                                    <p [innerHTML]="details.Address">
+                                    </p>
+                                    <p>
+                                        <strong>Phone: </strong>
+                                        <span *ngIf="details.lnthTelepone!=0">
+                                        <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span></a>
+                                        </span>
+                                        <span *ngIf="details.lnthTelepone==0">
+                                        <span>NA</span>
+                                        </span>
+                                        <br><strong>Fax: </strong>
+                                        <span *ngIf="details.lnthFax!=0">
+                                        <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span></a>
+                                        </span> 
+                                        <span *ngIf="details.lnthFax==0">
+                                        <span>NA</span>
+                                        </span>		
+                                    </p>
+                                    <p>
+                                        <strong>Email: </strong>
+                                        <span *ngIf="details.lnthE_maiil!=0">
+                                        <a class="gmailhide" href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span></a>
+                                        </span>
+                                        <span *ngIf="details.lnthE_maiil==0">
+                                        <span>NA</span>
+                                        </span>
+                                        <br><strong>Website: </strong>
+                                        <span *ngIf="details.lnthwebsite!=0">
+                                        <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
+                                        </span>
+                                        <span *ngIf="details.lnthwebsite==0">
+                                        <span>NA</span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="emb_location_div">
+                            <div class="map">
+                                <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="my1">
+                <section class="section_20" *ngFor="let details of EmbassyAd">
+                    <div id="embassy_flex_cont">
+                        <div>
+                            <article class="embassy_info_left">
+                                <div class="info_div" style="position: relative;text-align: left;">
+                                    <div class="city_name">
+                                        <h3><a title="{{details.name}}" routerLink="/embassy/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
+                                    </div>
+                                    <h3><span>Address: </span></h3>
+                                    <p [innerHTML]="details.Address">
+                                    </p>
+                                    <p>
+                                        <strong>Phone: </strong>
+                                        <span *ngIf="details.lnthTelepone!=0">
+                                        <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span></a>
+                                        </span>
+                                        <span *ngIf="details.lnthTelepone==0">
+                                        <span>NA</span>
+                                        </span>
+                                        <br><strong>Fax: </strong>
+                                        <span *ngIf="details.lnthFax!=0">
+                                        <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span></a>
+                                        </span> 
+                                        <span *ngIf="details.lnthFax==0">
+                                        <span>NA</span>
+                                        </span>		
+                                    </p>
+                                    <p>
+                                        <strong>Email: </strong>
+                                        <span *ngIf="details.lnthE_maiil!=0">
+                                        <a class="gmailhide" href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span></a>
+                                        </span>
+                                        <span *ngIf="details.lnthE_maiil==0">
+                                        <span>NA</span>
+                                        </span>
+                                        <br><strong>Website: </strong>
+                                        <span *ngIf="details.lnthwebsite!=0">
+                                        <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
+                                        </span>
+                                        <span *ngIf="details.lnthwebsite==0">
+                                        <span>NA</span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="emb_location_div">
+                            <div class="map">
+                                <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 <section class="table_section section_20" *ngIf='tableViasaToggle' style="padding-top:0px;">
     <div class="container table_data">
         <div class=" table_div">
@@ -178,7 +288,7 @@
         </div>
     </div>
 </section>
-<section class="section_20 country_specification">
+<section class="section_20 country_specification" [hidden]="tableRegular">
     <div class="container">
         <h2 class="text-center" style="text-transform: uppercase;">{{country_ctn}}</h2>
         <div class="row" *ngIf="(documents_req==null && visa_req==null && faq==null) || intro==null">

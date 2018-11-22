@@ -50,7 +50,7 @@
                         <p>
                             <strong>Email: </strong>
                             <span *ngIf="details.lnthE_maiil!=0">
-                            <a class="gmailhide" href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span></a>
+                            <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span></a>
                             </span>
                             <span *ngIf="details.lnthE_maiil==0">
                             <span>NA</span>
