@@ -134,17 +134,15 @@ export class HeaderPageComponent implements OnInit {
 	}
 
 	userLocal(){
-		if(this.profile_user_show==1){
-			var user = JSON.parse(localStorage.getItem('user'));
-			if(user!==null && user!==undefined){
-				this.userName = user.name;
-				$('#login_li').hide();
-				$('#accnt_li').show();
-			}else{
-				$('#login_li').show();
-				$('#accnt_li').hide();
-			}
-		}		
+		var user = JSON.parse(localStorage.getItem('user'));	
+		if(user!==null && user!==undefined){	
+			this.userName = user.name;
+			$('#login_li').hide();
+			$('#accnt_li').show();
+		}else{
+			$('#login_li').show();
+			$('#accnt_li').hide();
+		}
 	}
 
 	logOut(){

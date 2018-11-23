@@ -86,6 +86,7 @@ export class VisaTableComponent implements OnInit {
 	countydetails:any;
 	consulateAd:any;
 	EmbassyAd:any;
+	Errortable:boolean;
 
   	ngOnInit(){
 		this.ngProgress.start();
@@ -152,21 +153,25 @@ export class VisaTableComponent implements OnInit {
 					this.requirementCountryName = this.nationalityChange + '/' + this.travellingChange;
 					
 					if(this.visaTable.length == 0){
+						this.Errortable = true;
 						this.tableShow = false;
 						this.tableRequired = false;
 						this.tableRegular = true;  
 						this.dataShow = false;
 					}else if(this.visaTable[0].visa_type!= 0){
+						this.Errortable = false;
 						this.tableShow = true;
 						this.tableRequired = false;
 						this.tableRegular = false;
 						this.dataShow = false;
 					}else if(this.visaTable[0].visa_not_required!= 0){
+						this.Errortable = false;
 						this.tableShow = false;
 						this.tableRequired = true;
 						this.tableRegular = false;
 						this.dataShow = false;
 					}else{
+						this.Errortable = false;
 						this.tableShow = false;
 						this.tableRequired = false;
 						this.tableRegular = true; 
@@ -219,8 +224,14 @@ export class VisaTableComponent implements OnInit {
 		this.router.navigate(["requirement",this.visaUrl]);
 		this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
 			data => {
-				this.visaTable = data.visa;
-				this.dataShow = false;
+				if(data.status=="SUCCUSS"){
+					this.visaTable = data.visa;
+					this.dataShow = false;
+				}else if(data.status=="FAIL"){
+					this.Errortable = true;
+				}else{
+					// do nothing
+				}
 			})
 	}
 	

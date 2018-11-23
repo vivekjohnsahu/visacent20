@@ -466,8 +466,10 @@ userDas(){
 		$('#delete_cnt_apli').click(function(){
 			var access_token = JSON.parse(localStorage.getItem('user'));
 			var access_token_get = access_token.access_token;
-			var token = btoa(access_token_get +'###'+ cmt.userId +'###'+ orderId+'###')
+			var token = btoa(access_token_get +'###'+ cmt.userId +'###'+ orderId+'###');
 			cmt.orders_user.splice(i,1)
+			// cmt.orders_user = cmt.orders_user;
+			cmt.UserOrders_user = cmt.orders_user;
 			cmt._deleteOrder.userDeleteOrd(token).subscribe(
 				data =>{
 					if(data.status=='SUCCESS'){

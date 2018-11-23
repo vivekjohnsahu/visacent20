@@ -17,9 +17,9 @@
             <div class="col-lg-4 col-md-4 col-lg-push-7 col-md-push-8">
                 <div class="contact_side">
                     <ul>
-                        <li class="active_content">Request a callback</li>
-                        <li><span>Report an offence</span></li>
-                        <li><span>Find immigration advice</span></li>
+                        <li id="RequestValue" (click)="type1()" class="active_content">Request a callback</li>
+                        <li><span id="ReportValue" (click)="type2()">Report an offence</span></li>
+                        <li><span id="FindValue" (click)="type3()">Find immigration advice</span></li>
                     </ul>
 <!--
                     <h3 id="RequestValue" (click)="type1()" ><span class="active_content">Request a callback</span></h3>
@@ -97,10 +97,10 @@
 						<div class="row">
 							<div class="col-sm-12">
                                 <div class="label_container">
-                                    <label>Message <i class="fas fa-pencil-alt"></i></label>
+                                    <label id="lbl_mag">Message <i class="fas fa-pencil-alt"></i></label>
                                 </div>
 								<div class="element_container">
-                                    <textarea name="massage" [(ngModel)]="contactU.mag" autosize style="min-height: 130px;border: 1px solid #b5b5b5;"></textarea>
+                                    <textarea class="magOne" name="massage" (keyup)="cleanMsg()" [(ngModel)]="contactU.mag" autosize style="min-height: 130px;border: 1px solid #b5b5b5;"></textarea>
                                 </div>
 							</div>
 						</div>

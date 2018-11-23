@@ -133,6 +133,13 @@ export class ContactUsComponent implements OnInit {
 			{
 				fild='lbl_email'
 			}	
+		}if(this.contactU.mag == "" || this.contactU.mag == undefined){
+			$(".magOne").css('border-color','red');
+			flag=1;
+			if(fild=='')
+			{
+				fild='lbl_mag';
+			}
 		}if(this.grecaptcha === undefined){
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
@@ -186,6 +193,9 @@ export class ContactUsComponent implements OnInit {
 	}
 	cleanGmail(){
 		$(".emailOne").removeClass("borderColor");
+	}
+	cleanMsg(){
+		$(".magOne").css('border-color','#b5b5b5');
 	}
 	
 }

@@ -25,7 +25,9 @@
                 <div class="drop_container embassy_of">
                     <h3 style="color:#005ea5;">I need visa for</h3>
                     <form>
-                        <select name="needvisa" (change)="changeNeedVisa($event.target)" class="enable_white" style="border: 1px solid #ddd;">
+                            <!-- (change)="changeNeedVisa($event.target)" -->
+
+                        <select name="needvisa" (change)="visafor1($event.target)"  class="enable_white" style="border: 1px solid #ddd;">
                             <option disabled>Choose Country</option>
                             <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name">{{list.name}}</option>
                             <option disabled >-----------</option>
@@ -187,7 +189,7 @@
                 <p style="color:#005ea5;font-size: 27px;text-transform: capitalize;">visa not required</p>
             </div>
         </div>
-        <div [hidden]="!tableRegular" style="text-align: center;margin-top:15px;">
+        <!-- <div [hidden]="!tableRegular" style="text-align: center;margin-top:15px;">
             <div class="errorshow" >
                 <p class="container" style="color:#333;">
                     <i class="far fa-hand-point-right" style="color:#005ea5;"></i>&nbsp; Citizens of the <span style="text-transform: capitalize;">{{belongCnty}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{country_ctnSet}}</span> diplomatic mission or one of 
@@ -195,15 +197,14 @@
                     prepare the required documentation.
                 </p>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
-<section class="section_20 country_specification" *ngIf="selectChangeCntry">
+<section class="section_20 country_specification" *ngIf="visa_req_sec">
     <div class="container">
         <h2 class="text-center" style="text-transform: uppercase;">{{country_ctnSet}}</h2>
         <div class="row" *ngIf="(documents_req==null && visa_req==null && faq==null) || intro==null">
             <div class="col-md-12 countray_flag">
-                <!-- <h2 class="text-center" style="text-transform: uppercase;">{{country_ctnSet}}</h2> -->
                 <aside class="text-center">
                     <img src={{visa_flag}} class="" style="margin: 0 auto;" />
                 </aside>
@@ -298,7 +299,7 @@
         </div>
     </section>
 </section>
-<section class="section_20" *ngIf="!selectChangeCntry">
+<section class="section_20" *ngIf="con_visa_req_sec">
     <div class="container">
         <div class="row" style="font-size: 20px;text-align: center;">
             VisaCent commits to deliver open information on visa requirements for all the countries. The technical advancement represents the our mission to foster industry innovation.
@@ -309,3 +310,120 @@
     </div>
 </section>
 
+
+
+<div *ngIf="cnt_emb" style="text-align: center;">
+    <div class="errorshow" style="color:#333;">
+        <div class="my1">
+            <section class="section_20" *ngFor="let details of consulateAd">
+                <div id="embassy_flex_cont">
+                    <div>
+                        <article class="embassy_info_left">
+                            <div class="info_div" style="position: relative;text-align: left;">
+                                <div class="city_name">
+                                    <h3><a title="{{details.name}}" routerLink="/consulate-general/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
+                                </div>
+                                <h3><span>Address: </span></h3>
+                                <p [innerHTML]="details.Address">
+                                </p>
+                                <p>
+                                    <strong>Phone: </strong>
+                                    <span *ngIf="details.lnthTelepone!=0">
+                                    <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span></a>
+                                    </span>
+                                    <span *ngIf="details.lnthTelepone==0">
+                                    <span>NA</span>
+                                    </span>
+                                    <br><strong>Fax: </strong>
+                                    <span *ngIf="details.lnthFax!=0">
+                                    <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span></a>
+                                    </span> 
+                                    <span *ngIf="details.lnthFax==0">
+                                    <span>NA</span>
+                                    </span>		
+                                </p>
+                                <p>
+                                    <strong>Email: </strong>
+                                    <span *ngIf="details.lnthE_maiil!=0">
+                                    <a class="gmailhide" href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span></a>
+                                    </span>
+                                    <span *ngIf="details.lnthE_maiil==0">
+                                    <span>NA</span>
+                                    </span>
+                                    <br><strong>Website: </strong>
+                                    <span *ngIf="details.lnthwebsite!=0">
+                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
+                                    </span>
+                                    <span *ngIf="details.lnthwebsite==0">
+                                    <span>NA</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="emb_location_div">
+                        <div class="map">
+                            <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="my1">
+            <section class="section_20" *ngFor="let details of EmbassyAd">
+                <div id="embassy_flex_cont">
+                    <div>
+                        <article class="embassy_info_left">
+                            <div class="info_div" style="position: relative;text-align: left;">
+                                <div class="city_name">
+                                    <h3><a title="{{details.name}}" routerLink="/embassy/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
+                                </div>
+                                <h3><span>Address: </span></h3>
+                                <p [innerHTML]="details.Address">
+                                </p>
+                                <p>
+                                    <strong>Phone: </strong>
+                                    <span *ngIf="details.lnthTelepone!=0">
+                                    <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span></a>
+                                    </span>
+                                    <span *ngIf="details.lnthTelepone==0">
+                                    <span>NA</span>
+                                    </span>
+                                    <br><strong>Fax: </strong>
+                                    <span *ngIf="details.lnthFax!=0">
+                                    <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span></a>
+                                    </span> 
+                                    <span *ngIf="details.lnthFax==0">
+                                    <span>NA</span>
+                                    </span>		
+                                </p>
+                                <p>
+                                    <strong>Email: </strong>
+                                    <span *ngIf="details.lnthE_maiil!=0">
+                                    <a class="gmailhide" href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span></a>
+                                    </span>
+                                    <span *ngIf="details.lnthE_maiil==0">
+                                    <span>NA</span>
+                                    </span>
+                                    <br><strong>Website: </strong>
+                                    <span *ngIf="details.lnthwebsite!=0">
+                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
+                                    </span>
+                                    <span *ngIf="details.lnthwebsite==0">
+                                    <span>NA</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="emb_location_div">
+                        <div class="map">
+                            <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+ 

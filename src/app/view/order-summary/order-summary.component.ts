@@ -1252,7 +1252,7 @@ export class OrderSummaryComponent implements OnInit {
 						}, 0);
 					}, 10);
 			}	
-		}
+		} 
 		if(vl=='6')
 		{
 			
@@ -1691,12 +1691,8 @@ export class OrderSummaryComponent implements OnInit {
 	submit_form(){
 		this.is_final_submit='1'
 		this.applicantFormData()
-		var cmt=this;
 		$('#submit_modal_btn').trigger('click');
-		// $("#submit_cnt_apli").off( "click" );
-		// $('#submit_cnt_apli').click(function(){
-			this.appliCantInfo()	
-		// })
+		this.appliCantInfo()	
 	}
 
 	changeimage(i){
@@ -1830,6 +1826,21 @@ export class OrderSummaryComponent implements OnInit {
 							$('#appli_msg_'+this.applicant_id).hide();
 							$('#appli_msg1_'+this.applicant_id).show();
 							$('.modal').hide();
+							
+							$('#appli_status_'+this.applicant_indx).val(1);
+							var flg=1;
+							$('.appli_status').each(function(){
+								if($(this).val()=='0')
+								{
+									flg=0;
+									$('#tab_detaile1').removeClass("active");
+									$('#tab_detaile2').addClass("active in");
+									$('#active_User').removeClass("active");
+									$('#remove_user').addClass("active");
+								}
+							})
+
+							if(flg!=0)
 								this.routers.navigate(["payment",this.currentIdUrl]);
 						}
 						if(this.is_doc==true){
@@ -1913,18 +1924,26 @@ export class OrderSummaryComponent implements OnInit {
 					this.process = false;
 					this.is_document='1';
 					this.is_all_docuemnt=0;
+					$('.modal').hide();
 					if(this.is_final_submit=='1'){
 						$('#appli_msg_'+this.applicant_id).hide();
 						$('#appli_msg1_'+this.applicant_id).show();
 					}
 					if(this.is_final_submit=='1' && this.is_document=='1'){
-						this.routers.navigate(["payment",this.currentIdUrl]);
+						$('#appli_status_'+this.applicant_indx).val(1);
+							var flg=1;
+							$('.appli_status').each(function(){
+								if($(this).val()=='0')
+								{
+									flg=0;
+								}
+							})
+							if(flg!=0){
+								this.routers.navigate(["payment",this.currentIdUrl]);
+							}
 					}
 					$('#document_sus_msg').html('Documents Success Upload').css('color','green').show();
-					setTimeout(function(){$('#document_sus_msg').hide();},3000);
-				// }else if(this.is_final_submit=='1' || this.is_document=='1'){
-				// 	this.routers.navigate(["payment",this.currentIdUrl]);
-				}
+					}
 				else if(data.status == "ERROR"){
 					this.process = false;
 					alert('please try again later');
@@ -2031,25 +2050,5 @@ export class OrderSummaryComponent implements OnInit {
 	logout(){
 		this.headerPageComponent.logOut()
 	}
-
-	// phone_validation(regisTel){
-	// 	var telMsg= $(".telMsg");
-	
-	// 	if(regisTel.prop("value")<1){
-	// 		regisTel.addClass('err');
-	// 		telMsg.text("Enter a phone number!");
-	// 			return false;
-	// 	}else if(!regisTel.intlTelInput("isValidNumber")){
-	// 		regisTel.addClass('err');
-		
-	// 		telMsg.text('This phone number format is not recognized.');
-	// 		return false;
-	// 	}else{
-	// 		var countryData = regisTel.intlTelInput("getSelectedCountryData");
-	// 		var phoneNum = regisTel.intlTelInput("getNumber");           
-	// 		telMsg.text("");
-	// 		regisTel.removeClass('err');
-	// 	}
-	// }  
 
 }
