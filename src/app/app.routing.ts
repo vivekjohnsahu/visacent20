@@ -45,6 +45,13 @@ import { PaymentFailedComponent } from './view/payment-failed/payment-failed.com
 			}
 		},
 		{
+			path: 'home/:Id',
+			component: HomePageComponent,
+			data: {
+				title: 'home'
+			}
+		},
+		{
 			path: 'embassy-and-consulate/worldwide',
 			component: EmbassiesPageComponent,
 			data: {

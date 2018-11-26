@@ -187,6 +187,12 @@
                             </div>     
                         </div>
                     </div>
+                    <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 66px;padding-right: 66px;">
+                        <div class="errorshow">
+                            <p> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
+                                {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
+                        </div>
+                    </div>
             </div>
         </div>
     </section>
@@ -308,12 +314,12 @@
                 </div>
         </div>
     </div>
-    <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 200px;padding-right: 200px;">
+    <!-- <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 200px;padding-right: 200px;">
         <div class="errorshow">
             <p> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
                 {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
         </div>
-    </div>
+    </div> -->
     <!--------------------end table section ---------------------->
     <section [hidden]="tableRegular">
         <section class="section_20" [hidden]="documents_req==null">

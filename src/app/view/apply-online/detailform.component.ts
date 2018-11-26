@@ -230,7 +230,7 @@ export class DetailformComponent implements OnInit  {
 					this.visa_other = this.details.visa_processing;
 					this.rushPrecessing_fee = this.visa_other[0].precessing_fee;
 					this.rush_precessing_time = this.visa_other[0].precessing_time;
-					this.rush_processing_type = this.visa_other[0].processing_type
+					this.rush_processing_type = this.visa_other[0].processing_type;
 					this.rushId = this.visa_other[0].id;
 					this.superPrecessing_fee = this.visa_other[1].precessing_fee;
 					this.superprecessing_time = this.visa_other[1].precessing_time;

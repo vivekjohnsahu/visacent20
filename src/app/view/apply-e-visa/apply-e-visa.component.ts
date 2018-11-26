@@ -73,6 +73,7 @@ export class ApplyEVisaComponent implements OnInit {
 		this.title.setTitle('Apply For e-Visa | Applying Visa Online | Online Visa application form');
 		this.meta.updateTag({ name:'description',content:'Apply For e-Visa, Applying Visa Online, Online Visa application form, visa application, work visa, tourist visa, travel visa, apply for visa, apply for visa online, visa legal services, get visa online, online visa'});
 		this.meta.updateTag({ name:'keywords',content:'You can apply visa online following just simple step, fill online visa application from, receive visa via email and enter destination where you want to go.'});
+		this.visa_flag = 'assets/images/default1.png';	
 	}
 
 	ngOnInit() {
@@ -136,7 +137,7 @@ export class ApplyEVisaComponent implements OnInit {
 	}
 
 	changeNeedVisa(listName){
-		console.log(listName)
+		this.visa_flag = 'assets/images/default1.png';	
 		this.visaApplicationService.eVisaSelectCnt(listName).subscribe(
 			data =>{
 				this.ngProgress.done();
@@ -145,7 +146,7 @@ export class ApplyEVisaComponent implements OnInit {
 				this.cnt_emb=false;
 				this.documents_req = data.country_visa.documents_req;
 				var faqQuestionAnswer:any;
-				this.faqQuestionAnswArry=new Array
+				this.faqQuestionAnswArry=new Array;
 				this.faq = data.country_visa.faq;
 				this.intro = data.country_visa.intro;
 				this.visa_req = data.country_visa.visa_req;
@@ -165,24 +166,19 @@ export class ApplyEVisaComponent implements OnInit {
 		let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.belong_to = $.grep(this.belong_to, function(item){ return item.name !== NeedVisaForObj[0].name;});
 		this.topCntryOne = this.topFiveCNtry;
-		// this.visafor()
 		let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
             return item.name !== nationalityTopOnePlaceObj[0].name;
         });
-		// this.visafor()
 	}
 
 	visafor1(listName){
 		this.country_ctnSet = listName.value;
-		this.con_visa_req_sec=false;
-		this.changeNeedVisa(this.country_ctnSet)
 		this.visafor();
 	}
 
 	visafor(){
-		this.visa_req_sec=false;
-		this.cnt_emb=false;
+		
 		if(this.belongCnty == undefined || this.belongCnty == ''){
 			return;
 		}else if(this.country_ctnSet == undefined || this.country_ctnSet == ''){
@@ -193,11 +189,14 @@ export class ApplyEVisaComponent implements OnInit {
 			this.requirementCountryName = this.country_ctnSet + "/" + this.belongCnty;
 			this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
 				data => {
+					this.visa_req_sec=false;
+					this.cnt_emb=false;
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
 						this.tableViasaToggle = true;
 						if(this.visaApplyTbl[0].visa_type!= 0){
+							this.visa_flag = 'assets/images/default1.png';
 							this.con_visa_req_sec=false;
 							var cnt_id=data.to_country_slug_name;
 							this.tableViasaToggle = true;
@@ -250,6 +249,7 @@ export class ApplyEVisaComponent implements OnInit {
 	}
 
 	requirementCountry(){
+		this.visa_flag = 'assets/images/default1.png';
 		this.embassiesCityDetailsService.requirementCountryCtn(this.requirementCountryName).subscribe(
 			data =>{
 				this.countydetails = data.data;

@@ -47,9 +47,6 @@ export class MakePaymentComponent implements OnInit {
 	  }
 
 	ngOnInit() {
-		// $('.paypal-button').click(function(){
-		// 	alert('abc');
-		// });
 		if($('#Umoneyagree').prop('checked')==false){
 			$('#paypal-checkout-btn').css('pointer-events','none');
 			$('#paypal_drop').addClass('paypal-no-drop')
@@ -117,6 +114,7 @@ export class MakePaymentComponent implements OnInit {
 			return;
 		}	
 		this.paymentButtonShow=true;
+		// localStorage.setItem('paymentUserName',JSON.stringify(this.name))
 		setTimeout(() => {
 			$('html, body').animate({
 				scrollTop: $("#mackPaymentScrool").offset().top

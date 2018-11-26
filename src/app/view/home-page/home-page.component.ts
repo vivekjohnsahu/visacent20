@@ -1,5 +1,5 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { Router } from '@angular/router'; 
+import { Router, ActivatedRoute } from '@angular/router'; 
 import * as $ from 'jquery';
 import { NgProgress } from 'ngx-progressbar';
 import { CountriesListService } from '../../services/countries_list_home/countries-list.service';
@@ -27,14 +27,15 @@ export class HomePageComponent implements OnInit {
 	countryTwo:any;
 	loaderShow_first = true;
 	loaderShow_second = true;
-	slide_id:any;
 	cntList:any;
 	topCntryTwo:any;
 	topCntryOne:any;
 	topFiveCNtry=[];
+	country_id:any;
 
 	constructor(
 		private router:Router,
+		private routers:ActivatedRoute,
 		public ngProgress: NgProgress,
 		private countriesListService:CountriesListService,
 		private meta: Meta,
@@ -84,14 +85,15 @@ export class HomePageComponent implements OnInit {
 			this.topCntryOne=this.topFiveCNtry;
 		}, 2000);
 
-
-		
-		this.slide_id=localStorage.getItem('home_id');
-			if(this.slide_id!=null){
+		this.routers.params.subscribe(val => {
+		this.country_id = this.routers.snapshot.params["Id"];
+			if(this.country_id==null || this.country_id=='' || this.country_id==undefined){
+				// do nothing
+			}else{
 				$('html, body').animate({
 				scrollTop: $("#scrollTable").offset().top}, 500);
-				localStorage.removeItem('home_id');
 			}
+		})
 	}
 				
 	changeShapeOne(listName){

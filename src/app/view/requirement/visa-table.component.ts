@@ -171,7 +171,7 @@ export class VisaTableComponent implements OnInit {
 						this.tableRegular = false;
 						this.dataShow = false;
 					}else{
-						this.Errortable = false;
+						this.Errortable = true;
 						this.tableShow = false;
 						this.tableRequired = false;
 						this.tableRegular = true; 

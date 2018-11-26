@@ -288,7 +288,7 @@
         </div>
     </div>
 </section>
-<section class="section_20 country_specification" [hidden]="tableRegular">
+<section class="section_20 country_specification" [hidden]="(tableRegular && countydetails!='')">
     <div class="container">
         <h2 class="text-center" style="text-transform: uppercase;">{{country_ctn}}</h2>
         <div class="row" *ngIf="(documents_req==null && visa_req==null && faq==null) || intro==null">

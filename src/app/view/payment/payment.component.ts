@@ -62,6 +62,7 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 		this.user_name = this.user.name;
 		this.user_phone = this.user.number
 		this.to_country_name_heading = to_country_name;
+		// localStorage.setItem('paymentUserName',JSON.stringify(this.user_name))
    	}
 
 	ngOnInit() {
@@ -88,9 +89,6 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 		this.order_id_next = orderId;
 		this.paymentGateService.paymentEv(orderId).subscribe(
 			data => {
-				// if(data.payment_status ='done'){
-				// 	this.routers.navigate(["order-summary",this.order_id_next]);
-				// }else 
 				this.payment_status = data.order.payment_status
 				if(this.payment_status=='done'){
 					if(data!=null){

@@ -140,6 +140,7 @@ export class ApplyVisaComponent implements OnInit {
 						this.tableRegular = false;
 						this.tableViasaToggle = false;
 					}else{
+						this.Errortable = true;
 						this.tableRequired = false;
 						this.tableRegular = true; 
 						this.tableViasaToggle = false;

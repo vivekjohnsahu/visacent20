@@ -132,7 +132,7 @@
                                 <!-- <h3>
                                     <a  routerLink="/apply-e-visa/{{of_cntname_lower}}">Apply for {{of_cntname}} Visa</a>
                                 </h3> -->
-                                <h3><a routerLink="/home" (click)="most_popular()">Most Popular Visas</a></h3>
+                                <h3><a routerLink="/home/{{homescroolId}}">Most Popular Visas</a></h3>
                                 <h3><a title="{{in_cntname}}" routerLink="/embassy-and-consulate-of/{{in_country_slug_name}}">Embassies of {{in_cntname}}</a></h3>
                                 <h3><a title="{{in_cntname}}" routerLink="/embassy-and-consulate-in/{{in_country_slug_name}}">Embassies in {{in_cntname}}</a></h3>
                                 <h3><a title="{{of_cntname}}" routerLink="/embassy-and-consulate-of/{{of_country_slug_name}}">Embassies of {{of_cntname}}</a></h3>
@@ -156,8 +156,8 @@
                 <div>
                     <article class="embassy_info_left">
                         <div class="info_div">
-                            <div class="city_name" (click)="topData(multi.slug_name)">
-                                <h3><a  title="{{multi.name}}{{in_cntname}}" routerLink="/consulate-general/{{multi.slug_name}}">{{multi.name}} {{in_cntname}}</a></h3>
+                            <div class="city_name" >
+                                <h3><a class="ToprollCtrl" title="{{multi.name}}{{in_cntname}}" routerLink="/consulate-general/{{multi.slug_name}}">{{multi.name}} {{in_cntname}}</a></h3>
                             </div>
                             <h3><span>Address: </span></h3>
                             <p style="margin-bottom:6px;" [innerHTML]="multi.Address"></p>
@@ -215,8 +215,8 @@
             <div>
                 <article class="embassy_info_left">
                     <div class="info_div">
-                        <div class="city_name" (click)="changeTopData(multi.slug_name)">
-                            <h3><a title="{{multi.name}} {{in_cntname}}" routerLink="/embassy/{{multi.slug_name}}">{{multi.name}} {{in_cntname}}</a></h3>
+                        <div class="city_name">
+                            <h3><a class="ToprollCtrl" title="{{multi.name}} {{in_cntname}}" routerLink="/embassy/{{multi.slug_name}}">{{multi.name}} {{in_cntname}}</a></h3>
                         </div>
                         <h3><span>Address: </span></h3>
                         <p style="margin-bottom:6px;" [innerHTML]="multi.Address"></p>

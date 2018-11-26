@@ -84,6 +84,7 @@ export class EmbassiesCitysComponent implements OnInit {
 	consulateAd:any;
 	EmbassyAd:any;
 	of_country:any;
+	homescroolId="Most-Sought-Visas";
 
 	constructor( 
 		private embassiesCityDetailsService:EmbassiesCityDetailsService,
@@ -124,8 +125,10 @@ export class EmbassiesCitysComponent implements OnInit {
             $(document).click(function(){
                 $("#report_popup").hide();
 				$("body").css({"overflow-y":"scroll"});
-            });    
+			});  
+			
 		});
+
 		this.ngProgress.start();
 		this.countryAllData()
 
@@ -276,6 +279,23 @@ export class EmbassiesCitysComponent implements OnInit {
 								this.multiCountry[i].lnthwebsite=0;
 							}
 						}
+						var ctrlPressed = false;
+							$(window).keydown(function(evt) {
+								if (evt.which == 17) { 
+									ctrlPressed = true;
+								}
+							}).keyup(function(evt) {
+								if (evt.which == 17) {
+									ctrlPressed = false;
+								}
+							});
+
+							setTimeout(function(){
+								$('.ToprollCtrl').click(function(e){	
+									if(!ctrlPressed)
+										$("html, body").animate({ scrollTop: 10 }, 1000);
+								});
+							},2000);
 					}		
 				}else if(data.status == 'ERROR'){
 					this.ngProgress.done();
@@ -362,19 +382,11 @@ export class EmbassiesCitysComponent implements OnInit {
 		$('#textarea').removeClass('borderCls')
 	}
 	
-	most_popular(){
-		localStorage.setItem('home_id',JSON.stringify(this.slid_id));
-		this.routers.navigate(['home']);
-	}
 	popup_Hide_msg(){
 		this.captchaError = false;
 		this.success_msg_error = false;
 		grecaptcha.reset();
 	}	
-
-	changeOnTopData(slug_name){
-		this.routers.navigate(['consulate-general',slug_name]);
-	}
 
 }
 

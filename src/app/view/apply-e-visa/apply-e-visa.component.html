@@ -12,7 +12,7 @@
                 <div class="select_cont drop_container1 embassy_of">
                     <h3 style="color:#005ea5;">I belong to</h3>
                     <form>
-                        <select name="belong" (change)="changeBelong($event.target)" class="enable_white">
+                        <select (change)="changeBelong($event.target)" class="enable_white">
                             <option disabled>Choose Country</option>
                             <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name">{{list.name}}</option>
                             <option disabled >-----------</option>
@@ -27,7 +27,7 @@
                     <form>
                             <!-- (change)="changeNeedVisa($event.target)" -->
 
-                        <select name="needvisa" (change)="visafor1($event.target)"  class="enable_white" style="border: 1px solid #ddd;">
+                        <select (change)="visafor1($event.target)"  class="enable_white" style="border: 1px solid #ddd;">
                             <option disabled>Choose Country</option>
                             <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name">{{list.name}}</option>
                             <option disabled >-----------</option>
@@ -189,7 +189,7 @@
                 <p style="color:#005ea5;font-size: 27px;text-transform: capitalize;">visa not required</p>
             </div>
         </div>
-        <!-- <div [hidden]="!tableRegular" style="text-align: center;margin-top:15px;">
+        <div [hidden]="!tableRegular" style="text-align: center;background: white;padding:7px;text-align: center;margin-top:15px;">
             <div class="errorshow" >
                 <p class="container" style="color:#333;">
                     <i class="far fa-hand-point-right" style="color:#005ea5;"></i>&nbsp; Citizens of the <span style="text-transform: capitalize;">{{belongCnty}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{country_ctnSet}}</span> diplomatic mission or one of 
@@ -197,7 +197,7 @@
                     prepare the required documentation.
                 </p>
             </div>
-        </div> -->
+        </div>
     </div>
 </section>
 <section class="section_20 country_specification" *ngIf="visa_req_sec">
