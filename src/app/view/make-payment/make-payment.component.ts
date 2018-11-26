@@ -101,7 +101,7 @@ export class MakePaymentComponent implements OnInit {
 			{
 				fild='lbl_amount_req';
 			}
-		}if(!this.email.match(this.regExEmail)){
+		}else if(!this.email.match(this.regExEmail)){
 			$('.email_req').addClass('borderColor')
 			flag=1;
 			{
@@ -202,7 +202,7 @@ export class MakePaymentComponent implements OnInit {
 				if(data.status ='SUCCESS'){
 					this.routers.navigate(['payment-success/'+btoa(this.order_id_random_paypal)]);
 				}else if(data.status ='ERROR') {
-					// do nothing
+					this.routers.navigate(['make-payment-failed/'+btoa(this.order_id_random_paypal)]);
 				}else{
 					// do nothing
 				}
@@ -220,6 +220,7 @@ export class MakePaymentComponent implements OnInit {
 		var productinfo = 'Make Payment'
 		var key=this.order_id_random+'##'+this.amount+'##'+this.name+'##'+this.email+'##'+this.phone+'##'+productinfo;	
 		var uMoneykey = btoa(btoa(key))
+		var make='make'
 		this.paymentGateService.makePayUmoney(uMoneykey).subscribe(
 			data => {
 				if(data.status='SUCCESS'){
@@ -232,7 +233,7 @@ export class MakePaymentComponent implements OnInit {
 					this.emailq = data.email;
 					this.productinfo = data.productinfo;
 					this.surl = 'https://visacent.com/payu-success';
-					this.furl = 'http://visacent.com/payment-failed/'+btoa(this.orderID);
+					this.furl = 'http://visacent.com/make-payment-failed/'+btoa(this.orderID);
 					setTimeout(() => {
 						$("#customButtonMoney").submit();	
 					},200);	

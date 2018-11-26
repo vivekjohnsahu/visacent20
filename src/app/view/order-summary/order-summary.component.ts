@@ -1951,6 +1951,10 @@ export class OrderSummaryComponent implements OnInit {
 			})
 	}
 
+	logout(){
+		this.headerPageComponent.logOut()
+	}
+
 	specificationsOpen(lbl){
 		this.specifiName = lbl
 		if(lbl=='Photo'){
@@ -2045,10 +2049,6 @@ export class OrderSummaryComponent implements OnInit {
 			$("#SpecificationsPhoto").hide();
 		}
 		$('#specificationsOpen').trigger('click');
-	}
-
-	logout(){
-		this.headerPageComponent.logOut()
 	}
 
 }

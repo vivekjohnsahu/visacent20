@@ -32,6 +32,7 @@ import { OtherserviceComponent } from './view/otherservice/otherservice.componen
 import { MakePaymentComponent } from './view/make-payment/make-payment.component';
 import { PaymentSuccesComponent } from './view/payment-success/payment-succes.component';
 import { PaymentFailedComponent } from './view/payment-failed/payment-failed.component';
+import { MakePaymentFailedComponent } from './view/make-payment-failed/make-payment-failed.component';
 
 	export const routes: Routes = [
 		{ 
@@ -321,7 +322,13 @@ import { PaymentFailedComponent } from './view/payment-failed/payment-failed.com
 				title: 'payment-failed'
 		}
 		},
-
+		{
+			path: 'make-payment-failed/:id',
+			component: MakePaymentFailedComponent,
+			data: {
+				title: 'make-payment-failed'
+		}
+		},
 		{ 
 			path: '**', redirectTo: '', pathMatch: 'full' 
 		},

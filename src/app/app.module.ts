@@ -42,6 +42,7 @@ import { OtherserviceComponent } from './view/otherservice/otherservice.componen
 import { MakePaymentComponent } from './view/make-payment/make-payment.component';
 import { PaymentSuccesComponent } from './view/payment-success/payment-succes.component';
 import { PaymentFailedComponent } from './view/payment-failed/payment-failed.component';
+import { MakePaymentFailedComponent } from './view/make-payment-failed/make-payment-failed.component';
 
 @NgModule({
 	declarations: 
@@ -81,6 +82,7 @@ import { PaymentFailedComponent } from './view/payment-failed/payment-failed.com
 		MakePaymentComponent,
 		PaymentSuccesComponent,
 		PaymentFailedComponent,
+		MakePaymentFailedComponent,
 		// Autosize
 	],
 

@@ -33,15 +33,14 @@
                 <p style="color:#005ea5;font-size: 27px;text-transform: capitalize;">visa not required</p>
             </div>
         </div>
-        
+        <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 75px;background: white;padding-right: 75px;">
+            <div class="errorshow">
+                <p> Citizens of the {{country_ctn}} must obtain a visa in advance. You have to apply for a visa through a {{bnewCnty}} diplomatic mission or one of its authorized visa agents outside 
+                    {{bnewCnty}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
+            </div>
+        </div>
     </div>
 </section>
-<div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 200px;padding-right: 200px;">
-    <div class="errorshow">
-        <p> Citizens of the {{country_ctn}} must obtain a visa in advance. You have to apply for a visa through a {{bnewCnty}} diplomatic mission or one of its authorized visa agents outside 
-            {{bnewCnty}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
-    </div>
-</div>
 <div [hidden]="!tableRegular" style="text-align: center;">
         <div class="errorshow" style="color:#333;">
             <div class="my1">

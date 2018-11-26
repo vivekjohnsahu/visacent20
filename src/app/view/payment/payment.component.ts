@@ -62,10 +62,10 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 		this.user_name = this.user.name;
 		this.user_phone = this.user.number
 		this.to_country_name_heading = to_country_name;
-		// localStorage.setItem('paymentUserName',JSON.stringify(this.user_name))
    	}
 
 	ngOnInit() {
+		$('.modal-backdrop').hide()
         $(document).ready(function(){
             $('input[type="radio"]').click(function(){
                 var pay_val = $(this).val();
