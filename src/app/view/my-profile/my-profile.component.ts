@@ -518,13 +518,17 @@ userDas(){
 			}			
 		}
 	}
-
+	textCopyComplete:boolean;
 	copyToClipboard(element) {
 		var $temp = $("<input>");
 		$("body").append($temp);
 		$temp.val($(element).text()).select();
 		document.execCommand("copy");
 		$temp.remove();
+		this.textCopyComplete = true;
+		setTimeout(() => {
+			this.textCopyComplete = false;
+		}, 800);
 	}
 	
 }

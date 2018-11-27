@@ -340,6 +340,25 @@ ul.a
 }
 /*------------------- end update profile -------------------*/
  
-
-
-
+.uncomplete
+{
+    position: relative;
+}
+.uncomplete>span
+{
+    position: absolute;
+    left: 475px;
+    top: 0px;
+    color: #ffffff;
+    font-size: 15px;
+    background: #fe484a;
+    padding: 1px 7px;
+    border-radius: 48px;
+    transform:scale(0,0);
+    transition-duration:.3s;
+}
+.uncomplete span
+{
+    transform:scale(1,1);
+    transition-duration:.3s;
+}

@@ -67,6 +67,7 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 
 	ngOnInit() {
 		$('.modal-backdrop').hide()
+		$('.modal-open').hide()
         $(document).ready(function(){
             $('input[type="radio"]').click(function(){
                 var pay_val = $(this).val();

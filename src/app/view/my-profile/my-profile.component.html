@@ -90,9 +90,11 @@
                                     </div>
 -->
 
-
+                                    <span *ngIf="textCopyComplete" class="uncomplete" style="color: #0dbc0d;">
+                                        <span style="background-color:#055fa5;">Copy</span>
+                                    </span>
                                     <div [hidden]="refferal==''">
-                                        <strong style="font-size: 16px;">Your Refferal Url</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy" style="cursor: copy;">https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
+                                        <strong style="font-size: 16px;">Your Refferal Url</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor: copy;">https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
                                     </div>
                                     <div class="row" [hidden]="admin_activity==''">
                                         <div class="col-md-12">
