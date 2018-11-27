@@ -89,8 +89,12 @@
                                         </div>	                                                                                                  
                                     </div>
 -->
-                            
-                                    <div class="row">
+
+
+                                    <div [hidden]="refferal==''">
+                                        <strong style="font-size: 16px;">Your Refferal Url</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy" style="cursor: copy;">https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
+                                    </div>
+                                    <div class="row" [hidden]="admin_activity==''">
                                         <div class="col-md-12">
                                             <h3 style="text-align:left!important;margin-top:15px;margin-bottom:8px;">Notes</h3>
                                             

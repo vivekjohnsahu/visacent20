@@ -59,6 +59,7 @@ export class ApplyEVisaComponent implements OnInit {
 	consulateAd:any;
 	EmbassyAd:any;
 	con_visa_req_sec:boolean;
+	currentUrl:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -81,6 +82,11 @@ export class ApplyEVisaComponent implements OnInit {
 		this.visa_req_sec=false;
 		this.con_visa_req_sec=true;
 		this.ngProgress.start();
+		this.currentUrl = this.router.url.split('=');
+		this.currentUrl = this.currentUrl[1]
+		if(this.currentUrl!=undefined){
+			localStorage.setItem('refferalCurrentUrl',JSON.stringify(this.currentUrl))
+		}
 		$('#profile_trans').hide();
 		this.routers.params.subscribe(val => {
 			this.visaReq = this.routers.snapshot.params["id"];

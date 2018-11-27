@@ -46,6 +46,7 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
   productinfo:any;
   emailq:any;
   surl:any;
+  refferalCurrentUrl:any;
 
 	constructor(
 		private router : ActivatedRoute,
@@ -158,6 +159,13 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 				$('#Umoney_paypal_drop').attr("disabled", false);
 			}	
 		})
+
+		var currentUrl = JSON.parse(localStorage.getItem('refferalCurrentUrl'));
+		if(currentUrl!=undefined || currentUrl!=null || currentUrl!=''){
+			this.refferalCurrentUrl = currentUrl;
+		}else{
+			this.refferalCurrentUrl = '';
+		}
 	}
 
     addScript: boolean = false;
@@ -242,12 +250,13 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 		this.paymentGateService.paymentComplete(key).subscribe(
 			data => {
 				if(data.status ='SUCCESS'){
+					localStorage.removeItem('refferalCurrentUrl');
 					this.routers.navigate(['payment-success',this.order_id_next]);
 					// window.location.href='order-summary/'+this.order_id_next;
 				}else if(data.status ='ERROR') {
-					// do nothing
+					// do nothing;
 				}else{
-					// do nothing
+					// do nothing;
 				}
 		});
 	}

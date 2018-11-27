@@ -5,7 +5,7 @@ import { HeaderPageComponent } from '../header-page/header-page.component';
 import { MyprofileService } from '../../services/my_profile/myprofile.service';
 import { NgProgress } from 'ngx-progressbar';
 import '../../../assets/js/intlTelInput.min.js';
-import { FlagValueService } from '../../services/flagValue/flag-value.service'
+import { FlagValueService } from '../../services/flagValue/flag-value.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -72,6 +72,7 @@ export class MyProfileComponent implements OnInit {
 	whatsapp:any;
 	skype:any;
 	wechat:any;
+	refferal:any;
 
 	constructor(
 		private router : ActivatedRoute,
@@ -143,6 +144,7 @@ export class MyProfileComponent implements OnInit {
 						this.name = data.user.name;
 						this.number = data.user.phone;
 						this.is_subscribe = data.user.is_subscribe;
+						this.refferal = data.user.refferal;
 						if(data.user.whatsapp!== undefined && data.user.whatsapp!== null && data.user.whatsapp!==''){
 							this.whatsapp=data.user.whatsapp;
 						}
@@ -515,6 +517,14 @@ userDas(){
 				this.UserOrders_user.push(this.orders_user[i])
 			}			
 		}
+	}
+
+	copyToClipboard(element) {
+		var $temp = $("<input>");
+		$("body").append($temp);
+		$temp.val($(element).text()).select();
+		document.execCommand("copy");
+		$temp.remove();
 	}
 	
 }

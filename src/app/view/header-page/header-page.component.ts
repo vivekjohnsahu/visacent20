@@ -151,6 +151,7 @@ export class HeaderPageComponent implements OnInit {
 		localStorage.removeItem('access_token');
 		localStorage.removeItem('userInformaction');
 		localStorage.removeItem('navbar_pro');
+		localStorage.removeItem('refferalCurrentUrl');
 		this.userlogin = false;
 		setTimeout(() => {
 			$('#modal_btn').trigger('click');
