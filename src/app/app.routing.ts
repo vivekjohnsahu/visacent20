@@ -33,6 +33,7 @@ import { MakePaymentComponent } from './view/make-payment/make-payment.component
 import { PaymentSuccesComponent } from './view/payment-success/payment-succes.component';
 import { PaymentFailedComponent } from './view/payment-failed/payment-failed.component';
 import { MakePaymentFailedComponent } from './view/make-payment-failed/make-payment-failed.component';
+import { RefferalComponent } from './view/refferal/refferal.component';
 
 	export const routes: Routes = [
 		{ 
@@ -323,10 +324,18 @@ import { MakePaymentFailedComponent } from './view/make-payment-failed/make-paym
 		}
 		},
 		{
+
 			path: 'make-payment-failed/:id',
 			component: MakePaymentFailedComponent,
 			data: {
 				title: 'make-payment-failed'
+		}
+		},
+		{
+			path: 'refer-a-friend',
+			component: RefferalComponent,
+			data: {
+				title: 'refer-a-friend'
 		}
 		},
 		{ 

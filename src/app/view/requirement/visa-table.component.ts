@@ -150,7 +150,7 @@ export class VisaTableComponent implements OnInit {
 					this.nationalityChangeName = data.from_country_name;
 					this.travellingChangeName = data.to_country_name;
 					this.newTravellingCnt = this.inCountrySlugName;
-					this.requirementCountryName = this.nationalityChange + '/' + this.travellingChange;
+					this.requirementCountryName = this.travellingChange + '/' + this.nationalityChange;
 					
 					if(this.visaTable.length == 0){
 						this.Errortable = true;
@@ -203,7 +203,7 @@ export class VisaTableComponent implements OnInit {
 	changeShapeOne(listName){
 		this.dataShow = true;
 		this.nationalityChange = listName.value;
-		this.requirementCountryName = this.nationalityChange + '/' + this.travellingChange;
+		this.requirementCountryName = this.travellingChange + '/' + this.nationalityChange;
 		this.countryTwo = this.country
 		let nationalityTwoPlaceObj = this.countryOne.filter(function(list){ return list.slug_country_name==listName.value;});
         this.countryTwo = $.grep(this.countryTwo, function(item) { 
@@ -238,7 +238,7 @@ export class VisaTableComponent implements OnInit {
 	changeShapeTwo(listName){
 		this.dataShow = true;
 		this.travellingChange = listName.value;
-		this.requirementCountryName = this.nationalityChange + '/' + this.travellingChange;
+		this.requirementCountryName = this.travellingChange + '/' + this.nationalityChange;
 		this.countryOne = this.country
 		let nationalityOnePlaceObj = this.countryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.countryOne = $.grep(this.countryOne, function(item) { 

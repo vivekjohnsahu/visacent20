@@ -15,10 +15,10 @@ export class PaymentGateService {
       return this.http.get(`${this.paymentUrl}`+order_id).map((res:Response) => res.json());
   }
 
-  private paymentCompleteUrl = "https://visacent.com/la/api/payment/";
+  private paymentCompleteUrl = "https://visacent.com/la/api/payment";
 
   paymentComplete(key:any){
-      return this.http.get(`${this.paymentCompleteUrl}`+key).map((res:Response) => res.json());
+      return this.http.post(`${this.paymentCompleteUrl}`,key).map((res:Response) => res.json());
   }
 
   private paymentPayUmoneyUrl = "https://visacent.com/la/api/payupayment/";
@@ -37,6 +37,12 @@ export class PaymentGateService {
 
   makePayUmoney(uMoneykey:any){
       return this.http.get(`${this.makePayUmoneyUrl}`+uMoneykey).map((res:Response) => res.json());
+  }
+
+  private userinfoUrl = "https://visacent.com/la/api/check_bonus/";
+
+  userinfo(userinformaction:any){
+    return this.http.get(`${this.userinfoUrl}`+userinformaction).map((res:Response) => res.json());
   }
 
 }

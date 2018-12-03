@@ -84,11 +84,27 @@ export class EmbassiesPageComponent implements OnInit {
 				}
 			})
 		this.cntList =JSON.parse(localStorage.getItem('countrylist'));
-		if(this.cntList!="" || this.cntList!=undefined){
+		if(this.cntList!="" && this.cntList!=undefined && this.cntList!=null){
 			this.pageHide=true;
 			this.country = this.cntList;
 			this.countryOne = this.cntList;
 			this.countryTwo = this.cntList;
+			this.topFiveCNtry = $.grep(this.country, function(item) { 
+				if(item.slug_country_name == 'australia')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'india')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'china')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'canada')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'united-kingdom')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'united-states-of-america')
+					return item.slug_country_name;
+			});	
+			this.topCntryTwo=this.topFiveCNtry;
+			this.topCntryOne=this.topFiveCNtry;
 		}else{
 			this.countriesListService.countriesList().subscribe(
 				data => {
@@ -96,24 +112,24 @@ export class EmbassiesPageComponent implements OnInit {
 					this.country = data;
 					this.countryOne = data;
 					this.countryTwo = data;
+					this.topFiveCNtry = $.grep(this.country, function(item) { 
+						if(item.slug_country_name == 'australia')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'india')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'china')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'canada')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'united-kingdom')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'united-states-of-america')
+							return item.slug_country_name;
+					});	
+					this.topCntryTwo=this.topFiveCNtry;
+					this.topCntryOne=this.topFiveCNtry;
 				})
 		}
-		this.topFiveCNtry = $.grep(this.country, function(item) { 
-			if(item.slug_country_name == 'australia')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'india')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'china')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'canada')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'united-kingdom')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'united-states-of-america')
-				return item.slug_country_name;
-		});	
-		this.topCntryTwo=this.topFiveCNtry;
-		this.topCntryOne=this.topFiveCNtry;
 		
 	} 
 

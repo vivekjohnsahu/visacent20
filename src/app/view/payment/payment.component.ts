@@ -47,6 +47,11 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
   emailq:any;
   surl:any;
   refferalCurrentUrl:any;
+  bonusUser:any;
+  bonusUserChek:any;
+  order_price_decod_final_bonus:any;
+  useBonus='0';
+  bonusUserpayUmoney='0'
 
 	constructor(
 		private router : ActivatedRoute,
@@ -83,7 +88,9 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
                 }
             });
         });
-    
+	
+		this.userBonus()
+		
 		$('#profile_trans').hide();
 		this.ngProgress.start();
 		this.router.params.subscribe(val => {
@@ -100,7 +107,7 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 						$('#modal_btn_paypal').trigger('click');
 						setTimeout(() => {
 							$('#modal_btn_paypal').trigger('click');
-							this.routers.navigate(['order-summary',this.order_id_next]);
+							this.routers.navigate(['payment-success',this.order_id_next]);
 						}, 2000);
 					}
 				}else if(data.payment_status ='pending'){
@@ -118,6 +125,7 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 						this.order_id_decod_final = this.order_id_decod[2];
 						this.order_price = this.order_price.split("(0)");
 						this.order_price_decod_final = parseFloat(this.order_price[1])/100
+						this.order_price_decod_final_bonus = parseFloat(this.order_price[1])/100
 						this.arrival_date = data.order.arrival_date
 						this.email = data.order.email
 						this.processing_type = data.order.processing_type
@@ -183,13 +191,13 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 			return actions.payment.create({
 				payment: {
 					transactions: [
-						{ amount: { total: this.realpaymentdv, currency: 'USD' },
+						{ amount: { total: this.order_price_decod_final, currency: 'USD' },
 							item_list: {
 								items: [
 									{
 										name: "payment for evisa",
 										quantity: "1",
-										price:this.realpaymentdv,
+										price:this.order_price_decod_final,
 										tax: "0",
 										currency: "USD",
 										sku: this.order_id,
@@ -205,7 +213,6 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 			var cmt=this;
 			return actions.payment.execute().then(function(data){
 				if(data.transactions[0].related_resources[0].sale.state=="completed"){
-					/*$('#pay_fully_msg').text("Thank you for using visacent");*/
                     $('#pay_fully_msg').html('Thank you for using visacent <i class="fas fa-check-circle"></i>');
 					var txn_id=data.transactions[0].related_resources[0].sale.id;
 					var amount=data.transactions[0].related_resources[0].sale.amount.total;
@@ -246,16 +253,18 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 	}
 	
 	paymentFill(){
-		let key;
-		key=$('#keys').val();
+		var key = {
+			key:$('#keys').val(),
+			useBonus:this.useBonus,
+			bonusChek:this.bonusUserChek,
+		} 
 		this.paymentGateService.paymentComplete(key).subscribe(
 			data => {
 				if(data.status ='SUCCESS'){
 					localStorage.removeItem('refferalCurrentUrl');
 					this.routers.navigate(['payment-success',this.order_id_next]);
-					// window.location.href='order-summary/'+this.order_id_next;
 				}else if(data.status ='ERROR') {
-					// do nothing;
+					this.routers.navigate(['payment-failed',+btoa(this.orderID)]);
 				}else{
 					// do nothing;
 				}
@@ -263,12 +272,13 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 	}
 	
 	payUmoneyUser(){
+		$('#amount_not_fillerr').html('');
 		var productinfo = 'Online Evisa'
-		var key=this.order_id_decod_final+'##'+this.order_price_decod_final+'##'+this.user_name+'##'+this.email+'##'+this.user_phone+'##'+productinfo;	
+		var key=this.order_id_decod_final+'##'+this.order_price_decod_final+'##'+this.user_name+'##'+this.email+'##'+this.user_phone+'##'+productinfo+'##'+this.bonusUserChek+'##'+this.useBonus;
 		var uMoneykey = btoa(btoa(key))
 		this.paymentGateService.paymentPayUmoney(uMoneykey).subscribe(
 			data => {
-				if(data.status='SUCCESS'){
+				if(data.status=='SUCCESS'){
 					this.action = data.action;
 					this.hash = data.hash;
 					this.key = data.key;
@@ -276,18 +286,51 @@ export class PaymentComponent implements OnInit ,AfterViewChecked {
 					this.amount = data.amount;
 					this.fname = data.firstname;
 					this.emailq = data.email;
+
+					this.bonusUserpayUmoney = data.bonusUserChek;
+					this.useBonus = data.useBonus;
+
 					this.productinfo = data.productinfo;
 					this.surl = 'https://visacent.com/payusuccess';
 					this.furl = 'http://visacent.com/payment-failed/'+btoa(this.orderID);
 					setTimeout(() => {
 						$("#customButtonMoney").submit();	
 					},200);	
-				}else if(data.status='ERROR'){
-					// do nothing
+				}else if(data.status=='ERROR'){
+					$('#amount_not_fillerr').html('Application fee issue');
 				}else{
 					// do nothing
 				}
 			})
+	}
+
+	userBonus(){
+		var bonus = JSON.parse(localStorage.getItem('user'));
+		var userinformaction = btoa(bonus.access_token+'###'+bonus.user_id);
+		this.paymentGateService.userinfo(userinformaction).subscribe(
+			data => {
+				if(data.status=="SUCCESS"){
+					this.bonusUser = data.bonus;
+					this.bonusUserChek = data.bonus;
+				}else if(data.status=="ERROR"){
+					// do nothing
+				}
+			})
+
+	}
+	
+	refferalBonus(){
+		if($('#refferalBonus').prop('checked')==false){
+			this.bonusUser = this.bonusUserChek;
+			this.bonusUserpayUmoney = '0';
+			this.order_price_decod_final = this.order_price_decod_final_bonus;
+			this.useBonus='0';
+		}else if($('#refferalBonus').prop('checked')==true){
+			this.bonusUser = '0';
+			this.bonusUserpayUmoney = this.bonusUserChek;
+			this.order_price_decod_final = this.order_price_decod_final-this.bonusUserChek;
+			this.useBonus='1';
+		}
 	}
 
 }

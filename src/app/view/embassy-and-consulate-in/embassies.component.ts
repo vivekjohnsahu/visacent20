@@ -128,14 +128,6 @@ export class EmbassiesComponent implements OnInit {
 		$('select > option:first').hide();
 	}
 
-	// addMetaTags(){
-    //     this.meta.addTags([
-	// 		{name: 'title', content: 'All foreign Embassies and Consulates General in India & Other Representations in India'},
-	// 		{name: 'description', content: 'This is a list of foreign Embassies and Consulates in India. The capital of India, New Delhi hosts 151 embassies/high commissions, and in addition there are 254 consulates and 18 other representations in India. You can find all Embassies, high commissions and consulates in India.'},  
-	// 		{name: 'keywords', content: 'Embassies in India, Consulates in India, Other Representations in India, Embassy in India, high commission in India, All foreign Embassies and Consulates in India, Consulate General & other Representations in India.'},
-    //        	{name: 'date', content: '2018-06-02', scheme: 'YYYY-MM-DD'},
-    //     ]);
-   	// } 
 
    	removeMetaTags(){
 		this.meta.removeTag('name = "description"');        

@@ -1,4 +1,4 @@
-<section class="section_30">
+<section>
     <div class="container">
         <div class="main_heading main_heading_wbg">
             <h1>Make Secure Online Payment</h1>
@@ -6,28 +6,48 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="login_div" style="padding-top: 0px;" >
+                <div class="" style="padding-top: 0px;" >
                     <form class="contact login" style="width:auto;position: relative;">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="label_container">
-                                    <label id="lbl_amount_req" class="pull-left">Amount <i class="fas fa-hand-holding-usd"></i></label>
+                        <div class="make_pay_input">
+                            <div class="row">
+                                <div class="col-xs-6 col_pay">
+                                    <div class="label_container">
+                                        <label id="lbl_amount_req" class="pull-left">Amount <i class="fas fa-hand-holding-usd"></i></label>
+                                    </div>
+                                    <div class="element_container">
+                                        <input type="text" #lenghtError="ngModel" id="lenghtError" pattern="^(0|[1-9][0-9]*)$" (keyup)="amountClear()" minlength="1" maxlength="5" required class="enable_white amount_req" name="amount" [(ngModel)]="amount" (keypress)="isNumberKey($event)"/>
+                                    <!-- <div *ngIf="lenghtError.errors && (lenghtError.dirty || lenghtError.touched)" style="color: red">
+                                        <div [hidden]="!lenghtError.errors.minlength">
+                                            must be at least 1 characters long.
+                                        </div>
+                                        <div [hidden]="!lenghtError.errors.maxlength">
+                                            cannot be more than 5 characters long.
+                                        </div>
+                                    </div> -->
+                                    </div>
                                 </div>
-                                <div class="element_container">
-                                    <input type="text" #lenghtError="ngModel" id="lenghtError" pattern="^(0|[1-9][0-9]*)$" (keyup)="amountClear()" minlength="1" maxlength="5" required class="enable_white amount_req" name="amount" [(ngModel)]="amount" (keypress)="isNumberKey($event)"/>
-                                <!-- <div *ngIf="lenghtError.errors && (lenghtError.dirty || lenghtError.touched)" style="color: red">
-                                    <div [hidden]="!lenghtError.errors.minlength">
-                                        must be at least 1 characters long.
+                                <div class="col-xs-6 col_pay">
+                                    <div class="label_container">
+                                        <label class="pull-left">Phone <i class="fas fa-mobile-alt"></i></label>
                                     </div>
-                                    <div [hidden]="!lenghtError.errors.maxlength">
-                                        cannot be more than 5 characters long.
+                                    <div class="element_container phone_dropdown">
+                                        <select name="" id="flagVle" class="flagEr enable_white">
+                                            <option *ngFor="let flag of flagDrop" >{{flag.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{flag.country}}</option>
+                                        </select>
+                                        <input type="number" pattern="^(0|[1-9][0-9]*)$" minlength="6" maxlength="15" required class="enable_white" [(ngModel)]="phone" name="phone" />
                                     </div>
-                                </div> -->
                                 </div>
                             </div>
-                        </div>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-xs-6 col_pay">
+                                <div class="label_container">
+                                    <label class="pull-left"> Name <i class="fas fa-pencil-alt"></i></label>
+                                </div>
+                                <div class="element_container">
+                                    <input type="text" class="enable_white" [(ngModel)]="name" name="name" />
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col_pay">
                                 <div class="label_container">
                                     <label id="lbl_email_req" class="pull-left">Email <i class="far fa-envelope"></i></label>
                                 </div>
@@ -37,8 +57,10 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
+<!--
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="label_container">
                                     <label class="pull-left"> Name <i class="fas fa-pencil-alt"></i></label>
                                 </div>
@@ -62,72 +84,64 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                <div [hidden]="paymentButtonShow" style="text-align:center;">
+</div>
+-->
+                <div class="row text-center" [hidden]="paymentButtonShow" style="margin-top:17px;">
                     <button (click)='paypalPayment()' class="my_btn width_auto" style="display:inline-block;">Make Payment</button>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="row" style="margin-bottom: 15px;">
-                            <div [hidden]="!paymentButtonShow">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <p class="text-center">After payment is made, you will receive an email confirming your payment.</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="text-align: center;">
-                                        <!-- <img src="assets/images/payumoney.png" alt="paypal" style="height: 73px"> -->
-                                        <form class="paypal">
-                                            <p style="text-align: left;" id="mackPaymentScrool">I, the applicant, hereby certify that I have read and understood all the statements / questions in this application, all terms and fee about the visa services. The answers and information furnished in this application are true and correct to the best of my knowledge and belief. I understand that the Visa fee once paid is non-refundable irrespective of the outcome of my application and doesn't in any way guarantee issuance of Visa by the Government. I agree that I cannot cancel or amend this transaction. </p>
-                                            <label style="font-size: 20px;cursor: pointer;">
-                                                <input type="checkbox" name="agree" id="Umoneyagree" style=" width: 20px; height: 20px; vertical-align: text-bottom;"> I agree.</label>
-                                            <br>
-                                            <span style="color: #055ea5; font-size: 14px;">Please check term and condition</span>
-                                            <br />
-                                            <br />
-                                                <p  style="color: #6ebc06eb;margin: 0px;font-size: 18px;"></p>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="paypal-no-drop" style="width: 250px;" id="paypal_drop">
-                                        <div id="paypal-checkout-btn"></div>
-                                    </div>
-                                    <!-- <aside>
-                                        <img src="assets/images/backup/paypal.png" class="img-responsive pull-right" />
-                                    </aside> -->
-                                </div>
-                                <div class="col-xs-6">
-                                    <div class="payumoney-inner-wrapper">
-                                        <div class="paypal-no-drop" id="Umoney_paypal_drop" style="position: relative;text-align: center;top: 2px;">
-                                            <input type="submit" id="Umoney_fully_msg" style="pointer-events: auto;background-color: #a1ca3a;color: white;width: 207px;font-size: 17px;height: 33px;border-radius: 16px;" (click)="payUmoneyUser()" class="custom-button" value="Pay With PayU" />  
-                                            <p style="font-size: 12px;">The safer, easier way to pay</p>
-                                        </div>  
-                                    </div>
-                                    <!-- <aside style="margin-top:15px;">
-                                        <img src="assets/images/backup/payumoney.png" class="img-responsive" />
-                                    </aside> -->
-                                </div>
+                    <div class="" [hidden]="!paymentButtonShow">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1 payment_content">
+                                <p>After payment is made, you will receive an email confirming your payment.</p>
+                                <p id="mackPaymentScrool">I, the applicant, hereby certify that I have read and understood all the statements / questions in this application, all terms and fee about the visa services. The answers and information furnished in this application are true and correct to the best of my knowledge and belief. I understand that the Visa fee once paid is non-refundable irrespective of the outcome of my application and doesn't in any way guarantee issuance of Visa by the Government. I agree that I cannot cancel or amend this transaction. </p>
+                                <p>
+                                    <label style="font-size: 20px;cursor: pointer;">
+                                        <input type="checkbox" name="agree" id="Umoneyagree" style=" width: 19px;height: 20px;transform: scale(1,1);vertical-align: sub;"> I agree.
+                                    </label>
+                                    <br /><span style="color: #055ea5; font-size: 14px;">Please check term and condition</span>
+                                </p>
+
+                                <p  style="color: #6ebc06eb;margin: 0px;font-size: 18px;"></p>
                             </div>
-                            
-                            <form action={{action}} method="POST" name="payuForm" id="customButtonMoney"> 
-                                <input type="hidden" name="key" value={{key}} />
-                                <input type="hidden" name="hash" value={{hash}}/>
-                                <input type="hidden" name="txnid" value={{orderID}} />
-                                <input type="hidden" name="amount" value={{amountPayU}} />
-                                <input type="hidden" name="firstname" id="firstname" value={{fname}} />
-                                <input type="hidden" name="email" id="email" value={{emailq}} />
-                                <input type="hidden" name="phone" value={{user_phone}} />
-                                <input type="hidden" name="productinfo" value={{productinfo}} />
-                                <input type="hidden" name="surl" value={{surl}}/>
-                                <input type="hidden" name="furl" value={{furl}}/>
-                                <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
-                                <!-- <input type="submit" style="display: none;" class="custom-button"  value="Make Payment" />    -->
-                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 payment_buttons">
+                                <div class="paypal-no-drop" id="paypal_drop">
+                                    <div id="paypal-checkout-btn" class="text-right"></div>
+                                </div>
+                                <!-- <aside>
+                                    <img src="assets/images/backup/paypal.png" class="img-responsive pull-right" />
+                                </aside> -->
+                            </div>
+                            <div class="col-xs-6 payment_buttons">
+                                <div class="payumoney-inner-wrapper">
+                                    <div class="paypal-no-drop text-left" id="Umoney_paypal_drop">
+                                        <input type="submit" id="Umoney_fully_msg" style="pointer-events: auto;background-color: #a1ca3a;color: white;font-size: 17px;height: 33px;border-radius: 16px;" (click)="payUmoneyUser()" class="custom-button" value="Pay With PayU" />  
+                                        <p style="font-size: 12px;">The safer, easier way to pay</p>
+                                    </div>  
+                                </div>
+                                <!-- <aside style="margin-top:15px;">
+                                    <img src="assets/images/backup/payumoney.png" class="img-responsive" />
+                                </aside> -->
+                            </div>
                         </div>
                     </div>
-                </div>
+                            
+                    <form action={{action}} method="POST" name="payuForm" id="customButtonMoney"> 
+                        <input type="hidden" name="key" value={{key}} />
+                        <input type="hidden" name="hash" value={{hash}}/>
+                        <input type="hidden" name="txnid" value={{orderID}} />
+                        <input type="hidden" name="amount" value={{amountPayU}} />
+                        <input type="hidden" name="firstname" id="firstname" value={{fname}} />
+                        <input type="hidden" name="email" id="email" value={{emailq}} />
+                        <input type="hidden" name="phone" value={{user_phone}} />
+                        <input type="hidden" name="productinfo" value={{productinfo}} />
+                        <input type="hidden" name="surl" value={{surl}}/>
+                        <input type="hidden" name="furl" value={{furl}}/>
+                        <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
+                        <!-- <input type="submit" style="display: none;" class="custom-button"  value="Make Payment" />    -->
+                    </form>
+                   
                 <input type="hidden" id="keys" value="">
                         
                         <!-- <div class="row">

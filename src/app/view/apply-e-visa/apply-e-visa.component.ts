@@ -93,11 +93,28 @@ export class ApplyEVisaComponent implements OnInit {
 		})
 
 		this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
-		if(this.countryShow!=null || this.countryShow!=''){
+		if(this.countryShow!=null && this.countryShow!=''){
 			this.ngProgress.done();
 			this.country = this.countryShow;
 			this.belong_to = this.countryShow;
 			this.need_visa_for = this.countryShow;
+			this.topFiveCNtry = $.grep(this.country, function(item){ 
+				if(item.slug_country_name == 'australia')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'india')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'china')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'canada')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'united-kingdom')
+					return item.slug_country_name;
+				if(item.slug_country_name == 'united-states-of-america')
+					return item.slug_country_name;
+			});
+			this.topCntryTwo=this.topFiveCNtry;
+			this.topCntryOne=this.topFiveCNtry;
+			this.visafor()
 		}else{
 			this.countriesListService.countriesList().subscribe(
 				data => {
@@ -105,27 +122,26 @@ export class ApplyEVisaComponent implements OnInit {
 					this.country = data;
 					this.belong_to = data;
 					this.need_visa_for = data;
+					this.topFiveCNtry = $.grep(this.country, function(item){ 
+						if(item.slug_country_name == 'australia')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'india')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'china')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'canada')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'united-kingdom')
+							return item.slug_country_name;
+						if(item.slug_country_name == 'united-states-of-america')
+							return item.slug_country_name;
+					});
+					this.topCntryTwo=this.topFiveCNtry;
+					this.topCntryOne=this.topFiveCNtry;
+					this.visafor()	
 				})
-		}
+		}	
 
-		this.topFiveCNtry = $.grep(this.country, function(item) { 
-			if(item.slug_country_name == 'australia')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'india')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'china')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'canada')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'united-kingdom')
-				return item.slug_country_name;
-			if(item.slug_country_name == 'united-states-of-america')
-				return item.slug_country_name;
-		});	
-
-		this.topCntryTwo=this.topFiveCNtry;
-		this.topCntryOne=this.topFiveCNtry;
-		this.visafor()
 	}
 
   	changeBelong(listName){

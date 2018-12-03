@@ -38,68 +38,108 @@
     <section class="section_30">
         <div class="container">
                 <div [hidden]="user_dashboard" style="padding:0px;">
-                
                     <div class="row">
                         <div class="col-lg-9">
-                                <div class="row">
-                                        <div class="col-sm-3" style="padding-right:0px;">
-                                            <div class="user_pro">
-                                                <h1><i class="fas fa-smile"></i></h1>
-                                                <h3 style="color:#EDEFF1;text-transform: capitalize;margin-top: 5px;">{{name}}</h3>
-                                                <p style="margin-bottom: 5px;"><a href="javascript:void(0);" style="color: #2fffff;font-size: 15px;">{{email}}</a></p>
-                                                <p>Activated <span style="color: #16e416;"><i class="fas fa-circle"></i></span></p>
-                                            </div>             
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <div class="row">
-                                                <div class="col-sm-6" style="padding-right:0px;cursor: pointer;">
-                                                    <a class="dash_div" routerLink="/my-profile/applications">
-                                                        <h1><i class="fab fa-wpforms"></i></h1>
-                                                        <h3>All Applications</h3>
-                                                        <p>{{total_orders}}</p>
-                                                    </a>
-                                                </div>
-                                                <div class="col-sm-6" style="cursor: pointer;">
-                                                    <a class="dash_div" routerLink="/my-profile/applications-under-process">
-                                                        <h1><i class="fas fa-spinner"></i></h1>
-                                                        <h3>Under Process Applications</h3>
-                                                        <p>{{processing}}</p>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            
-<!--
+                            <div class="row">
+                                <div class="col-sm-3" style="padding-right:0px;">
+                                    <div class="user_pro">
+                                        <h1><i class="fas fa-smile"></i></h1>
+                                        <h3 style="color:#EDEFF1;text-transform: capitalize;margin-top: 5px;">{{name}}</h3>
+                                        <p style="margin-bottom: 5px;"><a href="javascript:void(0);" style="color: #2fffff;font-size: 15px;">{{email}}</a></p>
+                                        <p>Activated <span style="color: #16e416;"><i class="fas fa-circle"></i></span></p>
+                                    </div>             
+                                </div>
+                                <div class="col-sm-9">
                                     <div class="row">
-                                        <div class="col-sm-12">
-                                            <h3 style="text-align:left!important;margin-top:15px;">notes</h3>
-                                            <div class="" style="height:200px;overflow-y: scroll;padding-left:15px;border:1px solid #ddd;margin-top:5px;">
-                                                <article>
-                                                    
-                                                    <ul class="a" *ngFor="let activity of admin_activity" >
-                                                    <li> {{activity.alert}}</li>
-                                                    <li> {{activity.applicant}}</li>
-                                                    <li> {{activity.date_time}}</li>
-                                                    <li> {{activity.order_id}}</li>
-                                                        <hr />
-                                                </ul>
-                                                </article>
-                                            </div>
-                                        </div>	                                                                                                  
+                                        <div class="col-sm-6" style="padding-right:0px;cursor: pointer;">
+                                            <a class="dash_div" routerLink="/my-profile/applications">
+                                                <h1><i class="fab fa-wpforms"></i></h1>
+                                                <h3>All Applications</h3>
+                                                <p>{{total_orders}}</p>
+                                            </a>
+                                        </div>
+                                        <div class="col-sm-6" style="cursor: pointer;">
+                                            <a class="dash_div" routerLink="/my-profile/applications-under-process">
+                                                <h1><i class="fas fa-spinner"></i></h1>
+                                                <h3>Under Process Applications</h3>
+                                                <p>{{processing}}</p>
+                                            </a>
+                                        </div>
                                     </div>
--->
-
-                                    <span *ngIf="textCopyComplete" class="uncomplete" style="color: #0dbc0d;">
-                                        <span style="background-color:#055fa5;">Copy</span>
+                                </div>
+                                <!-- <div class="col-sm-9" [hidden]="total_bonus==0"></div> -->
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-sm-6" style="cursor: pointer;">
+                                            <a class="dash_div">
+                                                <h1><i class="fas fa-gift"></i></h1>
+                                                <h3>Total Bonus</h3>
+                                                <p>{{total_bonus}}</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                    <span *ngIf="textCopyComplete">
+                                        <div class="hero">Copied</div>
                                     </span>
                                     <div [hidden]="refferal==''">
-                                        <strong style="font-size: 16px;">Your Refferal Url</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor: copy;">https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
+                                        <strong style="font-size: 16px;">Your Referral Url</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor:copy;color:#044e88">&nbsp; https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
+                                    </div><br />
+                                    <div [hidden]="user_refferals1==''" class="main_heading main_heading_wbg"><h1 class="table_h">User Refferals Details</h1>
+                                        <span></span>
                                     </div>
+                                    <table class="tableRefferals" *ngFor="let bonus of user_refferals1; let i=index" [hidden]="user_refferals1==''">      
+                                        <tr >
+                                            <th>{{i+1}}</th>
+                                            <th>USER DETAILS</th>
+                                        </tr>
+                                        <tr >
+                                            <th>Bonus</th>
+                                            <td>{{bonus.bonus_amt}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Refferer Created</th>
+                                            <td>{{bonus.refferer_created}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Refferer Email</th>
+                                            <td>{{bonus.refferer_email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Refferer Name</th>
+                                            <td>{{bonus.refferer_name}}</td>
+                                        </tr>
+                                        <br />
+                                    </table><br />
+                                    <hr />       
+                                    <div [hidden]="bonus_withdraw1==''" class="main_heading main_heading_wbg"><h1 class="table_h">Bonus Withdraw</h1>
+                                        <span></span>
+                                    </div>   
+                                    <table class="tableRefferals" *ngFor="let bonus of bonus_withdraw1; let i=index" [hidden]="bonus_withdraw1==''">      
+                                        <tr >
+                                            <th>{{i+1}}</th>
+                                            <th>USER DETAILS</th>
+                                        </tr>
+                                        <tr >
+                                            <th>Bonus</th>
+                                            <td>{{bonus.bonus_amt}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Refferer Created</th>
+                                            <td>{{bonus.created_at}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td>{{bonus.description}}</td>
+                                        </tr>
+                                        <br />
+                                    </table>
+
+
                                     <div class="row" [hidden]="admin_activity==''">
                                         <div class="col-md-12">
-                                            <h3 style="text-align:left!important;margin-top:15px;margin-bottom:8px;">Notes</h3>
-                                            
+                                            <h3 style="text-align:left!important;margin-top:15px;margin-bottom:8px;">Notes</h3>       
                                             <div class="notes" *ngFor="let activity of admin_activity">
                                                 <div class="" [ngClass]="{'notes_background': activity.applicant==''}">
                                                     <h3 class="text-right"><span class="pull-left">{{activity.alert}}</span><span [hidden]="activity.applicant==''"> Appli Name: </span><label>{{activity.applicant}}</label></h3>
@@ -108,8 +148,7 @@
                                                 
                                             </div>
                                         </div>
-                                    </div>
-                            
+                                    </div>  
                         </div>
                         <div class="col-lg-3">
                             <div class="r_div">

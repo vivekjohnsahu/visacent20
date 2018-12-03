@@ -89,31 +89,48 @@ export class ApplyVisaComponent implements OnInit {
 				})
 		})
 		this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
-		if(this.countryShow!=null || this.countryShow!=''){
+		if(this.countryShow!=null && this.countryShow!=''){
 			this.country = this.countryShow;
+			var var_country_ctn=this.country_ctn;
+			this.topFiveCNtry = $.grep(this.country, function(item) { 
+				if(item.slug_country_name == 'australia' && item.slug_country_name!=var_country_ctn)
+					return item.slug_country_name;
+				if(item.slug_country_name == 'india' && item.slug_country_name!=var_country_ctn)
+					return item.slug_country_name;
+				if(item.slug_country_name == 'china' && item.slug_country_name!=var_country_ctn)
+					return item.slug_country_name;
+				if(item.slug_country_name == 'canada' && item.slug_country_name!=var_country_ctn)
+					return item.slug_country_name;
+				if(item.slug_country_name == 'united-kingdom' && item.slug_country_name!=var_country_ctn)
+					return item.slug_country_name;
+				if(item.slug_country_name == 'united-states-of-america' && item.slug_country_name!=var_country_ctn)
+					return item.slug_country_name;
+			});	
+			this.topCntry=this.topFiveCNtry;
 		}else{
 			this.countriesListService.countriesList().subscribe(
 				data => {
 					this.country = data;
+					var var_country_ctn=this.country_ctn;
+					this.topFiveCNtry = $.grep(this.country, function(item) { 
+						if(item.slug_country_name == 'australia' && item.slug_country_name!=var_country_ctn)
+							return item.slug_country_name;
+						if(item.slug_country_name == 'india' && item.slug_country_name!=var_country_ctn)
+							return item.slug_country_name;
+						if(item.slug_country_name == 'china' && item.slug_country_name!=var_country_ctn)
+							return item.slug_country_name;
+						if(item.slug_country_name == 'canada' && item.slug_country_name!=var_country_ctn)
+							return item.slug_country_name;
+						if(item.slug_country_name == 'united-kingdom' && item.slug_country_name!=var_country_ctn)
+							return item.slug_country_name;
+						if(item.slug_country_name == 'united-states-of-america' && item.slug_country_name!=var_country_ctn)
+							return item.slug_country_name;
+					});	
+					this.topCntry=this.topFiveCNtry;
 				})
 		}
 
-		var var_country_ctn=this.country_ctn;
-		this.topFiveCNtry = $.grep(this.country, function(item) { 
-			if(item.slug_country_name == 'australia' && item.slug_country_name!=var_country_ctn)
-				return item.slug_country_name;
-			if(item.slug_country_name == 'india' && item.slug_country_name!=var_country_ctn)
-				return item.slug_country_name;
-			if(item.slug_country_name == 'china' && item.slug_country_name!=var_country_ctn)
-				return item.slug_country_name;
-			if(item.slug_country_name == 'canada' && item.slug_country_name!=var_country_ctn)
-				return item.slug_country_name;
-			if(item.slug_country_name == 'united-kingdom' && item.slug_country_name!=var_country_ctn)
-				return item.slug_country_name;
-			if(item.slug_country_name == 'united-states-of-america' && item.slug_country_name!=var_country_ctn)
-				return item.slug_country_name;
-		});	
-		this.topCntry=this.topFiveCNtry;
+		
 	}
 	  
 	changeCuntry(listName){

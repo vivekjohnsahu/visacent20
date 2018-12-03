@@ -30,3 +30,59 @@ input[type=number] {
 {
   cursor: no-drop
 }
+.payment_content
+{
+    text-align: justify;
+    text-align-last: center;
+}
+.make_pay_input
+{
+    width:900px;
+    margin:0 auto;
+}
+#Umoney_fully_msg
+{
+    width:252px;
+}
+@media (max-width:950px)
+{
+    .make_pay_input
+    {
+        width:700px;
+    }
+}
+@media (max-width:750px)
+{
+    .make_pay_input
+    {
+        width:400px;
+    }
+    .col_pay
+    {
+        float: none;
+        width:100%;
+    }
+}
+@media (max-width:600px)
+{
+    .payment_buttons
+    {
+        float: none;
+        width:100%;
+    }
+    #paypal-checkout-btn,#Umoney_paypal_drop
+    {
+        text-align: center;
+    }
+    #Umoney_paypal_drop
+    {
+        margin-top:10px;
+    }
+}
+@media (max-width:450px)
+{
+    .make_pay_input
+    {
+        width:100%;
+    }
+}

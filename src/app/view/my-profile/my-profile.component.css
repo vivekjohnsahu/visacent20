@@ -339,26 +339,41 @@ ul.a
     }
 }
 /*------------------- end update profile -------------------*/
- 
-.uncomplete
-{
+
+.tableRefferals {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tableRefferals td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+
+.hero {
     position: relative;
-}
-.uncomplete>span
-{
-    position: absolute;
-    left: 475px;
-    top: 0px;
-    color: #ffffff;
+    background-color: #a2a2a2;
+    height: 21px !important;
+    width: 7% !important;
+    border-radius: 17px;
+    left: 129px;
     font-size: 15px;
-    background: #fe484a;
-    padding: 1px 7px;
-    border-radius: 48px;
-    transform:scale(0,0);
-    transition-duration:.3s;
+    top: -3px;
+    text-align: center;
 }
-.uncomplete span
-{
-    transform:scale(1,1);
-    transition-duration:.3s;
+.hero:after {
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    content:'';
+    width: 0;
+    height: 0;
+    border-top: solid 10px #a2a2a2;
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
 }

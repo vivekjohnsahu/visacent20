@@ -50,13 +50,13 @@
                                                 <span style="color: #055ea5; font-size: 14px;">Please check term and condition</span>
                                                 <br />
                                                 <br />
-                                                    <p  style="color: #6ebc06eb;margin: 0px;font-size: 18px;"></p>
+                                                <p id="amount_not_fillerr" style="color: red;margin: 0px;font-size: 18px;"></p> 
                                             </form>
                                         </div>
                                     </div>
                                     <div class="payumoney-inner-wrapper">
                                         <div class="paypal-no-drop" id="Umoney_paypal_drop" style="position: relative;text-align: center;top: -23px;">
-                                            <input type="submit" id="Umoney_fully_msg" style="pointer-events: auto;background-color: #a1ca3a;color: white;width: 207px;font-size: 17px;height: 33px;border-radius: 16px;" (click)="payUmoneyUser()" class="custom-button" value="Pay with PayU"/>  
+                                            <input type="button" id="Umoney_fully_msg" style="pointer-events: auto;background-color: #a1ca3a;color: white;width: 207px;font-size: 17px;height: 33px;border-radius: 16px;" (click)="payUmoneyUser()" class="custom-button" value="Pay with PayU"/>  
                                         </div>  
                                     </div>
                                     <form action={{action}} method="POST" name="payuForm" id="customButtonMoney"> 
@@ -70,6 +70,8 @@
                                         <input type="hidden" name="productinfo" value={{productinfo}} />
                                         <input type="hidden" name="surl" value={{surl}}/>
                                         <input type="hidden" name="furl" value={{furl}}/>
+                                        <input type="hidden" name="bonusUserChek" value={{bonusUserpayUmoney}}/>
+                                        <input type="hidden" name="useBonus" value={{useBonus}}/>
                                         <input type="hidden" name="service_provider" value="payu_paisa" size="64" />
                                     </form>
                                 </li>
@@ -90,6 +92,10 @@
                         <ul>
                             <li><label>Processing Type:</label> {{processing_type}}</li>
                             <li><label>Total Amount:</label> {{order_price_decod_final}} USD</li>
+                            <!-- <div [hidden]="bonusUser==null">
+                                <li><label>Bonus Amount:</label>&nbsp; {{bonusUser}} <span [hidden]="bonusUser==0">USD</span></li>
+                                <input type="checkbox" id="refferalBonus" name="country" (click)="refferalBonus()" style="width:6%;height: 12px;cursor: pointer;"><label>&nbsp;&nbsp; Use Bonus</label><br/>    
+                            </div> -->
                         </ul>
                     </div>
                 </div>

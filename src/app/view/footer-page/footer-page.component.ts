@@ -9,10 +9,7 @@ import * as $ from 'jquery';
 })
 export class FooterPageComponent implements OnInit {
 
-	constructor(
-		// private router:Router,
-		// private routers:ActivatedRoute,
-	) { }
+	constructor(){}
 
 	ngOnInit() {
 		$(document).ready(function(){

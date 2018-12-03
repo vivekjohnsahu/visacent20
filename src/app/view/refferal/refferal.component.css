@@ -5,10 +5,8 @@
 .application_info
 {
         width: 100%;
-    /* background: #e9f6ff; */
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    /* border: 2px solid #dcf0ff; */
     padding-left: 60px;
     padding-right: 60px;
 }
@@ -37,7 +35,6 @@
 .status_div>article
 {
     margin:20px auto;
-    /* box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); */
     padding:15px 15px;
     border: 1px solid #e0e0e0;
     background: #edeef1;
@@ -195,4 +192,26 @@
     {
         width:800px;
     }
+}
+.uncomplete
+{
+    position: relative;
+}
+.uncomplete>span
+{
+    position: absolute;
+    left: 500px;
+    top: 0px;
+    color: #ffffff;
+    font-size: 15px;
+    background: #fe484a;
+    padding: 1px 7px;
+    border-radius: 48px;
+    transform:scale(0,0);
+    transition-duration:.3s;
+}
+.uncomplete span
+{
+    transform:scale(1,1);
+    transition-duration:.3s;
 }

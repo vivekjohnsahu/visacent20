@@ -73,7 +73,20 @@ export class MyProfileComponent implements OnInit {
 	skype:any;
 	wechat:any;
 	refferal:any;
-
+	textCopyComplete:boolean;
+	total_bonus:any;
+	user_refferals:any;
+	bonus_amt:any;
+	refferer_created:any;
+	refferer_email:any;
+	refferer_name:any;
+	bonus_withdraw:any;
+	withdraw_bonus_amt:any;
+	withdraw_refferer_created:any;
+	withdraw_description:any;
+	user_refferals1:any;
+	bonus_withdraw1:any;
+	
 	constructor(
 		private router : ActivatedRoute,
 		private routers : Router,
@@ -123,7 +136,7 @@ export class MyProfileComponent implements OnInit {
 			},5000);			
 			
 	}
-
+	
 	applicant(){
 		this.myprofileService.myOrder(this.token).subscribe(
 			data =>{
@@ -131,33 +144,46 @@ export class MyProfileComponent implements OnInit {
 					this.ngProgress.done();	
 					this.pageHide = true;
 					if(data.status == 'SUCCESS'){
-						this.orders_user = data.orders;
-						var i=0
-						this.UserOrders_user=new Array
-						for(i=0;this.orders_user.length>i;i++){
-							this.UserOrders_user.push(this.orders_user[i])		
-						}
 						this.orders_Id = data.orders[0].order_id;
-						this.is_complete = this.orders_user[0].is_complete
 						this.applicants = data.orders[0].applicants;
 						this.email = this.user.email;
 						this.name = data.user.name;
 						this.number = data.user.phone;
 						this.is_subscribe = data.user.is_subscribe;
 						this.refferal = data.user.refferal;
-						if(data.user.whatsapp!== undefined && data.user.whatsapp!== null && data.user.whatsapp!==''){
-							this.whatsapp=data.user.whatsapp;
+						this.total_bonus = data.user.total_bonus;
+						if(data.orders!=="No visa application found."){
+							this.orders_user = data.orders;
+							this.UserOrders_user=new Array;
+							for(var i=0;this.orders_user.length>i;i++){
+								this.UserOrders_user.push(this.orders_user[i])		
+							}
+							this.is_complete = this.orders_user[0].is_complete
+							if(data.user.whatsapp!== undefined && data.user.whatsapp!== null && data.user.whatsapp!==''){
+								this.whatsapp=data.user.whatsapp;
+							}
+							if(data.user.skype!== undefined && data.user.skype!== null && data.user.skype!==''){
+								this.skype=data.user.skype;
+							}
+							if(data.user.wechat!== undefined && data.user.wechat!== null && data.user.wechat!==''){
+								this.wechat=data.user.wechat;
+							}
+							this.codeCnt = this.number.split(" ")
+							this.codeCnt = this.codeCnt[0]
+							this.number = this.number.split(" ")
+							this.number = this.number[1]
 						}
-						if(data.user.skype!== undefined && data.user.skype!== null && data.user.skype!==''){
-							this.skype=data.user.skype;
+
+						this.user_refferals = data.user_refferals;
+						if(this.user_refferals!==''){
+							this.user_refferals1 = this.user_refferals;
 						}
-						if(data.user.wechat!== undefined && data.user.wechat!== null && data.user.wechat!==''){
-							this.wechat=data.user.wechat;
+
+						this.bonus_withdraw = data.bonus_withdraw;
+						if(this.bonus_withdraw!==''){
+							this.bonus_withdraw1 = data.bonus_withdraw
 						}
-						this.codeCnt = this.number.split(" ")
-						this.codeCnt = this.codeCnt[0]
-						this.number = this.number.split(" ")
-						this.number = this.number[1]
+							
 					}else if(data.status == 'ERROR'){
 						this.headerPageComponent.logOut()
 					}else{
@@ -249,33 +275,6 @@ userDas(){
 			});
 		});
 	}
-
-	// dashboard(vla){
-	// 	this.routers.navigate(["my-profile"+'/'+vla]);
-	// }
-
-	// orders(vla){
-	// 	this.routers.navigate(["my-profile"+'/'+vla]);
-	// }
-
-	// changeProfile(vla){
-	// 	this.routers.navigate(["my-profile"+'/'+vla]);
-	// 	$(document).ready(function(){
-	// 		$('input').on('click',function(){
-	// 			$(this).removeClass('borderColor')
-	// 		});
-	// 	});
-	
-	// }
-
-	// changePassword(vla){
-	// 	this.routers.navigate(["my-profile"+'/'+vla]);
-	// 	$(document).ready(function(){
-	// 		$('input').on('click',function(){
-	// 			$(this).removeClass('borderColor')
-	// 		});
-	// 	});
-	// }
 
 	myProfileSub(){
 		$('#flagDropVlu').change(function(){
@@ -502,23 +501,21 @@ userDas(){
 	}
 
 	ComProcessAppli(){
-		var i=0;
 		this.UserOrders_user=new Array
-		for(i=0;this.orders_user.length>i;i++){
+		for(var i=0;this.orders_user.length>i;i++){
 			this.UserOrders_user.push(this.orders_user[i])			
 		}
 	}
 
 	underProcessAppli(){
-		var i=0;
 		this.UserOrders_user=new Array
-		for(i=0;this.orders_user.length>i;i++){
+		for(var i=0;this.orders_user.length>i;i++){
 			if(this.orders_user[i].is_complete==0){
 				this.UserOrders_user.push(this.orders_user[i])
 			}			
 		}
 	}
-	textCopyComplete:boolean;
+	
 	copyToClipboard(element) {
 		var $temp = $("<input>");
 		$("body").append($temp);
