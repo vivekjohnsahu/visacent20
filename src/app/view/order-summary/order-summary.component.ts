@@ -309,6 +309,7 @@ export class OrderSummaryComponent implements OnInit {
 				this.hospital_detail = data.form_field.hospital_detail;
 				this.company_detail = data.form_field.company_detail;
 				this.document = data.form_field.document;
+				console.log(this.document)
 				this.applicant_id = data.form_field.applicant_id;
 				this.sp_detail = data.form_field.sp_detail;
 				this.military_data = data.form_field.military_data;
@@ -1062,8 +1063,8 @@ export class OrderSummaryComponent implements OnInit {
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#genralTtemSclSbt").offset().top
-						}, 0);
-					}, 10);
+						}, 800);
+					});
 			}	
 			var cmd=this;	
 		}
@@ -1117,8 +1118,8 @@ export class OrderSummaryComponent implements OnInit {
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#applicantTtemSclSbt").offset().top
-						}, 0);
-					}, 10);
+						}, 800);
+					});
 	
 			}
 			var cmd=this;	
@@ -1176,8 +1177,8 @@ export class OrderSummaryComponent implements OnInit {
 						setTimeout(() => {
 							$('html, body').animate({
 								scrollTop: $("#per_infoTtemSclSbt").offset().top
-							}, 0);
-						}, 10);
+							}, 800);
+						});
 				}	
 				var cmd=this;	
 		}
@@ -1204,8 +1205,8 @@ export class OrderSummaryComponent implements OnInit {
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#father_btnTtemSclSbt").offset().top
-						}, 0);
-					}, 10);
+						}, 800);
+					});
 				}	
 		}
 		if(vl=='5')
@@ -1249,8 +1250,8 @@ export class OrderSummaryComponent implements OnInit {
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#refe_btnTtemSclSbt").offset().top
-						}, 0);
-					}, 10);
+						}, 800);
+					});
 			}	
 		} 
 		if(vl=='6')
@@ -1362,9 +1363,8 @@ export class OrderSummaryComponent implements OnInit {
 				setTimeout(() => {
 					$('html, body').animate({
 						scrollTop: $("#suoughtTtemSclSbt").offset().top
-					}, 0);
-				}, 10);
-				
+					}, 800);
+				});			
 		}
 
 		if(((this.progress_bar_step.length)-1)>this.progress_active)
@@ -1505,7 +1505,6 @@ export class OrderSummaryComponent implements OnInit {
 		}
 		if(pr=='4')
 		{
-			
 			this.applicant_reference_informaction = false;
 			this.applicant_father_informaction = false;
 			this.applicant_informaction = false;
@@ -1513,21 +1512,16 @@ export class OrderSummaryComponent implements OnInit {
 			this.applicant_personal_informaction = false;
 			this.applicant_suought_infor = false;
 			this.submit_btn_show = false;	
-			if(this.form_fields_father_detail){
-				
+			if(this.form_fields_father_detail){	
 				this.applicant_father_informaction = true;
 				this.next_father_btn = true;
-			}else if(this.form_fields_applicant_personal){
-				
+			}else if(this.form_fields_applicant_personal){	
 				this.applicant_personal_informaction = true;
-				this.next_btn_per_info = true
-				
+				this.next_btn_per_info = true	
 			}else if(this.form_fields_applicant){
-				
 				this.applicant_informaction = true;
 				this.next_btn_applicant = true;
 			}else{
-			
 				this.general_information = true;
 				this.next_btn_genral = true;
 				this.submit_btn_show = false;
@@ -1691,8 +1685,12 @@ export class OrderSummaryComponent implements OnInit {
 	submit_form(){
 		this.is_final_submit='1'
 		this.applicantFormData()
+		var cmt = this
 		$('#submit_modal_btn').trigger('click');
-		this.appliCantInfo()	
+		$("#submit_modal_btn_payPage").off( "click" );
+		$('#submit_modal_btn_payPage').click(function(){
+		cmt.appliCantInfo()	
+		})
 	}
 
 	changeimage(i){
@@ -1822,26 +1820,29 @@ export class OrderSummaryComponent implements OnInit {
 					this.is_show_alert=1;
 					if(this.is_final_submit=='1'){
 						this.is_disabled=1;
-						if(this.is_final_submit=='1' && this.is_document=='1'){
-							$('#appli_msg_'+this.applicant_id).hide();
-							$('#appli_msg1_'+this.applicant_id).show();
-							$('.modal').hide();
-							
-							$('#appli_status_'+this.applicant_indx).val(1);
-							var flg=1;
-							$('.appli_status').each(function(){
-								if($(this).val()=='0')
-								{
-									flg=0;
-									$('#tab_detaile1').removeClass("active");
-									$('#tab_detaile2').addClass("active in");
-									$('#active_User').removeClass("active");
-									$('#remove_user').addClass("active");
-								}
-							})
-
-							if(flg!=0)
-								this.routers.navigate(["payment",this.currentIdUrl]);
+						if(this.is_final_submit=='1' && this.is_document=='1'){	
+							if(this.is_final_submit=='1' && this.document==undefined){
+								$('.modal-open').css('display','block');	
+								this.routers.navigate(["payment",this.currentIdUrl]);	
+							}else{
+								$('#appli_msg_'+this.applicant_id).hide();
+								$('#appli_msg1_'+this.applicant_id).show();
+								$('.modal').hide();	
+								$('#appli_status_'+this.applicant_indx).val(1);
+								var flg=1;
+								$('.appli_status').each(function(){
+									if($(this).val()=='0')
+									{
+										flg=0;
+										$('#tab_detaile1').removeClass("active");
+										$('#tab_detaile2').addClass("active in");
+										$('#active_User').removeClass("active");
+										$('#remove_user').addClass("active");
+									}
+								})
+								if(flg!=0)
+									this.routers.navigate(["payment",this.currentIdUrl]);
+							}
 						}
 						if(this.is_doc==true){
 							$('#tab_detaile1').removeClass("active");
@@ -1858,7 +1859,7 @@ export class OrderSummaryComponent implements OnInit {
 					$('#valSucSave').trigger('click');
 					this.error_alert_msg='Please try again';
 				}else{
-					// do nthg
+					// do nothing
 				}
 			})
 	}

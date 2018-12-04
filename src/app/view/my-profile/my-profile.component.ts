@@ -86,6 +86,11 @@ export class MyProfileComponent implements OnInit {
 	withdraw_description:any;
 	user_refferals1:any;
 	bonus_withdraw1:any;
+	withdraw_page:boolean;
+	userData:any;
+	Withdraw_btn_hide:boolean;
+	available_bonus:any;
+	indiaevisa_referral:any;
 	
 	constructor(
 		private router : ActivatedRoute,
@@ -151,6 +156,7 @@ export class MyProfileComponent implements OnInit {
 						this.number = data.user.phone;
 						this.is_subscribe = data.user.is_subscribe;
 						this.refferal = data.user.refferal;
+						this.indiaevisa_referral = data.user.indiaevisa_referral
 						this.total_bonus = data.user.total_bonus;
 						if(data.orders!=="No visa application found."){
 							this.orders_user = data.orders;
@@ -198,6 +204,7 @@ userDas(){
 	this.router.params.subscribe(val => {
 		let currentId = this.router.snapshot.params["value"];
 		if(currentId=='dashboard'){
+			this.withdraw_page=false;
 			this.my_profile = false;
 			this.my_account = false;
 			this.change_password = false;
@@ -210,6 +217,7 @@ userDas(){
 			setTimeout(() => {
 				this.ComProcessAppli()
 			}, 1500);
+			this.withdraw_page=false;
 			this.my_account = true;
 			this.my_profile = false;
 			this.user_dashboard=true;
@@ -222,6 +230,7 @@ userDas(){
 			setTimeout(() => {
 				this.underProcessAppli()
 			}, 1500);
+			this.withdraw_page=false;
 			this.my_account = true;
 			this.my_profile = false;
 			this.user_dashboard=true;
@@ -233,6 +242,7 @@ userDas(){
 			this.my_profile = true;
 			this.user_dashboard=true;
 			this.change_password = false;
+			this.withdraw_page=false;
 			$('.applications').removeClass('profile_active')
 			$('.dashboard').removeClass('profile_active');
 			$('.update-profile').addClass('profile_active')
@@ -241,9 +251,31 @@ userDas(){
 			this.my_account = false;
 			this.user_dashboard=true;
 			this.change_password = true;
+			this.withdraw_page=false;
 			$('.update-profile').removeClass('profile_active')
 			$('.dashboard').removeClass('profile_active');
 			$('.change-password').addClass('profile_active')
+		}else if(currentId=='withdraw'){
+			this.my_profile = false;
+			this.my_account = false;
+			this.change_password = false;
+			this.user_dashboard=true;
+			this.withdraw_page=true;
+			$('.dashboard').removeClass('profile_active');
+			var bonus = JSON.parse(localStorage.getItem('user'));
+			var userInfo = btoa(bonus.access_token+'###'+bonus.user_id);
+			this.myprofileService.UserData(userInfo).subscribe(
+				data =>{
+					if(data.status=="SUCCESS"){
+						this.userData = data.withdraw_request;
+						this.available_bonus = data.available_bonus;
+					}else if(data.status=="ERROR"){
+						// do nothing
+					}else{
+						// do nothing
+					}
+				}
+			)
 		}
 	})
 }
@@ -526,6 +558,34 @@ userDas(){
 		setTimeout(() => {
 			this.textCopyComplete = false;
 		}, 800);
+	}
+
+	withdraw(){
+		var cmt = this
+		$('#bonusAppli').trigger('click');
+		$("#bonus_use_apli").off( "click" );
+		$('#bonus_use_apli').click(function(){
+			cmt.processmy = true;
+			var bonus = JSON.parse(localStorage.getItem('user'));
+			var userInfo = btoa(bonus.access_token+'###'+bonus.user_id);
+			var bonus_withdraw = {
+				token:userInfo,
+				amount:cmt.total_bonus
+			}
+			cmt.myprofileService.withdraw(bonus_withdraw).subscribe(
+				data => {
+					if(data.status=="SUCCESS"){
+						cmt.Withdraw_btn_hide = true;
+						cmt.available_bonus = data.rem_bonus;
+						cmt.processmy = false;
+					}else if(data.status=="ERROR"){
+						cmt.processmy = false;
+					}else{
+						// do nothing
+					}
+				}
+			)
+		})
 	}
 	
 }

@@ -1,21 +1,4 @@
 /*--------------- start global css ---------------------*/
-/*::-webkit-scrollbar {
-    width: 15px;
-     background-color:#EDEFF1;
-}
- 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    border-radius: 10px;
-     background-color:#EDEFF1;
- 
-}
- 
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-     background-color:#dce2e8;
-}*/
 body
 {
 	font-family: 'Lato', sans-serif;
@@ -1791,6 +1774,89 @@ ul.faq_ul ol li
 
 
 /*------------------- start Order Summery -------------------------*/
+.applicants_item
+{
+	overflow: auto;
+}
+.applicants_item>.left,.applicants_item>.right
+{
+	width:50%;
+	float:left;
+}
+.applicants_item>.left
+{
+
+}
+.appli_row
+{
+	overflow: hidden;
+}
+.applicants_label
+{
+	width:145px;
+	float:left;
+}
+.applicants_data
+{
+	width:calc(100% - 145px);
+	float:left;
+}
+@media (max-width: 850px)
+{
+	.applicants_item>.left
+	{
+		width:60%;
+	}
+	.applicants_item>.right
+	{
+		width:40%;
+	}
+}
+@media (max-width:700px)
+{
+	.applicants_label
+	{
+		float:none;
+		width:100%;
+	}
+	.applicants_data
+	{
+		width:100%;
+		float:none;
+	}
+}
+@media (max-width: 530px)
+{
+	.applicants_item>.left,.applicants_item>.right
+	{
+		width:100%;
+		float:none;
+	}
+	.applicants_label
+	{
+		float:left;
+		width:145px;
+	}
+	.applicants_data
+	{
+		width:calc(100% - 145px);
+		float:left;
+	}
+}
+@media (max-width:440px)
+{
+	.applicants_label
+	{
+		float:none;
+		width:100%;
+	}
+	.applicants_data
+	{
+		width:100%;
+		float:none;
+	}
+}
+
 .order_head
 {
     color: #005ea5;
@@ -2525,6 +2591,107 @@ ul.faq_ul ol li
     
 }
 /*-------------------------- end payment failed ------------------------*/
+
+
+
+
+
+/*------------------- start referal -------------------*/
+.our_program
+{
+
+}
+.mail_div
+{
+	overflow:hidden;
+}
+.mail_div>div
+{
+	//float: left;
+}
+.mail_div .input_div
+{
+	width:435px;
+	margin:0 auto;
+	text-align: center;
+}
+.mail_div .web_div
+{
+	width:calc(100% - 330px);
+	padding-top:22px;
+	padding-left:15px;
+	display: none;
+}
+
+.refer_form
+{
+    background: #e4e6e7;
+    padding: 20px 0px;
+}
+.input_div .element_container
+{
+	margin-bottom: 15px;
+}
+.input_div .element_container label
+{
+	display: inline-block;
+    background: #dedede;
+    height: 35px;
+    vertical-align: top;
+    line-height: 35px;
+    color: #1a1a1a;
+    padding: 0px 5px;
+    border: 1px solid #b0b0b0;
+    border-right: none;
+}
+.web_div p 
+{
+	margin-bottom: 5px;
+}
+.web_div p span
+{
+	font-size:22px;
+	font-family: 'Hammersmith One';
+	color:orange;
+}
+.web_div p:last-child span
+{
+	color:#005ea5;
+}
+.how_work
+{
+	width:100%;
+	text-align: justify;
+	text-align-last: center;
+}
+.how_work>i
+{
+	display: block;
+	width:80px;
+	height: 80px;
+	margin:10px auto;
+	line-height: 80px;
+	background-color:#edeff1;
+	font-size: 40px;
+	color:#005ea5;
+	border-radius: 50%;
+}
+.newsletter>h1
+{
+	color:white;
+}
+.newsletter>p
+{
+	color: #ddf0ff;
+    font-size: 18px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
+}
+
+
+/*------------------- end referal -------------------*/
+
+
+
 
 
 /*------------------------------- start media query ------------------------------*/

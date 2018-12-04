@@ -23,10 +23,21 @@ export class RefferalComponent implements OnInit {
   isN:any;
   isnewUser:boolean;
   refferalCountry='visacent';
-  refferalvisacent=true;
-  refferalindianvisa:boolean;
+  indiaevisas_referral:any;
 
   ngOnInit() {
+		$(document).ready(function () {
+			$(document).ready(function () {
+				var $accord = $('.open');
+				$(".new").click(function () {
+				var $ans = $(this).next(".open").slideToggle();
+				});
+				$(".new").click(function(){
+					$(this).find("i").toggleClass("rotate");	
+							
+				});
+			});
+		});
   }
 
   refferalUser(){
@@ -53,6 +64,7 @@ export class RefferalComponent implements OnInit {
 				this.process = false;
 				this.refferalShow = true;
 				this.refferal = data.referral;
+				this.indiaevisas_referral = data.indiaevisas_referral;
 				this.isN = data.isN;
 				if(this.isN==1){
 					this.isnewUser = true;
@@ -93,18 +105,6 @@ copyToClipboar2(element){
 	setTimeout(() => {
 		this.textCopyComplete = false;
 	}, 800);
-}
-
-VisacentSelect(){
-	this.refferalCountry='visacent'
-	this.refferalindianvisa=false;
-	this.refferalvisacent=true;
-}
-
-indiaEvisaSelect(){
-	this.refferalCountry='india e-visa'
-	this.refferalvisacent=false;
-	this.refferalindianvisa=true;
 }
 
 }

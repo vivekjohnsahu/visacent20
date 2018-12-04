@@ -45,12 +45,88 @@
             </div>
         </div>
     </section>
-    <section class="section_20">
+
+    <section class="section_30" style="padding-bottom: 20px;">
         <div class="container">
             <h2 class="order_head" style="text-align: center;">
                 <p style="font-size:25px;">Application Summary</p>
             </h2>
-            <!-- <h3 style="margin-bottom: 12px;">Personal Details</h3> -->
+            <div class="applicants_item">
+                <div class="left">
+                    <div class="appli_row">
+                        <div class="applicants_label">
+                            <label>Appli. Id</label>
+                        </div>
+                        <div class="applicants_data">
+                            <p>{{order_id}}</p>
+                        </div>
+                    </div>
+                    <div class="appli_row">
+                        <div class="applicants_label">
+                            <label>Email</label>
+                        </div>
+                        <div class="applicants_data">
+                            <p>{{user_email}}</p>
+                        </div>
+                    </div>
+                    <div class="appli_row">
+                        <div class="applicants_label">
+                            <label>Appli. Date</label>
+                        </div>
+                        <div class="applicants_data">
+                            <p>{{created_at}} (DD-MM-YYYY)</p>
+                        </div>
+                    </div>
+                    <div class="appli_row">
+                        <div class="applicants_label">
+                            <label>Mobile No</label>
+                        </div>
+                        <div class="applicants_data">
+                            <p *ngIf="order_phone!=null">{{order_phone}}</p>
+                            <p *ngIf="order_phone==null">NA</p>
+                        </div>
+                    </div>
+                </div> 
+                <div class="right">
+                    <div class="appli_row">
+                        <div class="applicants_label">
+                            <label>Visa Country</label>
+                        </div>
+                        <div class="applicants_data">
+                            <p>{{visa_for_country}}</p>
+                        </div>
+                    </div>
+                    <div class="appli_row">
+                        <div class="applicants_label">
+                            <label>Total Ammount</label>
+                        </div>
+                        <div class="applicants_data">
+                            <p>{{total_fee}} USD</p>
+                        </div>
+                    </div>
+                    <div class="appli_row">
+                        <div class="applicants_label">
+                            <label>Payment Status</label>
+                        </div>
+                        <div class="applicants_data">
+                            <p style="color:#0dbc0d;text-transform: capitalize;" *ngIf="payment_status=='done'">{{payment_status}} <i class="fas fa-check-circle"></i></p>
+
+                            <p style="color:red;text-transform: capitalize;" *ngIf="payment_status=='pending'">{{payment_status}} <i class="fas fa-check-circle"></i></p>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- <section class="section_20">
+        <div class="container">
+            <h2 class="order_head" style="text-align: center;">
+                <p style="font-size:25px;">Application Summary</p>
+            </h2>
+           
             <div class="row personal">
                 <div class="col-xs-6">
                     <div class="row personal_inside">
@@ -148,7 +224,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <section class="section_20 form_section" style="padding:0px;">
         <div class="container">
             <div class="row">
@@ -182,27 +258,28 @@
                                                 <div class="panel-heading" style="background-color:transparent;">
                                                     <ul class="nav nav-tabs" style="border-bottom: 1px solid #ddd;">
                                                         <li><a style=" color: #005ea5;text-transform: capitalize;" class="user_ico"><i class="fas fa-user"></i> {{appliGivenName}}</a></li>
-                                                        <li id="active_User" class="active"><a href="#tab_detaile1" data-toggle="tab" style="color: #555;"> Detail 
-                                                    <span [hidden]="is_disabled=='1'" class="uncomplete" style="color:#f7c316;">
-                                                        <i class="fas fa-exclamation-triangle"></i>
-                                                        <span>Incomplete</span>
-                                                    </span>
-                                                    <span [hidden]="is_disabled=='0'" class="uncomplete" style="color:#0dbc0d;">
-                                                        <i class="fas fa-check-circle"></i>
-                                                        <span style="background-color:#0dbc0d;">Complete</span>
-                                                    </span>
-                                                    </a>
+                                                        <li id="active_User" class="active">
+                                                            <a href="#tab_detaile1" data-toggle="tab" style="color: #555;"> Detail 
+                                                            <span [hidden]="is_disabled=='1'" class="uncomplete" style="color:#f7c316;">
+                                                                <i class="fas fa-exclamation-triangle"></i>
+                                                                <span>Incomplete</span>
+                                                            </span>
+                                                            <span [hidden]="is_disabled=='0'" class="uncomplete" style="color:#0dbc0d;">
+                                                                <i class="fas fa-check-circle"></i>
+                                                                <span style="background-color:#0dbc0d;">Complete</span>
+                                                            </span>
+                                                            </a>
                                                         </li>
                                                         <li id="remove_user" *ngIf="is_doc"><a href="#tab_detaile2" data-toggle="tab" style="color: #555;">  Document
-                                                    <span [hidden]="is_document=='1'" class="uncomplete" style="color:#f7c316;">
-                                                        <i class="fas fa-exclamation-triangle"></i>
-                                                        <span>Incomplete</span>
-                                                    </span>
-                                                    <span [hidden]="is_document=='0'" class="uncomplete" style="color:#0dbc0d;">
-                                                        <i class="fas fa-check-circle"></i>
-                                                        <span style="background-color:#0dbc0d;">Complete</span>
-                                                    </span>
-                                                    </a>
+                                                            <span [hidden]="is_document=='1'" class="uncomplete" style="color:#f7c316;">
+                                                                <i class="fas fa-exclamation-triangle"></i>
+                                                                <span>Incomplete</span>
+                                                            </span>
+                                                            <span [hidden]="is_document=='0'" class="uncomplete" style="color:#0dbc0d;">
+                                                                <i class="fas fa-check-circle"></i>
+                                                                <span style="background-color:#0dbc0d;">Complete</span>
+                                                            </span>
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -1048,7 +1125,7 @@
                                 <p style="text-align: center;">You can check visa status from Visa Status option of website using Application ID and applicant’s passport.</p>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" id="submit_modal_btn_payPage">Ok</button>
                         <!-- <button type="button" class="btn btn-danger" data-dismiss="modal" id="submit_cnt_apli">Continue</button> -->
                     </div>
                 </div>

@@ -1,4 +1,162 @@
+<section class="section_30" style="background-color:#EDEFF1;padding-bottom: 0px;">
+	<div class="container">
+		<div class="our_program">
+			<div class="main_heading main_heading_wbg">
+				<h1 class="table_h">Our Referral Program</h1>
+				<span ></span>
+			</div>
+			<p class="text-center">Make Money Through Your Network, Invite Your Friends And</p>
+			<p class="text-center" style="font-size: 32px;" *ngIf="!isnewUser">
+				Earn $10 for every new applicant you refer
+			</p>
+			<p class="text-center">
+				<label>Nobody can tell the our story better than our customers.</label> Get a friend to start apply for a visa today and earn $10 when they complete their first application.
+			</p>
+			<p *ngIf="isnewUser" class="text-center" style="color: #73d934;
+			padding: 4px 0px;
+			border-radius: 30px;
+			border:1px solid #73d934;
+			box-shadow: inset 0px 0px 20px #73d93478;width: 80%;
+    		margin-left: auto;
+    		margin-right: auto;">
+					Your account has been registered on Visacent. Your login credentials has been sent no your email. You can login using visacent.com/login and check your refferal bonus and update your information.
+			</p>
+			
+			
+		</div>
+	</div>
+</section>
+<section style="padding:0px;background: #e4e6e7;">
+	<div class="container">
+		<form [hidden]="refferalShow" class="refer_form">
+				<div class="mail_div">
+				<div class="input_div">
+					
+				<div class="element_container">
+					<label id="lbl_appliId">Email Id <i class="fas fa-pencil-alt"></i></label><input type="text" [(ngModel)]="email" class="emailCls enable_white" style="width: 319px;" name="email" (keyup)="removclsAppli()"/>
+				</div>
+					<button class="my_btn width_auto" (click)="refferalUser()">Get your referral link</button>
+				</div>
+				<div class="web_div">
+					<p><a href="javascript:void(0);">https://visacent.com</a> <span>Worldwide Visa services</span> </p>
+					<p><a href="javascript:void(0);">https://visacent.com</a> <span>Worldwide Visa services</span> </p>
+				</div>
+				
+			</div>
+		</form>
+		
+		<div [hidden]="!refferalShow" style="text-align: center;margin-top: 20px;">
+			<p>
+				<span style="font-family: 'Hammersmith One';
+				color: #ff7600;">Your Referral Url In Visacent:</span> 
+				<span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
+			</p>
+			<span *ngIf="textCopyComplete" class="uncomplete" style="color: #0dbc0d;">
+					<span style="background-color:#a1a2a2;">Copied</span>
+			</span>
+			<p>
+				<span style="font-family: 'Hammersmith One';
+				color: #005ea5;">Your Referral Url In indiaEvisas:</span>
+				<span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{indiaevisas_referral}}</span>
+			</p>
+			
+		</div><br>
+	</div>
+</section>
+
+
+<section class="section_30" style="background-color:#005ea5;">
+	<div class="container text-center">
+		<div class="newsletter">
+			<h1 class="text-center" style="margin-bottom: 15px;text-transform: capitalize;">Login to get your refferal details .</h1>
+			<p style="margin-bottom: 15px;">Use one of our logos or badges to help spread the word.</p>
+			<div>
+				<button class="my_btn width_auto" style= "font-family: 'Hammersmith One';background-color: #EDEFF1;color:#333;">Login Your Account</button>
+			</div>
+		</div>	
+	</div>
+</section>
+
+
+
 <section class="section_30">
+	<div class="container">
+			<h3 class="text-center" style="margin-bottom: 20px;">How It Works?</h3>
+			<div class="row">
+				<div class="col-sm-4">
+					<article class="how_work">
+						<i class="fas fa-link"></i>
+						<h3>Share unique link</h3>
+						<p>Send your unique referral link via email or share it on Facebook, Twitter or other social media platform.</p>
+					</article>
+				</div>
+				<div class="col-sm-4">
+					<article class="how_work">
+						<i class="fas fa-users"></i>
+						<h3>Friend makes a transfer</h3>
+						<p>Friends who sign up with your link, make their first Booking.</p>
+					</article>
+				</div>
+				<div class="col-sm-4">
+					<article class="how_work">
+						<i class="fas fa-gift"></i>
+						<h3>Claim your reward</h3>
+						<p>Once your friend completed first booking, you'll receive a $10 reward!</p>
+					</article>
+				</div>
+			</div>
+		</div>	
+</section>
+
+
+
+
+<section class="section_30" >
+	<div class="container">
+		<h3 class="text-center" style="margin-bottom: 20px;">FAQ's</h3>
+		<div class="faq_accordian">
+			<a href="javascript:void(0)" class='new'>Can I claim my bonus to someone else’s account? <span><i class="fas fa-chevron-right"></i></span></a>
+        <div class="open">
+            <p>No. You can only claim the bonus to your personal visacent / paypal / bank account account.</p>
+        </div>
+
+        <a href="javascript:void(0)" class='new'>How much time will it take to receive my bonus after claiming it? <span><i class="fas fa-chevron-right"></i></span></a>
+        <div class="open">
+            <p>Your refer a friend bonus will usually be paid out within 6 business days.</p>
+        </div>
+
+        <a href="javascript:void(0)" class='new'>In which currency will I receive my bonus? <span><i class="fas fa-chevron-right"></i></span></a>
+        <div class="open">
+           <p>You will receive your bonus in the USD in visacent / paypal and account local currency of your bank account.
+           </p>
+        </div>
+
+        <a href="javascript:void(0)" class='new'>When I my refer eligible to get bonus?
+ <span><i class="fas fa-chevron-right"></i></span></a>
+        <div class="open">
+           <p>Once your friends who sign up with your link, make their first Booking ( complete a payment for their visa application / tour packages / or other services. amount should be $50 USD or more)  you'll be eligible for the a bonus of $10 USD.
+			</p>
+        </div>
+
+        <a href="javascript:void(0)" class='new'>How many people can I invite? <span><i class="fas fa-chevron-right"></i></span></a>
+        <div class="open">
+        	<p>
+        		There is a daily limit of 100 invitations, but there is no overall limit on the total number of people you can invite nor the amount of referral credit you can earn.
+        	</p>
+        </div>
+
+		</div>	
+	</div>
+</section>
+
+
+
+
+
+
+
+
+<!-- <section class="section_30">
 	<div class="container">
 		<div class="status_div">
 			<div class="main_heading main_heading_wbg">
@@ -26,12 +184,6 @@
 							</div>
 						</div>
 					</div>
-					<label style="display: initial;cursor: pointer;">
-						<input type="radio" name="country" (click)="VisacentSelect()" value="visacent" checked style="width:6%;height: 12px;"> Visacent<br>
-					</label>
-					<label style="display: initial;cursor: pointer;">
-						<input type="radio" name="country" (click)="indiaEvisaSelect()" value="india e-visa" style="width:6%;height: 12px;"> India e-visa
-					</label>
 					<div class="row">
 						<div class="col-sm-12" style="text-align: -webkit-center">
 							<button class="my_btn" style="width: 170px!important;" (click)="refferalUser()">Get your referral link</button>
@@ -43,8 +195,8 @@
 				</span>
 				<div [hidden]="!refferalShow">
 					<strong style="font-size: 19px;">Your Referral Url:</strong> 
-					<span [hidden]="!refferalvisacent" id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
-					<span [hidden]="!refferalindianvisa" id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{refferal}}</span>
+					<span [hidden]="!refferalUrl" id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
+					<span [hidden]="!refferalUrl" id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{indiaevisas_referral}}</span>
 				</div><br>
 				<h1 style="text-align: center;">How it Works</h1><br>
 				<p  style="text-align: center;margin: 0 0 -15px;font-size: 25px;"><strong>Sign Up to get a unique referral link</strong></p><br>
@@ -59,7 +211,7 @@
 			</div>
 		</div>      
 	</div>
-</section>
+</section> -->
 <div *ngIf="process" class="preloader"> 
     <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
         <g>

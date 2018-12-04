@@ -295,6 +295,7 @@ export class ApplyEVisaComponent implements OnInit {
 						if(this.countydetailsNew[i].Telepone!=null && $.trim(this.countydetailsNew[i].Telepone)!='' && $.trim(this.countydetailsNew[i].Telepone)!=' '){
 							this.phoneMulti = this.countydetailsNew[i].Telepone;
 							this.phoneM =this.phoneMulti.split('<br />');
+							this.phoneM = this.phoneM.filter(function(v){return v!==''});
 							this.countydetailsNew[i].phoneM1 = this.phoneM;
 							this.countydetailsNew[i].lnthTelepone=1;
 						}else{
@@ -304,6 +305,7 @@ export class ApplyEVisaComponent implements OnInit {
 						if(this.countydetailsNew[i].Fax!=null && $.trim(this.countydetailsNew[i].Fax)!='' && $.trim(this.countydetailsNew[i].Fax)!=' '){
 							this.faxMulti = this.countydetailsNew[i].Fax;
 							this.faxMultiM =this.faxMulti.split('<br />');
+							this.faxMultiM = this.faxMultiM.filter(function(v){return v!==''});
 							this.countydetailsNew[i].faxMultiM1 = this.faxMultiM;
 							this.countydetailsNew[i].lnthFax=1;
 						}else{
@@ -313,6 +315,7 @@ export class ApplyEVisaComponent implements OnInit {
 						if(this.countydetailsNew[i].E_maiil!=null && $.trim(this.countydetailsNew[i].E_maiil)!='' && $.trim(this.countydetailsNew[i].E_maiil)!=' '){
 							this.emaiMulti = this.countydetailsNew[i].E_maiil;
 							this.emaiM =this.emaiMulti.split('<br />');
+							this.emaiM = this.emaiM.filter(function(v){return v!==''});
 							this.countydetailsNew[i].emaiM1 = this.emaiM;
 							this.countydetailsNew[i].lnthE_maiil=1;
 						}else{
@@ -322,6 +325,7 @@ export class ApplyEVisaComponent implements OnInit {
 						if(this.countydetailsNew[i].website!=null && $.trim(this.countydetailsNew[i].website)!='' && $.trim(this.countydetailsNew[i].website)!=' '){
 							this.websiteMulti = this.countydetailsNew[i].website;
 							this.websiteM =this.websiteMulti.split('<br />');
+							this.websiteM = this.websiteM.filter(function(v){return v!==''});
 							this.countydetailsNew[i].websiteM1 =this.websiteM;
 							this.countydetailsNew[i].lnthwebsite=1;
 						}else{

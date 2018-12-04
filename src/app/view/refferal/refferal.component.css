@@ -200,11 +200,12 @@
 .uncomplete>span
 {
     position: absolute;
-    left: 500px;
-    top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 29px;
     color: #ffffff;
     font-size: 15px;
-    background: #fe484a;
+    /* background: #fe484a; */
     padding: 1px 7px;
     border-radius: 48px;
     transform:scale(0,0);
@@ -215,3 +216,57 @@
     transform:scale(1,1);
     transition-duration:.3s;
 }
+
+
+
+/*------------------- start faq accordian -----------------*/
+a.new{
+    display: block;
+    width: 100%;
+    color: #333;
+    font-size: 18px;
+    padding: 15px 0px;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 7px;
+    border-bottom: 1px solid #d5d5d5;
+    font-family: 'Hammersmith One';
+}
+a.new:hover,a.new:focus{
+    outline: none;
+    text-decoration:none;
+}
+a.new>span
+{
+    float:right;
+    margin-right:13px;  
+    }
+    a.new>span>img
+{
+    width:13px;
+    }
+.open{
+    padding: 10px 0px;
+    border-bottom: 3px solid white;
+    display: none;
+}
+.rotate
+{
+    transform:rotate(90deg);
+        
+    }
+@media (max-width: 600px)
+{
+    a.new
+    {
+        position: relative;
+    }
+    a.new > span
+    {
+        position: absolute;
+        right: 2px;
+        top: 19px;
+    }
+}
+
+/*------------------- end faq accordian -----------------*/

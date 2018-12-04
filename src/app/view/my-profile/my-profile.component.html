@@ -73,82 +73,33 @@
                                         <div class="col-sm-6" style="cursor: pointer;">
                                             <a class="dash_div">
                                                 <h1><i class="fas fa-gift"></i></h1>
-                                                <h3>Total Bonus</h3>
-                                                <p>{{total_bonus}}</p>
+                                                <h3>Available Total Bonus</h3>
+                                                <p>{{available_bonus}}</p>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                                    <span *ngIf="textCopyComplete">
-                                        <div class="hero">Copied</div>
-                                    </span>
-                                    <div [hidden]="refferal==''">
-                                        <strong style="font-size: 16px;">Your Referral Url</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor:copy;color:#044e88">&nbsp; https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
-                                    </div><br />
-                                    <div [hidden]="user_refferals1==''" class="main_heading main_heading_wbg"><h1 class="table_h">User Refferals Details</h1>
-                                        <span></span>
+                            </div>
+                            <span *ngIf="textCopyComplete">
+                                <div class="hero">Copied</div>
+                            </span>
+                            <div [hidden]="refferal==''">
+                                <strong style="font-size: 16px;">Your Referral Url In Visacent</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor:copy;color:#044e88">&nbsp; https://visacent.com/apply-e-visa/?ref={{refferal}}</span><br>
+                            </div><br /> 
+                            <div [hidden]="indiaevisa_referral==''">
+                                <strong style="font-size: 16px;">Your Referral Url In IndiaEvisas</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor:copy;color:#044e88">&nbsp; https://indiaevisas.org/apply-visa/?ref={{indiaevisa_referral}}</span>
+                            </div>                         
+                            <div class="row" [hidden]="admin_activity==''">
+                                <div class="col-md-12">
+                                    <h3 style="text-align:left!important;margin-top:15px;margin-bottom:8px;">Notes</h3>       
+                                    <div class="notes" *ngFor="let activity of admin_activity">
+                                        <div class="" [ngClass]="{'notes_background': activity.applicant==''}">
+                                            <h3 class="text-right"><span class="pull-left">{{activity.alert}}</span><span [hidden]="activity.applicant==''"> Appli Name: </span><label>{{activity.applicant}}</label></h3>
+                                            <div class="notes_date"><span>Order Date: {{activity.date_time}}</span><span >Order Id: {{activity.order_id}}</span></div>
+                                        </div>  
                                     </div>
-                                    <table class="tableRefferals" *ngFor="let bonus of user_refferals1; let i=index" [hidden]="user_refferals1==''">      
-                                        <tr >
-                                            <th>{{i+1}}</th>
-                                            <th>USER DETAILS</th>
-                                        </tr>
-                                        <tr >
-                                            <th>Bonus</th>
-                                            <td>{{bonus.bonus_amt}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Refferer Created</th>
-                                            <td>{{bonus.refferer_created}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Refferer Email</th>
-                                            <td>{{bonus.refferer_email}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Refferer Name</th>
-                                            <td>{{bonus.refferer_name}}</td>
-                                        </tr>
-                                        <br />
-                                    </table><br />
-                                    <hr />       
-                                    <div [hidden]="bonus_withdraw1==''" class="main_heading main_heading_wbg"><h1 class="table_h">Bonus Withdraw</h1>
-                                        <span></span>
-                                    </div>   
-                                    <table class="tableRefferals" *ngFor="let bonus of bonus_withdraw1; let i=index" [hidden]="bonus_withdraw1==''">      
-                                        <tr >
-                                            <th>{{i+1}}</th>
-                                            <th>USER DETAILS</th>
-                                        </tr>
-                                        <tr >
-                                            <th>Bonus</th>
-                                            <td>{{bonus.bonus_amt}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Refferer Created</th>
-                                            <td>{{bonus.created_at}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Description</th>
-                                            <td>{{bonus.description}}</td>
-                                        </tr>
-                                        <br />
-                                    </table>
-
-
-                                    <div class="row" [hidden]="admin_activity==''">
-                                        <div class="col-md-12">
-                                            <h3 style="text-align:left!important;margin-top:15px;margin-bottom:8px;">Notes</h3>       
-                                            <div class="notes" *ngFor="let activity of admin_activity">
-                                                <div class="" [ngClass]="{'notes_background': activity.applicant==''}">
-                                                    <h3 class="text-right"><span class="pull-left">{{activity.alert}}</span><span [hidden]="activity.applicant==''"> Appli Name: </span><label>{{activity.applicant}}</label></h3>
-                                                    <div class="notes_date"><span>Order Date: {{activity.date_time}}</span><span >Order Id: {{activity.order_id}}</span></div>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>  
+                                </div>
+                            </div>  
                         </div>
                         <div class="col-lg-3">
                             <div class="r_div">
@@ -157,36 +108,32 @@
                                     <li><a data-toggle="modal" data-target="#mod1">Making an application</a></li>
                                     <li><a data-toggle="modal" data-target="#mod2">Uploading documents</a></li>
                                     <li><a data-toggle="modal" data-target="#mod3">Photographs</a></li>
+                                    <li><a routerLink="/my-profile/withdraw">your bouns</a></li>
                                 </ul>
-                            </div>
-                           
+                            </div>    
                         </div>
                     </div> 
                     
                     <!----------------- start popup 1         ------------------->
                     <div>
-                          <div class="modal fade" id="mod1" role="dialog">
+                        <div class="modal fade" id="mod1" role="dialog">
                             <div class="modal-dialog">
-
                               <!-- Modal content-->
-                              <div class="modal-content">
-                                <div class="mod al-header">
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  <h4 class="modal-title">Mod1</h4>
+                                <div class="modal-content">
+                                    <div class="mod al-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Mod1</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Some text in the modal.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                  <p>Some text in the modal.</p>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                              </div>
-
                             </div>
-                          </div>
                         </div>
-                    
-                    
+                    </div>
                         <div>
                           <div class="modal fade" id="mod2" role="dialog">
                             <div class="modal-dialog">
@@ -207,35 +154,30 @@
 
                             </div>
                           </div>
-                        </div>
-                    
-                    
+                        </div>   
                     <div>
-                          <div class="modal fade" id="mod3" role="dialog">
-                            <div class="modal-dialog">
+                        <div class="modal fade" id="mod3" role="dialog">
+                        <div class="modal-dialog">
 
-                              <!-- Modal content-->
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  <h4 class="modal-title">Mod3</h4>
-                                </div>
-                                <div class="modal-body">
-                                  <p>Some text in the modal.</p>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                              </div>
-
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Mod3</h4>
                             </div>
-                          </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+
                         </div>
+                        </div>
+                    </div>
                     
-                    <!------------------ end popup 1 --------------------------->
-                    
-                    
-                
+                    <!------------------ end popup 1 --------------------------->   
             </div>
             <div [hidden]="!my_account">
                     <div class="icon_meaning_div">
@@ -265,9 +207,7 @@
                         </div>
                     </div>
                     <h1 class="text-center" *ngIf="AllApplication" style="margin-top:20px;font-size:30px;">All Applications</h1>
-                    <h1 class="text-center" *ngIf="UnderProcessApplication" style="margin-top:20px;font-size:30px;">Under Process Applications</h1>
-              
-                
+                    <h1 class="text-center" *ngIf="UnderProcessApplication" style="margin-top:20px;font-size:30px;">Under Process Applications</h1>     
                 <div *ngFor="let order1 of UserOrders_user; let i = index" class="div_for_user row">
                     <div class="col-md-12 new">
                         <h4>
@@ -470,8 +410,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div>      
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-md-12">
@@ -523,9 +462,7 @@
                     </div>
                 </form>
             </div>
-            <div class="" [hidden]="!change_password">
-                
-                
+            <div class="" [hidden]="!change_password">   
                 <!-- <h3 style="margin-top: 0;">Change Password</h3> -->
                 <form class="change_pro_form">
                 <h1 style="margin-bottom: 15px;text-align: center;font-size: 30px;">Change Password</h1>
@@ -536,8 +473,7 @@
                 <div id="myalert" class="my_alert my_alert_pos my_alert_red" *ngIf="change_error">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span class="sus">{{change_error_msg}}</span>
-                </div>
-                    
+                </div>   
                     <div class="row">
                         <div class="col-md-12">
                             <div class="label_container">
@@ -579,6 +515,115 @@
                     </div>        
                 </form>
             </div>
+            <div *ngIf="withdraw_page">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-sm-3" style="cursor: pointer;">
+                            <a class="dash_div" style="display: block;text-align: center;padding-top: 10px;padding-bottom: 10px;background: #edeff1;">
+                                <h3 >Available Total Bonus</h3>
+                                <p>{{available_bonus}} USD</p>
+                                <button *ngIf="!Withdraw_btn_hide && !available_bonus==0" (click)="withdraw()" class="my_btn width_auto">Request to withdraw</button>
+                            </a>
+                        </div>
+                    </div>
+                </div><br>
+                <p *ngIf="Withdraw_btn_hide" style="color:green">Your request to withdrawal bonus has been submitted. Your bonus will be credit within 72 hour into your Paypal account. </p>
+                <div class="row" [hidden]="userData==''">
+                    <div class="col-md-12">
+                        <div class="main_heading main_heading_wbg"><h1 class="table_h">Bonus Withdraw Request</h1>
+                            <span></span>
+                        </div>  
+                        <div class="table-responsive table_cont">
+                            <table class="table table-hover table-bordered xzy">
+                                <thead>
+                                    <tr>
+                                        <th>Withdraw amount</th>
+                                        <th>Status</th>
+                                        <th>Request Date</th>
+                                        <th>Created time</th>                                       
+                                        <th>Credit amount</th>
+                                        <th>Comment</th>
+                                         <!-- <th>Total bonus</th> -->                                       
+                                    </tr>
+                                </thead>
+                                <tbody style="cursor: pointer;" *ngFor="let bonus of userData; let i=index">
+                                    <tr class="active">
+                                            <td *ngIf="bonus.withdraw_amount!=null">{{bonus.withdraw_amount}}</td>
+                                            <td *ngIf="bonus.withdraw_amount==null">NA</td>
+                                            <td *ngIf="bonus.status=='Pending'" style="color:orange">{{bonus.status}}</td>
+                                            <td *ngIf="bonus.status=='Cancel'" style="color:red">{{bonus.status}}</td>
+                                            <td *ngIf="bonus.status=='Completed'" style="color:green">{{bonus.status}}</td>                                        
+                                            <td *ngIf="bonus.created_at!=null">{{bonus.created_at}}</td>
+                                            <td *ngIf="bonus.created_at==null">NA</td>
+                                            <td *ngIf="bonus.credit_date!=null">{{bonus.credit_date}}</td>
+                                            <td *ngIf="bonus.credit_date==null">NA</td>       
+                                            <td *ngIf="bonus.credit_amount!=null">{{bonus.credit_amount}}</td>
+                                            <td *ngIf="bonus.credit_amount==null">NA</td>
+                                            <td *ngIf="bonus.comment!=null">{{bonus.comment}}</td>
+                                            <td *ngIf="bonus.comment==null">NA</td>
+                                       <!-- <td *ngIf="bonus.total_bonus!=null">{{bonus.total_bonus}}</td>
+                                        <td *ngIf="bonus.total_bonus==null">NA</td> -->  
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="row" [hidden]="user_refferals1==''">
+                    <div class="col-md-6">
+                        <div [hidden]="user_refferals1==''" class="main_heading main_heading_wbg"><h1 class="table_h">User Refferals Details</h1>
+                            <span></span>
+                        </div>
+                        <div class="table-responsive table_cont">
+                            <table class="table table-hover table-bordered xzy">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Bonus</th>
+                                        <th>Refferer Created</th>
+                                        <th>Refferer Email</th>
+                                        <th>Refferer Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="cursor: pointer;" *ngFor="let bonus of user_refferals1; let i=index">
+                                    <tr class="active">
+                                        <td>{{i+1}}</td>
+                                        <td>{{bonus.bonus_amt}}</td>
+                                        <td>{{bonus.refferer_created}}</td>
+                                        <td>{{bonus.refferer_email}}</td>
+                                        <td>{{bonus.refferer_name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6" [hidden]="bonus_withdraw1==''">
+                        <div [hidden]="bonus_withdraw1==''" class="main_heading main_heading_wbg"><h1 class="table_h">Bonus Withdraw</h1>
+                            <span></span>
+                        </div>  
+                        <div class="table-responsive table_cont">
+                            <table class="table table-hover table-bordered xzy">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Bonus</th>
+                                        <th>Refferer Created</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="cursor: pointer;" *ngFor="let bonus of bonus_withdraw1; let i=index">
+                                    <tr class="active">
+                                        <td>{{i+1}}</td>
+                                        <td>{{bonus.bonus_amt}}</td>
+                                        <td>{{bonus.created_at}}</td>
+                                        <td>{{bonus.description}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
@@ -601,12 +646,7 @@
                     <h4 class="modal-title" style="text-align: center;text-align: center;font-size: 20px;color: #005ea5;">Alert</h4>
                 </div>
                 
-                    <p style="
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;text-align: center;">Are you sure! you want to delete?</p>
-                
-                
+                    <p style="font-size: 20px;margin-top: 20px;margin-bottom: 20px;text-align: center;">Are you sure! you want to delete?</p>          
                 <div class="modal-footer" style="text-align: center">
                     <div class="row">
                         <div class="col-xs-6">
@@ -632,6 +672,28 @@
                 </div>
                 <div class="modal-footer" style="text-align: center;display:none;">
                     <button type="button" class="btn btn-success" id="modal_btn_dlt" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <button type="button" class="btn btn-info btn-lg hidden" id="bonusAppli" data-toggle="modal" data-target="#bonusUser"></button>
+    <div class="modal fade" id="bonusUser" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content mediaCls" style="position: initial;;width: 100%;">
+                <div class="modal-header" style="border-bottom:none">
+                    <button style="color: red;font-size: 32px;" type="button" class="close" data-dismiss="modal">&times;</button>
+                    <div class="modal-title main_heading main_heading_wbg" style="text-align: center;text-align: center;font-size: 20px;color: green;">
+                        <h3 class="table_h">Confirmation</h3>
+                        <span></span>
+                    </div>
+                </div>
+                <p style="position: relative;text-align: center;">Use bonus conform</p>
+                <div class="modal-footer" style="text-align: center" style="border-top:none;text-align: center">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="bonus_use_apli">Agree</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" style="background-color: #f3c36c;border-color: #f3c36c;">Later </button>
                 </div>
             </div>
         </div>

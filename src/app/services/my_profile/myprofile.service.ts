@@ -33,8 +33,19 @@ export class MyprofileService {
 
   private userDeleteOrdUrl = "https://visacent.com/la/api/delete_application/";
   userDeleteOrd(ind){
-    console.log(ind)
     return this.http.get(`${this.userDeleteOrdUrl}`+ind).map((res:Response) => res.json());
+  }
+
+  private withdrawUrl = "https://visacent.com/la/api/bonus_withdraw";
+
+  withdraw(withdrawUserData:any){
+    return this.http.post(`${this.withdrawUrl}`,withdrawUserData).map((res:Response) => res.json());
+  }
+
+  private userInfoUrl = "https://visacent.com/la/api/withdraw_request_detail/";
+
+  UserData(userInfo:any){
+    return this.http.get(`${this.userInfoUrl}`+userInfo).map((res:Response) => res.json());
   }
 
 }
