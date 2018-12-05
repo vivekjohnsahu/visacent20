@@ -40,6 +40,11 @@ input[type=number] {
     width:900px;
     margin:0 auto;
 }
+.agree_p
+{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
 #Umoney_fully_msg
 {
     width:252px;
@@ -65,10 +70,16 @@ input[type=number] {
 }
 @media (max-width:600px)
 {
+    .agree_p
+    {
+        margin-bottom: 0px;
+        margin-top: 20px;
+    }
     .payment_buttons
     {
         float: none;
         width:100%;
+        margin-top:17px;
     }
     #paypal-checkout-btn,#Umoney_paypal_drop
     {

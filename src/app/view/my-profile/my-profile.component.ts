@@ -256,6 +256,7 @@ userDas(){
 			$('.dashboard').removeClass('profile_active');
 			$('.change-password').addClass('profile_active')
 		}else if(currentId=='withdraw'){
+			document.body.scrollTop = document.documentElement.scrollTop = 0;
 			this.my_profile = false;
 			this.my_account = false;
 			this.change_password = false;

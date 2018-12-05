@@ -211,9 +211,6 @@ export class OrderSummaryComponent implements OnInit {
 						this.user_email = data.visa_applicantion.user_email;
 						this.total_fee = data.visa_applicantion.total_fee;
 						this.payment_status = data.visa_applicantion.payment_status;
-						// if(data.visa_applicantion.payment_status=='pending'){
-						// 	this.routers.navigate(["payment",this.currentIdUrl]);
-						// }
 						this.created_at = data.visa_applicantion.created_at;
 						if(this.order_phone = data.visa_applicantion.phone!=null){
 							this.order_phone = data.visa_applicantion.phone;
@@ -279,6 +276,12 @@ export class OrderSummaryComponent implements OnInit {
 		this.next_btn_suought=true;
 		this.submit_btn_show=false;
 		this.general_information = true;
+		this.applicant_informaction = false;
+		this.applicant_personal_informaction = false;
+		this.applicant_father_informaction = false;
+		this.applicant_reference_informaction = false;
+		this.applicant_suought_infor = false;
+		
 		this.is_disabled=0;
 		this.is_show_alert=0;
 		this.progress_active=0;
@@ -1821,28 +1824,25 @@ export class OrderSummaryComponent implements OnInit {
 					if(this.is_final_submit=='1'){
 						this.is_disabled=1;
 						if(this.is_final_submit=='1' && this.is_document=='1'){	
-							if(this.is_final_submit=='1' && this.document==undefined){
-								$('.modal-open').css('display','block');	
-								this.routers.navigate(["payment",this.currentIdUrl]);	
-							}else{
-								$('#appli_msg_'+this.applicant_id).hide();
-								$('#appli_msg1_'+this.applicant_id).show();
-								$('.modal').hide();	
-								$('#appli_status_'+this.applicant_indx).val(1);
-								var flg=1;
-								$('.appli_status').each(function(){
-									if($(this).val()=='0')
-									{
-										flg=0;
-										$('#tab_detaile1').removeClass("active");
-										$('#tab_detaile2').addClass("active in");
-										$('#active_User').removeClass("active");
-										$('#remove_user').addClass("active");
-									}
-								})
-								if(flg!=0)
-									this.routers.navigate(["payment",this.currentIdUrl]);
-							}
+							$('#appli_msg_'+this.applicant_id).hide();
+							$('#appli_msg1_'+this.applicant_id).show();
+							$('.modal').hide();
+							$('#appli_status_'+this.applicant_indx).val(1);
+							var flg=1;
+							var indx=0;
+							var cmd=this;
+							$('.appli_status').each(function(){
+								if($(this).val()=='0')
+								{
+									flg=0;
+									cmd.field_re(indx);
+									$('html,body').animate({ scrollTop: $('.appli_tab').offset().top},'fast'); 
+									return false;
+								}
+								indx++;
+							})
+							if(flg!=0)
+								this.routers.navigate(["payment",this.currentIdUrl]);
 						}
 						if(this.is_doc==true){
 							$('#tab_detaile1').removeClass("active");
@@ -1933,11 +1933,17 @@ export class OrderSummaryComponent implements OnInit {
 					if(this.is_final_submit=='1' && this.is_document=='1'){
 						$('#appli_status_'+this.applicant_indx).val(1);
 							var flg=1;
+							var indx=0;
+							var cmd=this;
 							$('.appli_status').each(function(){
 								if($(this).val()=='0')
 								{
 									flg=0;
+									cmd.field_re(indx);
+									$('html,body').animate({ scrollTop: $('.appli_tab').offset().top},'fast'); 
+									return false;
 								}
+								indx++;
 							})
 							if(flg!=0){
 								this.routers.navigate(["payment",this.currentIdUrl]);

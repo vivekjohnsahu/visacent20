@@ -10,10 +10,10 @@
 				Earn $10 for every new applicant you refer
 			</p>
 			<p class="text-center">
-				<label>Nobody can tell the our story better than our customers.</label> Get a friend to start apply for a visa today and earn $10 when they complete their first application.
+				<span style="cursor:auto;font-family: 'Hammersmith One';">Nobody can tell the our story better than our customers.</span> Get a friend to start apply for a visa today and earn $10 when they complete their first application.
 			</p>
 			<p *ngIf="isnewUser" class="text-center" style="color: #73d934;
-			padding: 4px 0px;
+			padding: 4px 10px;
 			border-radius: 30px;
 			border:1px solid #73d934;
 			box-shadow: inset 0px 0px 20px #73d93478;width: 80%;
@@ -26,41 +26,65 @@
 		</div>
 	</div>
 </section>
-<section style="padding:0px;background: #e4e6e7;">
+<section class="section_30" style="background: #e4e6e7;">
 	<div class="container">
 		<form [hidden]="refferalShow" class="refer_form">
-				<div class="mail_div">
-				<div class="input_div">
-					
-				<div class="element_container">
-					<label id="lbl_appliId">Email Id <i class="fas fa-pencil-alt"></i></label><input type="text" [(ngModel)]="email" class="emailCls enable_white" style="width: 319px;" name="email" (keyup)="removclsAppli()"/>
+			<div class="mail_div">
+				<div class="input_div">	
+					<div class="element_container">
+						<label id="lbl_appliId">Email Id </label>
+						<input type="text" [(ngModel)]="email" class="emailCls enable_white" style="width: 319px;" name="email" (keyup)="removclsAppli()"/>
+					</div>
 				</div>
-					<button class="my_btn width_auto" (click)="refferalUser()">Get your referral link</button>
+				<div class="row">
+					<div class="col-sm-12 " style="text-align: center;margin-bottom:5px;">
+						<span style="display: inline-block;">
+						<re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha></span>
+						<div *ngIf="captchaError" style="color:red;">*{{captchaError_msg}}</div>
+					</div>
+					<div class="col-sm-12 text-center">
+						<button class="my_btn width_auto" (click)="refferalUser()">Get your referral link</button>
+					</div>
 				</div>
-				<div class="web_div">
-					<p><a href="javascript:void(0);">https://visacent.com</a> <span>Worldwide Visa services</span> </p>
-					<p><a href="javascript:void(0);">https://visacent.com</a> <span>Worldwide Visa services</span> </p>
-				</div>
-				
 			</div>
 		</form>
 		
-		<div [hidden]="!refferalShow" style="text-align: center;margin-top: 20px;">
-			<p>
-				<span style="font-family: 'Hammersmith One';
-				color: #ff7600;">Your Referral Url In Visacent:</span> 
-				<span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
-			</p>
-			<span *ngIf="textCopyComplete" class="uncomplete" style="color: #0dbc0d;">
-					<span style="background-color:#a1a2a2;">Copied</span>
-			</span>
-			<p>
-				<span style="font-family: 'Hammersmith One';
-				color: #005ea5;">Your Referral Url In indiaEvisas:</span>
-				<span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{indiaevisas_referral}}</span>
-			</p>
+		<div class="" [hidden]="!refferalShow" style="text-align: center;">
+			<div class="row url_row">
+			<div class="col-sm-5 url_col">
+				<p class="url_p url_p1">
+					<span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://visacent.com/">Visacent</a></span>
+				</p>
+			</div>
+			<div class="col-sm-7">
+				<p class="url_p">
+					<span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" data-toggle="tooltip"> https://visacent.com/apply-e-visa/?ref={{refferal}} &nbsp;<i class="fas fa-paste"></i></span>
+					<span *ngIf="textCopyCompleteCent" class="uncomplete copied">
+						Copied
+					</span>
+				</p>
+			</div>
+			</div>
+
+			<div class="row url_row">
+				<div class="col-sm-5 url_col">
+					<p class="url_p url_p1">
+						<span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://indiaevisas.org" target="_blank" >India e-Visa</a>
+						
+						</span>
+					</p>
+				</div>
+				<div class="col-sm-7">
+					<p class="url_p">
+						<span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url"> https://indiaevisas.org/apply-visa/?ref={{indiaevisas_referral}} &nbsp;<i class="fas fa-paste"></i></span>
+						<span *ngIf="textCopyCompleteIndia" class="uncomplete copied">
+								Copied
+						</span>
+					</p>
+				</div>
+			</div>
 			
-		</div><br>
+		</div>
 	</div>
 </section>
 
@@ -68,52 +92,49 @@
 <section class="section_30" style="background-color:#005ea5;">
 	<div class="container text-center">
 		<div class="newsletter">
-			<h1 class="text-center" style="margin-bottom: 15px;text-transform: capitalize;">Login to get your refferal details .</h1>
+			<h1 class="text-center" style="margin-bottom: 15px;text-transform: capitalize;">Login to get your referral details.</h1>
 			<p style="margin-bottom: 15px;">Use one of our logos or badges to help spread the word.</p>
 			<div>
-				<button class="my_btn width_auto" style= "font-family: 'Hammersmith One';background-color: #EDEFF1;color:#333;">Login Your Account</button>
+				<button class="my_btn width_auto" routerLink="/login" style= "font-family: 'Hammersmith One';background-color: #EDEFF1;color:#333;">Login Your Account</button>
 			</div>
 		</div>	
 	</div>
 </section>
-
-
-
 <section class="section_30">
 	<div class="container">
-			<h3 class="text-center" style="margin-bottom: 20px;">How It Works?</h3>
-			<div class="row">
-				<div class="col-sm-4">
-					<article class="how_work">
-						<i class="fas fa-link"></i>
-						<h3>Share unique link</h3>
-						<p>Send your unique referral link via email or share it on Facebook, Twitter or other social media platform.</p>
-					</article>
-				</div>
-				<div class="col-sm-4">
-					<article class="how_work">
-						<i class="fas fa-users"></i>
-						<h3>Friend makes a transfer</h3>
-						<p>Friends who sign up with your link, make their first Booking.</p>
-					</article>
-				</div>
-				<div class="col-sm-4">
-					<article class="how_work">
-						<i class="fas fa-gift"></i>
-						<h3>Claim your reward</h3>
-						<p>Once your friend completed first booking, you'll receive a $10 reward!</p>
-					</article>
-				</div>
+		<h2 class="text-center" style="margin-bottom: 20px;">How It Works?</h2>
+		<div class="row">
+			<div class="col-sm-4">
+				<article class="how_work">
+					<i class="fas fa-link"></i>
+					<h3>Share your unique link</h3>
+					<p>Send your unique referral link via email or share it on Facebook, Twitter or other social media platform.</p>
+				</article>
 			</div>
-		</div>	
+			<div class="col-sm-4">
+				<article class="how_work">
+					<i class="fas fa-calendar-check"></i>
+					<h3>Friend Complete a Booking</h3>
+					<p>Friends who sign up with your link, make their first Booking.</p>
+				</article>
+			</div>
+			<div class="col-sm-4">
+				<article class="how_work">
+					<i class="fas fa-gift"></i>
+					<h3>Claim your reward</h3>
+					<p>Once your friend completed first booking, you'll receive a $10 reward!</p>
+				</article>
+			</div>
+		</div>
+	</div>	
 </section>
 
 
 
 
-<section class="section_30" >
+<section class="section_30" style="padding-top:0px;">
 	<div class="container">
-		<h3 class="text-center" style="margin-bottom: 20px;">FAQ's</h3>
+		<h2 class="text-center" style="margin-bottom: 20px;">FAQ's</h2>
 		<div class="faq_accordian">
 			<a href="javascript:void(0)" class='new'>Can I claim my bonus to someone else’s account? <span><i class="fas fa-chevron-right"></i></span></a>
         <div class="open">
@@ -138,7 +159,7 @@
 			</p>
         </div>
 
-        <a href="javascript:void(0)" class='new'>How many people can I invite? <span><i class="fas fa-chevron-right"></i></span></a>
+        <a id="last_faq_a" href="javascript:void(0)" class='new'>How many people can I invite? <span><i class="fas fa-chevron-right"></i></span></a>
         <div class="open">
         	<p>
         		There is a daily limit of 100 invitations, but there is no overall limit on the total number of people you can invite nor the amount of referral credit you can earn.

@@ -96,7 +96,7 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 		FormsModule,
 		RecaptchaModule.forRoot(),
 		NgProgressModule,
-		TextareaAutosizeModule
+		TextareaAutosizeModule,
 	],
 
 	providers: [],

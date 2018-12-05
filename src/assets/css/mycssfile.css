@@ -2625,8 +2625,7 @@ ul.faq_ul ol li
 
 .refer_form
 {
-    background: #e4e6e7;
-    padding: 20px 0px;
+    
 }
 .input_div .element_container
 {
@@ -2643,6 +2642,7 @@ ul.faq_ul ol li
     padding: 0px 5px;
     border: 1px solid #b0b0b0;
     border-right: none;
+    font-size: 16px;
 }
 .web_div p 
 {
@@ -2658,6 +2658,31 @@ ul.faq_ul ol li
 {
 	color:#005ea5;
 }
+.url_col
+{
+	padding-right:0px;
+}
+.url_p
+{
+	margin-bottom: 0px;
+	text-align: left;
+}
+.url_p1
+{
+	text-align: right;
+}
+.copied
+{
+	color: #ffffff;
+    background-color: #3c3c3c;
+    display: inline-block;
+    width: 59px;
+    text-align: center;
+    border-radius: 16px;
+    font-size: 15px;
+    margin-left: 7px;
+}
+
 .how_work
 {
 	width:100%;
@@ -2667,14 +2692,18 @@ ul.faq_ul ol li
 .how_work>i
 {
 	display: block;
-	width:80px;
-	height: 80px;
+	width:100px;
+	height: 100px;
 	margin:10px auto;
-	line-height: 80px;
+	line-height: 100px;
 	background-color:#edeff1;
-	font-size: 40px;
-	color:#005ea5;
+	font-size: 36px;
+	color:#cacaca;
 	border-radius: 50%;
+}
+.how_work:hover i
+{
+	color:#005ea5;
 }
 .newsletter>h1
 {
@@ -2686,7 +2715,51 @@ ul.faq_ul ol li
     font-size: 18px;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.30);
 }
-
+@media (max-width: 767px)
+{
+	.how_work 
+	{
+	    margin-bottom: 30px;
+	    width:395px;
+	    margin-left:auto;
+	    margin-right:auto;
+	}
+	.url_row
+	{
+		margin-bottom: 15px;
+	}
+	.url_col
+	{
+		padding-right:15px;
+	}
+	.url_p
+	{
+		text-align: center;
+	}
+	.url_p1
+	{
+		text-align: center;
+	}
+}
+@media (max-width:475px)
+{
+	.mail_div .input_div
+	{
+		width:100%;
+	}
+	.input_div input[type="text"]
+	{
+		width:242px!important;
+		transition-duration: .2s;
+	}
+}
+@media (max-width:450px)
+{
+	.how_work 
+	{
+	    width:100%;
+	}
+}
 
 /*------------------- end referal -------------------*/
 

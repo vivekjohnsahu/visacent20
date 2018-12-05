@@ -6,11 +6,7 @@
                 <span _ngcontent-c4=""></span>
             </div>
             <p class="text-center">
-                If you have submitted your application through our website and want to check your e-Visa status, Please enter you Application Id and Passport No.
-            <br />
-                Or
-                <br />
-                Check <a routerLink="/visa-requirements">visa requirements</a> for all countries and start a visa application.
+                If you have submitted your application through our website and want to check your e-Visa status,<br /> Please enter you Application Id and Passport No.<br />
             </p>
             <div class="login_div" style="padding-top: 0px;" >
                 <form class="contact login" style="width:auto;position: relative;">   
@@ -24,7 +20,7 @@
                                 <label id="lbl_appliId" class="pull-left">Application Id <i class="fas fa-pencil-alt"></i></label>
                             </div>
                             <div class="element_container">
-                                <input type="text" [(ngModel)]="applicationId" class="appliCls enable_white" name="applicationId" (focus)="removclsAppli()"  />
+                                <input type="text" [(ngModel)]="applicationId" maxlength="30" required class="appliCls enable_white" name="applicationId" (focus)="removclsAppli()"  />
                             </div>
                         </div>
                     </div>
@@ -35,7 +31,7 @@
                             </div>
                             
                             <div class="element_container">
-                                <input type="text" class="passCls enable_white" [(ngModel)]="passportNo" name="passportNo" (focus)="removclsPass()" />
+                                <input type="text" class="passCls enable_white" maxlength="20" required [(ngModel)]="passportNo" name="passportNo" (focus)="removclsPass()" />
                             </div>
                         </div>
                     </div>
@@ -43,6 +39,9 @@
                         <div class="col-sm-12">
                             <button class="my_btn" (click)="statusUser()">Proceed</button>
                         </div>
+                    </div>
+                    <div style="text-align: center;font-size: 19px;">
+                            <i class="fas fa-hand-point-right" style="color:#005ea5;"></i> &nbsp;Check <a routerLink="/visa-requirements">visa requirements</a> for all countries and start a visa application.
                     </div>
                 </form>
             </div>
@@ -143,5 +142,4 @@
             </animateTransform>
         </g>
     </svg>
-    <!-- <p style="color: white;text-align: center;margin-top: 15px;font-size: 24px;">Processing ..</p>  -->
 </div>

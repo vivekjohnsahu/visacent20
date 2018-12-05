@@ -9,6 +9,60 @@
     right: 7px;
     width: 22px;
 }
+
+/*------------------ start total row --------------*/
+.total_row
+{
+    overflow: hidden;
+}
+.total_row>div
+{
+    float:left;
+}
+.total_row>.first
+{
+    width: 200px;
+}
+.total_row>.second
+{
+    width: 300px;
+}
+.total_row>.third
+{
+    width: calc(100% - 500px);
+    text-align: right;
+}
+@media (max-width:700px)
+{
+    .total_row>.first
+    {
+        width: 135px;
+    }
+    .total_row>.second
+    {
+        width: 300px;
+    }
+    .total_row>.third
+    {
+        width: calc(100% - 435px);
+    }
+}
+@media (max-width:610px)
+{
+    .total_row>div
+    {
+        float:none;
+        width:100%!important;
+        text-align:left!important;
+        margin-bottom: 10px!important;
+    }
+    .total_row>.third
+    {
+        text-align: left!important;;
+    }
+}
+/*----------------- end total row ---------------------*/
+
 @media (min-width:400px)
 {
    .v_price,.s_fee

@@ -1658,8 +1658,10 @@ export class DetailformComponent implements OnInit  {
 		this.emailValidLoaderRight=false;
 	} 
 	
-	emailVerified(){	
-		this.emailValidLoader = true;
+	emailVerified(){
+		if(this.registeruser.email != ""){
+			this.emailValidLoader = true;
+		}	
 		this.nextBtn_dis=0	
 		this.loginEmail=this.registeruser.email;
 		$(".disabledNot").attr("disabled", false);

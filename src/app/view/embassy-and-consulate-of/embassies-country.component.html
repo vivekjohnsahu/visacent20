@@ -382,15 +382,22 @@
 </section>
 <span style="display: none;" id="spn_ip"></span>
 <section *ngIf="form==0" class="section_30">
-        <div class="container datafound">
+        <div class="container datafound scroll_msg">
             <div>
-                <p class="text-center">We maintain lists that contains the addresses, telephone numbers, email addresses, website addresses and more information for all types of diplomatic and consular missions around the world. The list as…
-                    The Embassies and High Commissions,
-                    Consulates-General
-                    Other Representations
-                    We try to update regularly directory of embassies, consulates and other diplomatic representations.
-                    
+                <p style="text-align: left;width: 65%;margin-left: auto;margin-right: auto;">We maintain lists that contains the addresses, telephone numbers, email addresses, website addresses and more information for 
+                    all types of diplomatic and consular missions around the world. The list as…<br>
                 </p>
+                <div style="font-size: 16px;text-align: left;margin-left: auto;margin-right: auto;width: 57%;">
+                    1. The Embassies and High Commissions,<br>
+                    2. Consulates-General<br>
+                    3. Other Representations<br><br>
+                </div>
+                <div style="font-size: 16px;text-align: left;margin-left: auto;margin-right: auto;width: 65%;">
+                    We try to update regularly directory of embassies, consulates and other diplomatic representations. 
+                </div><br>
+                <div style="text-align: center;font-size: 22px; margin-left: auto;margin-right: auto;width: 68%;color: #055ea5;">
+                    Sorry, we don't have any detail regarding <strong style="text-transform: capitalize;"> {{country_id}} </strong> . If you have any detail, please send us.
+                </div>              
             </div>
             <form class="user_emabassy" style="position:relative;"> 
                 <div class="my_alert my_alert_pos myalert" *ngIf="success_msg_error">

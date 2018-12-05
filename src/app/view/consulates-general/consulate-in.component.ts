@@ -67,6 +67,7 @@ export class ConsulateInComponent implements OnInit {
 	numberRegEx = "^(0|[0-9][0-9]*)$"
 	Landmark:any;
 	WorkingTime:any;
+	country_name_name:any;
 
 	constructor(
 		private router : ActivatedRoute,
@@ -87,6 +88,7 @@ export class ConsulateInComponent implements OnInit {
 		});	
 		this.router.params.subscribe(val => {
 		this.cousulate = this.router.snapshot.params["value"];
+		this.country_name_name = this.cousulate.split('-in-');
 		this.cousulateInService.cousulateList(this.cousulate).subscribe(
 			data => {
 				if(data.status == 'SUCCESS'){
@@ -215,17 +217,18 @@ export class ConsulateInComponent implements OnInit {
 			workingTime:this.WorkingTime,
 			comments:this.comments,
 			ipAddress:this.nweipAddress,
-			of_cn:'',
-			in_cn:'',
+			of_cn:this.country_name_name[0],
+			in_cn:this.country_name_name[1],
 			slug:this.cousulate,
-			emb_type:'consulares',
+			emb_type:'consulates',
 		}
 		this.userInputCntdetailsService.userInputData(this.userFileData).subscribe(
 			data => {
 				if(data='SUCCESS'){
 					this.updating = false;
 					this.success_msg_error = true;
-					this.success_msg = 'you have any detail send' 
+					this.success_msg = 'Thank you for sending your suggestions.' 
+					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
 				}else if(data='ERROR'){
 					this.updating = false;
 					this.msg_error = true;

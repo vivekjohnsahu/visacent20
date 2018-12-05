@@ -114,18 +114,20 @@ export class LoginComponent implements OnInit {
 	}
 
     forgot(){
-	  this.loginpage=true;
-	  this.Email = ""
-	  this.Password = ""
-	  this.login_msg_sus = false;
+		$('html, body').animate({scrollTop: $("#scrollTopPage").offset().top}, 500);
+		this.loginpage=true;
+		this.Email = ""
+		this.Password = ""
+		this.login_msg_sus = false;
     }
 
     login(){
-	  this.loginpage=false;
-	  this.forgot_msg_sus = false;
-	  this.forgot_msg_error = false;
-	  this.forgot_msg = ""
-	  this.forgot_error_msg = ""
+		$('html, body').animate({scrollTop: $("#scrollTopPage").offset().top}, 500);
+		this.loginpage=false;
+		this.forgot_msg_sus = false;
+		this.forgot_msg_error = false;
+		this.forgot_msg = ""
+		this.forgot_error_msg = ""
 	}
 	
 	cleanerror(){

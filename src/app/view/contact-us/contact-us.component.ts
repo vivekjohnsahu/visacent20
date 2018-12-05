@@ -144,7 +144,6 @@ export class ContactUsComponent implements OnInit {
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
 			flag=1;
-			// return false;
 		}if(flag==1){
 			$('html, body').animate({
 				scrollTop: $("#"+fild).offset().top

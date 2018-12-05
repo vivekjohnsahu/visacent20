@@ -12,10 +12,10 @@
                             <div class="row">
                                 <div class="col-xs-6 col_pay">
                                     <div class="label_container">
-                                        <label id="lbl_amount_req" class="pull-left">Amount <i class="fas fa-hand-holding-usd"></i></label>
+                                        <label id="lbl_amount_req" class="pull-left">Amount (USD) <i class="fas fa-hand-holding-usd"></i></label>
                                     </div>
                                     <div class="element_container">
-                                        <input type="text" #lenghtError="ngModel" id="lenghtError" pattern="^(0|[1-9][0-9]*)$" (keyup)="amountClear()" minlength="1" maxlength="5" required class="enable_white amount_req" name="amount" [(ngModel)]="amount" (keypress)="isNumberKey($event)"/>
+                                        <input type="tel" #lenghtError="ngModel" id="lenghtError" pattern="^(0|[1-9][0-9]*)$" (keyup)="amountClear()" minlength="1" maxlength="5" required class="enable_white amount_req" name="amount" [(ngModel)]="amount" (keypress)="isNumberKey($event)"/>
                                     <!-- <div *ngIf="lenghtError.errors && (lenghtError.dirty || lenghtError.touched)" style="color: red">
                                         <div [hidden]="!lenghtError.errors.minlength">
                                             must be at least 1 characters long.
@@ -38,25 +38,25 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="row">
-                            <div class="col-xs-6 col_pay">
-                                <div class="label_container">
-                                    <label class="pull-left"> Name <i class="fas fa-pencil-alt"></i></label>
+                            <div class="row">
+                                <div class="col-xs-6 col_pay">
+                                    <div class="label_container">
+                                        <label class="pull-left"> Name <i class="fas fa-pencil-alt"></i></label>
+                                    </div>
+                                    <div class="element_container">
+                                        <input type="text" class="enable_white" [(ngModel)]="name" name="name" />
+                                    </div>
                                 </div>
-                                <div class="element_container">
-                                    <input type="text" class="enable_white" [(ngModel)]="name" name="name" />
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col_pay">
-                                <div class="label_container">
-                                    <label id="lbl_email_req" class="pull-left">Email <i class="far fa-envelope"></i></label>
-                                </div>
+                                <div class="col-xs-6 col_pay">
+                                    <div class="label_container">
+                                        <label id="lbl_email_req" class="pull-left">Email <i class="far fa-envelope"></i></label>
+                                    </div>
 
-                                <div class="element_container">
-                                    <input type="text" class="enable_white email_req" name="email" (keyup)="emailClear()" [(ngModel)]="email" />
+                                    <div class="element_container">
+                                        <input type="text" class="enable_white email_req" name="email" (keyup)="emailClear()" [(ngModel)]="email" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
 <!--
                         <div class="row">
@@ -94,14 +94,15 @@
                             <div class="col-md-10 col-md-offset-1 payment_content">
                                 <p>After payment is made, you will receive an email confirming your payment.</p>
                                 <p id="mackPaymentScrool">I, the applicant, hereby certify that I have read and understood all the statements / questions in this application, all terms and fee about the visa services. The answers and information furnished in this application are true and correct to the best of my knowledge and belief. I understand that the Visa fee once paid is non-refundable irrespective of the outcome of my application and doesn't in any way guarantee issuance of Visa by the Government. I agree that I cannot cancel or amend this transaction. </p>
-                                <p>
-                                    <label style="font-size: 20px;cursor: pointer;">
-                                        <input type="checkbox" name="agree" id="Umoneyagree" style=" width: 19px;height: 20px;transform: scale(1,1);vertical-align: sub;"> I agree.
+                                <p class="agree_p">
+                                    <label style="font-size: 18px;cursor: pointer;font-family: inherit;">
+                                        <input type="checkbox" name="agree" id="Umoneyagree" style=" width: 19px;height: 20px;transform: scale(1,1);vertical-align: sub;"> I agree with terms & condition.
                                     </label>
-                                    <br /><span style="color: #055ea5; font-size: 14px;">Please check term and condition</span>
+                                    <!-- <br />
+                                    <span style="color: #055ea5; font-size: 14px;">Please check term and condition</span> -->
                                 </p>
 
-                                <p  style="color: #6ebc06eb;margin: 0px;font-size: 18px;"></p>
+                                
                             </div>
                         </div>
                         <div class="row">

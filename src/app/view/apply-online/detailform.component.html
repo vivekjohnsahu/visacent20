@@ -506,8 +506,8 @@
 						</button>
 					</span> -->
 				</h3>
-                    <div class="row">
-                        <div class="col-sm-3">
+                    <div class="total_row">
+                        <div class="first">
                             <!-- <div class="label_container label_left">
                                 <label style="margin-top:10px;margin-bottom:3px;">Currency: <i class="fas fa-hand-holding-usd"></i></label>
                             </div>
@@ -518,26 +518,26 @@
                                     <option value="SOS">SOS</option>
                                 </select>
                             </div> -->
-                            <div class="">
+                            <div class="second">
                                 <h4 style="margin-top: 7px;font-size: 26px;">{{priceSighn}}USD {{total_cost}}</h4>
                             </div>
                         </div>
-                        <div class="col-md-3" style="text-align: center;margin-top: -24px;left: -112px;">
+                        <div class="second">
                             <!-- <div class="label_container" style="margin-bottom: 10px; display: inline-block;"> -->
                             <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha>
                             <div *ngIf="captchaError" style="color:red; position: relative; left: 94px;">*{{captchaError_msg}}</div>
                         </div>
                        
-                        <div class="col-md-6 col-sm-4">
+                        <div class="third">
                             <!-- <button type="button" (click)="formfilslide('modify')" *ngIf="!next_btn_hide" class="my_btn nextOne pull-right" style="margin-top: 22px;">
                                 <i class="" style="margin-right: 8px;"> </i> Next
                             </button> -->
-                            <button type="button" (click)="formfilslide('final')" *ngIf="!next_btn_hide" class="my_btn nextOne pull-right" style="margin-top: -24px;">
+                            <button type="button" (click)="formfilslide('final')" *ngIf="!next_btn_hide" class="my_btn nextOne">
                                 <i class="" style="margin-right: 8px;"> </i> Next
                             </button>
-                            <button type="button" (click)="formfilslide('final')" *ngIf="submit_btn_hide" class="my_btn my_btn_submit pull-right" style="margin-top: 22px;border-color: #077080!important;background-color: #077080!important;">
+                            <!-- <button type="button" (click)="formfilslide('final')" *ngIf="submit_btn_hide" class="my_btn my_btn_submit" style="margin-top: 22px;border-color: #077080!important;background-color: #077080!important;">
                                 <i *ngIf="spinner" class="fa fa-lock fafa fa-spinner fa-spin" style="margin-right: 8px;"> </i> Submit
-                            </button>
+                            </button> -->
                         </div>      
                     </div>     
                 </form>

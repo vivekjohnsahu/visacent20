@@ -207,7 +207,8 @@ export class EmbassiesCountryComponent implements OnInit {
 				if(data='SUCCESS'){
 					this.updating = false;
 					this.success_msg_error = true;
-					this.success_msg = 'Send successfully!' 
+					this.success_msg = 'Thank you for sending your suggestions.'
+					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
                     $(document).ready(function(){
 						setTimeout(function(){
                             $('.myalert').fadeOut('fast');}, 3000);

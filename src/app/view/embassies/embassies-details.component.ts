@@ -64,6 +64,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 	numberRegEx = "^(0|[0-9][0-9]*)$"
 	Landmark:any;
 	WorkingTime:any;
+	country_name_name:any;
 
 	constructor(
 		private embOfInCountryService:EmbOfInCountryService,
@@ -85,6 +86,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 		});	
 		this.router.params.subscribe(val => {
 		this.country_name = this.router.snapshot.params["value"];
+		this.country_name_name = this.country_name.split('-in-');
 		this.embOfInCountryService.getparticulatrid(this.country_name).subscribe(
 			data => {
 				if(data.status == 'SUCCESS'){
@@ -201,6 +203,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 			this.WorkingTime=$('#WorkingTime').text();
 			this.nweipAddress=$('#spn_ip').text();
 		}
+		
 		this.userFileData={
 			name:this.name,
 			address:this.Address,
@@ -214,8 +217,8 @@ export class EmbassiesDetailsComponent implements OnInit {
 			workingTime:this.WorkingTime,
 			comments:this.comments,
 			ipAddress:this.nweipAddress,
-			of_cn:'',
-			in_cn:'',
+			of_cn:this.country_name_name[0],
+			in_cn:this.country_name_name[1],
 			slug:this.country_name,
 			emb_type:'embassies',
 		}
@@ -224,7 +227,8 @@ export class EmbassiesDetailsComponent implements OnInit {
 				if(data='SUCCESS'){
 					this.updating = false;
 					this.success_msg_error = true;
-					this.success_msg = 'you have any detail send' 
+					this.success_msg = 'Thank you for sending your suggestions.'
+					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
 				}else if(data='ERROR'){
 					this.updating = false;
 					this.msg_error = true;
