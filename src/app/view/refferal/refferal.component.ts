@@ -15,7 +15,11 @@ export class RefferalComponent implements OnInit {
 	  private refferalService:RefferalService,
 	  private meta: Meta,
 	  private title:Title
-  ) { }
+  ) { 
+	this.title.setTitle('Refer a Friend || Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas');
+	this.meta.updateTag({ name:'title',content:'Refer a Friend || Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas'});	
+	
+  }
 
   email:any;
   regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
@@ -33,9 +37,6 @@ export class RefferalComponent implements OnInit {
   captchaError_msg:any;
 
 	ngOnInit() {
-		this.title.setTitle('Refer a Friend || Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas');
-		this.meta.updateTag({ name:'title',content:'Refer a Friend || Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas'});	
-  
 		$(document).ready(function () {
 			$(document).ready(function () {
 				var $accord = $('.open');
@@ -43,8 +44,10 @@ export class RefferalComponent implements OnInit {
 				var $ans = $(this).next(".open").slideToggle();
 				});
 				$(".new").click(function(){
-					$(this).find("i").toggleClass("rotate");	
-							
+					$(this).find("i").toggleClass("rotate");								
+				});
+				$("#last_faq_a").click(function(){
+					$(this).toggleClass("border-bottom");
 				});
 			});
 		});

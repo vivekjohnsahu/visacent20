@@ -46,7 +46,8 @@ export class ContactUsComponent implements OnInit {
 		  private flagValueService:FlagValueService
 	  ) {}
 
-	ngOnInit() {	
+	ngOnInit() {
+		document.body.scrollTop = document.documentElement.scrollTop = 0;	
 		this.flagDrop = this.flagValueService.flagMethod()	
 		$('#profile_trans').hide();
 		$(document).ready(function(){

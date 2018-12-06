@@ -548,19 +548,33 @@ userDas(){
 			}			
 		}
 	}
-	
+
+	textCopyCompleteCent:boolean;
+	textCopyCompleteIndia:boolean;
 	copyToClipboard(element) {
 		var $temp = $("<input>");
 		$("body").append($temp);
 		$temp.val($(element).text()).select();
 		document.execCommand("copy");
 		$temp.remove();
-		this.textCopyComplete = true;
+		this.textCopyCompleteCent = true;
 		setTimeout(() => {
-			this.textCopyComplete = false;
+			this.textCopyCompleteCent = false;
 		}, 800);
 	}
 
+	copyToClipboar2(element){
+		var $temp = $("<input>");
+		$("body").append($temp);
+		$temp.val($(element).text()).select();
+		document.execCommand("copy");
+		$temp.remove();
+		this.textCopyCompleteIndia = true;
+		setTimeout(() => {
+			this.textCopyCompleteIndia = false;
+		}, 800);
+	}
+	
 	withdraw(){
 		var cmt = this
 		$('#bonusAppli').trigger('click');

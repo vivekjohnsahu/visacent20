@@ -133,13 +133,6 @@ export class EmbassiesPageComponent implements OnInit {
 		
 	} 
 
-	// embassy_btn(list){
-	// 	this.embParticularCountryService.list_id(list);
-	// 	this.urlName = list.slug_country_name.trim();
-	// 	this.router.navigate(["embassy-and-consulate-in",this.urlName]);
-	// 	document.body.scrollTop = document.documentElement.scrollTop = 0;
-	// }
-	
 	changeShapeOne(listName){
 		this.onecnt = listName.value;
 		this.countryTwo = this.country;

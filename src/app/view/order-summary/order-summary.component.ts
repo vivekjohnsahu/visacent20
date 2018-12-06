@@ -280,8 +280,7 @@ export class OrderSummaryComponent implements OnInit {
 		this.applicant_personal_informaction = false;
 		this.applicant_father_informaction = false;
 		this.applicant_reference_informaction = false;
-		this.applicant_suought_infor = false;
-		
+		this.applicant_suought_infor = false;	
 		this.is_disabled=0;
 		this.is_show_alert=0;
 		this.progress_active=0;
@@ -312,7 +311,6 @@ export class OrderSummaryComponent implements OnInit {
 				this.hospital_detail = data.form_field.hospital_detail;
 				this.company_detail = data.form_field.company_detail;
 				this.document = data.form_field.document;
-				console.log(this.document)
 				this.applicant_id = data.form_field.applicant_id;
 				this.sp_detail = data.form_field.sp_detail;
 				this.military_data = data.form_field.military_data;

@@ -87,6 +87,8 @@ export class VisaTableComponent implements OnInit {
 	consulateAd:any;
 	EmbassyAd:any;
 	Errortable:boolean;
+	// of_country_name:any;
+	// from_country_name:any;
 
   	ngOnInit(){
 		this.ngProgress.start();
@@ -137,6 +139,7 @@ export class VisaTableComponent implements OnInit {
 		let visaAllValue = this.routers.snapshot.params["value"]
 		this.visaApplicationService.visaTableList(visaAllValue).subscribe(
 			data => {
+				// this.visa_flag = 'assets/images/default1.png';
 				if(data!=null){
 					this.ngProgress.done();
 					this.pageHide = true;
@@ -151,7 +154,9 @@ export class VisaTableComponent implements OnInit {
 					this.travellingChangeName = data.to_country_name;
 					this.newTravellingCnt = this.inCountrySlugName;
 					this.requirementCountryName = this.travellingChange + '/' + this.nationalityChange;
-					
+					// this.of_country_name = data.to_country_name;
+					// this.from_country_name = data.from_country_name;
+					// this.visa_flag = data.country_flag;
 					if(this.visaTable.length == 0){
 						this.Errortable = true;
 						this.tableShow = false;

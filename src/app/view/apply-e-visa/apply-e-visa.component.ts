@@ -60,6 +60,8 @@ export class ApplyEVisaComponent implements OnInit {
 	EmbassyAd:any;
 	con_visa_req_sec:boolean;
 	currentUrl:any;
+	of_country_name:any;
+	from_country_name:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -78,6 +80,7 @@ export class ApplyEVisaComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
 		this.cnt_emb=false;
 		this.visa_req_sec=false;
 		this.con_visa_req_sec=true;
@@ -200,7 +203,6 @@ export class ApplyEVisaComponent implements OnInit {
 	}
 
 	visafor(){
-		
 		if(this.belongCnty == undefined || this.belongCnty == ''){
 			return;
 		}else if(this.country_ctnSet == undefined || this.country_ctnSet == ''){
@@ -211,16 +213,19 @@ export class ApplyEVisaComponent implements OnInit {
 			this.requirementCountryName = this.country_ctnSet + "/" + this.belongCnty;
 			this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
 				data => {
+					this.visa_flag = 'assets/images/default1.png';
 					this.visa_req_sec=false;
 					this.cnt_emb=false;
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
 						this.tableViasaToggle = true;
+						this.of_country_name = data.to_country_name;
+						this.from_country_name = data.from_country_name;
+						this.visa_flag = data.country_flag;
 						if(this.visaApplyTbl[0].visa_type!= 0){
-							this.visa_flag = 'assets/images/default1.png';
-							this.con_visa_req_sec=false;
-							var cnt_id=data.to_country_slug_name;
+							this.con_visa_req_sec = false;
+							var cnt_id = data.to_country_slug_name;
 							this.tableViasaToggle = true;
 							this.tableRequired = false;
 							this.tableRegular = false;
@@ -271,7 +276,6 @@ export class ApplyEVisaComponent implements OnInit {
 	}
 
 	requirementCountry(){
-		this.visa_flag = 'assets/images/default1.png';
 		this.embassiesCityDetailsService.requirementCountryCtn(this.requirementCountryName).subscribe(
 			data =>{
 				this.countydetails = data.data;
@@ -280,7 +284,6 @@ export class ApplyEVisaComponent implements OnInit {
 				this.EmbassyAd=new Array()
 
 				if(this.countydetails.length>0){
-
 					this.cnt_emb=true;
 					this.visa_req_sec=false;	
 					this.con_visa_req_sec=false;

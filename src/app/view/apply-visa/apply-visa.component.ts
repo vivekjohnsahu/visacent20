@@ -58,6 +58,8 @@ export class ApplyVisaComponent implements OnInit {
 	consulateAd:any;
 	EmbassyAd:any;
 	Errortable:boolean;
+	of_country_name:any;
+	from_country_name:any;
 
   	ngOnInit() {
 		this.ngProgress.start();
@@ -140,6 +142,9 @@ export class ApplyVisaComponent implements OnInit {
 		this.Errortable = false;
 		this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
 			data => {
+				this.of_country_name = data.to_country_name;
+				this.from_country_name = data.from_country_name;
+				this.visa_flag = data.country_flag;
 				if(data.status=='SUCCUSS'){
 					this.ngProgress.done();
 					this.visaApplyTbl = data.visa

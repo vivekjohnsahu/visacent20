@@ -192,8 +192,8 @@
         <div [hidden]="!tableRegular" style="text-align: center;background: white;padding:7px;text-align: center;margin-top:15px;">
             <div class="errorshow" >
                 <p class="container" style="color:#333;">
-                    <i class="far fa-hand-point-right" style="color:#005ea5;"></i>&nbsp; Citizens of the <span style="text-transform: capitalize;">{{belongCnty}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{country_ctnSet}}</span> diplomatic mission or one of 
-                    its authorized visa agents outside <span style="text-transform: capitalize;">{{country_ctnSet}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
+                    <i class="far fa-hand-point-right" style="color:#005ea5;"></i>&nbsp; Citizens of the <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
+                    its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
                     prepare the required documentation.
                 </p>
             </div>
@@ -202,7 +202,7 @@
 </section>
 <section class="section_20 country_specification" *ngIf="visa_req_sec">
     <div class="container">
-        <h2 class="text-center" style="text-transform: uppercase;">{{country_ctnSet}}</h2>
+        <h2 class="text-center" style="text-transform: uppercase;">{{of_country_name}}</h2>
         <div class="row" *ngIf="(documents_req==null && visa_req==null && faq==null) || intro==null">
             <div class="col-md-12 countray_flag">
                 <aside class="text-center">
@@ -210,7 +210,7 @@
                 </aside>
             </div>
         </div>
-        <p *ngIf="(intro==null && documents_req==null && visa_req==null && faq==null)" style="margin-top:25px;">You can apply online for e-visas. You can upload supporting documents,
+        <p *ngIf="(intro==null && documents_req==null && visa_req==null && faq==null)" style="margin-top:25px;">You can apply online for e-Visas. You can upload supporting documents,
             photographs and also pay for your application online. 
             It's faster and easier to apply online.
         </p>

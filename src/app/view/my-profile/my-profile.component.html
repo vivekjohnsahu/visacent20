@@ -80,15 +80,33 @@
                                     </div>
                                 </div>
                             </div>
-                            <span *ngIf="textCopyComplete">
-                                <div class="hero">Copied</div>
-                            </span>
-                            <div [hidden]="refferal==''">
-                                <strong style="font-size: 16px;">Your Referral Url In Visacent</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor:copy;color:#044e88">&nbsp; https://visacent.com/apply-e-visa/?ref={{refferal}}</span><br>
-                            </div><br /> 
-                            <div [hidden]="indiaevisa_referral==''">
-                                <strong style="font-size: 16px;">Your Referral Url In IndiaEvisas</strong>: <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor:copy;color:#044e88">&nbsp; https://indiaevisas.org/apply-visa/?ref={{indiaevisa_referral}}</span>
-                            </div>                         
+
+
+                            <div class="" [hidden]="refferal=='' || indiaevisa_referral==''" >
+                                <div class="row url_row">
+                                    <div class="col-sm-12 url_col">
+                                        <p class="url_p url_p1" style="text-align: left;">
+                                            <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://visacent.com/">Visacent :</a>&nbsp;&nbsp;</span>
+                                            <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" data-toggle="tooltip" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}} &nbsp;<i class="fas fa-paste"></i></span>
+                                            <span *ngIf="textCopyCompleteCent" class="uncomplete copied" style="width: 52px;">
+                                                Copied
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row url_row">
+                                    <div class="col-sm-12 url_col">
+                                        <p class="url_p url_p1" style="text-align: left;">
+                                            <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://indiaevisas.org" target="_blank" >India e-Visa :</a>&nbsp;&nbsp;</span>
+                                            <span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{indiaevisa_referral}} &nbsp;<i class="fas fa-paste"></i></span>
+                                            <span *ngIf="textCopyCompleteIndia" class="uncomplete copied" style="width: 52px;">
+                                                    Copied
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div> 
+                            </div><br />
+
                             <div class="row" [hidden]="admin_activity==''">
                                 <div class="col-md-12">
                                     <h3 style="text-align:left!important;margin-top:15px;margin-bottom:8px;">Notes</h3>       
@@ -516,17 +534,39 @@
                 </form>
             </div>
             <div *ngIf="withdraw_page">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-sm-3" style="cursor: pointer;">
-                            <a class="dash_div" style="display: block;text-align: center;padding-top: 10px;padding-bottom: 10px;background: #edeff1;">
-                                <h3 >Available Total Bonus</h3>
-                                <p>{{available_bonus}} USD</p>
-                                <button *ngIf="!Withdraw_btn_hide && !available_bonus==0" (click)="withdraw()" class="my_btn width_auto">Request to withdraw</button>
-                            </a>
-                        </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span style="font-size: 23px;">Available Total Bonus :</span>&nbsp;
+                        <span style="font-size: 23px;">{{available_bonus}} USD</span><br />
+                    </div>
+                    <div class="col-md-3">
+                        <button *ngIf="!Withdraw_btn_hide && !available_bonus==0" (click)="withdraw()" class="my_btn width_auto">Request to withdraw</button>
                     </div>
                 </div><br>
+                <div class="" [hidden]="refferal=='' || indiaevisa_referral==''" >
+                    <div class="row url_row">
+                        <div class="col-sm-12 url_col">
+                            <p class="url_p url_p1" style="text-align: left;">
+                                <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://visacent.com/">Visacent :</a>&nbsp;&nbsp;</span>
+                                <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" data-toggle="tooltip" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}} &nbsp;<i class="fas fa-paste"></i></span>
+                                <span *ngIf="textCopyCompleteCent" class="uncomplete copied" style="width: 52px;">
+                                    Copied
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row url_row">
+                        <div class="col-sm-12 url_col">
+                            <p class="url_p url_p1" style="text-align: left;">
+                                <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://indiaevisas.org" target="_blank" >India e-Visa :</a>&nbsp;&nbsp;</span>
+                                <span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{indiaevisa_referral}} &nbsp;<i class="fas fa-paste"></i></span>
+                                <span *ngIf="textCopyCompleteIndia" class="uncomplete copied" style="width: 52px;">
+                                        Copied
+                                </span>
+                            </p>
+                        </div>
+                    </div> 
+                </div><br />
                 <p *ngIf="Withdraw_btn_hide" style="color:green">Your request to withdrawal bonus has been submitted. Your bonus will be credit within 72 hour into your Paypal account. </p>
                 <div class="row" [hidden]="userData==''">
                     <div class="col-md-12">
@@ -690,7 +730,7 @@
                         <span></span>
                     </div>
                 </div>
-                <p style="position: relative;text-align: center;">Use bonus conform</p>
+                <p style="position: relative;text-align: center;">Do you want to use your bonus!</p>
                 <div class="modal-footer" style="text-align: center" style="border-top:none;text-align: center">
                     <button type="button" class="btn btn-success" data-dismiss="modal" id="bonus_use_apli">Agree</button>
                     <button type="button" class="btn btn-success" data-dismiss="modal" style="background-color: #f3c36c;border-color: #f3c36c;">Later </button>

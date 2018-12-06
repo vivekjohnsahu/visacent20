@@ -14,6 +14,7 @@
                             <span style="margin-left: 5px;">Login</span>
                         </a>
                     </li>
+                    {{this.userLocal()}}
                     <li style="position: relative;display: none;" id="accnt_li">
                         <a id="profile" class="social-button google" title="Profile">
                             <i class="fa fa-user" aria-hidden="true"></i> <span style="margin-left: 5px;">{{userName}}</span></a>
@@ -24,7 +25,7 @@
                             <a (click)="logOut()" id="" class="social-button" title="Log Out" style="padding-top:0px;">
                                 <i>Log Out</i>
                             </a>
-                            {{this.userLocal()}}
+                            
                         </div>
                     </li>
                     
@@ -61,7 +62,7 @@
                 <ul class="nav navbar-nav nav_ul">
                     <li><a routerLink="" class="act" title="Home">Home</a></li>
                     <li class="dropdown">
-                        <a routerLink="apply-e-visa" title="Apply e-Visa">Apply e Visa</a>
+                        <a routerLink="apply-e-visa" title="Apply e Visa">Apply e Visa</a>
                     </li>
                     <li class="dropdown">
                         <a routerLink="apply-visa-tool" title="Visa Apply Tool">Visa Apply Tool</a>

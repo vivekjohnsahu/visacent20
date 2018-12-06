@@ -3,8 +3,7 @@
 [color]="'#055ea5'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"
 ></ng-progress>
 <section class="section_30" [hidden]="!pageHide">
-    <div class="container">
-        
+    <div class="container">     
         <div _ngcontent-c7="" class="main_heading main_heading_wbg">
             <h1 id="topScreen">Latest News</h1>
             <span style="margin-bottom:30px;"></span>
@@ -68,20 +67,19 @@
           </div>
         </div>
     </div>
+    <div class="btn-toolbar" role="toolbar" style="margin: 0;">
+        <div style="text-align: center">
+            <ul class="pagination" >
+                <li [ngClass]="{'disabled': (currentPage == 1 || pageNumber == 0)}" ><a (click)="prevPage()">Prev</a></li>
+                <li *ngFor="let page of pages"  [ngClass]="{'active': (currentPage == page)}">
+                <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{'disabled': (currentPage == pageNumber || pageNumber == 0)}" ><a (click)="nextPage()">Next</a></li>
+            </ul>
+        </div>
+        <div  style="text-align: center">
+            <label style="margin-top:5px">Page {{currentPage}}/{{pageNumber}}</label>
+        </div>
+    </div>
 </section>
 <div *ngIf="Error_page" style="color: red;font-size: 30px;text-align: center;top: 58px;position: relative;">{{Error_page_msg}}</div>
-
-<div class="btn-toolbar" role="toolbar" style="margin: 0;">
-    <div style="text-align: center">
-        <ul class="pagination" >
-            <li [ngClass]="{'disabled': (currentPage == 1 || pageNumber == 0)}" ><a (click)="prevPage()">Prev</a></li>
-            <li *ngFor="let page of pages"  [ngClass]="{'active': (currentPage == page)}">
-            <a (click)="setPage(page)">{{page}}</a>
-            </li>
-            <li [ngClass]="{'disabled': (currentPage == pageNumber || pageNumber == 0)}" ><a (click)="nextPage()">Next</a></li>
-        </ul>
-    </div>
-    <div  style="text-align: center">
-        <label style="margin-top:5px">Page {{currentPage}}/{{pageNumber}}</label>
-    </div>
-</div>

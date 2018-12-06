@@ -80,6 +80,9 @@ export class VisaStatusComponent implements OnInit {
 					this.process = false;
 					this.StutasError = true;
 					this.StutasErrorMsg = data.msg;
+					if(this.StutasErrorMsg=='Application not found'){
+						localStorage.removeItem('user');
+					}
                     $(document).ready(function(){
 						setTimeout(function(){
                             $('#myalert').fadeOut('fast');}, 3000);
