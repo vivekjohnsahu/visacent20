@@ -65,6 +65,8 @@ export class EmbassiesDetailsComponent implements OnInit {
 	Landmark:any;
 	WorkingTime:any;
 	country_name_name:any;
+	country_name_f_replace:any;
+	country_name_s_replace:any;
 
 	constructor(
 		private embOfInCountryService:EmbOfInCountryService,
@@ -87,6 +89,8 @@ export class EmbassiesDetailsComponent implements OnInit {
 		this.router.params.subscribe(val => {
 		this.country_name = this.router.snapshot.params["value"];
 		this.country_name_name = this.country_name.split('-in-');
+		this.country_name_f_replace = this.country_name_name[0].replace('-',' ')
+		this.country_name_s_replace = this.country_name_name[1].replace('-',' ')
 		this.embOfInCountryService.getparticulatrid(this.country_name).subscribe(
 			data => {
 				if(data.status == 'SUCCESS'){
@@ -106,6 +110,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 							if(this.countydetailsNew[i].Telepone!=null && $.trim(this.countydetailsNew[i].Telepone)!='' && $.trim(this.countydetailsNew[i].Telepone)!=' '){
 								this.phoneMulti = this.countydetailsNew[i].Telepone;
 								this.phoneM =this.phoneMulti.split('<br />');
+								this.phoneM = this.phoneM.filter(function(v){return v!==''});
 								this.countydetailsNew[i].phoneM1 = this.phoneM;
 								this.countydetailsNew[i].lnthTelepone=1;
 							}else{
@@ -115,6 +120,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 							if(this.countydetailsNew[i].Fax!=null && $.trim(this.countydetailsNew[i].Fax)!='' && $.trim(this.countydetailsNew[i].Fax)!=' '){
 								this.faxMulti = this.countydetailsNew[i].Fax;
 								this.faxMultiM =this.faxMulti.split('<br />');
+								this.faxMultiM = this.faxMultiM.filter(function(v){return v!==''});
 								this.countydetailsNew[i].faxMultiM1 = this.faxMultiM;
 								this.countydetailsNew[i].lnthFax=1;
 							}else{
@@ -124,7 +130,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 							if(this.countydetailsNew[i].E_maiil!=null && $.trim(this.countydetailsNew[i].E_maiil)!='' && $.trim(this.countydetailsNew[i].E_maiil)!=' '){
 								this.emaiMulti = this.countydetailsNew[i].E_maiil;
 								this.emaiM =this.emaiMulti.split('<br />');
-								// $( ".gmailhide span").hide();
+								this.emaiM = this.emaiM.filter(function(v){return v!==''});
 								this.countydetailsNew[i].emaiM1 = this.emaiM;
 								this.countydetailsNew[i].lnthE_maiil=1;
 							}else{
@@ -134,6 +140,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 							if(this.countydetailsNew[i].website!=null && $.trim(this.countydetailsNew[i].website)!='' && $.trim(this.countydetailsNew[i].website)!=' '){
 								this.websiteMulti = this.countydetailsNew[i].website;
 								this.websiteM =this.websiteMulti.split('<br />');
+								this.websiteM = this.websiteM.filter(function(v){return v!==''});
 								this.countydetailsNew[i].websiteM1 =this.websiteM;
 								this.countydetailsNew[i].lnthwebsite=1;
 							}else{

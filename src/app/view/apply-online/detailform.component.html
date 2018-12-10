@@ -47,13 +47,10 @@
                                             <label id="lbl_email">Email <i class="far fa-envelope"></i></label>
                                         </div>
                                         <div class="element_container mail">
-                                            <input class="one disTwo emailOne" [disabled]="inpu_disabled_val=='1'" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched),'enable_white':inpu_disabled_val=='0'}" #email="ngModel" placeholder="demo@gmail.com" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$" type="text" name="email" [(ngModel)]="registeruser.email" (focus)="cleanerror1()" (keyup)="chekHide()" required (change)="emailVerified()"/> 
+                                            <input class="one disTwo emailOne" maxlength="40" [disabled]="inpu_disabled_val=='1'" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched),'enable_white':inpu_disabled_val=='0'}" #email="ngModel" placeholder="demo@gmail.com" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$" type="text" name="email" [(ngModel)]="registeruser.email" (focus)="cleanerror1()" (keyup)="chekHide()" required (change)="emailVerified()"/> 
                                             <!-- (focusout)="emailVerified()" -->
                                             <img *ngIf="emailValidLoader" src="assets/images/RapidRadiantBug-small.gif" alt="image" >
-                                            <div style=" position: absolute;
-                                            top: 6px;
-                                            right: 7px;
-                                            width: 22px;" *ngIf="emailValidLoaderRight"><i style="color: green;" class="fas fa-check-circle"></i></div>
+                                            <div style=" position: absolute;top: 6px;right: 7px;width: 22px;" *ngIf="emailValidLoaderRight"><i style="color: green;" class="fas fa-check-circle"></i></div>
                                         <span class="emailNotVerified" style="color:red;"></span>
                                         </div>
                                     </div>

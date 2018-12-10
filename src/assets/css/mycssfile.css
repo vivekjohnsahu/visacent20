@@ -1,4 +1,4 @@
-/*--------------- start global css ---------------------*/
+--------------- start global css ---------------------*/
 body
 {
 	font-family: 'Lato', sans-serif;
@@ -584,10 +584,17 @@ ul.nav_ul li a:focus
 .visa_country
 {
 	margin-bottom: 20px;
+	text-align: center;
 }
 .visa_country h3
 {
 	margin: 10px 0px
+}
+.visa_country p
+{
+	color:#333;
+	text-align: justify;
+    text-align-last: center;
 }
 .visa_country aside
 {
@@ -2240,7 +2247,50 @@ ul.faq_ul ol li
     margin-bottom: 0;
     margin-top: 8px;
 }
-
+.bonus_summary
+{
+	text-align: center;
+    background: #edeff1;
+    padding: 15px 0px;
+    margin-bottom: 15px;
+}
+.bonus_summary .bonus_icon
+{
+	color: #acacac;
+    background: #ffffff;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    line-height: 100px;
+    border-radius: 50%;
+    font-size: 36px;
+    text-align: center;
+}
+.bonus_summary>p
+{
+	margin-bottom: 0px;
+    color: #6b6b6b;
+    margin: 10px 0px 3px 0px;
+}
+.bonus_summary>h4
+{
+	color: black;
+    font-family: lato;
+    font-weight: bold;
+}
+.bonus_table table thead tr 
+{
+	background-color: #005ea5;
+}
+.bonus_table table thead tr th
+{
+	color:white;
+	text-align: center;
+}
+.bonus_table table td
+{
+	text-align: center;
+}
 @media (max-width:1075px)
 {
    .profile_opt_ul li a i
@@ -2273,6 +2323,17 @@ ul.faq_ul ol li
         width:50%;
     } 
 }
+@media (max-width:767px)
+{
+    .bonus_summary
+	{
+		width:500px;
+		margin:0 auto;
+		margin-bottom: 15px;
+	}
+}
+
+
 @media (max-width:720px)
 {
     .new>h4
@@ -2303,6 +2364,7 @@ ul.faq_ul ol li
     }
     
 }
+
 @media (max-width:600px)
 {
     .div_for_user>div>h5
@@ -2413,6 +2475,10 @@ ul.faq_ul ol li
     {
         border: none;
     }
+    .bonus_summary
+	{
+		width:100%;
+	}
 }
 /*--------------------- end myProfile -------------------*/
 
@@ -2682,6 +2748,11 @@ ul.faq_ul ol li
     font-size: 15px;
     margin-left: 7px;
 }
+#p1:hover, #p2:hover, #p1:focus, #p2:focus 
+{
+    color: #3a84df;
+    cursor: pointer;
+}
 
 .how_work
 {
@@ -2762,6 +2833,91 @@ ul.faq_ul ol li
 }
 
 /*------------------- end referal -------------------*/
+
+
+
+
+
+/*------------------ ---- start qoute msg ----------------*/
+.citizen_quoute
+{
+    width:90%;
+    margin-left:auto;
+    margin-right: auto;
+    text-align: justify;
+    text-align-last: center;
+    margin-top: 15px;
+}
+.citizen_quoute>p
+{
+	margin-bottom: 0px;
+}
+.citizen_quoute>p>i
+{
+    vertical-align: super;
+    display: inline-block;
+    margin-right: 3px;
+    color: #d2d2d2;
+    font-size: 15px;
+}
+
+.citizen_quoute>p>i:last-child
+{
+    margin-left: 3px;
+    transform:scale(-1);
+}
+@media (max-width: 767px)
+{
+	.citizen_quoute
+    {
+        width:100%;
+    }
+}
+/*------------------ ---- end qoute msg ----------------*/
+
+
+
+
+
+
+/*------------------- start no visa required icon --------------*/
+.no_visa_div
+{
+	text-align: center;
+	margin-top: 25px;
+}
+.no_visa_cont
+{
+    width:135px;
+    margin:15px auto 0px auto;
+    position:relative;
+    border-radius: 50%;
+}
+.no_visa_cont>i
+{
+    display:block;
+    width:100%;
+    height:100%;
+    
+}
+.no_visa_cont>i:first-child
+{
+    display: block;
+    font-size: 85px;
+    background: white;
+    line-height: 135px;
+    text-align: center;
+    border-radius: 50%;
+}
+.no_visa_para p
+{
+	margin-bottom: 0px;
+	color:#c8c9cb;
+	font-size: 33px;
+	text-transform: capitalize;
+}
+/*------------------- end no visa required icon --------------*/
+
 
 
 
@@ -3750,4 +3906,4 @@ ul.faq_ul ol li
 
 
 
-/*------------------------------- end media query ------------------------------*/
+/*------------------------------- end media query ------------------------------

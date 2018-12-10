@@ -66,19 +66,17 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- <div class="col-sm-9" [hidden]="total_bonus==0"></div> -->
-                                <div class="col-sm-9">
                                     <div class="row">
-                                        <div class="col-sm-6" style="cursor: pointer;" routerLink="/my-profile/withdraw">
-                                            <a class="dash_div">
+                                        <div class="col-sm-6">
+                                            <a href="" class="dash_div" routerLink="/my-profile/withdraw">
                                                 <h1><i class="fas fa-gift"></i></h1>
                                                 <h3>Available Total Bonus</h3>
-                                                <p>{{available_bonus}}</p>
+                                                <p>{{total_bonus}}</p>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- <div class="col-sm-9" [hidden]="total_bonus==0"></div> -->
                             </div>
 
 
@@ -535,53 +533,155 @@
             </div>
             <div *ngIf="withdraw_page">
                 <div class="row">
-                    <div class="col-md-4">
-                        <span style="font-size: 23px;">Available Total Bonus :</span>&nbsp;
-                        <span style="font-size: 23px;">{{available_bonus}} USD</span><br />
-                    </div>
-                    <div class="col-md-3">
-                        <button *ngIf="!Withdraw_btn_hide && !available_bonus==0" (click)="withdraw()" class="my_btn width_auto">Request to withdraw</button>
-                    </div>
-                </div><br>
-                <div class="" [hidden]="refferal=='' || indiaevisa_referral==''" >
-                    <div class="row url_row">
-                        <div class="col-sm-12 url_col">
-                            <p class="url_p url_p1" style="text-align: left;">
-                                <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://visacent.com/">Visacent :</a>&nbsp;&nbsp;</span>
-                                <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" data-toggle="tooltip" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}} &nbsp;<i class="fas fa-paste"></i></span>
-                                <span *ngIf="textCopyCompleteCent" class="uncomplete copied" style="width: 52px;">
-                                    Copied
-                                </span>
-                            </p>
+                    <div class="col-sm-4">
+                        <div class="bonus_summary">
+                            <aside class="bonus_icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </aside>
+                            <p>Total Bonus Amount: </p>
+                            <h4>{{total_page_bonus_}} USD</h4>
                         </div>
                     </div>
-                    <div class="row url_row">
-                        <div class="col-sm-12 url_col">
-                            <p class="url_p url_p1" style="text-align: left;">
-                                <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://indiaevisas.org" target="_blank" >India e-Visa :</a>&nbsp;&nbsp;</span>
-                                <span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{indiaevisa_referral}} &nbsp;<i class="fas fa-paste"></i></span>
-                                <span *ngIf="textCopyCompleteIndia" class="uncomplete copied" style="width: 52px;">
+                
+                <div class="col-sm-4">
+                    <div class="bonus_summary">
+                        <aside class="bonus_icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </aside>
+                        <p>Available to Withdraw</p>
+                        <h4>{{available_bonus}} USD</h4>
+                    </div>
+                </div>
+                
+                <div class="col-sm-4">
+                    <div class="bonus_summary">
+                        <aside class="bonus_icon">
+                            <i class="fas fa-spinner"></i>
+                        </aside>
+                        <p>Withdraw Request Pending</p>
+                        <h4>{{pending_amount}} USD</h4>
+                    </div>
+                </div>
+                </div>
+                <div class="urls">
+                    <div class="row">
+                        <div class="col-md-12 text-center" style="padding-bottom: 20px;padding-top: 15px;">
+                            <button *ngIf="!Withdraw_btn_hide && !available_bonus==0" (click)="withdraw()" class="my_btn width_auto">Request to withdraw</button>
+                        </div>
+                    </div>
+                    <div [hidden]="refferal=='' || indiaevisa_referral==''">
+                        <div class="row url_row">
+                            <div class="col-sm-5 url_col">
+                                <p class="url_p url_p1">
+                                    <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://visacent.com/">Visacent</a>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="col-sm-7">
+                                <p class="url_p">
+                                    <span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url">https://visacent.com/apply-e-visa/?ref={{refferal}} <i class="fas fa-paste"></i>
+                                    </span>
+                                    <span *ngIf="textCopyCompleteCent" class="uncomplete copied" style="width: 52px;">
                                         Copied
-                                </span>
-                            </p>
+                                    </span>
+                                </p>
+                            </div>
                         </div>
-                    </div> 
-                </div><br />
+                        <div class="row url_row">
+                            <div class="col-sm-5 url_col">
+                                <p class="url_p url_p1">
+                                    <span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://indiaevisas.org" target="_blank" >India e-Visa</a></span>
+                                    
+                                </p>
+                            </div>
+                            <div class="col-sm-7">
+                                <p class="url_p">
+                                    <span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url"> https://indiaevisas.org/apply-visa/?ref={{indiaevisa_referral}} <i class="fas fa-paste"></i>
+                                    </span>
+                                    <span *ngIf="textCopyCompleteIndia" class="uncomplete copied" style="width: 52px;">
+                                            Copied
+                                    </span>
+                                </p>
+                            </div>
+
+                        </div> 
+                    </div>
+                </div>
+                
                 <p *ngIf="Withdraw_btn_hide" style="color:green">Your request to withdrawal bonus has been submitted. Your bonus will be credit within 72 hour into your Paypal account. </p>
-                <div class="row" [hidden]="userData==''">
-                    <div class="col-md-12">
-                        <div class="main_heading main_heading_wbg"><h1 class="table_h">Bonus Withdraw Request</h1>
-                            <span></span>
+                
+                <div class="row" style="    margin-top: 45px;" [hidden]="user_refferals1==''">
+                    
+                    <div class="col-md-6" [hidden]="bonus_withdraw1==''">
+                        <div [hidden]="bonus_withdraw1==''">
+                            <h3 class="text-center" style="margin-bottom: 10px;">Bonus</h3>
                         </div>  
-                        <div class="table-responsive table_cont">
+                        <div class="table-responsive bonus_table">
                             <table class="table table-hover table-bordered xzy">
                                 <thead>
                                     <tr>
-                                        <th>Withdraw amount</th>
+                                        <th>No</th>
+                                        <th>Bonus</th>
+                                        <th>Referral Created</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="cursor: pointer;" *ngFor="let bonus of bonus_withdraw1; let i=index">
+                                    <tr class="active">
+                                        <td>{{i+1}}</td>
+                                        <td>{{bonus.bonus_amt}}</td>
+                                        <td>{{bonus.created_at}}</td>
+                                        <td>{{bonus.description}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div [hidden]="user_refferals1==''" >
+                            <h3 class="text-center" style="margin-bottom: 10px;">User Refferals Details</h3>
+                            
+                        </div>
+                        <div class="table-responsive bonus_table">
+                            <table class="table table-hover table-bordered xzy">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Bonus</th>
+                                        <th>Date & Time</th>
+                                        <th>Referral Email</th>
+                                        <th>Referral Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="cursor: pointer;" *ngFor="let bonus of user_refferals1; let i=index">
+                                    <tr class="active">
+                                        <td>{{i+1}}</td>
+                                        <td>{{bonus.bonus_amt}}</td>
+                                        <td>{{bonus.refferer_created}}</td>
+                                        <td>{{bonus.refferer_email}}</td>
+                                        <td>{{bonus.refferer_name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row" [hidden]="userData==''">
+                    <div class="col-md-12" style="margin-bottom: 8px;
+    margin-top: 40px;">
+                        <div class="text-center" style="margin-bottom: 10px;">
+                            <h3 class="table_h">Bonus Withdraw Request</h3>
+                        </div>  
+                        <div class="table-responsive bonus_table">
+                            <table class="table table-hover table-bordered xzy">
+                                <thead>
+                                    <tr>
+                                        <th>Withdraw Amount</th>
                                         <th>Status</th>
                                         <th>Request Date</th>
-                                        <th>Created time</th>                                       
-                                        <th>Credit amount</th>
+                                        <th>Created Time</th>                                       
+                                        <th>Credit Amount</th>
                                         <th>Comment</th>
                                          <!-- <th>Total bonus</th> -->                                       
                                     </tr>
@@ -603,60 +703,6 @@
                                             <td *ngIf="bonus.comment==null">NA</td>
                                        <!-- <td *ngIf="bonus.total_bonus!=null">{{bonus.total_bonus}}</td>
                                         <td *ngIf="bonus.total_bonus==null">NA</td> -->  
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div><br>
-                <div class="row" [hidden]="user_refferals1==''">
-                    <div class="col-md-6">
-                        <div [hidden]="user_refferals1==''" class="main_heading main_heading_wbg"><h1 class="table_h">User Refferals Details</h1>
-                            <span></span>
-                        </div>
-                        <div class="table-responsive table_cont">
-                            <table class="table table-hover table-bordered xzy">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Bonus</th>
-                                        <th>Refferer Created</th>
-                                        <th>Refferer Email</th>
-                                        <th>Refferer Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="cursor: pointer;" *ngFor="let bonus of user_refferals1; let i=index">
-                                    <tr class="active">
-                                        <td>{{i+1}}</td>
-                                        <td>{{bonus.bonus_amt}}</td>
-                                        <td>{{bonus.refferer_created}}</td>
-                                        <td>{{bonus.refferer_email}}</td>
-                                        <td>{{bonus.refferer_name}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-6" [hidden]="bonus_withdraw1==''">
-                        <div [hidden]="bonus_withdraw1==''" class="main_heading main_heading_wbg"><h1 class="table_h">Bonus Withdraw</h1>
-                            <span></span>
-                        </div>  
-                        <div class="table-responsive table_cont">
-                            <table class="table table-hover table-bordered xzy">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Bonus</th>
-                                        <th>Refferer Created</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="cursor: pointer;" *ngFor="let bonus of bonus_withdraw1; let i=index">
-                                    <tr class="active">
-                                        <td>{{i+1}}</td>
-                                        <td>{{bonus.bonus_amt}}</td>
-                                        <td>{{bonus.created_at}}</td>
-                                        <td>{{bonus.description}}</td>
                                     </tr>
                                 </tbody>
                             </table>

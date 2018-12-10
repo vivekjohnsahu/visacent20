@@ -3,7 +3,7 @@
              [color]="'#055ea5'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"
 ></ng-progress>
 <section *ngIf="pageHide" style="padding:0px;">
-<section class="section_20" style="background-color:#EDEFF1;">
+<section class="section_30" style="background-color:#EDEFF1;">
     <div class="container">
         <div class="main_heading main_heading_wbg">
             <h1>Apply For {{country_ctn}} Visa</h1>
@@ -25,21 +25,21 @@
             </div>
         </div>
         
-        <div [hidden]="!tableRequired" style="text-align: center;background: white;padding:7px;margin-top:10px;">
+        <div [hidden]="!tableRequired" class="no_visa_div">
             <div class="no_visa_cont">
                 <i class="fas fa-id-badge" style="color:#005ea5;"></i>
             </div>
-            <div class="errorshow">
-                <p style="color: #c8c9cb;
-    font-size: 33px;text-transform: capitalize;">visa not required</p>
+            <div class="no_visa_para">
+                <p>visa not required</p>
             </div>
         </div>
-        <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 75px;background: white;padding-right: 75px;">
-            <div class="errorshow">
-                <p> Citizens of the {{of_country_name}} must obtain a visa in advance. You have to apply for a visa through a {{from_country_name}} diplomatic mission or one of its authorized visa agents outside 
-                    {{from_country_name}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
+       
+            <div *ngIf="Errortable" class="citizen_quoute">
+                <p> 
+                    <i class="fas fa-quote-left"></i> Citizens of the {{of_country_name}} must obtain a visa in advance. You have to apply for a visa through a {{from_country_name}} diplomatic mission or one of its authorized visa agents outside 
+                    {{from_country_name}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation. <i class="fas fa-quote-left"></i></p>
             </div>
-        </div>
+        
     </div>
 </section>
 <div [hidden]="!tableRegular" style="text-align: center;">

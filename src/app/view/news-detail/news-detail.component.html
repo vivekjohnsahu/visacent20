@@ -63,7 +63,7 @@
                                                 <label>Name <i class="fas fa-pencil-alt"></i></label>
                                             </div>
                                             <div class="element_container">
-                                                <input type="text" name="name" [(ngModel)]='name' required class="nameBrd" (keyup)="nameRemove()"/>
+                                                <input type="text" maxlength="40" name="name" [(ngModel)]='name' required class="nameBrd" (keyup)="nameRemove()"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -71,7 +71,7 @@
                                                 <label>Email <i _ngcontent-c3="" class="far fa-envelope"></i></label>
                                             </div>
                                             <div class="element_container">
-                                                <input type="text" name="email" [(ngModel)]='email' class="emailBrd" required (keyup)="emailRemove()" />
+                                                <input type="text" maxlength="40" name="email" [(ngModel)]='email' class="emailBrd" required (keyup)="emailRemove()" />
                                             </div>
                                         </div>
                                     </div>
@@ -113,8 +113,8 @@
             <div class="col-md-4">
               <div class="right_main_div">
                 <h3>Realted Post</h3>
-                <div class="related_post" *ngFor="let realt of realted" (click)="realtedPost(realt.slug_name)">
-                    <a>
+                <div class="related_post" *ngFor="let realt of realted">
+                    <a routerLink="/news/{{realt.slug_name}}">
                         <div class="media" >
                             <div class="media-left">
                               <img src="https://visacent.com/{{realt.image}}" class="media-object" title="{{realt.title}}" alt="{{realt.slug_name}}" style="width:60px">

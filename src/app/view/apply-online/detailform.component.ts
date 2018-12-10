@@ -1659,9 +1659,17 @@ export class DetailformComponent implements OnInit  {
 	} 
 	
 	emailVerified(){
-		if(this.registeruser.email != ""){
-			this.emailValidLoader = true;
-		}	
+		var flag=0;
+		if(this.registeruser.email == "" || this.registeruser.email == undefined){
+			$(".emailOne").addClass("borderColor");
+			flag=1;
+		}
+		if(!this.registeruser.email.match(this.regExEmail)){
+			$(".emailOne").addClass("borderColor");
+			flag=1;
+		}if(flag==1){
+			return;
+		}
 		this.nextBtn_dis=0	
 		this.loginEmail=this.registeruser.email;
 		$(".disabledNot").attr("disabled", false);

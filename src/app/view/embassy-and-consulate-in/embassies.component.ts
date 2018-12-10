@@ -67,6 +67,7 @@ export class EmbassiesComponent implements OnInit {
 	ttl_emb_of:any;
 	ttl_rep_of:any;
 	last_updated:any;
+	country:any;
 
 	constructor(
 		private embParticularCountryService:EmbParticularCountryService,
@@ -117,9 +118,8 @@ export class EmbassiesComponent implements OnInit {
 						this.form=0
 					}
 					this.countryname = data.country;
-					this.cntName = data.slug_country_name
+					this.cntName = data.slug_country_name;
 					this.cntNamechange = this.cntName;
-					
 				}else{
 					this.pade_error_show = true;
 				}

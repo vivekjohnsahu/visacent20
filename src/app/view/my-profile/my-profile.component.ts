@@ -91,6 +91,8 @@ export class MyProfileComponent implements OnInit {
 	Withdraw_btn_hide:boolean;
 	available_bonus:any;
 	indiaevisa_referral:any;
+	pending_amount:any;
+	total_page_bonus_:any;
 	
 	constructor(
 		private router : ActivatedRoute,
@@ -121,7 +123,6 @@ export class MyProfileComponent implements OnInit {
 			data =>{
 				if(data.status=='SUCCESS'){
 					this.ngProgress.done();
-					this.pageHide = true;
 					this.info_incomplete=data.info_incomplete;
 					this.processing=data.processing;
 					this.visa_complete=data.visa_complete;
@@ -131,7 +132,7 @@ export class MyProfileComponent implements OnInit {
 				var cmt=this;
 				setTimeout(function(){
 					cmt.userDas()
-				},1000)
+				},500)
 				this.applicant()
 			})
 			this.flagDrop = this.flagValueService.flagMethod()	
@@ -204,6 +205,7 @@ userDas(){
 	this.router.params.subscribe(val => {
 		let currentId = this.router.snapshot.params["value"];
 		if(currentId=='dashboard'){
+			this.pageHide = true;
 			this.withdraw_page=false;
 			this.my_profile = false;
 			this.my_account = false;
@@ -212,6 +214,7 @@ userDas(){
 			$('.applications').removeClass('profile_active')
 			$('.dashboard').addClass('profile_active');
 		}else if(currentId=='applications'){
+			this.pageHide = true;
 			this.AllApplication=true;
 			this.UnderProcessApplication=false;
 			setTimeout(() => {
@@ -225,6 +228,7 @@ userDas(){
 			$('.dashboard').removeClass('profile_active');
 			$('.applications').addClass('profile_active')
 		}else if(currentId=='applications-under-process'){
+			this.pageHide = true;
 			this.UnderProcessApplication=true;
 			this.AllApplication=false;
 			setTimeout(() => {
@@ -238,6 +242,7 @@ userDas(){
 			$('.dashboard').removeClass('profile_active');
 			$('.applications').addClass('profile_active')
 		}else if(currentId=='update-profile'){
+			this.pageHide = true;
 			this.my_account = false;
 			this.my_profile = true;
 			this.user_dashboard=true;
@@ -247,6 +252,7 @@ userDas(){
 			$('.dashboard').removeClass('profile_active');
 			$('.update-profile').addClass('profile_active')
 		}else if(currentId=='change-password'){
+			this.pageHide = true;
 			this.my_profile = false;
 			this.my_account = false;
 			this.user_dashboard=true;
@@ -257,6 +263,7 @@ userDas(){
 			$('.change-password').addClass('profile_active')
 		}else if(currentId=='withdraw'){
 			document.body.scrollTop = document.documentElement.scrollTop = 0;
+			this.pageHide = true;
 			this.my_profile = false;
 			this.my_account = false;
 			this.change_password = false;
@@ -270,6 +277,8 @@ userDas(){
 					if(data.status=="SUCCESS"){
 						this.userData = data.withdraw_request;
 						this.available_bonus = data.available_bonus;
+						this.pending_amount = data.pending_amount;
+						this.total_page_bonus_ = data.total_bonus;
 					}else if(data.status=="ERROR"){
 						// do nothing
 					}else{

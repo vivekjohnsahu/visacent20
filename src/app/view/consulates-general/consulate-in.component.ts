@@ -68,6 +68,8 @@ export class ConsulateInComponent implements OnInit {
 	Landmark:any;
 	WorkingTime:any;
 	country_name_name:any;
+	country_name_f_replace:any;
+	country_name_s_replace:any;
 
 	constructor(
 		private router : ActivatedRoute,
@@ -89,6 +91,8 @@ export class ConsulateInComponent implements OnInit {
 		this.router.params.subscribe(val => {
 		this.cousulate = this.router.snapshot.params["value"];
 		this.country_name_name = this.cousulate.split('-in-');
+		this.country_name_f_replace = this.country_name_name[0].replace('-',' ')
+		this.country_name_s_replace = this.country_name_name[1].replace('-',' ')
 		this.cousulateInService.cousulateList(this.cousulate).subscribe(
 			data => {
 				if(data.status == 'SUCCESS'){
@@ -112,6 +116,7 @@ export class ConsulateInComponent implements OnInit {
 							if(this.multidateilsNew[i].Telepone!=null && $.trim(this.multidateilsNew[i].Telepone)!='' && $.trim(this.multidateilsNew[i].Telepone)!=' '){ 
 								this.phoneMulti = this.multidateilsNew[i].Telepone;
 								this.phoneM = this.phoneMulti.split('<br />');
+								this.phoneM = this.phoneM.filter(function(v){return v!==''});
 								this.multidateilsNew[i].phoneM1 = this.phoneM;
 								this.multidateilsNew[i].lnthTelepone=1;
 							}else{
@@ -121,6 +126,7 @@ export class ConsulateInComponent implements OnInit {
 							if(this.multidateilsNew[i].Fax!=null && $.trim(this.multidateilsNew[i].Fax)!='' && $.trim(this.multidateilsNew[i].Fax)!=' '){ 
 								this.faxMulti = this.multidateilsNew[i].Fax;
 								this.faxMultiM =this.faxMulti.split('<br />');
+								this.faxMultiM = this.faxMultiM.filter(function(v){return v!==''});
 								this.multidateilsNew[i].faxMultiM1 = this.faxMultiM;
 								this.multidateilsNew[i].lnthFax=1;
 							}else{
@@ -130,6 +136,7 @@ export class ConsulateInComponent implements OnInit {
 							if(this.multidateilsNew[i].E_maiil!=null && $.trim(this.multidateilsNew[i].E_maiil)!='' && $.trim(this.multidateilsNew[i].E_maiil)!=' '){ 
 								this.emaiMulti = this.multidateilsNew[i].E_maiil;
 								this.emaiM =this.emaiMulti.split('<br />');
+								this.emaiM = this.emaiM.filter(function(v){return v!==''});
 								this.multidateilsNew[i].emaiM1 = this.emaiM;
 								this.multidateilsNew[i].lnthE_maiil=1;
 							}else{
@@ -139,6 +146,7 @@ export class ConsulateInComponent implements OnInit {
 							if(this.multidateilsNew[i].website!=null && $.trim(this.multidateilsNew[i].website)!='' && $.trim(this.multidateilsNew[i].website)!=' '){ 
 								this.websiteMulti = this.multidateilsNew[i].website;
 								this.websiteM =this.websiteMulti.split('<br />');
+								this.websiteM = this.websiteM.filter(function(v){return v!==''});
 								this.multidateilsNew[i].websiteM1 =this.websiteM;
 								this.multidateilsNew[i].lnthWebsite=1;
 							}else{

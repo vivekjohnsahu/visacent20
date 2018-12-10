@@ -5,12 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VisaApplicationService } from '../../services/visa_application/visa-application.service';
 import { CountriesListService } from '../../services/countries_list_home/countries-list.service';
 import { Meta, Title} from '@angular/platform-browser';
+import { EmbassiesCityDetailsService } from '../../services/embassies_city_details/embassies-city-details.service'
 
 @Component({
   selector: 'app-visa-tips',
   templateUrl: './visa-tips.component.html',
   styleUrls: ['./visa-tips.component.css'],
-  providers: [ CountriesListService ]
+  providers: [ CountriesListService, VisaApplicationService, EmbassiesCityDetailsService ]
 })
 export class VisaTipsComponent implements OnInit {
 
@@ -41,7 +42,25 @@ export class VisaTipsComponent implements OnInit {
 	visa_flag:any;
 	question:any;
 	answer:any;
-	faqQuestionAnswArry:any
+	faqQuestionAnswArry:any;
+	con_visa_req_sec:boolean;
+	requirementCountryName:any;
+	cnt_emb:boolean;
+	visa_req_sec:boolean;
+	of_country_name:boolean;
+	from_country_name:boolean;
+	countydetailsNew:any;
+	phoneMulti:any;
+	phoneM:any;
+	faxMulti:any;
+	faxMultiM:any;
+	emaiMulti:any;
+	emaiM:any;
+	websiteMulti:any;
+	websiteM:any;
+	countydetails:any;
+	consulateAd:any;
+	EmbassyAd:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -50,11 +69,16 @@ export class VisaTipsComponent implements OnInit {
 		private routers : ActivatedRoute,
 		private countriesListService:CountriesListService,
 		private meta: Meta,
-		private title:Title
+		private title:Title,
+		private embassiesCityDetailsService:EmbassiesCityDetailsService
 	) {}
 
   ngOnInit() {
-    $('#profile_trans').hide();
+	$('#profile_trans').hide();
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+	this.cnt_emb=false;
+	this.visa_req_sec=false;
+	this.con_visa_req_sec=true;
     this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
 		if(this.countryShow!=null || this.countryShow!=''){
 			this.ngProgress.done();
@@ -92,7 +116,7 @@ export class VisaTipsComponent implements OnInit {
 
 	}
 
-  	changeBelong(listName){
+	changeBelong(listName){
 		this.belongCnty = listName.value;
 		this.need_visa_for = this.country
 		let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==listName.value;});
@@ -107,18 +131,19 @@ export class VisaTipsComponent implements OnInit {
 	}
 
 	changeNeedVisa(listName){
-		this.country_ctnSet = listName.value;
-		this.visaApplicationService.eVisaSelectCnt(this.country_ctnSet).subscribe(
+		this.visa_flag = 'assets/images/default1.png';	
+		this.visaApplicationService.eVisaSelectCnt(listName).subscribe(
 			data =>{
 				this.ngProgress.done();
-				this.selectChangeCntry=true;
+				this.visa_flag = data.country_flag;					
+				this.visa_req_sec=true;
+				this.cnt_emb=false;
 				this.documents_req = data.country_visa.documents_req;
 				var faqQuestionAnswer:any;
-				this.faqQuestionAnswArry=new Array
+				this.faqQuestionAnswArry=new Array;
 				this.faq = data.country_visa.faq;
 				this.intro = data.country_visa.intro;
 				this.visa_req = data.country_visa.visa_req;
-				this.visa_flag = data.country_flag
 				if(this.faq!=null){
 					for(var i=0; this.faq.length>i;i++){
 						this.question=this.faq[i].question;
@@ -135,12 +160,15 @@ export class VisaTipsComponent implements OnInit {
 		let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.belong_to = $.grep(this.belong_to, function(item){ return item.name !== NeedVisaForObj[0].name;});
 		this.topCntryOne = this.topFiveCNtry;
-		this.visafor()
 		let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
             return item.name !== nationalityTopOnePlaceObj[0].name;
         });
-		this.visafor()
+	}
+
+	visafor1(listName){
+		this.country_ctnSet = listName.value;
+		this.visafor();
 	}
 
 	visafor(){
@@ -151,34 +179,52 @@ export class VisaTipsComponent implements OnInit {
 		}else{
 			this.ngProgress.start();
 			this.visaUrl = this.country_ctnSet+"-visas-for-"+this.belongCnty;
+			this.requirementCountryName = this.country_ctnSet + "/" + this.belongCnty;
 			this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
 				data => {
+					this.visa_flag = 'assets/images/default1.png';
+					this.visa_req_sec=false;
+					this.cnt_emb=false;
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
 						this.tableViasaToggle = true;
-						if(this.visaApplyTbl.length == 0){
-							this.tableViasaToggle = false;
-							this.tableRequired = false;
-							this.tableRegular = true;  
-						}else if(this.visaApplyTbl[0].visa_type!= 0){
+						this.of_country_name = data.to_country_name;
+						this.from_country_name = data.from_country_name;
+						this.visa_flag = data.country_flag;
+						if(this.visaApplyTbl[0].visa_type!= 0){
+							this.con_visa_req_sec = false;
+							var cnt_id = data.to_country_slug_name;
 							this.tableViasaToggle = true;
 							this.tableRequired = false;
 							this.tableRegular = false;
+							this.changeNeedVisa(cnt_id)
+						}else if(this.visaApplyTbl.length == 0){
+							this.con_visa_req_sec=false;
+							this.tableViasaToggle = false;
+							this.tableRequired = false;
+							this.tableRegular = true;  
+							this.requirementCountry()
 						}else if(this.visaApplyTbl[0].visa_not_required!= 0){
+							this.con_visa_req_sec=false;
 							this.tableRequired = true;
 							this.tableRegular = false;
 							this.tableViasaToggle = false;
+							this.requirementCountry()
 						}else{
+							this.con_visa_req_sec=false;
 							this.tableRequired = false;
 							this.tableRegular = true; 
 							this.tableViasaToggle = false;
+							this.requirementCountry()
 						}
 					}else if(data.status=='FAIL'){
+						this.con_visa_req_sec=false;
 						this.ngProgress.done();
 						this.tableViasaToggle = false;
 						this.tableRequired = false;
 						this.tableRegular = true; 
+						this.requirementCountry()
 					}
 				})
 		}  
@@ -196,6 +242,79 @@ export class VisaTipsComponent implements OnInit {
 			$('.tableSelect tr').css({"background-color":"transparent"});
 		    $(this).css({"background-color":"#e8e8e8"});
 		})
+	}
+
+	requirementCountry(){
+		this.embassiesCityDetailsService.requirementCountryCtn(this.requirementCountryName).subscribe(
+			data =>{
+				this.countydetails = data.data;
+				this.countydetailsNew = data.data;
+				this.consulateAd=new Array();
+				this.EmbassyAd=new Array()
+
+				if(this.countydetails.length>0){
+					this.cnt_emb=true;
+					this.visa_req_sec=false;	
+					this.con_visa_req_sec=false;
+					for(i=0;this.countydetails.length>i;i++){
+						if(data.data[i].name.indexOf("Consulate")>-1){
+							this.consulateAd.push(this.countydetails[i])
+						}else{
+							this.EmbassyAd.push(this.countydetails[i])
+						}	
+					}
+					for(var i=0;i<this.countydetailsNew.length;i++){
+						if(this.countydetailsNew[i].Telepone!=null && $.trim(this.countydetailsNew[i].Telepone)!='' && $.trim(this.countydetailsNew[i].Telepone)!=' '){
+							this.phoneMulti = this.countydetailsNew[i].Telepone;
+							this.phoneM =this.phoneMulti.split('<br />');
+							this.phoneM = this.phoneM.filter(function(v){return v!==''});
+							this.countydetailsNew[i].phoneM1 = this.phoneM;
+							this.countydetailsNew[i].lnthTelepone=1;
+						}else{
+							this.countydetailsNew[i].lnthTelepone=0;	
+						}
+
+						if(this.countydetailsNew[i].Fax!=null && $.trim(this.countydetailsNew[i].Fax)!='' && $.trim(this.countydetailsNew[i].Fax)!=' '){
+							this.faxMulti = this.countydetailsNew[i].Fax;
+							this.faxMultiM =this.faxMulti.split('<br />');
+							this.faxMultiM = this.faxMultiM.filter(function(v){return v!==''});
+							this.countydetailsNew[i].faxMultiM1 = this.faxMultiM;
+							this.countydetailsNew[i].lnthFax=1;
+						}else{
+							this.countydetailsNew[i].lnthFax=0;	
+						}
+			
+						if(this.countydetailsNew[i].E_maiil!=null && $.trim(this.countydetailsNew[i].E_maiil)!='' && $.trim(this.countydetailsNew[i].E_maiil)!=' '){
+							this.emaiMulti = this.countydetailsNew[i].E_maiil;
+							this.emaiM =this.emaiMulti.split('<br />');
+							this.emaiM = this.emaiM.filter(function(v){return v!==''});
+							this.countydetailsNew[i].emaiM1 = this.emaiM;
+							this.countydetailsNew[i].lnthE_maiil=1;
+						}else{
+							this.countydetailsNew[i].lnthE_maiil=0;	
+						}
+
+						if(this.countydetailsNew[i].website!=null && $.trim(this.countydetailsNew[i].website)!='' && $.trim(this.countydetailsNew[i].website)!=' '){
+							this.websiteMulti = this.countydetailsNew[i].website;
+							this.websiteM =this.websiteMulti.split('<br />');
+							this.websiteM = this.websiteM.filter(function(v){return v!==''});
+							this.countydetailsNew[i].websiteM1 =this.websiteM;
+							this.countydetailsNew[i].lnthwebsite=1;
+						}else{
+							this.countydetailsNew[i].lnthwebsite=0;	
+						}
+					}	
+				}
+				else{
+					this.con_visa_req_sec=false;
+					this.cnt_emb=false;
+					this.visa_req_sec=true;
+					this.documents_req=null; 
+					this.visa_req=null;
+					this.faq=null
+					this.intro=null;
+				}		
+			})
 	}
 
 }

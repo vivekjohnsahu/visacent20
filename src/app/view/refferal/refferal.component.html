@@ -33,7 +33,7 @@
 				<div class="input_div">	
 					<div class="element_container">
 						<label id="lbl_appliId">Email Id </label>
-						<input type="text" [(ngModel)]="email" class="emailCls enable_white" style="width: 319px;" name="email" (keyup)="removclsAppli()"/>
+						<input type="text" [(ngModel)]="email" maxlength="40" class="emailCls enable_white" style="width: 319px;" name="email" (keyup)="removclsAppli()"/>
 					</div>
 				</div>
 				<div class="row">
@@ -87,8 +87,6 @@
 		</div>
 	</div>
 </section>
-
-
 <section class="section_30" style="background-color:#005ea5;">
 	<div class="container text-center">
 		<div class="newsletter">
@@ -128,10 +126,6 @@
 		</div>
 	</div>	
 </section>
-
-
-
-
 <section class="section_30" style="padding-top:0px;">
 	<div class="container">
 		<h2 class="text-center" style="margin-bottom: 20px;">FAQ's</h2>
@@ -169,70 +163,6 @@
 		</div>	
 	</div>
 </section>
-
-
-
-
-
-
-
-
-<!-- <section class="section_30">
-	<div class="container">
-		<div class="status_div">
-			<div class="main_heading main_heading_wbg">
-				<h1 class="table_h">Our Referral Program</h1>
-				<span ></span>
-			</div>
-			<p class="text-center" style="font-family: fantasy;font-size: 32px;" *ngIf="!isnewUser">
-				Earn $10 for every new applicant you refer
-			</p>
-			<p class="text-center container col-sm-12">
-				Nobody can tell the our story better than our customers. Get a friend to start apply for a visa today and earn $10 when they complete their first application.
-			</p>
-			<p *ngIf="isnewUser" class="text-center" style="color:green">
-					Your account has been registered on Visacent. Your login credentials has been sent no your email. You can login using visacent.com/login and check your refferal bonus and update your information.
-			</p>
-			<div class="login_div" style="padding-top: 0px;" >
-				<form class="contact login" style="width:auto;position: relative;" [hidden]="refferalShow">   
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="label_container" style="text-align: center">
-								<label id="lbl_appliId">Email Id <i class="fas fa-pencil-alt"></i></label>
-							</div>
-							<div class="element_container">
-								<input type="text" [(ngModel)]="email" class="emailCls enable_white" name="email" (keyup)="removclsAppli()"/>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12" style="text-align: -webkit-center">
-							<button class="my_btn" style="width: 170px!important;" (click)="refferalUser()">Get your referral link</button>
-						</div>
-					</div>
-				</form><br />
-				<span *ngIf="textCopyComplete" class="uncomplete" style="color: #0dbc0d;">
-					<span style="background-color:#a1a2a2;">Copied</span>
-				</span>
-				<div [hidden]="!refferalShow">
-					<strong style="font-size: 19px;">Your Referral Url:</strong> 
-					<span [hidden]="!refferalUrl" id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" style="cursor: copy;"> https://visacent.com/apply-e-visa/?ref={{refferal}}</span>
-					<span [hidden]="!refferalUrl" id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url" style="cursor: copy;"> https://indiaevisas.org/apply-visa/?ref={{indiaevisas_referral}}</span>
-				</div><br>
-				<h1 style="text-align: center;">How it Works</h1><br>
-				<p  style="text-align: center;margin: 0 0 -15px;font-size: 25px;"><strong>Sign Up to get a unique referral link</strong></p><br>
-				<p style="text-align: center;font-size: 12px;">Use one of our <a>logos or badges</a> to help spread the word</p><br>
-				<div class="row">
-					<div class="col-sm-12" style="text-align: -webkit-center">
-						<button class="my_btn" style="width: 110px!important;">Get Started</button>
-					</div>
-				</div><br>
-				<p style="text-align: center;font-size: 12px;" routerLink="/login"><a>or log in to access referral program settings</a></p>
-				
-			</div>
-		</div>      
-	</div>
-</section> -->
 <div *ngIf="process" class="preloader"> 
     <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
         <g>

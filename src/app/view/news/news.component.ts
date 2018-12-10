@@ -64,13 +64,13 @@ import * as $ from 'jquery';
 
 	}
 
-	continueReading(value){
-		this.routers.navigate(['news',value]);
-	}
+	// continueReading(value){
+	// 	this.routers.navigate(['news',value]);
+	// }
 
-	realtedPost(value){
-		this.routers.navigate(['news',value]);
-	}
+	// realtedPost(value){
+	// 	this.routers.navigate(['news',value]);
+	// }
 
 	prevPage(){
 		// $('html, body').animate({scrollTop: $("#topScreen").offset().top}, 2000);

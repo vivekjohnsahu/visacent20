@@ -1,10 +1,17 @@
-.errorshow{
-    color: #345fbd;
-    position: relative;
-    font-size: 30px;
-    bottom: 2px;
+.select_cont
+{
+    width: 350px;
+    margin-left: auto;
 }
-.req_loader{
+.select_cont select
+ {
+    height: 40px;
+    border: 1px solid #ddd;
+}
+
+
+.req_loader
+{
     text-align: center;
     position: relative;
 }
@@ -28,8 +35,10 @@
     color: red
 }
 
-
-
+.table_div
+{
+    margin-top:20px;
+}
 .table_2 p
 {
     font-size: 16px;
@@ -47,6 +56,19 @@
 {
     background: #EDEFF1;
 }
+@media (max-width:767px)
+{
+    .table_div
+    {
+        margin-top:0px;
+    }
+    
+    .select_cont
+    {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 @media (min-width: 500px)
 {
     .table_2 .col-sm-6 
@@ -55,29 +77,21 @@
         float:left;
     }
 }
-.no_visa_cont
+
+@media (min-width: 1400px)
 {
-    width:135px;
-    margin:15px auto 0px auto;
-    position:relative;
-    border-radius: 50%;
-}
-.no_visa_cont>i
-{
-    display:block;
-    width:100%;
-    height:100%;
-    
+    .select_cont select
+    {
+        height: 45px;
+    }
 }
 
-.no_visa_cont>i:first-child
-{
-    display: block;
-    font-size: 85px;
-    background: #EDEFF1;
-    line-height: 135px;
-    text-align: center;
-    border-radius: 50%;
-}
 
+@media (max-width:1250px)
+{
+    .no_visa_cont>i:first-child
+    {
+        background: white;
+    }
+}
 

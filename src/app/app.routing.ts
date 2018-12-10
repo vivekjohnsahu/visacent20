@@ -282,7 +282,7 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 		}
 		},
 		{
-			path: 'otherservice',
+			path: 'other-service',
 			component: OtherserviceComponent,
 			data: {
 				title: 'otherservice'

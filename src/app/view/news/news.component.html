@@ -34,7 +34,7 @@
                                         <a><i class="fab fa-google-plus-g"></i></a>
                                     </li>
                                 </ul>
-                                <a (click)="continueReading(List.slug_name)" >
+                                <a routerLink="/news/{{List.slug_name}}">
                                     <img src="https://visacent.com/{{List.image}}" title="{{List.title}}" alt="{{List.slug_name}}" class="img-responsive" />
                                         <span>{{List.created_at}}</span>
                                     <h2>{{List.title}}</h2>
@@ -50,8 +50,8 @@
             <div class="col-md-4">
               <div class="right_main_div">
                 <h3>Realted Post</h3>
-                <div class="related_post" (click)="realtedPost(List.slug_name)" *ngFor="let List of newsList">
-                    <a>
+                <div class="related_post" *ngFor="let List of newsList">
+                    <a routerLink="/news/{{List.slug_name}}">
                         <div class="media">
                             <div class="media-left">
                               <img src="https://visacent.com/{{List.image}}" title="{{List.title}}" alt="{{List.slug_name}}" class="media-object" style="width:60px">

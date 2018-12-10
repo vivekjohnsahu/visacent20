@@ -34,7 +34,7 @@
                                         <select name="" id="flagVle" class="flagEr enable_white">
                                             <option *ngFor="let flag of flagDrop" >{{flag.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{flag.country}}</option>
                                         </select>
-                                        <input type="number" pattern="^(0|[1-9][0-9]*)$" minlength="6" maxlength="15" required class="enable_white" [(ngModel)]="phone" name="phone" />
+                                        <input style="padding-left: 71px;" type="tel" (keypress)="isNumberKey($event)" pattern="^(0|[1-9][0-9]*)$" minlength="6" maxlength="15" required class="enable_white" [(ngModel)]="phone" name="phone" />
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                         <label class="pull-left"> Name <i class="fas fa-pencil-alt"></i></label>
                                     </div>
                                     <div class="element_container">
-                                        <input type="text" class="enable_white" [(ngModel)]="name" name="name" />
+                                        <input type="text" class="enable_white" maxlength="30" [(ngModel)]="name" name="name" />
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col_pay">

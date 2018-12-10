@@ -1,12 +1,12 @@
 <ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1"
-             [speed]="200" [showSpinner]="false" [direction]="'leftToRightIncreased'"
-             [color]="'#055ea5'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"
+[speed]="200" [showSpinner]="false" [direction]="'leftToRightIncreased'"
+[color]="'#055ea5'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"
 ></ng-progress>
-<section class="table_section section_20">
+<section class="table_section section_30">
     <div class="container">
-     <div>
+        <div>
             <h1 class="text-center ap_head">Apply For e-Visa</h1>
-        </div>   
+        </div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="select_cont drop_container1 embassy_of">
@@ -25,8 +25,7 @@
                 <div class="drop_container embassy_of">
                     <h3 style="color:#005ea5;">I need visa for</h3>
                     <form>
-                            <!-- (change)="changeNeedVisa($event.target)" -->
-
+                        <!-- (change)="changeNeedVisa($event.target)" -->
                         <select (change)="visafor1($event.target)"  class="enable_white" style="border: 1px solid #ddd;">
                             <option disabled>Choose Country</option>
                             <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name">{{list.name}}</option>
@@ -36,7 +35,7 @@
                     </form>
                 </div>
             </div>
-        </div>  
+        </div>
         <section class="table_section section_20" *ngIf='tableViasaToggle'>
             <div class="table_data">
                 <div class=" table_div">
@@ -74,8 +73,8 @@
                             </div>
                         </div>
                     </div>
-                </div> 
-            <!-------------------------- start duplicate tabel on mobile ---------------->
+                </div>
+                <!-------------------------- start duplicate tabel on mobile ---------------->
                 <div class="table_2" *ngFor="let visa of visaApplyTbl; let i = index">
                     <div class="row" style="background: #055da5;color: white;font-size: 18px;">
                         <div class="col-sm-12">{{visa.visa_type}}</div>
@@ -168,35 +167,31 @@
                             <p style="color:#8e8e8e;font-size: 33px;text-transform: capitalize;">visa not required</p>
                         </div>
                     </div>
-                    <div [hidden]="!tableRegular" style="text-align: center;">
-                        <div class="errorshow">
-                            <p class="container" style="color:#055da5;">
-                                Citizens of the <span style="text-transform: capitalize;">{{belongCnty}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{country_ctnSet}}</span> diplomatic mission or one of 
-                                its authorized visa agents outside <span style="text-transform: capitalize;">{{country_ctnSet}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
-                                prepare the required documentation.
-                            </p>
-                        </div>
-                    </div>
-                </div> 
-            <!-------------------------- end duplicate tabel on mobile ---------------->
-            </div>   
-        </section>    
-        <div [hidden]="!tableRequired" style="text-align: center;background: white;padding:7px;margin-top:10px;">
+                    <!-- <div [hidden]="!tableRegular" class="citizen_quoute">
+                        <p class="container" style="color:#055da5;">
+                            <i class="fas fa-quote-left"></i> Citizens of the <span style="text-transform: capitalize;">{{belongCnty}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{country_ctnSet}}</span> diplomatic mission or one of 
+                            its authorized visa agents outside <span style="text-transform: capitalize;">{{country_ctnSet}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
+                            prepare the required documentation. <i class="fas fa-quote-left"></i>
+                        </p>
+                        </div> -->
+                </div>
+                <!-------------------------- end duplicate tabel on mobile ---------------->
+            </div>
+        </section>
+        <div [hidden]="!tableRequired" class="no_visa_div">
             <div class="no_visa_cont">
                 <i class="fas fa-id-badge" style="color:#005ea5;"></i>
             </div>
-            <div class="errorshow">
-                <p style="color:#c8c9cb;font-size: 27px;text-transform: capitalize;">visa not required</p>
+            <div class="no_visa_para">
+                <p>visa not required</p>
             </div>
         </div>
-        <div [hidden]="!tableRegular" style="text-align: center;background: white;padding:7px;text-align: center;margin-top:15px;">
-            <div class="errorshow" >
-                <p class="container" style="color:#333;">
-                    <i class="far fa-hand-point-right" style="color:#005ea5;"></i>&nbsp; Citizens of the <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
-                    its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
-                    prepare the required documentation.
-                </p>
-            </div>
+        <div [hidden]="!tableRegular" class="citizen_quoute" >
+            <p>
+                <i class="fas fa-quote-left"></i> Citizens of the <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
+                its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
+                prepare the required documentation. <i class="fas fa-quote-left"></i>
+            </p>
         </div>
     </div>
 </section>
@@ -215,7 +210,6 @@
             It's faster and easier to apply online.
         </p>
     </div>
-    
     <section class="section_20" [hidden]="intro==null">
         <div class="container">
             <div class="intro_container" style="border-bottom: 1px solid #ddd;">
@@ -223,15 +217,15 @@
                     <div class="col-sm-12">
                         <article class="instruction">
                             <div id="intro_div">
-                              <div>
-                                <i class="fas fa-quote-left"></i>
-                              </div>
-                              <div>
-                                <p >
-                                    <img src={{visa_flag}} style="margin: 0 auto;float:left;width:70px;margin-right:12px;" />
-                                    <span [innerHTML]="intro"></span>
-                                </p>
-                              </div>
+                                <div>
+                                    <i class="fas fa-quote-left"></i>
+                                </div>
+                                <div>
+                                    <p >
+                                        <img src={{visa_flag}} style="margin: 0 auto;float:left;width:70px;margin-right:12px;" />
+                                        <span [innerHTML]="intro"></span>
+                                    </p>
+                                </div>
                             </div>
                         </article>
                     </div>
@@ -239,7 +233,6 @@
             </div>
         </div>
     </section>
-    
     <section class="section_20" [hidden]="documents_req==null">
         <div class="container">
             <div class="intro_container">
@@ -260,7 +253,7 @@
     </section>
     <section class="section_20" [hidden]="visa_req==null">
         <div class="container">
-             <div class="intro_container">
+            <div class="intro_container">
                 <div class="row">
                     <div class="col-sm-12">
                         <article class="instruction">
@@ -268,7 +261,7 @@
                                 <h2 style="text-transform: capitalize;"><i class="fas fa-paste"></i> Entry Requirements For {{country_ctn}} EVisa</h2>
                             </div>
                             <ol>
-                                <li><span [innerHTML]="visa_req"></span></li>   
+                                <li><span [innerHTML]="visa_req"></span></li>
                             </ol>
                         </article>
                     </div>
@@ -286,12 +279,12 @@
                                 <h2><i class="fas fa-question-circle"></i> FAQs</h2>
                             </div>
                             <div *ngFor="let f of faqQuestionAnswArry;">
-                                    <!-- <label style="text-transform: capitalize;">Q. Define {{country_ctn}} ETA(Electronic Travel Authority)?</label> -->
-                                    <ul class="faq_list">
-                                        <li [innerHTML]="f.question"></li> 
-                                        <li [innerHTML]="f.answer"></li>    
-                                    </ul>
-                                </div>    
+                                <!-- <label style="text-transform: capitalize;">Q. Define {{country_ctn}} ETA(Electronic Travel Authority)?</label> -->
+                                <ul class="faq_list">
+                                    <li [innerHTML]="f.question"></li>
+                                    <li [innerHTML]="f.answer"></li>
+                                </ul>
+                            </div>
                         </article>
                     </div>
                 </div>
@@ -309,9 +302,6 @@
         </div>
     </div>
 </section>
-
-
-
 <div *ngIf="cnt_emb" style="text-align: center;">
     <div class="errorshow" style="color:#333;">
         <div class="my1">
@@ -326,7 +316,7 @@
                                 <h3><span>Address: </span></h3>
                                 <p [innerHTML]="details.Address">
                                 </p>
-                                <p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Phone: </strong>
                                     <span *ngIf="details.lnthTelepone!=0">
                                     <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
@@ -334,6 +324,8 @@
                                     <span *ngIf="details.lnthTelepone==0">
                                     <span>NA</span>
                                     </span>
+                                </p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Fax: </strong>
                                     <span *ngIf="details.lnthFax!=0">
                                     <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
@@ -342,7 +334,7 @@
                                     <span>NA</span>
                                     </span>		
                                 </p>
-                                <p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Email: </strong>
                                     <span *ngIf="details.lnthE_maiil!=0">
                                     <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
@@ -350,6 +342,8 @@
                                     <span *ngIf="details.lnthE_maiil==0">
                                     <span>NA</span>
                                     </span>
+                                </p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Website: </strong>
                                     <span *ngIf="details.lnthwebsite!=0">
                                     <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
@@ -381,7 +375,7 @@
                                 <h3><span>Address: </span></h3>
                                 <p [innerHTML]="details.Address">
                                 </p>
-                                <p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Phone: </strong>
                                     <span *ngIf="details.lnthTelepone!=0">
                                     <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
@@ -389,6 +383,8 @@
                                     <span *ngIf="details.lnthTelepone==0">
                                     <span>NA</span>
                                     </span>
+                                </p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Fax: </strong>
                                     <span *ngIf="details.lnthFax!=0">
                                     <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
@@ -397,7 +393,7 @@
                                     <span>NA</span>
                                     </span>		
                                 </p>
-                                <p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Email: </strong>
                                     <span *ngIf="details.lnthE_maiil!=0">
                                     <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
@@ -405,6 +401,8 @@
                                     <span *ngIf="details.lnthE_maiil==0">
                                     <span>NA</span>
                                     </span>
+                                </p>
+                                <p style="margin-bottom:6px;">
                                     <strong>Website: </strong>
                                     <span *ngIf="details.lnthwebsite!=0">
                                     <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
@@ -426,4 +424,3 @@
         </div>
     </div>
 </div>
- 

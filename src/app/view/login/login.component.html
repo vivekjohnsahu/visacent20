@@ -27,7 +27,7 @@
                                     <label class="pull-left">Email <i class="far fa-envelope"></i></label>
                                 </div>
                                 <div class="element_container">
-                                    <input type="text" title="Email" placeholder="Email" class="removeGmail enable_white" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched)}" required #email="ngModel" name="email" [(ngModel)]="Email" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$" (focus)="cleanerror()" />
+                                    <input type="text" title="Email" maxlength="40" placeholder="Email" class="removeGmail enable_white" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched)}" required #email="ngModel" name="email" [(ngModel)]="Email" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$" (focus)="cleanerror()" />
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                                     <label class="pull-left">Passowrd <i class="fas fa-unlock-alt"></i></label>
                                 </div>
                                 <div class="element_container">
-                                    <input type="password" title="Password" class="removePassword enable_white" placeholder="password" [ngClass]="{'borderColor': password.invalid && ( password.dirty || password.touched)}" #password="ngModel" name="password" [(ngModel)]="Password" (focus)="cleanerror1()" required />
+                                    <input type="password" maxlength="30" title="Password" class="removePassword enable_white" placeholder="password" [ngClass]="{'borderColor': password.invalid && ( password.dirty || password.touched)}" #password="ngModel" name="password" [(ngModel)]="Password" (focus)="cleanerror1()" required />
                                 </div>
                             </div>
                         </div>

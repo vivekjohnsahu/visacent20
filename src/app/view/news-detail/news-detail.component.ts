@@ -63,10 +63,10 @@ export class NewsDetailComponent implements OnInit {
 	
 	}
 
-	realtedPost(value){
-		this.routers.navigate(['news',value]);
-		$("html, body").animate({ scrollTop: 0 }, 1000);
-	}
+	// realtedPost(value){
+	// 	this.routers.navigate(['news',value]);
+	// 	$("html, body").animate({ scrollTop: 0 }, 1000);
+	// }
 	
 	resolved(captchaResponse: string) {
 		this.grecaptcha = captchaResponse;

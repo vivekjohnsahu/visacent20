@@ -1,0 +1,9 @@
+@media (max-width:767px) and (min-width:535px)
+{
+	.visa_country
+	{
+		width:500px;
+		margin-left: auto;
+		margin-right:auto;
+	}
+}

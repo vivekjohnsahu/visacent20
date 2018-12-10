@@ -13,7 +13,7 @@
                         <div><span><i class="fas fa-flag"></i></span></div>
                         <h3>My Passport Country</h3>
                         <form>
-                            <select name="shape_id" (change)="changeShapeOne($event.target)" class="enable_white">
+                            <select name="shape_id1" (change)="changeShapeOne($event.target)" class="enable_white">
                                 <option disabled>Choose Country</option>
                                 <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name">{{list.name}}</option>
                                 <option disabled>-----------</option>

@@ -12,7 +12,6 @@ export class NationalityPriceService {
   private priceUrl = "https://visacent.com/la/api/get_availabel_visa_by_country/";
 	  
   price_get(nationalityNamePrice:any) {
-    console.log(nationalityNamePrice)
 		return this.http.get(`${this.priceUrl}`+nationalityNamePrice).map((res:Response) => res.json());
     }
 

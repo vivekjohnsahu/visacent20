@@ -13,6 +13,7 @@ export class MakePaymentFailedComponent implements OnInit {
   constructor(private router: ActivatedRoute) { }
 
   ngOnInit() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;	
     this.router.params.subscribe(val => {
         this.paymentId = this.router.snapshot.params["id"];
         this.paymentId = atob(this.paymentId)

@@ -1,16 +1,15 @@
 <ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="false" [direction]="'leftToRightIncreased'" [color]="'#055ea5'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"></ng-progress>
 <section *ngIf="pageHide" style="padding: 0px;">
-    <section class="table_section section_20">
+    <section class="table_section section_30">
         <div class="container table_data">
             <div class="main_heading main_heading_wbg">
-                <h2 class="table_h">Get Your {{inCountrySlugName}} Visa Online Now</h2>
+                <h1 class="table_h">Get Your {{inCountrySlugName}} Visa Online Now</h1>
                 <span></span>
             </div>
-            <div class=" table_div">
-                <div class="row">
+            <div class="row">
                     <div class="col-sm-6">
-                        <div class="drop_container nationlity">
-                            <h3><i _ngcontent-c4="" class="fas fa-flag"></i> Nationality:</h3>
+                        <div class="select_cont drop_container1 embassy_of">
+                            <h3 style="color:#005ea5;">Nationality</h3>
                             <form>
                                 <select name="shape_id" (change)="changeShapeOne($event.target)" class="enable_white">
                                     <option style="display: none;">{{nationalityChangeName}}</option>
@@ -23,10 +22,10 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="drop_container nationlity">
-                            <h3>Travelling to: <i class="fa fa-plane" aria-hidden="true"></i></h3>
+                        <div class="drop_container embassy_of">
+                            <h3 style="color:#005ea5;">Travelling to</h3>
                             <form>
-                                <select name="shape_id" class="shape_hide enable_white" id="travling_cn" (change)="changeShapeTwo($event.target)">
+                                <select name="shape_id" class="shape_hide enable_white" id="travling_cn" (change)="changeShapeTwo($event.target)" style="border: 1px solid #ddd;">
                                     <option style="display: none;">{{travellingChangeName}}</option>
                                     <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name">{{list.name}}</option>
                                     <option disabled>-----------</option>
@@ -36,7 +35,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" [hidden]="!tableShow">
+            <div class=" table_div" [hidden]="!tableShow">
+                <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive table_cont">
                             <table class="table table-hover table-bordered xzy">
@@ -72,14 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div [hidden]="!tableRequired" style="text-align: center;">
-                    <div class="no_visa_cont">
-                        <i class="fas fa-id-badge" style="color:#005ea5;"></i>
-                    </div>
-                    <div class="errorshow">
-                        <p style="color:#c8c9cb;font-size: 33px;text-transform: capitalize;">visa not required</p>
-                    </div>
-                </div>
+                
                 <!-- <div [hidden]="!tableRegular" style="text-align: center;">
                     <div class="errorshow" style="color:#333;"> -->
                         <div [hidden]="!tableShow">
@@ -193,13 +186,30 @@
                             </div>     
                         </div>
                     </div>
-                    <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 66px;padding-right: 66px;">
-                        <div class="errorshow">
-                            <p> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
-                                {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
-                        </div>
-                    </div>
             </div>
+
+            <!-- start visa not required icon -->
+            <div [hidden]="!tableRequired" class="no_visa_div">
+                <div class="no_visa_cont">
+                    <i class="fas fa-id-badge" style="color:#005ea5;"></i>
+                </div>
+                <div class="no_visa_para">
+                    <p>visa not required</p>
+                </div>
+            </div>
+            <!-- start visa not required icon -->
+
+
+
+            <div *ngIf="Errortable" class="citizen_quoute">
+                <p>
+                    <i class="fas fa-quote-left"></i> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
+                    {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation. <i class="fas fa-quote-left"></i>
+                </p> 
+            </div>
+
+
+            
         </div>
     </section>
     <div [hidden]="!tableRegular" style="text-align: center;">
@@ -218,7 +228,7 @@
                                                 <h3><span>Address: </span></h3>
                                                 <p [innerHTML]="details.Address">
                                                 </p>
-                                                <p style="margin-bottom:1px;">
+                                                <p style="margin-bottom:6px;">
                                                     <strong>Phone: </strong>
                                                     <span *ngIf="details.lnthTelepone!=0">
                                                     <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
@@ -226,15 +236,17 @@
                                                     <span *ngIf="details.lnthTelepone==0">
                                                     <span>NA</span>
                                                     </span>
+                                                </p>
+                                                <p style="margin-bottom:6px;">
                                                     <strong>Fax: </strong>
                                                     <span *ngIf="details.lnthFax!=0">
-                                                    <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
+                                                    <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span></a>
                                                     </span> 
                                                     <span *ngIf="details.lnthFax==0">
                                                     <span>NA</span>
                                                     </span>		
                                                 </p>
-                                                <p style="margin-bottom:1px;">
+                                                <p style="margin-bottom:6px;">
                                                     <strong>Email: </strong>
                                                     <span *ngIf="details.lnthE_maiil!=0">
                                                     <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
@@ -242,9 +254,11 @@
                                                     <span *ngIf="details.lnthE_maiil==0">
                                                     <span>NA</span>
                                                     </span>
+                                                </p>
+                                                <p style="margin-bottom:6px;">
                                                     <strong>Website: </strong>
                                                     <span *ngIf="details.lnthwebsite!=0">
-                                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
+                                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
                                                     </span>
                                                     <span *ngIf="details.lnthwebsite==0">
                                                     <span>NA</span>
@@ -273,7 +287,7 @@
                                                 <h3><span>Address: </span></h3>
                                                 <p [innerHTML]="details.Address">
                                                 </p>
-                                                <p>
+                                                <p style="margin-bottom:6px;">
                                                     <strong>Phone: </strong>
                                                     <span *ngIf="details.lnthTelepone!=0">
                                                     <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
@@ -281,7 +295,9 @@
                                                     <span *ngIf="details.lnthTelepone==0">
                                                     <span>NA</span>
                                                     </span>
-                                                    <br><strong>Fax: </strong>
+                                                </p>
+                                                <p style="margin-bottom:6px;">
+                                                    <strong>Fax: </strong>
                                                     <span *ngIf="details.lnthFax!=0">
                                                     <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
                                                     </span> 
@@ -289,7 +305,7 @@
                                                     <span>NA</span>
                                                     </span>		
                                                 </p>
-                                                <p>
+                                                <p style="margin-bottom:6px;">
                                                     <strong>Email: </strong>
                                                     <span *ngIf="details.lnthE_maiil!=0">
                                                     <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
@@ -297,7 +313,9 @@
                                                     <span *ngIf="details.lnthE_maiil==0">
                                                     <span>NA</span>
                                                     </span>
-                                                    <br><strong>Website: </strong>
+                                                </p>
+                                                <p style="margin-bottom:6px;">
+                                                    <strong>Website: </strong>
                                                     <span *ngIf="details.lnthwebsite!=0">
                                                     <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
                                                     </span>

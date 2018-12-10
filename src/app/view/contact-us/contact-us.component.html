@@ -71,7 +71,7 @@
 									<select name="" id="flagVle" class="flagEr enable_white">
 										<option *ngFor="let flag of flagDrop" [selected]="codeCnt==flag.value" value="{{flag.value}}">{{flag.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{flag.country}}</option>
 									</select>
-									<input class="numberOne" id="number" type="number" #number="ngModel" pattern="^(0|[1-9][0-9]*)$" name="number" [(ngModel)]="contactU.phone" minlength="6" maxlength="15" required (keypress)="isNumberKey($event)"/>
+									<input class="numberOne" id="number" style="padding-left: 71px" type="tel" #number="ngModel" pattern="^(0|[1-9][0-9]*)$" name="number" [(ngModel)]="contactU.phone" minlength="6" maxlength="15" required (keypress)="isNumberKey($event)"/>
 								</div>
 							</div>
                             <div class="col-sm-6">
