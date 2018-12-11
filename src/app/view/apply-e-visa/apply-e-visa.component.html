@@ -14,7 +14,7 @@
                     <form>
                         <select (change)="changeBelong($event.target)" class="enable_white">
                             <option disabled>Choose Country</option>
-                            <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name">{{list.name}}</option>
+                            <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name" [selected]="list.slug_country_name==visaReqBlong">{{list.name}}</option>
                             <option disabled >-----------</option>
                             <option *ngFor="let list of belong_to" [value]="list.slug_country_name">{{list.name}}</option>
                         </select>
@@ -28,7 +28,7 @@
                         <!-- (change)="changeNeedVisa($event.target)" -->
                         <select (change)="visafor1($event.target)"  class="enable_white" style="border: 1px solid #ddd;">
                             <option disabled>Choose Country</option>
-                            <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name">{{list.name}}</option>
+                            <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name" [selected]="list.slug_country_name==visaReqNead">{{list.name}}</option>
                             <option disabled >-----------</option>
                             <option *ngFor="let list of need_visa_for" [value]="list.slug_country_name" [selected]="list.slug_country_name==country_ctn" >{{list.name}}</option>
                         </select>

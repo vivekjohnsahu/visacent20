@@ -1944,7 +1944,8 @@ export class OrderSummaryComponent implements OnInit {
 								indx++;
 							})
 							if(flg!=0){
-								this.routers.navigate(["payment",this.currentIdUrl]);
+								// alert('2')
+								// this.routers.navigate(["payment",this.currentIdUrl]);
 							}
 					}
 					$('#document_sus_msg').html('Documents Success Upload').css('color','green').show();
@@ -2054,6 +2055,10 @@ export class OrderSummaryComponent implements OnInit {
 			$("#SpecificationsPhoto").hide();
 		}
 		$('#specificationsOpen').trigger('click');
+	}
+
+	payNow(){
+		this.routers.navigate(["payment",this.currentIdUrl]);
 	}
 
 }

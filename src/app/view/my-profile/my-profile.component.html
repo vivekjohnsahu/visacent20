@@ -3,7 +3,7 @@
     <section class="section_20" style="background-color:#EDEFF1;padding:15px 0px;">
         <div class="container">
             <div class="row us_in">
-                <div class="col-sm-3 col_left" style="padding-right:0px;">
+                <div class="col-sm-3 col_left">
                     <div class="media">
                         <div class="media-left ic">
                           <h2>
@@ -37,11 +37,11 @@
     </section>
     <section class="section_30">
         <div class="container">
-                <div [hidden]="user_dashboard" style="padding:0px;">
+                <div [hidden]="user_dashboard">
                     <div class="row">
                         <div class="col-lg-9">
                             <div class="row">
-                                <div class="col-sm-3" style="padding-right:0px;">
+                                <div class="col-sm-3">
                                     <div class="user_pro">
                                         <h1><i class="fas fa-smile"></i></h1>
                                         <h3 style="color:#EDEFF1;text-transform: capitalize;margin-top: 5px;">{{name}}</h3>
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="row">
-                                        <div class="col-sm-6" style="padding-right:0px;cursor: pointer;">
+                                        <div class="col-sm-6" style="cursor: pointer;">
                                             <a class="dash_div" routerLink="/my-profile/applications">
                                                 <h1><i class="fab fa-wpforms"></i></h1>
                                                 <h3>All Applications</h3>
@@ -241,24 +241,23 @@
                     </div>
                     <div class="open" style="width: 100%;overflow: hidden;">
                         <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <strong class="left_label">Arrival Date</strong>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <strong class="left_label">Arrival Date</strong>
+                                </div>
+                                <div class="col-xs-8">
+                                    <p>{{order1.arrival_date}} (DD-MM-YYYY)</p>
+                                </div>
                             </div>
-                            <div class="col-xs-8">
-                                <p>{{order1.arrival_date}} (DD-MM-YYYY)</p>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <strong class="left_label">No of Application</strong>
+                                </div>
+                                <div class="col-xs-8">
+                                    <p>{{order1.visa_no}}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <strong class="left_label">No of Application</strong>
-                            </div>
-                            <div class="col-xs-8">
-                                <p>{{order1.visa_no}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" >
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-xs-4">
@@ -283,7 +282,6 @@
                                 </div>
                             </div>   
                         </div>
-                    </div>
                     <div class="col-md-12">
                         <div  class="col-md-12" style="padding:0px;position: relative;left: 15px" *ngIf="!(order1.payment_status=='pending' && order1.is_info_complete=='1') && !(order1.payment_status=='done')">
                             <div class="row">
@@ -610,14 +608,13 @@
                 
                 <p *ngIf="Withdraw_btn_hide" style="color:green">Your request to withdrawal bonus has been submitted. Your bonus will be credit within 72 hour into your Paypal account. </p>
                 
-                <div class="row" style="    margin-top: 45px;" [hidden]="user_refferals1==''">
-                    
-                    <div class="col-md-6" [hidden]="bonus_withdraw1==''">
+                <div class="row bon_row" [hidden]="user_refferals1==''">
+                    <div class="col-lg-6" [hidden]="bonus_withdraw1==''">
                         <div [hidden]="bonus_withdraw1==''">
                             <h3 class="text-center" style="margin-bottom: 10px;">Bonus</h3>
                         </div>  
-                        <div class="table-responsive bonus_table">
-                            <table class="table table-hover table-bordered xzy">
+                        <div class="bonus_table bonus_table1">
+                            <table class="table xzy">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -626,8 +623,8 @@
                                         <th>Description</th>
                                     </tr>
                                 </thead>
-                                <tbody style="cursor: pointer;" *ngFor="let bonus of bonus_withdraw1; let i=index">
-                                    <tr class="active">
+                                <tbody style="cursor: pointer;" >
+                                    <tr *ngFor="let bonus of bonus_withdraw1; let i=index" class="active">
                                         <td>{{i+1}}</td>
                                         <td>{{bonus.bonus_amt}}</td>
                                         <td>{{bonus.created_at}}</td>
@@ -637,13 +634,13 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6 sec_col">
                         <div [hidden]="user_refferals1==''" >
-                            <h3 class="text-center" style="margin-bottom: 10px;">User Refferals Details</h3>
+                            <h3 class="text-center" style="margin-bottom: 10px;">User Referral Details</h3>
                             
                         </div>
-                        <div class="table-responsive bonus_table">
-                            <table class="table table-hover table-bordered xzy">
+                        <div class="bonus_table bonus_table2">
+                            <table class="table xzy">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -653,8 +650,8 @@
                                         <th>Referral Name</th>
                                     </tr>
                                 </thead>
-                                <tbody style="cursor: pointer;" *ngFor="let bonus of user_refferals1; let i=index">
-                                    <tr class="active">
+                                <tbody style="cursor: pointer;" >
+                                    <tr *ngFor="let bonus of user_refferals1; let i=index" class="active">
                                         <td>{{i+1}}</td>
                                         <td>{{bonus.bonus_amt}}</td>
                                         <td>{{bonus.refferer_created}}</td>
@@ -668,13 +665,12 @@
                     
                 </div>
                 <div class="row" [hidden]="userData==''">
-                    <div class="col-md-12" style="margin-bottom: 8px;
-    margin-top: 40px;">
-                        <div class="text-center" style="margin-bottom: 10px;">
-                            <h3 class="table_h">Bonus Withdraw Request</h3>
+                    <div class="col-md-12" >
+                        <div class="text-center" >
+                            <h3 style="margin-bottom: 10px;">Bonus Withdraw Request</h3>
                         </div>  
-                        <div class="table-responsive bonus_table">
-                            <table class="table table-hover table-bordered xzy">
+                        <div class="bonus_table bonus_table3">
+                            <table class="table xzy">
                                 <thead>
                                     <tr>
                                         <th>Withdraw Amount</th>
@@ -686,8 +682,8 @@
                                          <!-- <th>Total bonus</th> -->                                       
                                     </tr>
                                 </thead>
-                                <tbody style="cursor: pointer;" *ngFor="let bonus of userData; let i=index">
-                                    <tr class="active">
+                                <tbody style="cursor: pointer;">
+                                    <tr class="active" *ngFor="let bonus of userData; let i=index">
                                             <td *ngIf="bonus.withdraw_amount!=null">{{bonus.withdraw_amount}}</td>
                                             <td *ngIf="bonus.withdraw_amount==null">NA</td>
                                             <td *ngIf="bonus.status=='Pending'" style="color:orange">{{bonus.status}}</td>

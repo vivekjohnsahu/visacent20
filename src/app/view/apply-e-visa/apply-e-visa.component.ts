@@ -62,6 +62,8 @@ export class ApplyEVisaComponent implements OnInit {
 	currentUrl:any;
 	of_country_name:any;
 	from_country_name:any;
+	visaReqBlong:any;
+	visaReqNead:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -94,6 +96,11 @@ export class ApplyEVisaComponent implements OnInit {
 		this.routers.params.subscribe(val => {
 			this.visaReq = this.routers.snapshot.params["id"];
 		})
+		if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
+			var NewvisaReq = this.visaReq.split('-visa-application-from-')
+			this.visaReqBlong = NewvisaReq[1]
+			this.visaReqNead = NewvisaReq[0]
+		}
 
 		this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
 		if(this.countryShow!=null && this.countryShow!=''){

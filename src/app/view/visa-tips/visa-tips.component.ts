@@ -72,13 +72,23 @@ export class VisaTipsComponent implements OnInit {
 		private title:Title,
 		private embassiesCityDetailsService:EmbassiesCityDetailsService
 	) {}
-
+	currentId:any;
+	currentIdBlong
+	currentIdNead
   ngOnInit() {
 	$('#profile_trans').hide();
 	document.body.scrollTop = document.documentElement.scrollTop = 0;
 	this.cnt_emb=false;
 	this.visa_req_sec=false;
 	this.con_visa_req_sec=true;
+	this.routers.params.subscribe(val => {
+		this.currentId = this.routers.snapshot.params["id"];
+	})
+	if(this.currentId!='' && this.currentId!=null && this.currentId!=undefined){
+		this.currentId = this.currentId.split('-visa-application-from-')
+		this.currentIdBlong = this.currentId[1]
+		this.currentIdNead = this.currentId[0]
+	}
     this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
 		if(this.countryShow!=null || this.countryShow!=''){
 			this.ngProgress.done();

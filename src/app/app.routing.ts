@@ -230,6 +230,14 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 		},
 
 		{
+			path: 'visa-tips/:id',
+			component: VisaTipsComponent,
+			data: {
+				title: 'visa-tips'
+		}
+		},
+
+		{
 			path: 'payment/:id',
 			component: PaymentComponent,
 			data: {

@@ -21,7 +21,6 @@ export class MyProfileComponent implements OnInit {
 	email:any;
 	name:any;
 	number:any
-	// regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
 	numberRegEx = "^(0|[1-9][0-9]*)$"
 	oldPassword:any;
 	newPassword:any;
@@ -29,7 +28,6 @@ export class MyProfileComponent implements OnInit {
 	profileData:{};
 	changePassData:{};
 	orders_user:any;
-	// visaProcType:boolean;
 	applicants:any;
 	cntryList:any;
 	pageHide:boolean;

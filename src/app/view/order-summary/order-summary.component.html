@@ -110,121 +110,14 @@
                         </div>
                         <div class="applicants_data">
                             <p style="color:#0dbc0d;text-transform: capitalize;" *ngIf="payment_status=='done'">{{payment_status}} <i class="fas fa-check-circle"></i></p>
-
                             <p style="color:red;text-transform: capitalize;" *ngIf="payment_status=='pending'">{{payment_status}} <i class="fas fa-check-circle"></i></p>
                         </div>
+                        <input *ngIf="(is_final_submit=='1' && is_document=='1' && payment_status!='done')" type="button" style="margin:2px" name="btn" class="my_btn" (click)="payNow()" value="Pay Now">
                     </div>
                 </div>            
             </div>
         </div>
     </section>
-
-
-
-    <!-- <section class="section_20">
-        <div class="container">
-            <h2 class="order_head" style="text-align: center;">
-                <p style="font-size:25px;">Application Summary</p>
-            </h2>
-           
-            <div class="row personal">
-                <div class="col-xs-6">
-                    <div class="row personal_inside">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="left_label">
-                                <strong>Appli. Id</strong>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p>{{order_id}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row personal_inside">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="left_label">
-                                <strong>Email</strong>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p>{{user_email}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row personal_inside">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="left_label">
-                                <strong>Appli. Date</strong>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p>{{created_at}} (DD-MM-YYYY)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row personal_inside">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="left_label">
-                                <strong>Mobile No</strong>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p *ngIf="order_phone!=null">{{order_phone}}</p>
-                                <p *ngIf="order_phone==null">NA</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="row personal_inside">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="left_label">
-                                <strong>Visa Country</strong>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p>{{visa_for_country}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row personal_inside">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="left_label">
-                                <strong>Total Ammount</strong>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p>{{total_fee}} USD</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row personal_inside">
-                        <div class="col-sm-4 col-xs-12">
-                            <div class="left_label">
-                                <strong>Payment Status</strong>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p style="color:#0dbc0d;text-transform: capitalize;" *ngIf="payment_status=='done'">{{payment_status}} <i class="fas fa-check-circle"></i></p>
-                            </div>
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="right">
-                                <p style="color:red;text-transform: capitalize;" *ngIf="payment_status=='pending'">{{payment_status}} <i class="fas fa-check-circle"></i></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
     <section class="section_20 form_section" style="padding:0px;">
         <div class="container">
             <div class="row">

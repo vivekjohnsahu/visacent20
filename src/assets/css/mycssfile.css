@@ -2247,6 +2247,11 @@ ul.faq_ul ol li
     margin-bottom: 0;
     margin-top: 8px;
 }
+.bon_row
+{
+	margin-top:40px;
+	margin-bottom: 25px;
+}
 .bonus_summary
 {
 	text-align: center;
@@ -2287,9 +2292,17 @@ ul.faq_ul ol li
 	color:white;
 	text-align: center;
 }
-.bonus_table table td
+.bonus_table table tr td
 {
 	text-align: center;
+	border:1px solid #bbbbbb;
+}
+@media (max-width:1199px)
+{
+	.sec_col
+	{
+		margin-top:40px;
+	}
 }
 @media (max-width:1075px)
 {
@@ -2297,7 +2310,9 @@ ul.faq_ul ol li
     {
         display:none;
     } 
-}
+
+   }
+
 @media (max-width:1000px)
 {
     .profile_opt_ul li a i
@@ -2322,6 +2337,108 @@ ul.faq_ul ol li
         float: left;
         width:50%;
     } 
+    .bonus_table
+    {
+    	
+    }
+    .bonus_table table thead 
+	{
+		display: none;
+	}
+	.bonus_table table tbody tr td
+	{
+		display: block;
+	    padding-left: 40%;
+	    position: relative;
+	    border: none;
+	    border-bottom: 1px solid #ddd!important;
+	    background-color: transparent!important;
+	    text-align: left;
+	}
+	.bonus_table table tbody tr td::before
+	{
+		position: absolute;
+		left: 0px;
+		border:none;
+		font-family: 'Hammersmith One';
+	}
+	.bonus_table table tbody tr td:first-child
+	{
+		border-bottom: 2px solid #005ea5!important;
+		color:#005ea5;
+	}
+	.bonus_table1 table tbody tr td:nth-child(1)::before
+	{
+		content:"No";
+	}
+	.bonus_table1 table tbody tr td:nth-child(2)::before
+	{
+		content:"Bonus";
+	}
+	.bonus_table1 table tbody tr td:nth-child(3)::before
+	{
+		content:"Referral Created";
+	}
+	.bonus_table1 table tbody tr td:nth-child(4)::before
+	{
+		content:"Description";
+	}
+
+
+/*--------------------- start bonus table 2 -------------*/
+	.bonus_table2 table tbody tr td:nth-child(1)::before
+	{
+		content:"No";
+	}
+	.bonus_table2 table tbody tr td:nth-child(2)::before
+	{
+		content:"Bonus";
+	}
+	.bonus_table2 table tbody tr td:nth-child(3)::before
+	{
+		content:"Date & Time";
+	}
+	.bonus_table2 table tbody tr td:nth-child(4)::before
+	{
+		content:"Referral Email";
+	}
+	.bonus_table2 table tbody tr td:nth-child(5)::before
+	{
+		content:"Referral Name";
+	}
+/*--------------------- end bonus table 2 -------------*/
+
+
+
+
+
+/*--------------------- start bonus table 3 -------------*/
+.bonus_table3 table tbody tr td:nth-child(1)::before
+{
+	content:"Withdraw Amount";
+}
+.bonus_table3 table tbody tr td:nth-child(2)::before
+{
+	content:"Status";
+}
+.bonus_table3 table tbody tr td:nth-child(3)::before
+{
+	content:"Request Date";
+}
+.bonus_table3 table tbody tr td:nth-child(4)::before
+{
+	content:"Created Time";
+}
+.bonus_table3 table tbody tr td:nth-child(5)::before
+{
+	content:"Credit Amount";
+}
+.bonus_table3 table tbody tr td:nth-child(6)::before
+{
+	content:"Comment";
+}
+/*--------------------- end bonus table3  -------------*/
+
 }
 @media (max-width:767px)
 {
@@ -3405,6 +3522,17 @@ ul.faq_ul ol li
         font-size: 17px;
     }
 }
+@media (max-width:660px)
+{
+	 .detail_panel .applicant_tabs 
+    {
+    	overflow-x:auto;
+    }
+    .detail_panel .applicant_tabs .nav-tabs
+    {
+    	width:631px;
+    }
+}
 @media (max-width:600px)
 {
     .top_link li a span
@@ -3612,6 +3740,10 @@ ul.faq_ul ol li
     .drop_container 
     {
         width: 100%;
+    }
+    .select_cont
+    {
+    	width:100%!important;
     }
     .contact_side>ul>li
     {
