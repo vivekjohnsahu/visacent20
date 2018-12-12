@@ -100,6 +100,9 @@ export class ApplyEVisaComponent implements OnInit {
 			var NewvisaReq = this.visaReq.split('-visa-application-from-')
 			this.visaReqBlong = NewvisaReq[1]
 			this.visaReqNead = NewvisaReq[0]
+			this.visafor()
+			this.belongCnty = this.visaReqBlong
+			this.country_ctnSet = this.visaReqNead	
 		}
 
 		this.countryShow =JSON.parse(localStorage.getItem('countrylist'));

@@ -153,6 +153,10 @@ export class EmbassiesDetailsComponent implements OnInit {
 						this.btnName = this.countydetails.of_country;	
 				}else if(data.status == 'ERROR'){
 					this.ngProgress.done();
+					this.countyNameOf = this.country_name_name[0];
+					this.countyNameIn = this.country_name_name[1];
+					this.ofCountry = this.country_name_name[0];
+					this.inCountry = this.country_name_name[1];
 					this.pade_error_show = true;
 				}else{
 					//do nothing

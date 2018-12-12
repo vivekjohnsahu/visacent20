@@ -3,6 +3,7 @@ import { NgProgress } from 'ngx-progressbar';
 import { NewsService } from '../../services/news/news.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
+import { Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news',
@@ -16,7 +17,9 @@ import * as $ from 'jquery';
 		public ngProgress: NgProgress,
 		private newsService:NewsService,
 		private router : ActivatedRoute,
-		private routers : Router
+		private routers : Router,
+		private meta: Meta,
+		private title:Title
 	) { }
 
 	Error_page:boolean;
@@ -43,6 +46,10 @@ import * as $ from 'jquery';
 					this.ngProgress.done();
 					this.newsList = data.news_list;
 					this.pageHide = true;
+					this.title.setTitle(this.newsList[0].title);
+					this.meta.updateTag({ name:'title',content:this.newsList[0].title});	
+					this.meta.updateTag({ name:'description',content:this.newsList[0].title});
+					this.meta.updateTag({ name:'keywords',content: 'visa news, visa services, online visa news, check lates updated about visas, online news about visa, get online visa, online news, application of visa'});
 					this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
 					this.currentPage = 1;
 					this.pageStart = 1;
@@ -64,16 +71,7 @@ import * as $ from 'jquery';
 
 	}
 
-	// continueReading(value){
-	// 	this.routers.navigate(['news',value]);
-	// }
-
-	// realtedPost(value){
-	// 	this.routers.navigate(['news',value]);
-	// }
-
 	prevPage(){
-		// $('html, body').animate({scrollTop: $("#topScreen").offset().top}, 2000);
 		if(this.currentPage>1){
 		   this.currentPage --;
 		} 
@@ -82,10 +80,11 @@ import * as $ from 'jquery';
 		}
 		this.startIndex = (this.currentPage-1)*this.pageSize;
 		this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
+		this.title.setTitle(this.current_product[0].title);
+		this.meta.updateTag({ name:'title',content:this.current_product[0].title});
 	}
 
 	nextPage(){
-		// $('html, body').animate({scrollTop: $("#topScreen").offset().top}, 2000);
 		if(this.currentPage < this.pageNumber){
 			  this.currentPage ++;
 		}
@@ -94,6 +93,8 @@ import * as $ from 'jquery';
 		}
 		this.startIndex = (this.currentPage-1)*this.pageSize;
 		this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
+		this.title.setTitle(this.current_product[0].title);
+		this.meta.updateTag({ name:'title',content:this.current_product[0].title});
 	}
 
 	setPage(index : number){
@@ -101,6 +102,8 @@ import * as $ from 'jquery';
 		this.currentPage = index;
 		this.startIndex = (this.currentPage-1)*this.pageSize;
 		this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
+		this.title.setTitle(this.current_product[0].title);
+		this.meta.updateTag({ name:'title',content:this.current_product[0].title});
 	  }
 
 }

@@ -79,17 +79,7 @@
 </div>
 <div class="datafound">   
 </div>
-<section class="section_20">
-    <div class="container">
-        <div  *ngIf="countydetails.data.length > 0">
-            <a class="my_btn" routerLink="/consulates-general/{{ofCountry}}-in-{{inCountry}}">
-                {{countyNameOf}} Consulates in {{countyNameIn}}
-                </a>
-        </div>
-    </div>
 </section>
-</section>
-
 <span style="display: none;" id="spn_ip"></span>
 <section *ngIf="pade_error_show" class="section_30 scroll_msg">
         <div class="container datafound" style="position: relative;top: 15px;margin-bottom: 51px;">
@@ -223,5 +213,14 @@
                     </svg>
                 </div>
             </form>
+        </div>
+    </section>
+    <section class="section_20" *ngIf="pade_error_show || pageHide">
+        <div class="container">
+            <div>
+                <a class="my_btn" routerLink="/consulates-general/{{ofCountry}}-in-{{inCountry}}">
+                    <span style="text-transform: capitalize">{{countyNameOf}}</span> Consulates in <span style="text-transform: capitalize">{{countyNameIn}}</span>
+                </a>
+            </div>
         </div>
     </section>

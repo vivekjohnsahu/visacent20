@@ -79,15 +79,6 @@
         </div>
     </section>
 </div>
-<section class="section_20">
-    <div class="container">
-        <div *ngIf="multidateils.length > 0">
-            <a routerLink="/embassies/{{ofCountrySlugName}}-in-{{inCountrySlugName}}" class="next_btn my_btn">
-                {{of_name}} Embassies in {{in_name}}
-            </a>
-        </div>
-    </div>
-</section>
 </div>
 <span style="display: none;" id="spn_ip"></span>
 <section *ngIf="pade_error_show" class="section_30 scroll_msg">
@@ -222,5 +213,14 @@
                     </svg>
                 </div>
             </form>
+        </div>
+    </section>
+    <section class="section_20" *ngIf="pade_error_show || pageHide">
+        <div class="container">
+            <div>
+                <a routerLink="/embassies/{{ofCountrySlugName}}-in-{{inCountrySlugName}}" class="next_btn my_btn">
+                    <span style="text-transform: capitalize">{{of_name}}</span> Embassies in <span style="text-transform: capitalize">{{in_name}}</span>
+                </a>
+            </div>
         </div>
     </section>

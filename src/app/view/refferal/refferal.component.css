@@ -30,6 +30,49 @@
     transition-duration:.3s;
 }
 
+.how_work 
+{
+    position: relative;
+}
+.how_work>img
+{
+    position: absolute;
+    width: 250px;
+    top:17px;
+    right:-135px;
+}
+@media (max-width:1700px)
+{
+    .how_work>img
+    {
+        width: 220px;
+        right:-135px;
+    }
+}
+@media (max-width: 1335px)
+{
+    .how_work> img 
+    {
+        width: 160px;
+        right: -95px;
+    }
+}
+@media (max-width: 890px)
+{
+.how_work > img
+ {
+    width: 130px;
+    right: -82px;
+    top: 30px;
+}
+}
+@media (max-width: 767px)
+{
+    .how_work > img
+     {
+        display: none;
+    }
+}
 
 
 /*------------------- start faq accordian -----------------*/

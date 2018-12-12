@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { CountriesListService } from '../../services/countries_list_home/countries-list.service';
 import { ContactUsService } from '../../services/contact_us/contact-us.service';
-import { FlagValueService } from '../../services/flagValue/flag-value.service'
+import { FlagValueService } from '../../services/flagValue/flag-value.service';
+import { Meta, Title} from '@angular/platform-browser';
 
 export interface contactUs{
     name: any;
@@ -43,10 +44,16 @@ export class ContactUsComponent implements OnInit {
   	constructor(
 		  private countriesListService:CountriesListService,
 		  private contactUsService:ContactUsService,
-		  private flagValueService:FlagValueService
+		  private flagValueService:FlagValueService,
+		  private meta: Meta,
+		  private title:Title
 	  ) {}
 
 	ngOnInit() {
+		this.title.setTitle('Contact Us | For Visa Related Services Contact Us');
+		this.meta.updateTag({ name:'title',content:'Contact Us | For Visa Related Services Contact Us'});	
+		this.meta.updateTag({ name:'description',content:'Contact us for any visa related services, Our customer team assist you for any visa reated queries. Travel and explore many countries through applying visa online form myvisa.'});
+		this.meta.updateTag({ name:'keywords',content: 'contact us, visa related services, visa application services, online visa, '});
 		document.body.scrollTop = document.documentElement.scrollTop = 0;	
 		this.flagDrop = this.flagValueService.flagMethod()	
 		$('#profile_trans').hide();

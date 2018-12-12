@@ -61,6 +61,9 @@ export class VisaTipsComponent implements OnInit {
 	countydetails:any;
 	consulateAd:any;
 	EmbassyAd:any;
+	currentId:any;
+	currentIdBlong:any;
+	currentIdNead:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -72,11 +75,13 @@ export class VisaTipsComponent implements OnInit {
 		private title:Title,
 		private embassiesCityDetailsService:EmbassiesCityDetailsService
 	) {}
-	currentId:any;
-	currentIdBlong
-	currentIdNead
+	
   ngOnInit() {
 	$('#profile_trans').hide();
+	this.title.setTitle('Apply For e-Visa | Applying Visa Online | Online Visa application form');
+	this.meta.updateTag({ name:'description',content:'Apply For e-Visa, Applying Visa Online, Online Visa application form, visa application, work visa, tourist visa, travel visa, apply for visa, apply for visa online, visa legal services, get visa online, online visa'});
+	this.meta.updateTag({ name:'keywords',content:'You can apply visa online following just simple step, fill online visa application from, receive visa via email and enter destination where you want to go.'});
+	this.visa_flag = 'assets/images/default1.png';
 	document.body.scrollTop = document.documentElement.scrollTop = 0;
 	this.cnt_emb=false;
 	this.visa_req_sec=false;
@@ -88,6 +93,9 @@ export class VisaTipsComponent implements OnInit {
 		this.currentId = this.currentId.split('-visa-application-from-')
 		this.currentIdBlong = this.currentId[1]
 		this.currentIdNead = this.currentId[0]
+		this.country_ctnSet = this.currentIdNead;
+		this.belongCnty = this.currentIdBlong;
+		this.visafor()
 	}
     this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
 		if(this.countryShow!=null || this.countryShow!=''){
@@ -198,6 +206,7 @@ export class VisaTipsComponent implements OnInit {
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
+						this.metaTags()
 						this.tableViasaToggle = true;
 						this.of_country_name = data.to_country_name;
 						this.from_country_name = data.from_country_name;
@@ -325,6 +334,25 @@ export class VisaTipsComponent implements OnInit {
 					this.intro=null;
 				}		
 			})
+	}
+
+	metaTags(){
+		if(this.visaApplyTbl[0].visa_required!='0'){
+			this.title.setTitle('Tips for '+this.country_ctnSet+' visa application from '+this.belongCnty+', A regular visa required application required in advance.');
+			this.meta.updateTag({ name:'title',content:'Tips for '+this.country_ctnSet+' visa application from '+this.belongCnty+', A regular visa required application required in advance.'});	
+			this.meta.updateTag({ name:'description',content:'Tips for '+this.country_ctnSet+' visa application from '+this.belongCnty+'. Citizens of the '+this.belongCnty+' must obtain a visa in advance. You have to apply for a visa through a '+this.country_ctnSet+' diplomatic mission or one of its authorized visa agents outside '+this.country_ctnSet+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.country_ctnSet+' visa, '+this.country_ctnSet+' Visa, Apply for '+this.country_ctnSet+' Visa, '+this.country_ctnSet+' regular visa from '+this.belongCnty+', regular visa required, '+this.country_ctnSet+' visa.'});
+		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
+			this.title.setTitle( this.belongCnty+' Citizens do not required a visa to travel '+this.country_ctnSet+'. Travel Visa requirements');
+			this.meta.updateTag({ name:'title',content: this.belongCnty+' Citizens do not required a visa to travel '+this.country_ctnSet+'. Travel Visa requirements'});	
+			this.meta.updateTag({ name:'description',content: this.belongCnty+' Citizens do not required a visa to travel '+this.country_ctnSet+'. No Visa visa required to travel to '+this.country_ctnSet+'.'});
+			this.meta.updateTag({ name:'keywords',content: this.belongCnty+' Citizens travel '+this.country_ctnSet+'. '+this.belongCnty+' Citizens visa for '+this.country_ctnSet+', visa for '+this.country_ctnSet+', '+this.country_ctnSet+' visa.'});	
+		}else{
+			this.title.setTitle('Tips for '+this.country_ctnSet+' e-visa application from '+this.belongCnty+', A e-visa required required in advance.');
+			this.meta.updateTag({ name:'title',content:'Tips for '+this.country_ctnSet+' e-visa application from '+this.belongCnty+', A e-visa required required in advance.'});	
+			this.meta.updateTag({ name:'description',content:'Tips for '+this.country_ctnSet+' e-visa application from '+this.belongCnty+'. Citizens of the '+this.belongCnty+' must obtain a visa in advance. You have to apply online or through a '+this.country_ctnSet+' diplomatic mission.'});
+			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.country_ctnSet+' e-visa application, '+this.country_ctnSet+' e-Visa, Apply for '+this.country_ctnSet+' e-Visa, '+this.country_ctnSet+' e-visa from '+this.belongCnty+', '+this.country_ctnSet+' visa.'});
+		}
 	}
 
 }

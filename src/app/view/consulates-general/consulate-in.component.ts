@@ -156,6 +156,10 @@ export class ConsulateInComponent implements OnInit {
 					}
 				}else if(data.status == 'ERROR'){
 					this.ngProgress.done();
+					this.inCountrySlugName = this.country_name_name[0];
+					this.ofCountrySlugName = this.country_name_name[1];
+					this.of_name = this.country_name_name[0];
+					this.in_name = this.country_name_name[1];
 					this.pade_error_show = true;
 				}else{
 					//do nothing

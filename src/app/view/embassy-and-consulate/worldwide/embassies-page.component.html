@@ -17,7 +17,7 @@
                             <form>
                                 <!-- <div class="req_select">
                                     <img *ngIf="loaderShow_first" class="loader_first" src="assets/images/loading_apple.gif"> -->
-                                <select name="shape_id" (change)="changeShapeOne($event.target)" class="enable_white">
+                                <select name="shape_id1" (change)="changeShapeOne($event.target)" class="enable_white">
                                     <option style="display: none;">Choose Country</option>
                                     <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name">{{list.name}}</option>
                                     <option disabled >-----------</option>

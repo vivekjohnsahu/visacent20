@@ -2518,7 +2518,7 @@ ul.faq_ul ol li
     }
     .table_order td.bbbb
     {
-        display:none;
+        /*display:none;*/
     }
     .table_order tr td:before
     {
@@ -2549,7 +2549,7 @@ ul.faq_ul ol li
     }
     .table_order tr td:nth-child(6):before
     {
-        content:"Review";
+        content:"Visa Type";
     }
     .table_order tr td:nth-child(7):before
     {

@@ -1920,6 +1920,7 @@ export class OrderSummaryComponent implements OnInit {
 		this.orderSummaryService.submitDocFin(keyImg).subscribe(
 			data =>{
 				if(data.status == "SUCCESS"){
+					document.body.scrollTop = document.documentElement.scrollTop = 0;
 					this.process = false;
 					this.is_document='1';
 					this.is_all_docuemnt=0;

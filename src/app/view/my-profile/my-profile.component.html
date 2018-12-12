@@ -283,11 +283,9 @@
                             </div>   
                         </div>
                     <div class="col-md-12">
-                        <div  class="col-md-12" style="padding:0px;position: relative;left: 15px" *ngIf="!(order1.payment_status=='pending' && order1.is_info_complete=='1') && !(order1.payment_status=='done')">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <strong class="left_label">Please fill application details and make payment for further process</strong>
-                                </div>
+                        <div *ngIf="!(order1.payment_status=='pending' && order1.is_info_complete=='1') && !(order1.payment_status=='done')">
+                            <div>
+                                <p><i class="fas fa-hand-point-right"></i> Please fill application details and make payment for further process</p>
                             </div>
                         </div>
                         <div class="row">

@@ -3,6 +3,7 @@ import { NgProgress } from 'ngx-progressbar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsService } from '../../services/news/news.service';
 import * as $ from 'jquery';
+import { Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news-detail',
@@ -17,6 +18,8 @@ export class NewsDetailComponent implements OnInit {
 		private router : ActivatedRoute,
 		private routers : Router,
 		private newsService:NewsService,
+		private meta: Meta,
+		private title:Title
 	) { }
 
 	Error_page:boolean;
@@ -47,6 +50,10 @@ export class NewsDetailComponent implements OnInit {
 					if(data.status == 'SUCCESS'){
 						this.ngProgress.done();
 						this.newsData = data.news;
+						this.title.setTitle(this.newsData.title);
+						this.meta.updateTag({ name:'title',content:this.newsData.title});	
+						this.meta.updateTag({ name:'description',content:this.newsData.title});
+						this.meta.updateTag({ name:'keywords',content: 'visa news, visa services, online visa news, check lates updated about visas, online news about visa, get online visa, online news, application of visa'});
 						this.newsData = new Array(this.newsData);
 						this.realted = data.news_list;
 						this.pageHide = true;
