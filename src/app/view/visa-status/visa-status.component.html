@@ -124,11 +124,26 @@
             </div>
             <div class="st_row" style="border-bottom: none;">
                 <div class="st_col">Visa Status</div>
-                <div class="st_col" style="text-transform:uppercase;color: #3dce2d;">{{apli.visa_status}}</div>
-                
-                <!-- <div class="st_col" *ngIf="apli.visa_status=='pending'" style="text-transform:uppercase;color: red;">{{apli.visa_status}}</div>
-                <div class="st_col" *ngIf="apli.visa_status==SUCCESS" style="text-transform:uppercase;color: #3dce2d;">{{apli.visa_status}}</div> -->
-            
+                <div class="st_col" *ngIf="apli.visa_status=='pending'" style="color: red;text-align: right;">{{apli.visa_status}}</div>                
+                <div class="st_col" *ngIf="apli.visa_status=='success'" style="color: #3dce2d;text-align: right;">{{apli.visa_status}}</div>
+                <span (click)="imageView()" style="color: orange;cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==undefined || appli_visa==null || appli_visa.type=='JPG' || appli_visa==null || appli_visa.type=='jpeg' || appli_visa.type==undefined)">View Visa</span>
+                <span (click)="pdfView()" style="color: orange;cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==undefined || appli_visa==null || appli_visa.type=='pdf' || appli_visa.type==undefined)">View Visa</span>
+            </div>
+            <div class="container">
+                <button type="button" class="btn btn-info btn-lg hidden" id="popupImage" data-toggle="modal" data-target="#popupImg">Open Modal</button>
+                <div class="modal fade" id="popupImg" role="dialog">
+                    <div class="modal-dialog pdf" >
+                        <div class="modal-content" style="text-align: center">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div *ngIf="!imageDownload" class="modal_body" style="padding-left: 15px; padding-right: 15px;height: 450px;"></div>
+                            <a *ngIf="imageDownload" href={{appli_visa.visas}} download class="">Download
+                                <div class="modal_body" style="padding-left: 15px; padding-right: 15px;"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </article>
     </div>

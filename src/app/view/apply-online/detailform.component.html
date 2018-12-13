@@ -399,7 +399,7 @@
                                                     <div class="label_container">
                                                         <p><strong>Visa Price</strong>
                                                             <br />USD <span id="visa_cost_id{{i}}">{{visa_cost}}</span></p>
-                                                        <a title="Payment Guidlines" (click)="smallWindo()">Read important instructions</a>
+                                                        <a title="Payment Guidlines" data-toggle="modal" data-target="#Important">Read important instructions</a>
                                                         <!-- id="smallWindo" -->
                                                         <!--  -->
                                                     </div>
@@ -516,7 +516,9 @@
                                 </select>
                             </div> -->
                             <div class="second">
-                                <h4 style="margin-top: 7px;font-size: 26px;">{{priceSighn}}USD {{total_cost}}</h4>
+                                <h4 style="margin-top: 7px;font-size: 26px;">
+                                    <!-- {{priceSighn}} -->
+                                    USD {{total_cost}}</h4>
                             </div>
                         </div>
                         <div class="second">
@@ -542,7 +544,7 @@
         </div>
     </section>
     <div class="container">
-        <button type="button" class="btn btn-info btn-lg hidden" id="readImportant" data-toggle="modal" data-target="#Important"></button>
+       
         <div class="modal fade" id="Important" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content mediaCls">
@@ -584,7 +586,7 @@
                         </section>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                        <button type="button" class="my_btn width_auto my_btn_red" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -593,16 +595,19 @@
     <div class="container">
         <button type="button" class="btn btn-info btn-lg hidden" id="removeAppli" data-toggle="modal" data-target="#removeUser"></button>
         <div class="modal fade" id="removeUser" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content mediaCls" style="position: initial;;width: 100%;">
+            <div class="modal-dialog delete_popup">
+                <div class="modal-content mediaCls">
                     <div class="modal-header">
                         <button style="color: red;font-size: 32px;" type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" style="text-align: center;text-align: center;font-size: 20px;color: orange;">Alert</h4>
+                        <h3 class="modal-title">Delete An Applicant!</h3>
                     </div>
-                    <p style="position: relative;text-align: center;">Delete this User information</p>
+                    <p style="text-align: center;
+    padding: 17px 0px;
+    margin-bottom: 0px;">Do you want to delete this applicant?</p>
                     <div class="modal-footer" style="text-align: center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" id="delete_cnt_apli">Ok</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                        <button type="button" style="margin-right:10px;" class="my_btn my_btn_red" data-dismiss="modal" id="delete_cnt_apli">Delete</button>
+                        
+                        <button type="button" class="my_btn" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -611,17 +616,20 @@
     <div class="container">
         <button type="button" class="btn btn-info btn-lg hidden" id="emailVerifiedU" data-toggle="modal" data-target="#VerifiedU">Open Modal</button>
         <div class="modal fade" id="VerifiedU" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog login_popup">
                 <div class="modal-content">
-                    <div class="modal-body" >
-                        <div class="row" class="emailPage">
+                    <div class="modal-header" style="border-bottom:none;">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" style="padding-top:0px;">
+                        <div class="row emailPage">
                             <div class="col-lg-12">
-                                <div class="login_div">
+                                <div class="login_div" style="width:70%;">
                                     <h1 class="user_icon" style="text-align: center;">
                                         <i class="fas fa-user"></i>
                                         <i class="fas fa-key key"></i>
                                     </h1>
-                                    <h2 class="text-center" style="margin: 15px 0px 20px 0px;">Login to your account</h2>
+                                    <h3 class="text-center" style="margin: 15px 0px 20px 0px;">Login to your account</h3>
                                     <article>
                                         <span *ngIf="login_msg_sus" style="color: red">{{login_msg}}</span>
                                     </article>
@@ -648,10 +656,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div>
                                                     <button type="submit" class="my_btn" style="background-color: #055ea5;" (click)="loginUser()">Login</button>
                                                     <a class="forgot" (click)="forgot()" >Forgot Password <i class="fas fa-question-circle"></i></a>
-                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -705,9 +711,6 @@
                                 </svg>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer" style="text-align: center;">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="popup_login_hide">Close</button>
                     </div>
                 </div>
             </div>

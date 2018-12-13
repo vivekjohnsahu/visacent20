@@ -755,6 +755,7 @@ export class DetailformComponent implements OnInit  {
 				// this.submit_btn_hide  = true;
 				// this.chek_msg = true;
 				// this.addUser_btn = true;
+				this.process = true;
 				this.submitForm()
 		    }
 		}
@@ -825,14 +826,14 @@ export class DetailformComponent implements OnInit  {
 			currencyCounty:this.priceSighn,
 			processing:this.processing,
 			visa_cost:this.visa_cost,
-			total_cost:this.total_cost,
+			total_cost:this.total_cost.toFixed(2),
 			visa_for_country:this.to_countryId,
 			refferal:this.refferalCurrentUrl
 		}
 
 		if(btn=='final')
 		{
-         	this.process = true;
+         	// this.process = true;
 			this.chek_msg = false;
 			this.modify_btn = false;
 			this.modify_btnTwo = false;

@@ -91,6 +91,11 @@ export class MyProfileComponent implements OnInit {
 	indiaevisa_referral:any;
 	pending_amount:any;
 	total_page_bonus_:any;
+	textCopyCompleteCent:boolean;
+	textCopyCompleteIndia:boolean;
+	orders:any;
+	imageDownload:boolean;
+	image_Path:any;
 	
 	constructor(
 		private router : ActivatedRoute,
@@ -157,6 +162,7 @@ export class MyProfileComponent implements OnInit {
 						this.refferal = data.user.refferal;
 						this.indiaevisa_referral = data.user.indiaevisa_referral
 						this.total_bonus = data.user.total_bonus;
+						this.orders = data.orders
 						if(data.orders!=="No visa application found."){
 							this.orders_user = data.orders;
 							this.UserOrders_user=new Array;
@@ -468,38 +474,6 @@ userDas(){
 		this.radioValue=vls
 	}
 
-	// printdock(i,j,t,data){
-	// 	if(t=='pdf'){
-	// 		var winparams = 'dependent=yes,locationbar=no,scrollbars=yes,menubar=yes,'+'resizable,screenX=50,screenY=50,width=850,height=1050';
-	// 		var htmlPop = '<embed width=100% height=100%'+ ' type="application/pdf"'+ ' src="'+ (data)+ '"></embed>'; 
-	// 		var newWin=window.open('','Print-Window');
-	// 		newWin.document.open();
-	// 		newWin.document.write('<html><body>'+htmlPop+'</body></html>');
-	// 		newWin.document.close();
-	// 		setTimeout(function(){newWin.print();},10);
-	// 		console.log(111111)	
-	// 	}
-	// 	else{	
-	// 		var divToPrint=document.getElementById('visa_'+i+'_'+j);	
-	// 		var newWin=window.open('','Print-Window');
-	// 		newWin.document.open();
-	// 		var htmlPop ='<img src="'+data+'">';
-	// 		console.log(htmlPop)	
-	// 		newWin.document.write('<html><body onload="window.print()">'+htmlPop+'</body></html>');
-	// 		newWin.document.close();
-	// 		setTimeout(function(){newWin.close();},10);	
-	// 		console.log(222222)	
-	// 	}
-	// }
-
-	// downloadPDF(pri) {
-	// 	console.log(pri)
-	// 	var pdf = pri
-	// 	var dlnk = document.getElementById('dwnldLnk');
-	// 	dlnk.href = pdf;
-	// 	dlnk.click();
-	// }
-
 	delete(i,orderId){
 		var cmt = this
 		$('#removeAppli').trigger('click');
@@ -556,8 +530,7 @@ userDas(){
 		}
 	}
 
-	textCopyCompleteCent:boolean;
-	textCopyCompleteIndia:boolean;
+	
 	copyToClipboard(element) {
 		var $temp = $("<input>");
 		$("body").append($temp);
@@ -608,6 +581,23 @@ userDas(){
 				}
 			)
 		})
+	}
+	
+	imageView(){
+		this.imageDownload = true;
+		this.image_Path = this.orders[1].applicants[0].visas;
+		setTimeout(() => {
+			$(".modal_body").html("<img src='"+this.orders[1].applicants[0].visas+"' class='img-responsive' style='width:auto;margin:20px auto;'>");
+			$('#popupImage').trigger('click');
+		}, 500);	
+	}
+
+	pdfView(){
+		this.imageDownload = false;
+		setTimeout(() => {
+			$(".modal_body").html('<object style="width:100%;height:90%;" data="'+this.orders[0].applicants[0].visas+'" type="application/pdf"><embed src="'+this.orders[0].applicants[0].visas+'" type="application/pdf"/></object>');
+			$('#popupImage').trigger('click');
+		}, 500);
 	}
 	
 }

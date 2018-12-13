@@ -336,26 +336,11 @@
                                             {{apli.total_fee}}
                                             <span class="ap_mg" style="text-transform: capitalize;">
                                                 <strong>{{apli.visa_status}}</strong><br />
-                                                <!-- <a id='dwnldLnk'  > -->
-                                                    <a title="Download your application" href={{apli.visas}} *ngIf="apli.visa_status=='success'" download={{apli.visas}}  style="color:orange;cursor:pointer;">Download Visa</a>
-                                                <!-- </a> -->
-                                                
-                                                
-                                                  <!-- <a id='dwnldLnk' download='{{apli.visas}}' style="display:none;"></a> 
-                                                <a title="Download your application" href="javascript:void(0)" *ngIf="apli.visa_status=='success'" (click)="downloadPDF(apli.visas)" style="color:orange;cursor:pointer;">Download Visa</a>
-                                                  -->
-                                                
-                                                
-                                                <!-- <span *ngIf="apli.visa_status=='success'" (click)="printdock(i,j,apli.type,apli.visas)" style="color:orange;cursor:pointer;">Print Visa</span> -->
-                                            </span>                                            
-                                            <!-- <div [hidden]="!visasPrint" id="visa_{{i}}_{{j}}">
-                                                    <img src="{{apli.visas}}" *ngIf="apli.type!='pdf'">
-                                                    <object style="width:500px;height:500px;" *ngIf="apli.type=='pdf'" data="{{apli.visas}}" type="application/pdf">
-                                                    <embed src="{{apli.visas}}" type="application/pdf"/></object>
-                                                    <input type="hidden" id="inp" value="{{apli.visas}}">
-                                                </div> -->
+                                                <span (click)="imageView()" style="color:red;cursor: pointer;position: relative;" *ngIf="(apli.visas==undefined || apli.visas==null || apli.type=='JPG' || apli.visas==null || apli.type=='jpeg' || apli.type==undefined)">View Visa</span>
+                                                <span (click)="pdfView()" style="color:orange;cursor: pointer;position: relative;" *ngIf="(apli.visas==undefined || apli.visas==null || apli.type=='pdf' || apli.type==undefined)">View Visa</span>
+                                           </span>                                      
                                         </td>
-                                        <td>{{apli.visa_type}}</td>
+                                    <td>{{apli.visa_type}}</td>
                                         <!-- <td [hidden]="!(order1.payment_status=='done')" class="bbbb">
                                             <button (click)="amountPay(i,j)" class="my_btn my_btn_submit width_auto" style="padding-top: 6px;padding-bottom: 6px;">Detail <i class="fas fa-info-circle"></i></button>
                                         </td> -->
@@ -376,6 +361,23 @@
                         <li><i class="far fa-hand-point-right"></i> Please use a good quality A4 paper and do not fold more than once for smoother verification process upon your arrival.</li>
                     </ul>
                 </div>
+                <div class="container">
+                        <button type="button" class="btn btn-info btn-lg hidden" id="popupImage" data-toggle="modal" data-target="#popupImg">Open Modal</button>
+                        <div class="modal fade" id="popupImg" role="dialog">
+                            <div class="modal-dialog pdf" >
+                                <div class="modal-content" style="text-align: center">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div *ngIf="!imageDownload" class="modal_body" style="padding-left: 15px; padding-right: 15px;height: 450px;"></div>
+                                    <a *ngIf="imageDownload" href={{image_Path}} download class="">
+                                        <div class="modal_body" style="padding-left: 15px; padding-right: 15px;"></div>
+                                        Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>      
             </div>
             <div class="form_wrapper" [hidden]="!my_profile">
                 <form class="update_profile">

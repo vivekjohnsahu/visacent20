@@ -206,10 +206,12 @@ export class VisaTipsComponent implements OnInit {
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
-						this.metaTags()
 						this.tableViasaToggle = true;
 						this.of_country_name = data.to_country_name;
 						this.from_country_name = data.from_country_name;
+						this.country_ctnSet = this.of_country_name;
+						this.belongCnty = this.from_country_name;
+						this.metaTags()
 						this.visa_flag = data.country_flag;
 						if(this.visaApplyTbl[0].visa_type!= 0){
 							this.con_visa_req_sec = false;

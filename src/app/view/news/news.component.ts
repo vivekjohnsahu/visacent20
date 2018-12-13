@@ -46,9 +46,9 @@ import { Meta, Title} from '@angular/platform-browser';
 					this.ngProgress.done();
 					this.newsList = data.news_list;
 					this.pageHide = true;
-					this.title.setTitle(this.newsList[0].title);
-					this.meta.updateTag({ name:'title',content:this.newsList[0].title});	
-					this.meta.updateTag({ name:'description',content:this.newsList[0].title});
+					this.title.setTitle('Check Latest Updated About Visas | Online Visa News');
+					this.meta.updateTag({ name:'title',content:'Check Latest Updated About Visas | Online Visa News'});	
+					this.meta.updateTag({ name:'description',content:'Read latest news about visa related from this platform, we provide latest and updated news about visa related and also provide visa services of any country.'});
 					this.meta.updateTag({ name:'keywords',content: 'visa news, visa services, online visa news, check lates updated about visas, online news about visa, get online visa, online news, application of visa'});
 					this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
 					this.currentPage = 1;
@@ -80,8 +80,6 @@ import { Meta, Title} from '@angular/platform-browser';
 		}
 		this.startIndex = (this.currentPage-1)*this.pageSize;
 		this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
-		this.title.setTitle(this.current_product[0].title);
-		this.meta.updateTag({ name:'title',content:this.current_product[0].title});
 	}
 
 	nextPage(){
@@ -93,8 +91,6 @@ import { Meta, Title} from '@angular/platform-browser';
 		}
 		this.startIndex = (this.currentPage-1)*this.pageSize;
 		this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
-		this.title.setTitle(this.current_product[0].title);
-		this.meta.updateTag({ name:'title',content:this.current_product[0].title});
 	}
 
 	setPage(index : number){
@@ -102,8 +98,6 @@ import { Meta, Title} from '@angular/platform-browser';
 		this.currentPage = index;
 		this.startIndex = (this.currentPage-1)*this.pageSize;
 		this.current_product = this.newsList.slice(this.startIndex,this.startIndex+this.pageSize);
-		this.title.setTitle(this.current_product[0].title);
-		this.meta.updateTag({ name:'title',content:this.current_product[0].title});
 	  }
 
 }

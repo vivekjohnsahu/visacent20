@@ -1,4 +1,4 @@
---------------- start global css ---------------------*/
+/*--------------- start global css ---------------------*/
 body
 {
 	font-family: 'Lato', sans-serif;
@@ -119,6 +119,28 @@ button
     margin-right:auto;
     z-index: 5;
 }
+.modal-content
+{
+	border-radius: 0px;
+}
+
+/*-------------------- start bootstrap modal ------------*/
+.modal-dialog 
+{
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-header
+{
+	text-align: center;
+}
+/*-------------------- end bootstrap modal ------------*/
+
+
+
+
+
 /*--------------- end global css ---------------------*/
 
 .my_btn
@@ -1617,6 +1639,8 @@ textarea
 	opacity: 0;
 	text-align: center;
 }
+
+
 /*------------------------- end details  -----------------*/
 
 
@@ -1720,6 +1744,10 @@ ul.faq_ul ol li
     display: block;
     margin-bottom: 15px;
 }
+.info_container>a>img
+{
+    width:100%;
+}
 .info_container>a>span
 {
     margin: 10px 0px 5px 0px;
@@ -1747,6 +1775,8 @@ ul.faq_ul ol li
 .info_container>a>p+a
 {
     font-size:17px;
+    display: inline-block;
+    margin-top:15px;
 	}
 .right_main_div
 {
@@ -3084,6 +3114,12 @@ ul.faq_ul ol li
         line-height: 70px;
         font-size: 37px;
     }
+/*-------------------- start bootstrap modal ------------*/
+	.modal-dialog 
+	{
+	    width: 750px;
+	}
+/*-------------------- end bootstrap modal ------------*/
 }
 @media (max-width:1250px)
 {
@@ -3293,6 +3329,12 @@ ul.faq_ul ol li
     {
         width:80%;
     }
+    /*-------------------- start bootstrap modal ------------*/
+	.modal-dialog 
+	{
+	    width: 80%;
+	}
+	/*-------------------- end bootstrap modal ------------*/
 }
 @media (max-width:768px)
 {
@@ -3754,6 +3796,10 @@ ul.faq_ul ol li
     {
         width:100%;
     }
+    .modal-dialog 
+	{
+	    width: 95%;
+	}
 }
 @media (min-width: 450px) and (max-width:768px)
 {

@@ -1690,6 +1690,7 @@ export class OrderSummaryComponent implements OnInit {
 		$('#submit_modal_btn').trigger('click');
 		$("#submit_modal_btn_payPage").off( "click" );
 		$('#submit_modal_btn_payPage').click(function(){
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
 		cmt.appliCantInfo()	
 		})
 	}
@@ -1945,8 +1946,7 @@ export class OrderSummaryComponent implements OnInit {
 								indx++;
 							})
 							if(flg!=0){
-								// alert('2')
-								// this.routers.navigate(["payment",this.currentIdUrl]);
+								this.routers.navigate(["payment",this.currentIdUrl]);
 							}
 					}
 					$('#document_sus_msg').html('Documents Success Upload').css('color','green').show();

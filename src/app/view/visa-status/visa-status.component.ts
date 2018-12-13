@@ -22,6 +22,9 @@ export class VisaStatusComponent implements OnInit {
 	process:boolean;
 	cntryList:any;
 	is_login_user
+	appli_visa:any;
+	imageData: any;
+	imageDownload:boolean;
 
 	constructor(
 		private visaStatusService:VisaStatusService,
@@ -67,6 +70,7 @@ export class VisaStatusComponent implements OnInit {
 					this.formPage = true;
 					this.process = false;
 					this.applicationData = data.applicant_data;
+					this.appli_visa = data.appli_visa;
 					this.applicationData =new Array(this.applicationData)
 					this.applicationData = this.applicationData[0]
 					this.order_detail_data = data.order_detail;
@@ -101,4 +105,20 @@ export class VisaStatusComponent implements OnInit {
 		this.StutasError = false;
 	}
 
+	imageView(){	
+		this.imageDownload = true;
+		setTimeout(() => {
+			$(".modal_body").html("<img src='"+this.appli_visa.visas+"' class='img-responsive' style='width:auto;margin:20px auto;'>");
+			$('#popupImage').trigger('click');
+		}, 500);
+	}
+
+	pdfView(){
+		this.imageDownload = false;
+		setTimeout(() => {
+			$(".modal_body").html('<object style="width:100%;height:90%;" data="'+this.appli_visa.visas+'" type="application/pdf"><embed src="'+this.appli_visa.visas+'" type="application/pdf"/></object>');
+			$('#popupImage').trigger('click');	
+		}, 500);
+	}
+	
 }

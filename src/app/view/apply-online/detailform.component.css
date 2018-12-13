@@ -71,21 +71,25 @@
     } 
 }
 
-.btn_right_error{
+.btn_right_error
+{
     color: red;
     position: relative;
     right: 239px;
     top: 30px;
 }
-.disabledbutton {
+.disabledbutton 
+{
     pointer-events: none;
     background: #ebebe5;
     border: 1px solid #bdbdbd;
 }
-.disabledbutton label {
+.disabledbutton label 
+{
     opacity: .75;
 }
-.chek_alert{
+.chek_alert
+{
     position: absolute;
     left: 566px;
     top: 21px;
@@ -156,30 +160,8 @@
     transform:scale(1.2,1.2);
     transition-duration: .2s;
 }
-@media (max-width:1400px){
-    .mediaCls {
-        width: 180%;
-        right: 38%;
-    }
-}
-@media (max-width: 1200px) {
-    .mediaCls {
-        width: 142%;
-        right: 21%;
-    }
-}
-@media (max-width: 900px) {
-    .mediaCls {
-        width: 112%;
-        right: 7%;
-    }
-}
-@media (max-width: 768px) {
-    .mediaCls {
-        width: 94%;
-        right: -3%;
-    }
-}
+
+
 @media (min-width: 1200px)
 {
     .faq_div {
@@ -220,3 +202,77 @@
     font-family: 'Hammersmith One';
     margin-top: 6px;
 }
+
+
+/*------------------ start delete popup -------------------*/
+.login_div{
+    width: 70%;
+}
+.delete_popup
+{
+    width:600px;
+}
+.login_popup
+{
+    width:700px;
+}
+@media (max-width: 1400px)
+{
+    .modal-dialog 
+    {
+        
+    }
+}
+@media (max-width: 768px)
+{
+    .modal-dialog 
+    {
+        
+    }
+}
+@media (max-width: 670px)
+{
+    .delete_popup
+    {
+        width:95%;
+    }
+}
+
+/*------------------ end delete popup -------------------*/
+
+
+
+/*----------------------- start login popup ---------------*/
+.user_icon
+{
+    text-align: center;
+    display: block;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    line-height: 80px;
+    border-radius: 50%;
+    border: 2px solid #005ea5;
+    font-size: 36px;
+    position: relative;
+}
+.user_icon .key 
+{
+    position: absolute;
+    font-size: 12px;
+    color: #29e1d0;
+    background: #fff;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 50%;
+}
+.login_div 
+{
+    width:100%;
+    padding-top:0px;
+    padding-top: 0px;
+    padding-bottom: 50px;
+}
+/*---------------- end login popup----------------------*/
