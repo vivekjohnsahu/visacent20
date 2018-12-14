@@ -71,3 +71,6 @@
 .borderCls{
     border: 1px solid red;
 }
+agm-map {
+    height: 300px;
+  }

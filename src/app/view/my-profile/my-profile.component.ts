@@ -96,6 +96,7 @@ export class MyProfileComponent implements OnInit {
 	orders:any;
 	imageDownload:boolean;
 	image_Path:any;
+	userName:any;
 	
 	constructor(
 		private router : ActivatedRoute,
@@ -583,19 +584,20 @@ userDas(){
 		})
 	}
 	
-	imageView(){
+	imageView(i,j,name){
 		this.imageDownload = true;
-		this.image_Path = this.orders[1].applicants[0].visas;
+		this.userName = name
+		this.image_Path = this.orders[i].applicants[j].visas;
 		setTimeout(() => {
-			$(".modal_body").html("<img src='"+this.orders[1].applicants[0].visas+"' class='img-responsive' style='width:auto;margin:20px auto;'>");
+			$(".modal_body").html("<img src='"+this.orders[i].applicants[j].visas+"' class='img-responsive' style='width:auto;margin:20px auto;'>");
 			$('#popupImage').trigger('click');
 		}, 500);	
 	}
 
-	pdfView(){
+	pdfView(i,j,name){
 		this.imageDownload = false;
 		setTimeout(() => {
-			$(".modal_body").html('<object style="width:100%;height:90%;" data="'+this.orders[0].applicants[0].visas+'" type="application/pdf"><embed src="'+this.orders[0].applicants[0].visas+'" type="application/pdf"/></object>');
+			$(".modal_body").html('<object style="width:100%;height:90%;" data="'+this.orders[i].applicants[j].visas+'" type="application/pdf"><embed src="'+this.orders[i].applicants[j].visas+'" type="application/pdf"/></object>');
 			$('#popupImage').trigger('click');
 		}, 500);
 	}

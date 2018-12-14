@@ -2285,14 +2285,15 @@ ul.faq_ul ol li
 .bonus_summary
 {
 	text-align: center;
-    background: #edeff1;
+    //background: #edeff1;
+    border-right: 1px solid #acabb5;
     padding: 15px 0px;
     margin-bottom: 15px;
 }
 .bonus_summary .bonus_icon
 {
 	color: #acacac;
-    background: #ffffff;
+    background: #edeff1;
     width: 100px;
     height: 100px;
     margin: 0 auto;
@@ -3520,6 +3521,15 @@ ul.faq_ul ol li
     {
         width:400px;
     }
+    .bonus_summary
+	{
+	    background: #edeff1;
+	    border-right: none;
+	}
+	.bonus_summary .bonus_icon
+	{
+	    background: white;
+	}
 }
 @media (max-width:758px)
 {
@@ -3533,7 +3543,6 @@ ul.faq_ul ol li
         margin-left: auto;
         margin-right: auto;
     }
-
 }
 @media (max-width: 700px)
 {

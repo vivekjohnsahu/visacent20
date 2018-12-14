@@ -996,8 +996,8 @@
                         <p style="text-align: center;">You have not submitted information for this applicant. Information may be lost if you do not save infomation. Do you want to continue?</p>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="cnt_apli">Continue</button>
+                        <button type="button" class="my_btn" data-dismiss="modal" style="margin-right:10px;">Cancel</button>
+                        <button type="button" class="my_btn my_btn_red" data-dismiss="modal" id="cnt_apli">Continue</button>
                     </div>
                 </div>
             </div>
@@ -1010,7 +1010,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" style="color: orange; text-align: center;font-size: 20px;">Alert</h4>
+                        <h3>Alert</h3>
                     </div>
                     <div class="modal-body">
                         <p _ngcontent-c3="" style="text-align: center;">You will not be able to change information of this applicant once finally submitted.
@@ -1018,7 +1018,7 @@
                                 <p style="text-align: center;">You can check visa status from Visa Status option of website using Application ID and applicant’s passport.</p>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" id="submit_modal_btn_payPage">Ok</button>
+                        <button type="button" class="my_btn" data-dismiss="modal" id="submit_modal_btn_payPage">Proceed</button>
                         <!-- <button type="button" class="btn btn-danger" data-dismiss="modal" id="submit_cnt_apli">Continue</button> -->
                     </div>
                 </div>
@@ -1032,13 +1032,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title" style="color: orange; text-align: center">Alert</h4>
+                        <h3>Alert</h3>
                     </div>
                     <div class="modal-body">
                         <p style="text-align: center;">{{fileSizeAndExt}}</p>
                     </div>
                     <div class="modal-footer" style="text-align: center">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="my_btn" data-dismiss="modal">Ok</button>
                     </div>
                 </div>
             </div>
@@ -1080,12 +1080,14 @@
     </div>
     <div class="container">
             <button type="button" class="btn btn-info btn-lg hidden" id="specificationsOpen" data-toggle="modal" data-target="#specificationsPopup">Open Modal</button>
-            <div class="modal fade" id="specificationsPopup" role="dialog">
+            <div class="modal fade " id="specificationsPopup" role="dialog" >
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title" style="color: black; text-align: center; font-size: 20px">Guidlines For {{specifiName}}</h4>
+                        </div>
+                        <div class="modal-dialog">
                              <div class="photo_guidline" id="SpecificationsPhoto">
                                 <ul>
                                     <li><i class="fas fa-chevron-right"></i> Without border.</li>

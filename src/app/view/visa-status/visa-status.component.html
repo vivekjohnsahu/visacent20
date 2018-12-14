@@ -138,8 +138,9 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div *ngIf="!imageDownload" class="modal_body" style="padding-left: 15px; padding-right: 15px;height: 450px;"></div>
-                            <a *ngIf="imageDownload" href={{appli_visa.visas}} download class="">Download
+                            <a *ngIf="imageDownload" href={{appli_visa.visas}} download="{{apli.givenname}}/visa" class="">
                                 <div class="modal_body" style="padding-left: 15px; padding-right: 15px;"></div>
+                                Download
                             </a>
                         </div>
                     </div>

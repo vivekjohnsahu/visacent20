@@ -106,9 +106,9 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="map detail_map">
+                            <div class="map detail_map" id="emb_map">
                                 <!-- "https://www.google.com/maps/embed/v1/place?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=Space+Needle,Seattle+WA" -->
-                                <iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
+                                <!-- <iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe> -->
                             </div>
                             <p ><span style="color:red;">*</span> It might case this information is no longer correct, please help us to<a title="Update Information" id="rep_pop" (click)="popup_Hide_msg()">&nbsp;Update Embassy Information.
                                 </a> 
@@ -200,8 +200,11 @@
                     </article>
                 </div>
                 <div class="emb_location_div" >
-                    <div class="map">
-                        <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
+                   
+                    <div class="map" id="emb_map__div_{{multi.id}}">
+                         
+                            <!-- <p class="e2e-inner-html-bound" [innerHTML]="url"></p> -->
+                        <!-- <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q={{url}}&output=embed"></iframe> -->
                     </div>
                 </div>
             </div>
@@ -260,7 +263,8 @@
                     </div>
                     <div class="emb_location_div" >
                         <div class="map">
-                            <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
+                          
+                            <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q={{map}}&output=embed"></iframe>
                         </div>
                     </div>
                 </div>

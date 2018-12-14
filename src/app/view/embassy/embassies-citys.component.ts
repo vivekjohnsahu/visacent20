@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import { NgProgress } from 'ngx-progressbar';
 import { UpdateAddressService } from '../../services/update_address/update-address.service';
 import { Meta, Title} from '@angular/platform-browser';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-embassies-citys',
@@ -85,6 +86,8 @@ export class EmbassiesCitysComponent implements OnInit {
 	EmbassyAd:any;
 	of_country:any;
 	homescroolId="Most-Sought-Visas";
+	map:any;
+	url:any;
 
 	constructor( 
 		private embassiesCityDetailsService:EmbassiesCityDetailsService,
@@ -93,7 +96,8 @@ export class EmbassiesCitysComponent implements OnInit {
 		public ngProgress: NgProgress,
 		private updateAddressService:UpdateAddressService,
 		private meta: Meta,
-		private title:Title
+		private title:Title,
+		private sanitizer: DomSanitizer
 
 	) { }
 
@@ -156,10 +160,32 @@ export class EmbassiesCitysComponent implements OnInit {
 						this.of_country_slug_name = this.countydetails.of_country_slug_name;
 						this.of_country=this.countydetails.of_country
 						let lenght=this.multiCountry.length+1;
+						this.map = data.embassy_detail.maps
 						this.title.setTitle(''+this.name+', '+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.');
 						this.meta.updateTag({ name:'title',content:''+this.name+', '+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.'});
 						this.meta.updateTag({ name:'description',content:this.name+' '+this.in_cntname+', Get addresses, telephone numbers, email addresses, websites. '+this.of_country+' have '+ lenght+' embassies/high commissions in other cities of '+this.in_cntname+'.'});
 						this.meta.updateTag({ name:'keywords',content:this.name+', '+this.in_cntname+'. '+this.of_country+' Embassy in '+this.in_cntname+', '+this.of_country+' Embassy, '+this.of_country+' Embassy address in '+this.in_cntname+'. '+this.of_country+' Embassy address in '+this.in_cntname+'.'});
+
+
+						this.map = this.map=encodeURI(this.map);
+						$('#emb_map').html('<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');
+
+
+						// this.url='<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>';
+						//console.log(this.url);
+						
+						// this.url='<p>ajshdjgh</p>';
+						// if(this.map=='' || this.map==null){
+						// 	this.map=this.name;
+						// }else{
+						// 	// this.map = this.map=encodeURI(this.map)
+						// 	console.log(this.map)
+						// 	this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.map);
+						// 	this.url = this.url.changingThisBreaksApplicationSecurity
+						// 	console.log(this.url)	
+						// }
+						
+						
 
 						if(this.countydetails.in_coutnry_flag!=''){
 							this.in_coutnry_flag = this.countydetails.in_coutnry_flag; 
@@ -230,15 +256,22 @@ export class EmbassiesCitysComponent implements OnInit {
 						this.multiCountry = data.data;
 						this.consulateAd=new Array();
 						this.EmbassyAd=new Array()
-						for(i=0;this.multiCountry.length>i;i++){
-							if(data.data[i].name.indexOf("Consulate")>-1){
-								this.consulateAd.push(this.multiCountry[i])
-							}else{
-								this.EmbassyAd.push(this.multiCountry[i])
-							}	
-						}
+						
+
+
+						//console.log(this.EmbassyAd);
 
 						for(var i=0;i<this.multiCountry.length;i++){
+
+							if(this.multiCountry[i].maps=='' || this.multiCountry[i].maps==null)
+							{
+								this.multiCountry[i].maps=this.multiCountry[i].name;
+							}
+
+							//'Pakistani   High Commission  in Pretoria';
+
+							//console.log(this.multiCountry[i].maps);
+
 							if(this.multiCountry[i].Telepone!=null && $.trim(this.multiCountry[i].Telepone)!='' && $.trim(this.multiCountry[i].Telepone)!=' '){
 								this.phoneMulti = this.multiCountry[i].Telepone;
 								this.phoneM =this.phoneMulti.split('<br />');
@@ -279,6 +312,16 @@ export class EmbassiesCitysComponent implements OnInit {
 								this.multiCountry[i].lnthwebsite=0;
 							}
 						}
+
+						for(i=0;this.multiCountry.length>i;i++){
+							if(data.data[i].name.indexOf("Consulate")>-1){
+								this.consulateAd.push(this.multiCountry[i])
+							}else{
+								this.EmbassyAd.push(this.multiCountry[i])
+							}	
+						}
+
+						var ctl = this;
 						var ctrlPressed = false;
 							$(window).keydown(function(evt) {
 								if (evt.which == 17) { 
@@ -295,6 +338,8 @@ export class EmbassiesCitysComponent implements OnInit {
 									if(!ctrlPressed)
 										$("html, body").animate({ scrollTop: 10 }, 1000);
 								});
+
+								ctl.setemb_map();
 							},2000);
 					}		
 				}else if(data.status == 'ERROR'){
@@ -387,6 +432,20 @@ export class EmbassiesCitysComponent implements OnInit {
 		this.success_msg_error = false;
 		grecaptcha.reset();
 	}	
+
+	setemb_map(){
+		for(var i=0;i<this.EmbassyAd.length;i++){
+			console.log(i+'~~~'+this.EmbassyAd.length);
+			console.log(this.EmbassyAd[i].id);
+
+			var idd=this.EmbassyAd[i].id;
+
+			var rl='<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
+
+			$('#emb_map__div_'+idd).html(rl);
+		}
+
+	}
 
 }
 
