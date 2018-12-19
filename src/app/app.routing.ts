@@ -144,6 +144,14 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 				title: 'apply-e-visa'
 		}
 		},
+		
+		{
+			path: 'apply-visa-tool/:to',
+			component: ApplyEVisaComponent,
+			data: {
+				title: 'apply-e-visa'
+		}
+		},
 		{
 			path: 'visa-requirements',
 			component: ApplyEVisaComponent,
@@ -152,7 +160,21 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 		}
 		},
 		{
-			path: 'apply-e-visa/:id',
+			path: 'visa-requirements/:to',
+			component: ApplyEVisaComponent,
+			data: {
+				title: 'apply-e-visa'
+		}
+		},
+		{
+			path: 'apply-e-visa/:to/:a',
+			component: ApplyEVisaComponent,
+			data: {
+				title: 'apply-e-visa'
+		}
+		},
+		{
+			path: 'apply-e-visa/:to',
 			component: ApplyEVisaComponent,
 			data: {
 				title: 'apply-e-visa'
@@ -284,6 +306,13 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 		},
 		{
 			path: 'apply-visa/:value',
+			component: ApplyVisaComponent,
+			data: {
+				title: 'apply-visa'
+		}
+		},
+		{
+			path: 'apply-visa/:value/:a',
 			component: ApplyVisaComponent,
 			data: {
 				title: 'apply-visa'

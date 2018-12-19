@@ -84,6 +84,7 @@ export class MakePaymentComponent implements OnInit {
 			return s5() + s5();
 		}
 		this.order_id_random_paypal = guidId().toUpperCase()
+
 	}
 
 	paypalPayment(){
@@ -264,7 +265,21 @@ export class MakePaymentComponent implements OnInit {
 		}
 	}
 
-	isNumberKey(evt){
+	isNumberKey(el,evt){
+		var charCode = (evt.which) ? evt.which : evt.keyCode
+		if (charCode != 45 && charCode != 8 && (charCode != 46) && (charCode < 48 || charCode > 57))
+			return false;
+		if (charCode == 46) {
+			if ((el.amount) && (el.amount.indexOf('.') >= 0))
+				return false;
+			else
+				return true;
+		}
+		return true;
+		
+	}
+
+	NumberKey(evt){
 		var charCode = (evt.which) ? evt.which : evt.keyCode;
 		if (charCode > 31 && (charCode < 48 || charCode > 57))
 			return false;

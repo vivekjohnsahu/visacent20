@@ -138,13 +138,21 @@ export class EmbassiesPageComponent implements OnInit {
 		this.countryTwo = this.country;
 		let nationalityTwoPlaceObj = this.countryOne.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.countryTwo = $.grep(this.countryTwo, function(item){ 
-            return item.name !== nationalityTwoPlaceObj[0].name;
+			if(nationalityTwoPlaceObj.length>0){
+				return item.name !== nationalityTwoPlaceObj[0].name;
+			}else{
+				return item.name;
+			}
 		});
 		this.clickBox()
 		this.topCntryTwo = this.topFiveCNtry;
 		let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-            return item.name !== nationalityTopTwoPlaceObj[0].name;
+			if(nationalityTopTwoPlaceObj.length>0){
+				return item.name !== nationalityTopTwoPlaceObj[0].name;
+			}else{
+				return item.name;
+			}
         });
 		this.clickBox()
 	}
@@ -154,13 +162,21 @@ export class EmbassiesPageComponent implements OnInit {
 		this.countryOne = this.country;
 		let nationalityOnePlaceObj = this.countryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.countryOne = $.grep(this.countryOne, function(item){ 
-            return item.name !== nationalityOnePlaceObj[0].name;
+			if(nationalityOnePlaceObj.length>0){
+				return item.name !== nationalityOnePlaceObj[0].name;
+			}else{
+				return item.name;
+			}
 		});
 		this.clickBox()
 		this.topCntryOne = this.topFiveCNtry;
 		let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-            return item.name !== nationalityTopOnePlaceObj[0].name;
+			if(nationalityTopOnePlaceObj.length>0){
+				return item.name !== nationalityTopOnePlaceObj[0].name;
+			}else{
+				return item.name;
+			}
         });
 		this.clickBox()
 	}

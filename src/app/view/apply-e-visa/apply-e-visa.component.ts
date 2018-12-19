@@ -64,6 +64,8 @@ export class ApplyEVisaComponent implements OnInit {
 	from_country_name:any;
 	visaReqBlong:any;
 	visaReqNead:any;
+	visaReq1:any;
+	pageName:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -74,12 +76,7 @@ export class ApplyEVisaComponent implements OnInit {
 		private meta: Meta,
 		private title:Title,
 		private embassiesCityDetailsService:EmbassiesCityDetailsService
-	) {
-		this.title.setTitle('Apply For e-Visa | Applying Visa Online | Online Visa application form');
-		this.meta.updateTag({ name:'description',content:'Apply For e-Visa, Applying Visa Online, Online Visa application form, visa application, work visa, tourist visa, travel visa, apply for visa, apply for visa online, visa legal services, get visa online, online visa'});
-		this.meta.updateTag({ name:'keywords',content:'You can apply visa online following just simple step, fill online visa application from, receive visa via email and enter destination where you want to go.'});
-		this.visa_flag = 'assets/images/default1.png';	
-	}
+	) {}
 
 	ngOnInit() {
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -94,17 +91,55 @@ export class ApplyEVisaComponent implements OnInit {
 		}
 		$('#profile_trans').hide();
 		this.routers.params.subscribe(val => {
-			this.visaReq = this.routers.snapshot.params["id"];
+			this.visaReq = this.routers.snapshot.params["to"];
+			this.visaReq1 = this.routers.snapshot.params["a"];
 		})
-		if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
-			var NewvisaReq = this.visaReq.split('-visa-application-from-')
-			this.visaReqBlong = NewvisaReq[1]
-			this.visaReqNead = NewvisaReq[0]
-			this.visafor()
-			this.belongCnty = this.visaReqBlong
-			this.country_ctnSet = this.visaReqNead	
+		if(this.router.url=='/apply-e-visa'){
+			this.pageName = 'Apply for e-Visa'
+		}else if(this.router.url=='/apply-visa-tool'){
+			this.pageName = 'Visa apply tool'
+		}else if(this.router.url=='/visa-requirements'){
+			this.pageName = 'Requirement to apply e-Visa'
 		}
-
+	
+		if(this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+			this.pageName = 'Apply for e-Visa'
+			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
+				this.visaReqNead = this.visaReq;
+				this.country_ctnSet = this.visaReqNead	
+			}
+	
+			if(this.visaReq1!='' && this.visaReq1!=null && this.visaReq1!=undefined){
+				var NewvisaReq = this.visaReq1.split('from-')
+				if(NewvisaReq.length==2){
+					this.visaReqBlong = NewvisaReq[1]
+					this.belongCnty = this.visaReqBlong
+				}	
+			}
+		}else if(this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
+			this.pageName = 'Visa apply tool'
+			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
+				var NewvisaReq = this.visaReq.split('-visa-requirements-for-')
+				if(NewvisaReq.length==2){
+					this.visaReqNead=NewvisaReq[0]
+					this.country_ctnSet = this.visaReqNead	
+					this.visaReqBlong = NewvisaReq[1]
+					this.belongCnty = this.visaReqBlong
+				}	
+			}
+		}else if(this.router.url=='/visa-requirements'+'/'+this.visaReq){
+			this.pageName = 'Requirement to apply e-Visa'
+			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
+				var NewvisaReq = this.visaReq.split('-visa-requirements-for-')
+				if(NewvisaReq.length==2){
+					this.visaReqNead=NewvisaReq[0]
+					this.country_ctnSet = this.visaReqNead	
+					this.visaReqBlong = NewvisaReq[1]
+					this.belongCnty = this.visaReqBlong
+				}	
+			}
+		}
+			
 		this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
 		if(this.countryShow!=null && this.countryShow!=''){
 			this.ngProgress.done();
@@ -127,7 +162,6 @@ export class ApplyEVisaComponent implements OnInit {
 			});
 			this.topCntryTwo=this.topFiveCNtry;
 			this.topCntryOne=this.topFiveCNtry;
-			this.visafor()
 		}else{
 			this.countriesListService.countriesList().subscribe(
 				data => {
@@ -151,24 +185,67 @@ export class ApplyEVisaComponent implements OnInit {
 					});
 					this.topCntryTwo=this.topFiveCNtry;
 					this.topCntryOne=this.topFiveCNtry;
-					this.visafor()	
 				})
 		}	
 
+
+		if(this.belongCnty!='' && this.belongCnty!=null && this.country_ctnSet!='' && this.country_ctnSet!=null)
+		{
+			
+			this.visafor()
+			// var cmd=this;
+			// let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==cmd.belongCnty;});
+			// this.need_visa_for = $.grep(this.need_visa_for, function(item){ return item.name !== BelongToObj[0].name;});
+			// this.topCntryTwo = this.topFiveCNtry;
+	
+			// let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==cmd.belongCnty;});
+			// this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
+			// 	if(nationalityTopTwoPlaceObj.length>0){
+			// 		return item.name !== nationalityTopTwoPlaceObj[0].name;
+			// 	}else{
+			// 		return item.name;
+			// 	}
+			// });
+
+
+			// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+			// this.belong_to = $.grep(this.belong_to, function(item){
+			// 	if(NeedVisaForObj.length>0){
+			// 		return item.name !== NeedVisaForObj[0].name;
+			// 	}else{
+			// 		return item.name;
+			// 	}	
+			// });
+			// this.topCntryOne = this.topFiveCNtry;
+			// let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+			// this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+			// 	if(nationalityTopOnePlaceObj.length>0){
+			// 		return item.name !== nationalityTopOnePlaceObj[0].name;
+			// 	}else{
+			// 		return item.name;
+			// 	}
+			// });
+
+		}
 	}
 
   	changeBelong(listName){
-		this.belongCnty = listName.value;
-		this.need_visa_for = this.country
-		let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.need_visa_for = $.grep(this.need_visa_for, function(item){ return item.name !== BelongToObj[0].name;});
-		this.topCntryTwo = this.topFiveCNtry;
-		this.visafor()
-		let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-            return item.name !== nationalityTopTwoPlaceObj[0].name;
-        });
-		this.visafor()
+		 this.belongCnty = listName.value;
+		// this.need_visa_for = this.country
+		// let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.need_visa_for = $.grep(this.need_visa_for, function(item){ return item.name !== BelongToObj[0].name;});
+		// this.topCntryTwo = this.topFiveCNtry;
+		// // this.visafor()
+		// let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
+		// 	if(nationalityTopTwoPlaceObj.length>0){
+		// 		return item.name !== nationalityTopTwoPlaceObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+        // });
+		// this.visafor()
+		this.check_values();
 	}
 
 	changeNeedVisa(listName){
@@ -176,6 +253,7 @@ export class ApplyEVisaComponent implements OnInit {
 		this.visaApplicationService.eVisaSelectCnt(listName).subscribe(
 			data =>{
 				this.ngProgress.done();
+				this.metaTags()
 				this.visa_flag = data.country_flag;					
 				this.visa_req_sec=true;
 				this.cnt_emb=false;
@@ -197,19 +275,72 @@ export class ApplyEVisaComponent implements OnInit {
 					}
 				}
 			})
-		this.belong_to = this.country
-		let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.belong_to = $.grep(this.belong_to, function(item){ return item.name !== NeedVisaForObj[0].name;});
-		this.topCntryOne = this.topFiveCNtry;
-		let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-            return item.name !== nationalityTopOnePlaceObj[0].name;
-        });
+		// this.belong_to = this.country
+		// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.belong_to = $.grep(this.belong_to, function(item){
+		// 	if(NeedVisaForObj.length>0){
+		// 		return item.name !== NeedVisaForObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}	
+		// });
+		// this.topCntryOne = this.topFiveCNtry;
+		// let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+		// 	if(nationalityTopOnePlaceObj.length>0){
+		// 		return item.name !== nationalityTopOnePlaceObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+        // });
 	}
 
 	visafor1(listName){
 		this.country_ctnSet = listName.value;
-		this.visafor();
+		// var cmd=this;
+		// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+		// 	this.belong_to = $.grep(this.belong_to, function(item){
+		// 		if(NeedVisaForObj.length>0){
+		// 			return item.name !== NeedVisaForObj[0].name;
+		// 		}else{
+		// 			return item.name;
+		// 		}	
+		// 	});
+		// 	this.topCntryOne = this.topFiveCNtry;
+		// 	let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+		// 	this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+		// 		if(nationalityTopOnePlaceObj.length>0){
+		// 			return item.name !== nationalityTopOnePlaceObj[0].name;
+		// 		}else{
+		// 			return item.name;
+		// 		}
+		// 	});
+		// this.visafor();
+		this.check_values();
+	}
+
+	check_values(){
+		if(this.belongCnty == undefined || this.belongCnty == ''){
+			return;
+		}else if(this.country_ctnSet == undefined || this.country_ctnSet == ''){
+			return;
+		}else{
+			if(this.router.url.indexOf('apply-e-visa')>-1){
+				var url = this.country_ctnSet+"/from-"+this.belongCnty;
+				this.router.navigate(['apply-e-visa/'+url])
+				this.visafor();
+			}
+			else if(this.router.url.indexOf('apply-visa-tool')>-1){
+				var url = this.country_ctnSet+"-visa-requirements-for-"+this.belongCnty;
+				this.router.navigate(['/apply-visa-tool/'+url])
+				this.visafor();
+			}
+			else if(this.router.url.indexOf('visa-requirements')>-1){
+				var url = this.country_ctnSet+"-visa-requirements-for-"+this.belongCnty;
+				this.router.navigate(['/visa-requirements/'+url])
+				this.visafor();
+			}
+		}
 	}
 
 	visafor(){
@@ -226,6 +357,8 @@ export class ApplyEVisaComponent implements OnInit {
 					this.visa_flag = 'assets/images/default1.png';
 					this.visa_req_sec=false;
 					this.cnt_emb=false;
+					this.of_country_name = data.to_country_name;
+					this.from_country_name = data.from_country_name;
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
@@ -233,6 +366,7 @@ export class ApplyEVisaComponent implements OnInit {
 						this.of_country_name = data.to_country_name;
 						this.from_country_name = data.from_country_name;
 						this.visa_flag = data.country_flag;
+						this.country_ctn = data.to_country_name
 						if(this.visaApplyTbl[0].visa_type!= 0){
 							this.con_visa_req_sec = false;
 							var cnt_id = data.to_country_slug_name;
@@ -251,7 +385,8 @@ export class ApplyEVisaComponent implements OnInit {
 							this.tableRequired = true;
 							this.tableRegular = false;
 							this.tableViasaToggle = false;
-							this.requirementCountry()
+							this.metaTags()
+							// this.requirementCountry()
 						}else{
 							this.con_visa_req_sec=false;
 							this.tableRequired = false;
@@ -262,6 +397,7 @@ export class ApplyEVisaComponent implements OnInit {
 					}else if(data.status=='FAIL'){
 						this.con_visa_req_sec=false;
 						this.ngProgress.done();
+						this.visaApplyTbl = data.visa
 						this.tableViasaToggle = false;
 						this.tableRequired = false;
 						this.tableRegular = true; 
@@ -292,7 +428,7 @@ export class ApplyEVisaComponent implements OnInit {
 				this.countydetailsNew = data.data;
 				this.consulateAd=new Array();
 				this.EmbassyAd=new Array()
-
+				this.metaTags()
 				if(this.countydetails.length>0){
 					this.cnt_emb=true;
 					this.visa_req_sec=false;	
@@ -345,6 +481,10 @@ export class ApplyEVisaComponent implements OnInit {
 							this.countydetailsNew[i].lnthwebsite=0;	
 						}
 					}	
+					var cmt=this;
+					setTimeout(function(){
+						cmt.setemb_map();
+					},2000);
 				}
 				else{
 					this.con_visa_req_sec=false;
@@ -356,6 +496,74 @@ export class ApplyEVisaComponent implements OnInit {
 					this.intro=null;
 				}		
 			})
+	}
+
+	setemb_map(){
+		for(var i=0;i<this.EmbassyAd.length;i++){
+			var idd=this.EmbassyAd[i].id;
+			var rl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
+			$('#emb_map__div_'+idd).html(rl);
+		}
+
+		for(var i=0;i<this.consulateAd.length;i++){
+			var cidd=this.consulateAd[i].id;
+			var crl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
+			$('#cnst_map__div_'+cidd).html(crl);
+		}
+
+	}
+	
+	metaTags(){
+
+		if(this.router.url.indexOf('apply-visa-tool')>-1 || this.router.url.indexOf('visa-requirements')>-1){
+			this.applyVisaTool()
+			return true;
+		}
+
+		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
+			this.title.setTitle('Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.of_country_name+' Visa from '+this.from_country_name+'');
+			this.meta.updateTag({ name:'title',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.of_country_name+' Visa from '+this.from_country_name+''});	
+			this.meta.updateTag({ name:'description',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.of_country_name+' Visa from '+this.from_country_name+'. Apply for '+this.of_country_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'No eVisa available for '+this.from_country_name+', Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', Visa through a '+this.of_country_name+' diplomatic mission, '+this.of_country_name+' regular Visa'});
+		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
+			this.title.setTitle('No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.');
+			this.meta.updateTag({ name:'title',content:'No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});	
+			this.meta.updateTag({ name:'description',content:'hey, No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+', No '+this.of_country_name+' Visa, Visa free.'});
+		}else{
+			this.title.setTitle( 'Apply '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online from '+this.from_country_name+'');
+			this.meta.updateTag({ name:'title',content: 'Apply '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online from '+this.from_country_name+''});	
+			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa, Apply for '+this.of_country_name+' eVisa application online, '+this.from_country_name+'ese Citizens can apply online for '+this.of_country_name+' e-visa. show first visa type, show second visa type,'});
+			this.meta.updateTag({ name:'keywords',content: 'Apply '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online from '+this.from_country_name+', '+this.of_country_name+' eVisa, show first visa type, show second visa type'});	
+		}
+	}
+
+	applyVisaTool(){
+
+		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
+			this.title.setTitle('Visa requirements Check, A regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.');
+			this.meta.updateTag({ name:'title',content:'Visa requirements Check, A regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});	
+			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, A '+this.of_country_name+' regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});
+			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', A regular Visa from '+this.from_country_name+'.'});	
+		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
+
+			this.title.setTitle('Visa requirements Check, No Visa required from '+this.from_country_name+' to travel '+this.of_country_name+'.');
+			this.meta.updateTag({ name:'title',content:'Visa requirements Check, No Visa required from '+this.from_country_name+' to travel '+this.of_country_name+'.'});	
+			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, No '+this.of_country_name+' Visa required from '+this.from_country_name+' to travel '+this.of_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', No Visa from '+this.from_country_name+'.'});	
+
+		}else{
+
+			this.title.setTitle('Visa requirements Check, A eVisa from '+this.from_country_name+' to travel '+this.of_country_name+' required.');
+			this.meta.updateTag({ name:'title',content:'Visa requirements Check, A eVisa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});	
+			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, A '+this.of_country_name+' eVisa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});
+			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', A eVisa from '+this.from_country_name+'.'});	
+
+			
+		}
+
+
+		
 	}
 
 }

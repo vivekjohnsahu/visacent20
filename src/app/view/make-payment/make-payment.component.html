@@ -15,7 +15,8 @@
                                         <label id="lbl_amount_req" class="pull-left">Amount (USD) <i class="fas fa-hand-holding-usd"></i></label>
                                     </div>
                                     <div class="element_container">
-                                        <input type="tel" #lenghtError="ngModel" id="lenghtError" pattern="^(0|[1-9][0-9]*)$" (keyup)="amountClear()" minlength="1" maxlength="5" required class="enable_white amount_req" name="amount" [(ngModel)]="amount" (keypress)="isNumberKey($event)"/>
+                                            <!-- pattern="^(0|[1-9][0-9]*)$" -->
+                                        <input type="tel" #lenghtError="ngModel" id="lenghtError"  (keyup)="amountClear()" minlength="1" maxlength="7" required class="enable_white amount_req" name="amount" [(ngModel)]="amount" (keypress)='isNumberKey(this,$event)'/>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col_pay">
@@ -26,7 +27,7 @@
                                         <select name="" id="flagVle" class="flagEr enable_white">
                                             <option *ngFor="let flag of flagDrop" >{{flag.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{flag.country}}</option>
                                         </select>
-                                        <input style="padding-left: 71px;" type="tel" (keypress)="isNumberKey($event)" pattern="^(0|[1-9][0-9]*)$" minlength="6" maxlength="15" required class="enable_white" [(ngModel)]="phone" name="phone" />
+                                        <input style="padding-left: 71px;" type="tel" (keypress)="NumberKey($event)" pattern="^(0|[1-9][0-9]*)$" minlength="6" maxlength="15" required class="enable_white" [(ngModel)]="phone" name="phone" />
                                     </div>
                                 </div>
                             </div>

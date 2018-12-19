@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VisaApplicationService } from '../../services/visa_application/visa-application.service';
 import { CountriesListService } from '../../services/countries_list_home/countries-list.service';
 import { EmbassiesCityDetailsService } from '../../services/embassies_city_details/embassies-city-details.service'
+import { Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-apply-visa',
@@ -16,11 +17,13 @@ export class ApplyVisaComponent implements OnInit {
 
 	constructor(
 		public ngProgress: NgProgress,
-			private router:Router,
-			private visaApplicationService:VisaApplicationService,
-			private routers : ActivatedRoute,
-			private countriesListService:CountriesListService,
-			private embassiesCityDetailsService:EmbassiesCityDetailsService
+		private router:Router,
+		private visaApplicationService:VisaApplicationService,
+		private routers : ActivatedRoute,
+		private countriesListService:CountriesListService,
+		private embassiesCityDetailsService:EmbassiesCityDetailsService,
+		private meta: Meta,
+		private title:Title,
 	) { }
 
 	countryShow:any;
@@ -60,12 +63,30 @@ export class ApplyVisaComponent implements OnInit {
 	Errortable:boolean;
 	of_country_name:any;
 	from_country_name:any;
+	visaReq1:any;
+	selectCountry:any;
+	NewvisaReq:any;
+	flagCnt=0;
 
   	ngOnInit() {
 		this.ngProgress.start();
 		$('#profile_trans').hide();
 		this.routers.params.subscribe(val => {
 			this.country_ctn = this.routers.snapshot.params["value"]
+			this.visaReq1 = this.routers.snapshot.params["a"];
+			if(this.visaReq1!='' && this.visaReq1!=null && this.visaReq1!=undefined){
+				this.NewvisaReq = this.visaReq1.split('from-')
+				if(this.NewvisaReq.length==2){
+					this.flagCnt=1
+					this.selectCountry = this.NewvisaReq[1]
+					this.country_change()
+				}	
+			}
+			var country_ctn1 = this.country_ctn.charAt(0).toUpperCase() + this.country_ctn.slice(1)
+			this.title.setTitle('Apply '+country_ctn1+' visa, '+country_ctn1+' Visa Application, Documents required for '+country_ctn1+' Visa, '+country_ctn1+' Visa');
+			this.meta.updateTag({ name:'title',content:'Apply '+country_ctn1+' visa, '+country_ctn1+' Visa Application, Documents required for '+country_ctn1+' Visa, '+country_ctn1+' Visa'});	
+			this.meta.updateTag({ name:'description',content:'Apply for '+country_ctn1+' visa, Visa to '+country_ctn1+' for Tourist or Business. Apply Now! Individual visa seeker can to apply for the '+country_ctn1+' Visa through Online.'});
+			this.meta.updateTag({ name:'keywords',content: 'Apply '+country_ctn1+' visa, '+country_ctn1+' Visa Application, Documents required for '+country_ctn1+' Visa, '+country_ctn1+' Visa, '+country_ctn1+' Tourist or Business Visa, Apply '+country_ctn1+' Visa online, e-visa application.'});
 			this.visaApplicationService.visaSelectCnt(this.country_ctn).subscribe(
 				data =>{
 					this.ngProgress.done();
@@ -136,8 +157,15 @@ export class ApplyVisaComponent implements OnInit {
 	}
 	  
 	changeCuntry(listName){
-		this.ngProgress.start();
 		this.bnewCnty = listName.value;
+		var url = this.country_ctn+"/from-"+this.bnewCnty;
+		this.router.navigate(['apply-visa/'+url])
+		this.country_change()
+	}
+
+	country_change(){
+		this.bnewCnty = this.selectCountry;
+		this.ngProgress.start();
 		this.visaUrl = this.country_ctn+"-visas-for-"+this.bnewCnty;
 		this.Errortable = false;
 		this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
@@ -161,6 +189,7 @@ export class ApplyVisaComponent implements OnInit {
 						this.tableRequired = true;
 						this.tableRegular = false;
 						this.tableViasaToggle = false;
+						// return
 					}else{
 						this.Errortable = true;
 						this.tableRequired = false;
@@ -169,6 +198,7 @@ export class ApplyVisaComponent implements OnInit {
 					}
 				}else if(data.status=='FAIL'){
 					this.ngProgress.done();
+					this.visaApplyTbl = data.visa
 					this.tableViasaToggle = false;
 					this.tableRequired = false;
 					this.tableRegular = true;  
@@ -195,6 +225,7 @@ export class ApplyVisaComponent implements OnInit {
 	requirementCountry(){
 		this.embassiesCityDetailsService.requirementCountryCtn(this.requirementCountryName).subscribe(
 			data =>{
+				this.metaTags()
 				this.countydetails = data.data;
 				this.countydetailsNew = data.data;
 				if(this.countydetailsNew=='' && this.tableViasaToggle==false){
@@ -249,9 +280,45 @@ export class ApplyVisaComponent implements OnInit {
 					}else{
 						this.countydetailsNew[i].lnthwebsite=0;	
 					}
+					var cmt=this;
+					setTimeout(function(){
+						cmt.setemb_map();
+					},2000);
 				}			
 			})
 	}
 
+	setemb_map(){
+		for(var i=0;i<this.EmbassyAd.length;i++){
+			var idd=this.EmbassyAd[i].id;
+			var rl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
+			$('#emb_map__div_'+idd).html(rl);
+		}
+
+		for(var i=0;i<this.consulateAd.length;i++){
+			var cidd=this.consulateAd[i].id;
+			var crl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
+			$('#cnst_map__div_'+cidd).html(crl);
+		}
+	}
+
+	metaTags(){
+		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
+			this.title.setTitle('Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online');
+			this.meta.updateTag({ name:'title',content:'Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online'});	
+			this.meta.updateTag({ name:'description',content:'Apply for '+this.of_country_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online, visa through a '+this.of_country_name+' diplomatic mission, '+this.of_country_name+' regular Visa'});
+		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
+			this.title.setTitle(''+this.from_country_name+' Citizens do not required a visa to travel '+this.of_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.');
+			this.meta.updateTag({ name:'title',content:''+this.from_country_name+' Citizens do not required a visa to travel '+this.of_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});	
+			this.meta.updateTag({ name:'description',content:'Good news, '+this.of_country_name+' Citizens do not required a visa to travel United State of America. No Visa visa required to travel to United State of America.'});
+			this.meta.updateTag({ name:'keywords',content: ''+this.of_country_name+' visa for '+this.from_country_name+', '+this.from_country_name+' Citizens travel '+this.of_country_name+', No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});
+		}else{
+			this.title.setTitle( 'Apply for '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online');
+			this.meta.updateTag({ name:'title',content: 'Apply for '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online'});	
+			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa online, '+this.from_country_name+' Citizens can get e-visa for '+this.of_country_name+' online, '+this.of_country_name+' visa for '+this.from_country_name+', show first visa type, show second visa type.'});
+			this.meta.updateTag({ name:'keywords',content: 'Apply for '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online, show first visa type, show second visa type.'});	
+		}
+	}
 
 }

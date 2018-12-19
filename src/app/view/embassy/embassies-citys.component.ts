@@ -166,27 +166,9 @@ export class EmbassiesCitysComponent implements OnInit {
 						this.meta.updateTag({ name:'description',content:this.name+' '+this.in_cntname+', Get addresses, telephone numbers, email addresses, websites. '+this.of_country+' have '+ lenght+' embassies/high commissions in other cities of '+this.in_cntname+'.'});
 						this.meta.updateTag({ name:'keywords',content:this.name+', '+this.in_cntname+'. '+this.of_country+' Embassy in '+this.in_cntname+', '+this.of_country+' Embassy, '+this.of_country+' Embassy address in '+this.in_cntname+'. '+this.of_country+' Embassy address in '+this.in_cntname+'.'});
 
-
 						this.map = this.map=encodeURI(this.map);
-						$('#emb_map').html('<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');
-
-
-						// this.url='<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>';
-						//console.log(this.url);
+						$('#emb_map').html('<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
 						
-						// this.url='<p>ajshdjgh</p>';
-						// if(this.map=='' || this.map==null){
-						// 	this.map=this.name;
-						// }else{
-						// 	// this.map = this.map=encodeURI(this.map)
-						// 	console.log(this.map)
-						// 	this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.map);
-						// 	this.url = this.url.changingThisBreaksApplicationSecurity
-						// 	console.log(this.url)	
-						// }
-						
-						
-
 						if(this.countydetails.in_coutnry_flag!=''){
 							this.in_coutnry_flag = this.countydetails.in_coutnry_flag; 
 						}else{
@@ -257,20 +239,12 @@ export class EmbassiesCitysComponent implements OnInit {
 						this.consulateAd=new Array();
 						this.EmbassyAd=new Array()
 						
-
-
-						//console.log(this.EmbassyAd);
-
 						for(var i=0;i<this.multiCountry.length;i++){
 
 							if(this.multiCountry[i].maps=='' || this.multiCountry[i].maps==null)
 							{
 								this.multiCountry[i].maps=this.multiCountry[i].name;
 							}
-
-							//'Pakistani   High Commission  in Pretoria';
-
-							//console.log(this.multiCountry[i].maps);
 
 							if(this.multiCountry[i].Telepone!=null && $.trim(this.multiCountry[i].Telepone)!='' && $.trim(this.multiCountry[i].Telepone)!=' '){
 								this.phoneMulti = this.multiCountry[i].Telepone;
@@ -368,10 +342,10 @@ export class EmbassiesCitysComponent implements OnInit {
 		if($('#textarea').text()==''){
 			$('#textarea').addClass('borderCls')
 			return		
-		/*}else if(this.grecaptcha === undefined){
+		}else if(this.grecaptcha === undefined){
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
-			return false;*/
+			return false;
 		}else{
 			this.captchaError = false;
 			this.updating_msg = true;
@@ -415,8 +389,7 @@ export class EmbassiesCitysComponent implements OnInit {
 							  $("body").css({"overflow-y":"scroll"});
                        	}, 1000);
 					   	$('#myalert').fadeIn('fast');
-					   		$("#report_popup").show();
-					
+					   		$("#report_popup").show();	
 				}
 			})
 		}
@@ -434,15 +407,20 @@ export class EmbassiesCitysComponent implements OnInit {
 	}	
 
 	setemb_map(){
+		this.map = this.map=encodeURI(this.map);
+		$('#emb_map').html('<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');
+
+
 		for(var i=0;i<this.EmbassyAd.length;i++){
-			console.log(i+'~~~'+this.EmbassyAd.length);
-			console.log(this.EmbassyAd[i].id);
-
 			var idd=this.EmbassyAd[i].id;
-
-			var rl='<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
-
+			var rl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
 			$('#emb_map__div_'+idd).html(rl);
+		}
+
+		for(var i=0;i<this.consulateAd.length;i++){
+			var cidd=this.consulateAd[i].id;
+			var crl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
+			$('#cnst_map__div_'+cidd).html(crl);
 		}
 
 	}

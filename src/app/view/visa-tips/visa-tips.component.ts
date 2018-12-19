@@ -6,6 +6,7 @@ import { VisaApplicationService } from '../../services/visa_application/visa-app
 import { CountriesListService } from '../../services/countries_list_home/countries-list.service';
 import { Meta, Title} from '@angular/platform-browser';
 import { EmbassiesCityDetailsService } from '../../services/embassies_city_details/embassies-city-details.service'
+import { applyMixins } from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-visa-tips',
@@ -15,7 +16,7 @@ import { EmbassiesCityDetailsService } from '../../services/embassies_city_detai
 })
 export class VisaTipsComponent implements OnInit {
 
-  countryShow:any;
+  	countryShow:any;
 	belong_to:any
 	need_visa_for:any
 	country:any;
@@ -64,6 +65,9 @@ export class VisaTipsComponent implements OnInit {
 	currentId:any;
 	currentIdBlong:any;
 	currentIdNead:any;
+	belong_sel:any;
+	visa_for_sel:any;
+	is_flg:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -78,6 +82,8 @@ export class VisaTipsComponent implements OnInit {
 	
   ngOnInit() {
 	$('#profile_trans').hide();
+	this.belong_sel=$('select[name="belong"]');
+	this.visa_for_sel=$('select[name="needvisa"]');
 	this.title.setTitle('Apply For e-Visa | Applying Visa Online | Online Visa application form');
 	this.meta.updateTag({ name:'description',content:'Apply For e-Visa, Applying Visa Online, Online Visa application form, visa application, work visa, tourist visa, travel visa, apply for visa, apply for visa online, visa legal services, get visa online, online visa'});
 	this.meta.updateTag({ name:'keywords',content:'You can apply visa online following just simple step, fill online visa application from, receive visa via email and enter destination where you want to go.'});
@@ -95,7 +101,9 @@ export class VisaTipsComponent implements OnInit {
 		this.currentIdNead = this.currentId[0]
 		this.country_ctnSet = this.currentIdNead;
 		this.belongCnty = this.currentIdBlong;
-		this.visafor()
+		this.is_flg=1;
+		this.visa_for_sel.val(this.country_ctnSet);
+		this.belong_sel.val(this.belongCnty);
 	}
     this.countryShow =JSON.parse(localStorage.getItem('countrylist'));
 		if(this.countryShow!=null || this.countryShow!=''){
@@ -130,21 +138,34 @@ export class VisaTipsComponent implements OnInit {
 
 		this.topCntryTwo=this.topFiveCNtry;
 		this.topCntryOne=this.topFiveCNtry;
-		this.visafor()
-
+		var cmd=this;
+		setTimeout(function(){
+			cmd.visafor()
+		},1000)
+	
 	}
 
 	changeBelong(listName){
-		this.belongCnty = listName.value;
-		this.need_visa_for = this.country
-		let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.need_visa_for = $.grep(this.need_visa_for, function(item){ return item.name !== BelongToObj[0].name;});
-		this.topCntryTwo = this.topFiveCNtry;
-		this.visafor()
-		let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-            return item.name !== nationalityTopTwoPlaceObj[0].name;
-        });
+		this.belongCnty = listName.value
+		// this.need_visa_for = this.country
+		// let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.need_visa_for = $.grep(this.need_visa_for, function(item){ 
+		// 	if(BelongToObj.length>0){
+		// 		return item.name !== BelongToObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+		// 	});
+		// this.topCntryTwo = this.topFiveCNtry;
+		// let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
+		// 	if(nationalityTopTwoPlaceObj.length>0){
+		// 		return item.name !== nationalityTopTwoPlaceObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+		// });
+		
 		this.visafor()
 	}
 
@@ -153,6 +174,7 @@ export class VisaTipsComponent implements OnInit {
 		this.visaApplicationService.eVisaSelectCnt(listName).subscribe(
 			data =>{
 				this.ngProgress.done();
+				this.metaTags()
 				this.visa_flag = data.country_flag;					
 				this.visa_req_sec=true;
 				this.cnt_emb=false;
@@ -174,22 +196,60 @@ export class VisaTipsComponent implements OnInit {
 					}
 				}
 			})
-		this.belong_to = this.country
-		let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.belong_to = $.grep(this.belong_to, function(item){ return item.name !== NeedVisaForObj[0].name;});
-		this.topCntryOne = this.topFiveCNtry;
-		let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-            return item.name !== nationalityTopOnePlaceObj[0].name;
-        });
+		// this.belong_to = this.country
+		// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.belong_to = $.grep(this.belong_to, function(item){
+		// 	if(NeedVisaForObj.length>0){
+		// 		return item.name !== NeedVisaForObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+			
+		// 	});
+		// this.topCntryOne = this.topFiveCNtry;
+		// let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+		// 	if(nationalityTopOnePlaceObj.length>0){
+		// 		return item.name !== nationalityTopOnePlaceObj[0].name;
+		// 	}
+		// 	else{
+		// 		return item.name;
+		// 	}
+        // });
 	}
 
 	visafor1(listName){
-		this.country_ctnSet = listName.value;
+		this.country_ctnSet = listName.value
+		// this.belong_to = this.country
+		// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.belong_to = $.grep(this.belong_to, function(item){
+		// 	if(NeedVisaForObj.length>0){
+		// 		return item.name !== NeedVisaForObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+		// 	});
+		// this.topCntryOne = this.topFiveCNtry;
+		// let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+		// 	if(nationalityTopOnePlaceObj.length>0){
+		// 		return item.name !== nationalityTopOnePlaceObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+        // });
+
 		this.visafor();
 	}
 
 	visafor(){
+		if(this.is_flg!='1'){
+			this.country_ctnSet=this.visa_for_sel.val();
+			this.belongCnty=this.belong_sel.val();
+		}
+		this.is_flg=0;
+		this.country_ctnSet = this.country_ctnSet;
+		this.belongCnty = this.belongCnty;
 		if(this.belongCnty == undefined || this.belongCnty == ''){
 			return;
 		}else if(this.country_ctnSet == undefined || this.country_ctnSet == ''){
@@ -198,6 +258,8 @@ export class VisaTipsComponent implements OnInit {
 			this.ngProgress.start();
 			this.visaUrl = this.country_ctnSet+"-visas-for-"+this.belongCnty;
 			this.requirementCountryName = this.country_ctnSet + "/" + this.belongCnty;
+			var url = this.country_ctnSet+'-visa-application-from-'+this.belongCnty
+			this.router.navigate(['visa-tips',url])
 			this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
 				data => {
 					this.visa_flag = 'assets/images/default1.png';
@@ -207,12 +269,10 @@ export class VisaTipsComponent implements OnInit {
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
 						this.tableViasaToggle = true;
+						this.visa_flag = data.country_flag;
 						this.of_country_name = data.to_country_name;
 						this.from_country_name = data.from_country_name;
-						this.country_ctnSet = this.of_country_name;
-						this.belongCnty = this.from_country_name;
-						this.metaTags()
-						this.visa_flag = data.country_flag;
+						this.country_ctn = data.to_country_name
 						if(this.visaApplyTbl[0].visa_type!= 0){
 							this.con_visa_req_sec = false;
 							var cnt_id = data.to_country_slug_name;
@@ -231,7 +291,8 @@ export class VisaTipsComponent implements OnInit {
 							this.tableRequired = true;
 							this.tableRegular = false;
 							this.tableViasaToggle = false;
-							this.requirementCountry()
+							// this.requirementCountry()
+							this.metaTags()
 						}else{
 							this.con_visa_req_sec=false;
 							this.tableRequired = false;
@@ -240,15 +301,18 @@ export class VisaTipsComponent implements OnInit {
 							this.requirementCountry()
 						}
 					}else if(data.status=='FAIL'){
-						this.con_visa_req_sec=false;
 						this.ngProgress.done();
+						this.of_country_name = data.to_country_name;
+						this.from_country_name = data.from_country_name;
+						this.con_visa_req_sec=false;
 						this.tableViasaToggle = false;
 						this.tableRequired = false;
 						this.tableRegular = true; 
+						this.visaApplyTbl = data.visa
 						this.requirementCountry()
 					}
-				})
-		}  
+				})  
+		}
 	}
 
 	visaDetial(visa){
@@ -272,7 +336,7 @@ export class VisaTipsComponent implements OnInit {
 				this.countydetailsNew = data.data;
 				this.consulateAd=new Array();
 				this.EmbassyAd=new Array()
-
+				this.metaTags()
 				if(this.countydetails.length>0){
 					this.cnt_emb=true;
 					this.visa_req_sec=false;	
@@ -325,6 +389,11 @@ export class VisaTipsComponent implements OnInit {
 							this.countydetailsNew[i].lnthwebsite=0;	
 						}
 					}	
+
+					var ctl= this;
+					setTimeout(function(){
+						ctl.setemb_map();
+					},2000);
 				}
 				else{
 					this.con_visa_req_sec=false;
@@ -339,22 +408,37 @@ export class VisaTipsComponent implements OnInit {
 	}
 
 	metaTags(){
-		if(this.visaApplyTbl[0].visa_required!='0'){
-			this.title.setTitle('Tips for '+this.country_ctnSet+' visa application from '+this.belongCnty+', A regular visa required application required in advance.');
-			this.meta.updateTag({ name:'title',content:'Tips for '+this.country_ctnSet+' visa application from '+this.belongCnty+', A regular visa required application required in advance.'});	
-			this.meta.updateTag({ name:'description',content:'Tips for '+this.country_ctnSet+' visa application from '+this.belongCnty+'. Citizens of the '+this.belongCnty+' must obtain a visa in advance. You have to apply for a visa through a '+this.country_ctnSet+' diplomatic mission or one of its authorized visa agents outside '+this.country_ctnSet+'.'});
-			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.country_ctnSet+' visa, '+this.country_ctnSet+' Visa, Apply for '+this.country_ctnSet+' Visa, '+this.country_ctnSet+' regular visa from '+this.belongCnty+', regular visa required, '+this.country_ctnSet+' visa.'});
+		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
+			this.title.setTitle('Tips for '+this.of_country_name+' visa application from '+this.from_country_name+', A regular visa required application required in advance.');
+			this.meta.updateTag({ name:'title',content:'Tips for '+this.of_country_name+' visa application from '+this.from_country_name+', A regular visa required application required in advance.'});	
+			this.meta.updateTag({ name:'description',content:'Tips for '+this.of_country_name+' visa application from '+this.from_country_name+'. Citizens of the '+this.from_country_name+' must obtain a visa in advance. You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.of_country_name+' visa, '+this.of_country_name+' Visa, Apply for '+this.of_country_name+' Visa, '+this.of_country_name+' regular visa from '+this.from_country_name+', regular visa required, '+this.of_country_name+' visa.'});
 		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
-			this.title.setTitle( this.belongCnty+' Citizens do not required a visa to travel '+this.country_ctnSet+'. Travel Visa requirements');
-			this.meta.updateTag({ name:'title',content: this.belongCnty+' Citizens do not required a visa to travel '+this.country_ctnSet+'. Travel Visa requirements'});	
-			this.meta.updateTag({ name:'description',content: this.belongCnty+' Citizens do not required a visa to travel '+this.country_ctnSet+'. No Visa visa required to travel to '+this.country_ctnSet+'.'});
-			this.meta.updateTag({ name:'keywords',content: this.belongCnty+' Citizens travel '+this.country_ctnSet+'. '+this.belongCnty+' Citizens visa for '+this.country_ctnSet+', visa for '+this.country_ctnSet+', '+this.country_ctnSet+' visa.'});	
+			this.title.setTitle( this.from_country_name+' Citizens do not required a visa to travel '+this.of_country_name+'. Travel Visa requirements');
+			this.meta.updateTag({ name:'title',content: this.from_country_name+' Citizens do not required a visa to travel '+this.of_country_name+'. Travel Visa requirements'});	
+			this.meta.updateTag({ name:'description',content: this.from_country_name+' Citizens do not required a visa to travel '+this.of_country_name+'. No Visa visa required to travel to '+this.of_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: this.from_country_name+' Citizens travel '+this.of_country_name+'. '+this.from_country_name+' Citizens visa for '+this.of_country_name+', visa for '+this.of_country_name+', '+this.of_country_name+' visa.'});	
 		}else{
-			this.title.setTitle('Tips for '+this.country_ctnSet+' e-visa application from '+this.belongCnty+', A e-visa required required in advance.');
-			this.meta.updateTag({ name:'title',content:'Tips for '+this.country_ctnSet+' e-visa application from '+this.belongCnty+', A e-visa required required in advance.'});	
-			this.meta.updateTag({ name:'description',content:'Tips for '+this.country_ctnSet+' e-visa application from '+this.belongCnty+'. Citizens of the '+this.belongCnty+' must obtain a visa in advance. You have to apply online or through a '+this.country_ctnSet+' diplomatic mission.'});
-			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.country_ctnSet+' e-visa application, '+this.country_ctnSet+' e-Visa, Apply for '+this.country_ctnSet+' e-Visa, '+this.country_ctnSet+' e-visa from '+this.belongCnty+', '+this.country_ctnSet+' visa.'});
+			this.title.setTitle('Tips for '+this.of_country_name+' e-visa application from '+this.from_country_name+', A e-visa required required in advance.');
+			this.meta.updateTag({ name:'title',content:'Tips for '+this.of_country_name+' e-visa application from '+this.from_country_name+', A e-visa required required in advance.'});	
+			this.meta.updateTag({ name:'description',content:'Tips for '+this.of_country_name+' e-visa application from '+this.from_country_name+'. Citizens of the '+this.from_country_name+' must obtain a visa in advance. You have to apply online or through a '+this.of_country_name+' diplomatic mission.'});
+			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.of_country_name+' e-visa application, '+this.of_country_name+' e-Visa, Apply for '+this.of_country_name+' e-Visa, '+this.of_country_name+' e-visa from '+this.from_country_name+', '+this.of_country_name+' visa.'});
 		}
+	}
+
+	setemb_map(){
+		for(var i=0;i<this.EmbassyAd.length;i++){
+			var idd=this.EmbassyAd[i].id;
+			var rl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
+			$('#emb_map__div_'+idd).html(rl);
+		}
+
+		for(var i=0;i<this.consulateAd.length;i++){
+			var cidd=this.consulateAd[i].id;
+			var crl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
+			$('#cnst_map__div_'+cidd).html(crl);
+		}
+
 	}
 
 }

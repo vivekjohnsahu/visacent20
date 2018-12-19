@@ -5,7 +5,7 @@
 <section class="table_section section_20">
     <div class="container">
         <div>
-            <h1 class="text-center ap_head" style="text-transform: capitalize;">Tips for getting a Visa</h1>
+            <h1 class="text-center ap_head">Tips for getting a Visa</h1>
         </div>
         <div class="row">
             <div class="col-sm-6">
@@ -16,7 +16,7 @@
                             <option disabled>Choose Country</option>
                             <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name" [selected]="list.slug_country_name==currentIdBlong">{{list.name}}</option>
                             <option disabled >-----------</option>
-                            <option *ngFor="let list of belong_to" [value]="list.slug_country_name">{{list.name}}</option>
+                            <option *ngFor="let list of belong_to" [value]="list.slug_country_name" [selected]="list.slug_country_name==currentIdBlong">{{list.name}}</option>
                         </select>
                     </form>
                 </div>
@@ -29,7 +29,7 @@
                             <option disabled>Choose Country</option>
                             <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name" [selected]="list.slug_country_name==currentIdNead">{{list.name}}</option>
                             <option disabled >-----------</option>
-                            <option *ngFor="let list of need_visa_for" [value]="list.slug_country_name" [selected]="list.slug_country_name==country_ctn" >{{list.name}}</option>
+                            <option *ngFor="let list of need_visa_for" [value]="list.slug_country_name" [selected]="list.slug_country_name==currentIdNead">{{list.name}}</option>
                         </select>
                     </form>
                 </div>
@@ -72,8 +72,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                 <div class="table_2" *ngFor="let visa of visaApplyTbl; let i = index">
                     <div class="row" style="background: #055da5;color: white;font-size: 18px;">
                         <div class="col-sm-12">{{visa.visa_type}}</div>
@@ -166,32 +165,62 @@
                             <p style="color:#8e8e8e;font-size: 33px;text-transform: capitalize;">visa not required</p>
                         </div>
                     </div>
-                    <!-- <div [hidden]="!tableRegular" class="citizen_quoute">
-                        <p class="container" style="color:#055da5;">
-                            <i class="fas fa-quote-left"></i> Citizens of the <span style="text-transform: capitalize;">{{belongCnty}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{country_ctnSet}}</span> diplomatic mission or one of 
-                            its authorized visa agents outside <span style="text-transform: capitalize;">{{country_ctnSet}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
-                            prepare the required documentation. <i class="fas fa-quote-left"></i>
-                        </p>
-                        </div> -->
                 </div>
                 <!-------------------------- end duplicate tabel on mobile ---------------->
             </div>
         </section>
-        <div [hidden]="!tableRequired" class="no_visa_div">
-            <div class="no_visa_cont">
-                <i class="fas fa-id-badge" style="color:#005ea5;"></i>
+
+        
+
+ <!--------------------- start no visa required ---------------->
+        <div *ngIf="tableRequired" class="no_visa_req">
+            <div class="no_visa_req_icon">
+                <i class="far fa-smile-wink"></i>
             </div>
             <div class="no_visa_para">
-                <p>visa not required</p>
+                <h4>Woow, No Tourist Visa required on your trip to {{of_country_name}}.</h4>
+                <p>
+                    Citizens of <span>{{from_country_name}}</span> do not require visas for travel to <span>{{of_country_name}}</span> and as it is one of the visa exempt countries.
+                </p>
             </div>
         </div>
-        <div [hidden]="!tableRegular" class="citizen_quoute" >
+
+     <!--------------------- end no visa required ---------------->
+
+
+        <!-- <div [hidden]="!tableRegular" class="citizen_quoute" >
             <p>
                 <i class="fas fa-quote-left"></i> Citizens of the <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
                 its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
                 prepare the required documentation. <i class="fas fa-quote-left"></i>
             </p>
+        </div> -->
+
+
+
+<!--------------------- start Regular visa required ---------------->
+<article *ngIf="tableRegular">
+         <div class="regular_visa_req">
+            <div class="regular_visa_cont">
+                <img src="assets/images/regular.png" />
+            </div>
+            <div class="regular_visa_para">
+                <h4>Yes, a visa is required for your trip to {{of_country_name}}.</h4>
+                <p>
+                    Citizens of <span style="text-transform: capitalize;">{{from_country_name}} </span> must obtain a visa in advance. You have to apply for visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
+                its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink=
+                '/contact-us'>contact us</a>.
+                </p>
+            </div>
+        </div> 
+        <div class="below_country">
+            <p>
+<i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
         </div>
+</article>
+     <!--------------------- end Regular visa required ---------------->
+
+
     </div>
 </section>
 <section class="section_20 country_specification" *ngIf="visa_req_sec">
@@ -239,7 +268,7 @@
                     <div class="col-sm-12">
                         <article class="instruction">
                             <div>
-                                <h2 style="text-transform: capitalize;"><i class="fas fa-clipboard-list"></i> Documents Required for {{country_ctn}} Visa-</h2>
+                                <h2><i class="fas fa-clipboard-list"></i> Documents Required for <span style="text-transform: capitalize;">{{country_ctn}}</span> e-Visa</h2>
                             </div>
                             <ol style="padding-left:25px;">
                                 <li><span [innerHTML]="documents_req"></span></li>
@@ -257,7 +286,7 @@
                     <div class="col-sm-12">
                         <article class="instruction">
                             <div>
-                                <h2 style="text-transform: capitalize;"><i class="fas fa-paste"></i> Entry Requirements For {{country_ctn}} EVisa</h2>
+                                <h2><i class="fas fa-paste"></i> Entry Requirements for <span style="text-transform: capitalize;">{{country_ctn}}</span> e-Visa</h2>
                             </div>
                             <ol>
                                 <li><span [innerHTML]="visa_req"></span></li>
@@ -278,7 +307,6 @@
                                 <h2><i class="fas fa-question-circle"></i> FAQs</h2>
                             </div>
                             <div *ngFor="let f of faqQuestionAnswArry;">
-                                <!-- <label style="text-transform: capitalize;">Q. Define {{country_ctn}} ETA(Electronic Travel Authority)?</label> -->
                                 <ul class="faq_list">
                                     <li [innerHTML]="f.question"></li>
                                     <li [innerHTML]="f.answer"></li>
@@ -345,7 +373,7 @@
                                 <p style="margin-bottom:6px;">
                                     <strong>Website: </strong>
                                     <span *ngIf="details.lnthwebsite!=0">
-                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
+                                    <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
                                     </span>
                                     <span *ngIf="details.lnthwebsite==0">
                                     <span>NA</span>
@@ -354,10 +382,8 @@
                             </div>
                         </article>
                     </div>
-                    <div class="emb_location_div">
-                        <div class="map">
-                            <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
-                        </div>
+                    <div class="emb_location_div" >
+                        <div class="map" id="cnst_map__div_{{details.id}}"></div>
                     </div>
                 </div>
             </section>
@@ -404,7 +430,7 @@
                                 <p style="margin-bottom:6px;">
                                     <strong>Website: </strong>
                                     <span *ngIf="details.lnthwebsite!=0">
-                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
+                                    <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
                                     </span>
                                     <span *ngIf="details.lnthwebsite==0">
                                     <span>NA</span>
@@ -413,10 +439,8 @@
                             </div>
                         </article>
                     </div>
-                    <div class="emb_location_div">
-                        <div class="map">
-                            <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
-                        </div>
+                    <div class="emb_location_div" >
+                        <div class="map" id="emb_map__div_{{details.id}}"></div>
                     </div>
                 </div>
             </section>

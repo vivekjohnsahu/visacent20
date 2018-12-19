@@ -3,7 +3,7 @@
     <section class="table_section section_30">
         <div class="container table_data">
             <div class="main_heading main_heading_wbg">
-                <h1 class="table_h">Get Your {{inCountrySlugName}} Visa Online Now</h1>
+                <h1 class="table_h">Get your {{inCountrySlugName}} Visa Online Now</h1>
                 <span></span>
             </div>
             <div class="row">
@@ -153,10 +153,10 @@
                                                 <p>{{visaSummry.processing_time}}</p>
                                             </div>
                                         </div>
-                                    <div class="row">
+                                        <!-- <div class="row"> -->
                                             <!-- <div class="col-sm-6">
-                                                <p><label>Visa type</label>  </p>
-                                            </div> -->
+                                                    <p><label>Visa type</label>  </p>
+                                                </div> -->
                                             <!-- <div class="col-sm-6">
                                                 <p><label>
                                                     Tourist visa 
@@ -164,7 +164,7 @@
                                                     </label> 
                                                 </p>
                                             </div> -->
-                                        </div>
+                                        <!-- </div> -->
                                         <div class="row">
                                             <div class="col-sm-12">
                                             </div>
@@ -176,6 +176,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             <div [hidden]="!tableRequired" style="text-align: center;">
                                 <div class="no_visa_cont">
                                     <i class="fas fa-id-badge" style="color:#005ea5;"></i>
@@ -183,37 +184,68 @@
                                 <div class="errorshow">
                                     <p style="color:#333;font-size: 33px;text-transform: capitalize;">visa not required</p>
                                 </div>
-                            </div>     
+                            </div>  
+
                         </div>
                     </div>
             </div>
 
-            <!-- start visa not required icon -->
-            <div [hidden]="!tableRequired" class="no_visa_div">
-                <div class="no_visa_cont">
-                    <i class="fas fa-id-badge" style="color:#005ea5;"></i>
-                </div>
-                <div class="no_visa_para">
-                    <p>visa not required</p>
-                </div>
-            </div>
-            <!-- start visa not required icon -->
-
-
-
-            <div *ngIf="Errortable" class="citizen_quoute">
-                <p>
-                    <i class="fas fa-quote-left"></i> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
-                    {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation. <i class="fas fa-quote-left"></i>
-                </p> 
-            </div>
-
-
             
+
+
+
+ <!--------------------- start no visa required ---------------->
+    <div *ngIf="tableRequired" class="no_visa_req">
+        <div class="no_visa_req_icon">
+            <i class="far fa-smile-wink"></i>
+        </div>
+        <div class="no_visa_para">
+            <h4>Woow, No Tourist Visa required on your trip to {{travellingChangeName}}.</h4>
+            <p>
+                Citizens of <span>{{nationalityChangeName}}</span> do not require visas for travel to <span>{{travellingChangeName}}</span> and as it is one of the visa exempt countries.
+            </p>
+        </div>
+    </div>
+ <!--------------------- end no visa required ---------------->
+
+
+<!--  <div *ngIf="Errortable" class="citizen_quoute">
+    <p>
+        <i class="fas fa-quote-left"></i> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
+        {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation. <i class="fas fa-quote-left"></i>
+    </p> 
+</div> -->  
+
+<!--------------------- start Regular visa required ---------------->
+    <article *ngIf="Errortable">
+         <div class="regular_visa_req">
+            <div class="regular_visa_cont">
+                <img src="assets/images/regular.png" />
+            </div>
+            <div class="regular_visa_para">
+                <h4>Yes, a visa is required for your trip to {{travellingChangeName}}.</h4>
+                <p>
+                    Citizens of <span style="text-transform: capitalize;">{{nationalityChangeName}} </span> must obtain a visa in advance. You have to apply for visa through a <span style="text-transform: capitalize;">{{travellingChangeName}}</span> diplomatic mission or one of 
+                its authorized visa agents outside <span style="text-transform: capitalize;">{{travellingChangeName}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink=
+                '/contact-us'>contact us</a>.
+                </p>
+            </div>
+        </div>
+        <div class="below_country">
+            <p>
+<i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
+        </div> 
+    </article>
+
+     <!--------------------- end Regular visa required ---------------->
+
+
+
+
+
+
         </div>
     </section>
-    <div [hidden]="!tableRegular" style="text-align: center;">
-        <div class="errorshow" style="color:#333;">
                 <div [hidden]="!tableRegular" style="text-align: center;">
                     <div class="errorshow" style="color:#333;">
                         <div class="my1">
@@ -258,7 +290,7 @@
                                                 <p style="margin-bottom:6px;">
                                                     <strong>Website: </strong>
                                                     <span *ngIf="details.lnthwebsite!=0">
-                                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
+                                                    <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
                                                     </span>
                                                     <span *ngIf="details.lnthwebsite==0">
                                                     <span>NA</span>
@@ -267,10 +299,8 @@
                                             </div>
                                         </article>
                                     </div>
-                                    <div class="emb_location_div">
-                                        <div class="map">
-                                            <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
-                                        </div>
+                                    <div class="emb_location_div" >
+                                        <div class="map" id="cnst_map__div_{{details.id}}"></div>
                                     </div>
                                 </div>
                             </section>
@@ -317,7 +347,7 @@
                                                 <p style="margin-bottom:6px;">
                                                     <strong>Website: </strong>
                                                     <span *ngIf="details.lnthwebsite!=0">
-                                                    <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
+                                                    <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
                                                     </span>
                                                     <span *ngIf="details.lnthwebsite==0">
                                                     <span>NA</span>
@@ -326,18 +356,14 @@
                                             </div>
                                         </article>
                                     </div>
-                                    <div class="emb_location_div">
-                                        <div class="map">
-                                            <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
-                                        </div>
+                                    <div class="emb_location_div" >
+                                        <div class="map" id="emb_map__div_{{details.id}}"></div>
                                     </div>
                                 </div>
                             </section>
                         </div>
                     </div>
                 </div>
-        </div>
-    </div>
     <!-- <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 200px;padding-right: 200px;">
         <div class="errorshow">
             <p> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
@@ -353,7 +379,7 @@
                         <div class="col-sm-12">
                             <article class="instruction">
                                 <div>
-                                    <h2 style="text-transform: capitalize;"><i class="fas fa-clipboard-list"></i> Documents Required for {{country_ctn}} Visa-</h2>
+                                    <h2><i class="fas fa-clipboard-list"></i> Documents Required for <span style="text-transform: capitalize;">{{country_ctn}}</span> e-Visa</h2>
                                 </div>
                                 <ol style="padding-left:25px;">
                                     <li><span [innerHTML]="documents_req"></span></li>
@@ -371,7 +397,7 @@
                         <div class="col-sm-12">
                             <article class="instruction">
                                 <div>
-                                    <h2 style="text-transform: capitalize;"><i class="fas fa-paste"></i> Entry Requirements For {{country_ctn}} EVisa</h2>
+                                    <h2><i class="fas fa-paste"></i> Entry Requirements for <span style="text-transform: capitalize;">{{country_ctn}}</span> e-Visa</h2>
                                 </div>
                                 <ol>
                                     <li><span [innerHTML]="visa_req"></span></li>   

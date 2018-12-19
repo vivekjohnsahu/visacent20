@@ -87,8 +87,10 @@ export class VisaTableComponent implements OnInit {
 	consulateAd:any;
 	EmbassyAd:any;
 	Errortable:boolean;
+	country_ctn:any;
 	// of_country_name:any;
 	// from_country_name:any;
+	map:any;
 
   	ngOnInit(){
 		this.ngProgress.start();
@@ -154,6 +156,7 @@ export class VisaTableComponent implements OnInit {
 					this.travellingChangeName = data.to_country_name;
 					this.newTravellingCnt = this.inCountrySlugName;
 					this.requirementCountryName = this.travellingChange + '/' + this.nationalityChange;
+					this.country_ctn = data.to_country_name
 					// this.of_country_name = data.to_country_name;
 					// this.from_country_name = data.from_country_name;
 					// this.visa_flag = data.country_flag;
@@ -175,6 +178,7 @@ export class VisaTableComponent implements OnInit {
 						this.tableRequired = true;
 						this.tableRegular = false;
 						this.dataShow = false;
+						// return
 					}else{
 						this.Errortable = true;
 						this.tableShow = false;
@@ -211,14 +215,22 @@ export class VisaTableComponent implements OnInit {
 		this.requirementCountryName = this.travellingChange + '/' + this.nationalityChange;
 		this.countryTwo = this.country
 		let nationalityTwoPlaceObj = this.countryOne.filter(function(list){ return list.slug_country_name==listName.value;});
-        this.countryTwo = $.grep(this.countryTwo, function(item) { 
-            return item.name !== nationalityTwoPlaceObj[0].name;
+        this.countryTwo = $.grep(this.countryTwo, function(item) {	
+			if(nationalityTwoPlaceObj.length>0){
+				return item.name !== nationalityTwoPlaceObj[0].name;
+			}else{
+				return item.name;
+			}
 		});
 		this.snapOne()
 		this.topCntryTwo = this.topFiveCNtry;
 		let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-            return item.name !== nationalityTopTwoPlaceObj[0].name;
+			if(nationalityTopTwoPlaceObj.length>0){
+				return item.name !== nationalityTopTwoPlaceObj[0].name;
+			}else{
+				return item.name;
+			}
 		});
 		this.snapOne()	
 	}
@@ -247,13 +259,21 @@ export class VisaTableComponent implements OnInit {
 		this.countryOne = this.country
 		let nationalityOnePlaceObj = this.countryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.countryOne = $.grep(this.countryOne, function(item) { 
-            return item.name !== nationalityOnePlaceObj[0].name;
+			if(nationalityOnePlaceObj.length>0){
+				return item.name !== nationalityOnePlaceObj[0].name;
+			}else{
+				return item.name;
+			}
 		});
 		this.snapTwo()
 		this.topCntryOne = this.topFiveCNtry;
 		let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-            return item.name !== nationalityTopOnePlaceObj[0].name;
+			if(nationalityTopOnePlaceObj.length>0){
+				return item.name !== nationalityTopOnePlaceObj[0].name;
+			}else{
+				return item.name;
+			}
 		});
 		this.snapTwo()
 	}
@@ -362,8 +382,27 @@ export class VisaTableComponent implements OnInit {
 					}else{
 						this.countydetailsNew[i].lnthwebsite=0;	
 					}
+					var ctl= this;
+					setTimeout(function(){
+						ctl.setemb_map();
+					},2000);
 				}			
 			})
+	}
+
+	setemb_map(){
+		for(var i=0;i<this.EmbassyAd.length;i++){
+			var idd=this.EmbassyAd[i].id;
+			var rl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
+			$('#emb_map__div_'+idd).html(rl);
+		}
+
+		for(var i=0;i<this.consulateAd.length;i++){
+			var cidd=this.consulateAd[i].id;
+			var crl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
+			$('#cnst_map__div_'+cidd).html(crl);
+		}
+
 	}
 
 }

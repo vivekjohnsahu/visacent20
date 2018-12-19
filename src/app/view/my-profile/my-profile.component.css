@@ -43,6 +43,7 @@
             margin-left: auto;
             margin-right: auto;
     }
+    
 }
 
 
@@ -212,7 +213,7 @@
 	color: #acacac;
 	width: 100px;
     height:100px;
-    background-color: white;
+    background-color: #edeff1;
 	border-radius: 50%;
 	text-align: center;
 	line-height: 100px;
@@ -224,6 +225,10 @@
 	width:100%;
 	text-align:center;	
 	}
+.dash_div:hover h1 i
+{
+    color:#005ea5;
+}
 .dash_div>h3
 {
 	width:100%;
@@ -240,6 +245,15 @@
     margin-bottom: 0px;
     color:black;
 	}
+
+
+@media (max-width:730px)
+{
+    .dash_div>h1>i
+    {
+        background-color: white;
+        }
+}
 ul.a
 {
 	padding-left:15px;

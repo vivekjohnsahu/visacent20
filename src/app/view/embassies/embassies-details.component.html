@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="main_heading main_heading_wbg text-center">
-                        <h1 class="heading_in">{{countyNameOf}} Embassies in {{countyNameIn}}</h1>
+                        <h1 class="heading_in" style="text-transform: inherit!important;">{{countyNameOf}} Embassies in {{countyNameIn}}</h1>
                         <div class="hr_line"></div>
                         <p class="discription">{{countyNameOf}} Embassy office in {{countyNameIn}} is an office of communication between {{countyNameOf}} Government and {{countyNameIn}}.
                             It operates as the official representative of the {{countyNameOf}} in {{countyNameIn}}. The following is major information about {{countyNameOf}} Embassy for {{countyNameIn}} :
@@ -31,49 +31,83 @@
                         <h3><span>Address: </span></h3>
                         <p [innerHTML]="details.Address">
                         </p>
-                        <p style="margin-bottom:6px;">
-                            <strong>Phone: </strong>
-                            <span *ngIf="details.lnthTelepone!=0">
-                            <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
-                            </span>
+
+                        <div class="phone_box">
+                            <div class="left">
+                                <label>Phone:</label>
+                            </div>
+                            <div class="right">
+                                <p *ngIf="details.lnthTelepone!=0">
+                            <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1">
+                                <span [innerHTML]="portOne"></span><br></a>
+                            </p>
                             <span *ngIf="details.lnthTelepone==0">
                             <span>NA</span>
                             </span>
-                        <p style="margin-bottom:6px;">
-                            <strong>Fax: </strong>
-                            <span *ngIf="details.lnthFax!=0">
-                            <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
-                            </span> 
-                            <span *ngIf="details.lnthFax==0">
-                            <span>NA</span>
-                            </span>		
-                        </p>
-                        <p style="margin-bottom:6px;">
-                            <strong>Email: </strong>
-                            <span *ngIf="details.lnthE_maiil!=0">
-                            <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
-                            </span>
-                            <span *ngIf="details.lnthE_maiil==0">
-                            <span>NA</span>
-                            </span>
-                        </p>
-                        <p style="margin-bottom:6px;">
-                            <strong>Website: </strong>
-                            <span *ngIf="details.lnthwebsite!=0">
-                            <a href="http://{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"><br></span></a>
-                            </span>
-                            <span *ngIf="details.lnthwebsite==0">
-                            <span>NA</span>
-                            </span>
-                        </p>
+                            </div>
+                        </div>
+
+                        <div class="phone_box">
+                            <div class="left">
+                                <label>Fax:</label> 
+                            </div>
+                            <div class="right">
+                                <p style="margin-bottom:6px;" *ngIf="details.lnthFax!=0">
+                                    
+                                    <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
+                                    
+                                    <span *ngIf="details.lnthFax==0">
+                                        <span>NA</span>
+                                    </span>     
+                                </p>
+                            </div>
+                        </div>
+
+                        
+                        <div class="phone_box">
+                            <div class="left">
+                                <label>Email:</label>
+                            </div>
+                            <div class="right">
+                                <p style="margin-bottom:6px;" *ngIf="details.lnthE_maiil!=0">
+                                    
+                                    <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                    
+                                    <span *ngIf="details.lnthE_maiil==0">
+                                        <span>NA</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="phone_box">
+                            <div class="left">
+                                <label>Website:</label>
+                            </div>
+                            <div class="right">
+                                <p style="margin-bottom:6px;">
+                                    <span *ngIf="details.lnthwebsite!=0">
+                                    <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"><br></span></a>
+                                    </span>
+                                    <span *ngIf="details.lnthwebsite==0">
+                                    <span>NA</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        
+                        
                     </div>
                 </article>
             </div>
             <div class="emb_location_div">
-                <div class="map">
-                    <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=5%2C+Liang+Ma+Qiao+Bei+Jie+Chaoyang+District+Beijing+China&output=embed"></iframe>
-                </div>
+                <div class="map" id="emb_map__div_{{details.id}}"></div>
             </div>
+            <!-- <div class="emb_location_div" *ngIf="map!='' || map!=null">
+               <iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q=&output=embed"></iframe>
+            </div> -->
         </div>
     </section>
 </div>
@@ -215,11 +249,11 @@
             </form>
         </div>
     </section>
-    <section class="section_20" *ngIf="pade_error_show || pageHide">
+    <section class="section_20" style="padding:0px;" *ngIf="pade_error_show || pageHide">
         <div class="container">
-            <div>
-                <a class="my_btn" routerLink="/consulates-general/{{ofCountry}}-in-{{inCountry}}">
-                    <span style="text-transform: capitalize">{{countyNameOf}}</span> Consulates in <span style="text-transform: capitalize">{{countyNameIn}}</span>
+            <div class="link_btn">
+                <a routerLink="/consulates-general/{{ofCountry}}-in-{{inCountry}}">
+                    <i _ngcontent-c6="" class="fas fa-caret-right"></i>&nbsp;<span style="text-transform: capitalize">{{countyNameOf}}</span> Consulates in <span style="text-transform: capitalize">{{countyNameIn}}</span>
                 </a>
             </div>
         </div>

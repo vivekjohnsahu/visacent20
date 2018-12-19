@@ -123,7 +123,15 @@ button
 {
 	border-radius: 0px;
 }
-
+.modal-header .close 
+{
+    color: red;
+    font-size: 30px;
+}
+.modal-header .close:hover
+{
+    opacity: 1;
+}
 /*-------------------- start bootstrap modal ------------*/
 .modal-dialog 
 {
@@ -155,7 +163,8 @@ button
 	border-radius:0px;
 	width: 110px;
 }
-.width_auto{
+.width_auto
+{
 width: auto!important;
 }
 .my_btn:hover
@@ -182,7 +191,8 @@ width: auto!important;
 	background-color:red;
 	color:white!important;
 }
-.btn_sb{
+.btn_sb
+{
     background-color: #077080!important;
 }
 .navbar-left h1 .logo
@@ -239,8 +249,21 @@ width: auto!important;
 {
 	margin-top:10px;
 }*/
-
-
+.link_btn
+{
+	padding:15px 0px 25px 0px;
+}
+.link_btn>a
+{
+	display: inline-block;
+    font-size: 20px;
+    font-family: 'Hammersmith One';
+    color: #005ea5;
+}
+.link_btn>a:hover
+{
+	color:#888888;
+}
 
 
 
@@ -1160,6 +1183,21 @@ ul.emb_in
 {
 	font-size: 25px;
 }
+.phone_box
+{
+	width:100%;
+	overflow: hidden;
+}
+.phone_box>.left
+{
+	width:83px;
+	float: left;
+}
+.phone_box>.right
+{
+	width:calc(100% - 83px);
+	float: left;
+}
 /*------------------------------- end embassy page css ----------------------------*/
 .container_div
 {
@@ -1263,8 +1301,9 @@ ul.emb_in
 }
 .city_name h3 a
 {
-	Color:#333;
+	color:#333;
 	position:relative;
+	display: inline-block;
 }
 .city_name h3 a:before
 {
@@ -1395,7 +1434,7 @@ ul.emb_in
 }
 .sidebar a
 {
-    font-size:16px;
+    font-size:17px;
 }
 
 p.updating
@@ -1766,7 +1805,7 @@ ul.faq_ul ol li
 }
 .info_container>a>p
 {
-    max-height: 75px;
+    max-height: 43px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: justify;
@@ -2313,6 +2352,10 @@ ul.faq_ul ol li
 	color: black;
     font-family: lato;
     font-weight: bold;
+}
+.bonus_summary:hover .bonus_icon
+{
+	color:#005ea5;
 }
 .bonus_table table thead tr 
 {
@@ -3029,45 +3072,165 @@ ul.faq_ul ol li
 
 
 /*------------------- start no visa required icon --------------*/
-.no_visa_div
+
+/*-------------- start no visa required ---------------*/
+.no_visa_req
 {
 	text-align: center;
-	margin-top: 25px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
 }
-.no_visa_cont
+.no_visa_req_icon
 {
-    width:135px;
-    margin:15px auto 0px auto;
-    position:relative;
-    border-radius: 50%;
+    flex-basis: 130px;
+    color: #005ea5;
 }
-.no_visa_cont>i
-{
-    display:block;
-    width:100%;
-    height:100%;
-    
-}
-.no_visa_cont>i:first-child
+.no_visa_req_icon>i
 {
     display: block;
-    font-size: 85px;
-    background: white;
-    line-height: 135px;
-    text-align: center;
-    border-radius: 50%;
+    font-size: 90px;
+}
+.no_visa_para
+{
+	flex-basis: 500px;
+	text-align: justify;
+	padding-top:10px;
+}
+.no_visa_para>h4
+{
+	color: black;
 }
 .no_visa_para p
 {
 	margin-bottom: 0px;
-	color:#c8c9cb;
-	font-size: 33px;
-	text-transform: capitalize;
+}
+
+/*-------------- end no visa required ---------------*/
+
+
+/*------------ --- start regular visa required ---------*/
+.regular_visa_req
+{
+	text-align: center;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+.regular_visa_cont
+{
+    flex-basis: 130px;
+    margin-right:10px;
+}
+.regular_visa_cont>img
+{
+    width: 85%;
+    margin-top: 3px;
+}
+.regular_visa_para
+{
+	flex-basis: 500px;
+	text-align: justify;
+}
+.regular_visa_para>h4
+{
+	color: black;
+}
+.regular_visa_para>p
+{
+	font-size: 17px;
+	margin-bottom: 0px;
+}
+.below_country
+{
+	position: relative;
+	height: 20px;
+}
+.below_country>p
+{
+	position: absolute;
+    bottom: -27px;
+}
+
+/*------------ --- end regular visa required ---------*/
+
+
+
+
+
+
+@media (max-width:1000px)
+{
+	
+}
+@media (max-width:767px)
+{
+	 .no_visa_req,.regular_visa_req
+	 {
+	 	margin-top:0px;
+	 }
+	.no_visa_req_icon 
+	{
+	    flex-basis: 100px;
+	}
+	.no_visa_req_icon>i
+	{
+	    font-size: 70px;
+	}
+	.no_visa_para
+	{
+		flex-basis: 460px;
+		padding-top:0px;
+	}
+}
+@media (max-width:620px)
+{
+	.no_visa_req
+	{
+	    display: block;
+	}
+	.regular_visa_req
+	{
+	    display: block;
+	}
+	.no_visa_para,.regular_visa_para 
+	{
+	    text-align: justify;
+	    text-align-last: center;
+	    margin-top: 8px;
+	}
+	.regular_visa_cont>img 
+	{
+	    width: 75px;
+	}
 }
 /*------------------- end no visa required icon --------------*/
 
 
 
+/*----------------------- start other service ----------*/
+.web_link
+{
+	padding: 0px 5%;
+}
+.web_link ul
+{
+	padding-left: 0px;
+}
+.web_link ul li
+{
+    margin-top: 30px;
+}
+.web_link ul li h3
+{
+	color:#333;
+	font-size: 17px;
+}
+.web_link ul li p
+{
+	text-align: justify;
+}
+/*----------------------- end other service ----------*/
 
 
 
@@ -3304,6 +3467,18 @@ ul.faq_ul ol li
     {
         width:70%;
     }
+    .web_link
+	{
+		padding: 0px 0%;
+	}
+	.web_link ul 
+	{
+	    padding-left: 10px;
+	}
+	.web_link ul li h3 
+	{
+	    margin-bottom: 3px;
+	}
 }
 @media (max-width:991px) and (min-width:759px)
 {

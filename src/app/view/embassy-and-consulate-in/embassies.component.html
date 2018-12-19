@@ -7,7 +7,7 @@
 	<div class="section_20" style="background: rgba(0, 94, 165, 0.7);">
 		<div class="container">
 			<div class="main_heading">
-				<h1>Embassy And Consulate In {{countryname}} </h1>
+				<h1 style="text-transform: initial!important;">Embassy and Consulate in {{countryname}} </h1>
 				<span style="margin-bottom:0px;"></span>
 			</div>
 			<div class="row">
@@ -44,19 +44,18 @@
 <div class="container" *ngIf="!form==0">
   <div class="row">
     <div style="font-size: 18px;" class="col-md-10 col-md-offset-1">
-      <p style="text-align: center;">Here lists all <strong>Embassies and consular missions</strong> in {{countryname}} and all diplomatic and consular representations In {{countryname}}. There are total <strong>{{ttl_emb}}</strong> embassies, <strong>{{ttl_cons}}</strong> consulates and <strong>{{ttl_rep}}</strong> other representations in {{countryname}}.
+      <p style="text-align: center;">Here lists all overseas <strong>Embassies and consular missions </strong>all diplomatic and consular representations in {{countryname}} which promote friendly relations between {{countryname}} and its represented country. There are total <strong>{{ttl_emb}}</strong> embassies, <strong>{{ttl_cons}}</strong> Deputy High Commission / Consulates General / Consulates (including Honorary Consulates) and <strong>{{ttl_rep}}</strong> other representations (outside of the capital city) in {{countryname}}.
       Currently, {{countryname}} maintains <strong>{{ttl_emb_of}}</strong> embassies and high commissions abroad as well as <strong>{{ttl_cons_of}}</strong> consulates and<strong> {{ttl_rep_of}}</strong> other representations.
-    </p><p style="font-size: 12px;position: relative;top: -13px;float: right;">The page details was last updated on <strong>{{last_updated}}</strong></p>
+    </p><p style="font-size: 12px;position: relative;top: -13px;float: right;color:red">The page details were last updated on<strong>{{last_updated}}</strong></p>
     
     </div>
   </div>
 </div><br />
-
 <div class="container pg_" id="page-wrapper">
   <section style="padding:0px;">
       <div  class="row emb_in_row">
         <div *ngIf="details.is_embassy > 0" class="col-md-4 col-sm-6 col-xs-6">
-          <h2>Embassies In {{countryname}}</h2>
+          <h2>Embassies in {{countryname}}</h2>
           <h2 *ngIf="details.embassy['0'].length > 0"><span>A</span></h2>
           <ul class="emb_in" *ngFor="let city of details.embassy['0']" [hidden]="!(city.alpha=='A')">
             <li><a title="{{city.name}}" routerLink="/embassy/{{city.slug_name}}">{{city.name}}</a></li>
@@ -164,7 +163,7 @@
         </div>
 
         <div *ngIf="details.is_consulate > 0"  class="col-md-4 col-sm-6 col-xs-6">
-          <h2>Consulates In {{countryname}}</h2>
+          <h2>Consulates in {{countryname}}</h2>
           <h2 *ngIf="details.consulate['0'].length > 0"><span>A</span></h2>
           <ul class="emb_in" *ngFor="let city of details.consulate['0']" [hidden]="!(city.alpha=='A')">
             <li><a title="{{city.name}}" routerLink="/consulate-general/{{city.slug_name}}">{{city.name}}</a></li>
@@ -272,7 +271,7 @@
         </div>
 
         <div *ngIf="details.is_represent > 0" class="col-md-4 col-sm-6 col-xs-6 last_col">
-          <h2>Other Representations In {{countryname}}</h2>
+          <h2>Other Representations in {{countryname}}</h2>
           <!-- <div *ngIf="details.represent.length > 0"> -->
             <h2 *ngIf="details.represent['0'].length > 0"><span>A</span></h2>
             <ul class="emb_in" *ngFor="let city of details.represent['0']" [hidden]="!(city.alpha=='A')">

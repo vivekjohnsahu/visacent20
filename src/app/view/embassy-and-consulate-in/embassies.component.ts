@@ -126,16 +126,7 @@ export class EmbassiesComponent implements OnInit {
 			})
 		})
 		$('select > option:first').hide();
-	}
-
-
-   	removeMetaTags(){
-		this.meta.removeTag('name = "description"');        
-		this.meta.removeTag('name= "keywords"');
-		this.meta.removeTag('name = "title"');
-		let date: HTMLMetaElement = this.meta.getTag('name = "date"');
-		this.meta.removeTagElement(date);
-	}       
+	}     
 
 	changeCountry(id){
 		this.cntNamechange = id.value;

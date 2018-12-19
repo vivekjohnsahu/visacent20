@@ -101,14 +101,22 @@ export class HomePageComponent implements OnInit {
         this.nationality = listName.value;
         this.countryTwo = this.country
         let nationalityTwoPlaceObj = this.countryOne.filter(function(list){ return list.slug_country_name==listName.value;});
-        this.countryTwo = $.grep(this.countryTwo, function(item) { 
-            return item.name !== nationalityTwoPlaceObj[0].name;
+        this.countryTwo = $.grep(this.countryTwo, function(item) {
+			if(nationalityTwoPlaceObj.length>0){
+				return item.name !== nationalityTwoPlaceObj[0].name;
+			}else{
+				return item.name;
+			}
 		});
 		this.visaTable()
 		this.topCntryTwo = this.topFiveCNtry;
 		let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
 		this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-            return item.name !== nationalityTopTwoPlaceObj[0].name;
+			if(nationalityTopTwoPlaceObj.length>0){
+				return item.name !== nationalityTopTwoPlaceObj[0].name;
+			}else{
+				return item.name;
+			}
         });
         this.visaTable()
 	}

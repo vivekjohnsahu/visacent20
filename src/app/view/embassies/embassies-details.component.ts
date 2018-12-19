@@ -67,6 +67,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 	country_name_name:any;
 	country_name_f_replace:any;
 	country_name_s_replace:any;
+	map:any;
 
 	constructor(
 		private embOfInCountryService:EmbOfInCountryService,
@@ -101,12 +102,19 @@ export class EmbassiesDetailsComponent implements OnInit {
 						this.countydetailsNew = data.data;
 						this.countyNameOf = data.of_country;
 						this.countyNameIn = data.in_coutnry;
+						this.map = data.data.map
 						this.title.setTitle(''+this.countyNameOf+' Embassies in '+this.countyNameIn+'. Official representative of the '+this.countyNameOf+' in '+this.countyNameIn+'.');
 						this.meta.updateTag({ name:'title',content:''+this.countyNameOf+' Embassies in '+this.countyNameIn+'. Official representative of the '+this.countyNameOf+' in '+this.countyNameIn+'.'});
 						this.meta.updateTag({ name:'description',content:''+this.countyNameOf+' Embassies in '+this.countyNameIn+'. Official representative of the '+this.countyNameOf+' in '+this.countyNameIn+'. '+this.countyNameOf+' Embassies and Consulates located in '+this.countyNameIn+'. There are 9 embassies/high commissions and in addition 2 consulates of '+this.countyNameOf+' in '+this.countyNameIn+'.'});
 						this.meta.updateTag({ name:'keywords',content:''+this.countyNameOf+' Embassies in '+this.countyNameIn+'. Official representative of the '+this.countyNameOf+' in '+this.countyNameIn+'.'});
 
 						for(var i=0;i<this.countydetailsNew.length;i++){
+
+							if(this.countydetailsNew[i].maps=='' || this.countydetailsNew[i].maps==null)
+							{
+								this.countydetailsNew[i].maps=this.countydetailsNew[i].name;
+							}
+
 							if(this.countydetailsNew[i].Telepone!=null && $.trim(this.countydetailsNew[i].Telepone)!='' && $.trim(this.countydetailsNew[i].Telepone)!=' '){
 								this.phoneMulti = this.countydetailsNew[i].Telepone;
 								this.phoneM =this.phoneMulti.split('<br />');
@@ -148,6 +156,10 @@ export class EmbassiesDetailsComponent implements OnInit {
 							}
 						}
 					}
+					var cmt=this;
+					setTimeout(() => {
+						cmt.setemb_map()
+					}, 2000);
 						this.inCountry = data.in_country_slug_name;
 						this.ofCountry = data.of_country_slug_name;
 						this.btnName = this.countydetails.of_country;	
@@ -261,6 +273,14 @@ export class EmbassiesDetailsComponent implements OnInit {
 	}
 	ErrorRermoveEml(){
 		$('#email').removeClass('borderCls')
+	}
+
+	setemb_map(){
+		for(var i=0;i<this.countydetailsNew.length;i++){
+			var idd=this.countydetailsNew[i].id;
+			var rl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.countydetailsNew[i].maps+'&output=embed"></iframe>';
+			$('#emb_map__div_'+idd).html(rl);
+		}
 	}
 
 }

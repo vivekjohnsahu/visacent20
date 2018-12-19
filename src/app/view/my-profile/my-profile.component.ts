@@ -97,6 +97,8 @@ export class MyProfileComponent implements OnInit {
 	imageDownload:boolean;
 	image_Path:any;
 	userName:any;
+	withdraw_request:any;
+	withdraw_request1:boolean;
 	
 	constructor(
 		private router : ActivatedRoute,
@@ -186,14 +188,9 @@ export class MyProfileComponent implements OnInit {
 							this.number = this.number[1]
 						}
 
-						this.user_refferals = data.user_refferals;
-						if(this.user_refferals!==''){
-							this.user_refferals1 = this.user_refferals;
-						}
-
 						this.bonus_withdraw = data.bonus_withdraw;
 						if(this.bonus_withdraw!==''){
-							this.bonus_withdraw1 = data.bonus_withdraw
+							this.bonus_withdraw1 = data.bonus_withdraw;
 						}
 							
 					}else if(data.status == 'ERROR'){
@@ -284,6 +281,10 @@ userDas(){
 						this.available_bonus = data.available_bonus;
 						this.pending_amount = data.pending_amount;
 						this.total_page_bonus_ = data.total_bonus;
+						this.withdraw_request = data.withdraw_request;
+						if(this.withdraw_request!==''){
+							this.withdraw_request1 = data.bonus_withdraw;
+						}
 					}else if(data.status=="ERROR"){
 						// do nothing
 					}else{

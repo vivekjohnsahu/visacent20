@@ -70,6 +70,7 @@ export class ConsulateInComponent implements OnInit {
 	country_name_name:any;
 	country_name_f_replace:any;
 	country_name_s_replace:any;
+	map:any;
 
 	constructor(
 		private router : ActivatedRoute,
@@ -108,11 +109,19 @@ export class ConsulateInComponent implements OnInit {
 						this.multidateils = this.clickCountry.data;
 						this.multidateilsNew = this.clickCountry.data
 						let	consulateslength=data.data.length;
+						this.map = data.data.map
 						this.title.setTitle(''+this.of_name+' Consulates General in '+this.in_name+' and '+this.of_name+' all Consulates in '+this.in_name+'');
 						this.meta.updateTag({ name:'title',content:''+this.of_name+' Consulates General in '+this.in_name+' and '+this.of_name+' all Consulates in '+this.in_name+''});
 						this.meta.updateTag({ name:'description',content:'Search for '+this.of_name+' Consulates General and '+this.of_name+' Consulates & Other Representations in '+this.in_name+'. Get details like Addresses, telephone numbers, email addresses, websites. '+this.of_name+' have '+consulateslength+' Consulates General in '+this.in_name+' and in addition there are complete Consulates/high commissions and complete other representations.'});
 						this.meta.updateTag({ name:'keywords',content:''+this.of_name+' Consulates General in '+this.in_name+', '+this.of_name+' all Consulates in '+this.in_name+', '+this.of_name+' Consulates in '+this.in_name+', '+this.of_name+' Consulates & Other Representations in '+this.in_name+'.'});
+						
 						for(var i=0;i<this.multidateilsNew.length;i++){
+
+							if(this.multidateilsNew[i].maps=='' || this.multidateilsNew[i].maps==null)
+							{
+								this.multidateilsNew[i].maps=this.multidateilsNew[i].name;
+							}
+
 							if(this.multidateilsNew[i].Telepone!=null && $.trim(this.multidateilsNew[i].Telepone)!='' && $.trim(this.multidateilsNew[i].Telepone)!=' '){ 
 								this.phoneMulti = this.multidateilsNew[i].Telepone;
 								this.phoneM = this.phoneMulti.split('<br />');
@@ -153,6 +162,12 @@ export class ConsulateInComponent implements OnInit {
 								this.multidateilsNew[i].lnthWebsite=0;	
 							}
 						}
+
+						var cmt=this;
+						setTimeout(() => {
+							cmt.setemb_map()
+						}, 2000);
+						
 					}
 				}else if(data.status == 'ERROR'){
 					this.ngProgress.done();
@@ -265,5 +280,12 @@ export class ConsulateInComponent implements OnInit {
 		$('#email').removeClass('borderCls')
 	}
 
+	setemb_map(){
+		for(var i=0;i<this.multidateilsNew.length;i++){
+			var idd=this.multidateilsNew[i].id;
+			var rl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.multidateilsNew[i].maps+'&output=embed"></iframe>';
+			$('#emb_map__div_'+idd).html(rl);
+		}
+	}
 
 }
