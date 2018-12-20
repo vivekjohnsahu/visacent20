@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { FlagValueService } from '../../services/flagValue/flag-value.service'
 import { PaymentGateService } from '../../services/payment_gate/payment-gate.service'
 import { ActivatedRoute, Router } from '@angular/router';
+import { Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-make-payment',
@@ -42,8 +43,15 @@ export class MakePaymentComponent implements OnInit {
 		private paymentGateService:PaymentGateService,
 		private router : ActivatedRoute,
 		private routers : Router,
+		private meta: Meta,
+		private title:Title
+
 	  ) { 
-		this.flagDrop = this.flagValueService.flagMethod()	
+		this.flagDrop = this.flagValueService.flagMethod()
+		this.title.setTitle('Make Online Payment, Online Visa payment, Apply e-Visa');
+		this.meta.updateTag({ name:'title',content:'Make Online Payment, Online Visa payment, Apply e-Visa'});
+		this.meta.updateTag({ name:'description',content:'Make Online Payment, Online Visa payment, Apply e-Visa'});
+		this.meta.updateTag({ name:'keywords',content:'Make Secure Online Payment, Online Visa payment, Apply e-Visa'});	
 	  }
 
 	ngOnInit() {

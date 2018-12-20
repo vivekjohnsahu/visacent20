@@ -256,13 +256,12 @@ width: auto!important;
 .link_btn>a
 {
 	display: inline-block;
-    font-size: 20px;
-    font-family: 'Hammersmith One';
-    color: #005ea5;
-}
-.link_btn>a:hover
-{
-	color:#888888;
+    font-size: 17px;
+    color: #ffffff;
+    background-color: #005ea5;
+    padding: 5px 10px;
+    box-shadow: 0px 2px 2px #00000030;
+    text-align:center;
 }
 
 
@@ -1198,7 +1197,34 @@ ul.emb_in
 	width:calc(100% - 83px);
 	float: left;
 }
+
+.no_embassy_content
+{
+	width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+.no_embassy_content>.p1
+{
+	color: black;
+    font-size: 19px;
+    font-family: 'Hammersmith One';
+}
+.no_embassy_content>ul
+{
+	display: inline-block;
+    font-size: 17px;
+    list-style-type: none;
+    color: black;
+}
+.no_embassy_content>.p2
+{
+	font-size: 20px;
+	margin-bottom: 5px;
+	color: #005ea5;
+}
 /*------------------------------- end embassy page css ----------------------------*/
+
 .container_div
 {
 	/*background-color: #EDEFF1;
@@ -1805,7 +1831,7 @@ ul.faq_ul ol li
 }
 .info_container>a>p
 {
-    max-height: 43px;
+    max-height: 46px;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: justify;
@@ -3203,6 +3229,19 @@ ul.faq_ul ol li
 	{
 	    width: 75px;
 	}
+	.no_embassy_content 
+	{
+	    text-align: justify;
+	    text-align-last:center;
+	}
+	.no_embassy_content>ul
+	{
+		display: block;
+	    text-align: left;
+	    text-align-last:left;
+	    padding-left: 0px;
+	}
+	
 }
 /*------------------- end no visa required icon --------------*/
 
@@ -3216,6 +3255,7 @@ ul.faq_ul ol li
 .web_link ul
 {
 	padding-left: 0px;
+	margin-top:35px;
 }
 .web_link ul li
 {
@@ -3224,7 +3264,7 @@ ul.faq_ul ol li
 .web_link ul li h3
 {
 	color:#333;
-	font-size: 17px;
+	font-size: 20px;
 }
 .web_link ul li p
 {
@@ -3305,6 +3345,10 @@ ul.faq_ul ol li
     {
         background: white;
     }
+    .no_embassy_content
+	{
+		width: 100%;
+	}
 }
 @media (max-width:1240px)
 {

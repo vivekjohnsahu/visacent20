@@ -66,6 +66,9 @@ export class ApplyEVisaComponent implements OnInit {
 	visaReqNead:any;
 	visaReq1:any;
 	pageName:any;
+	to_country_alternate_name:any;
+	from_country_alternate_name:any;
+	visaTypeName:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -76,7 +79,12 @@ export class ApplyEVisaComponent implements OnInit {
 		private meta: Meta,
 		private title:Title,
 		private embassiesCityDetailsService:EmbassiesCityDetailsService
-	) {}
+	) {
+		this.title.setTitle('Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas');
+		this.meta.updateTag({ name:'title',content:'Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas'});
+		this.meta.updateTag({ name:'description',content:'Apply for a Visa, Online Visa Application, Expedited Visa Services, Most Sought Visas, apply business and tourist visa, visa and immigration services, visa processing services, expedited visa services, apply for an expedited visa services, visa company, expedited business visa services, tourist expedited visa services, international visa services, myvisa visa services'});
+		this.meta.updateTag({ name:'keywords',content:'Apply for a Visa, Online Visa Application, Most Sought Visas. VisaCent commits to deliver open information on visa requirements for all the countries.'});
+	}
 
 	ngOnInit() {
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -359,6 +367,8 @@ export class ApplyEVisaComponent implements OnInit {
 					this.cnt_emb=false;
 					this.of_country_name = data.to_country_name;
 					this.from_country_name = data.from_country_name;
+					this.from_country_alternate_name = data.from_country_alternate_name;
+					this.to_country_alternate_name = data.to_country_alternate_name;
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
@@ -369,6 +379,11 @@ export class ApplyEVisaComponent implements OnInit {
 						this.country_ctn = data.to_country_name
 						if(this.visaApplyTbl[0].visa_type!= 0){
 							this.con_visa_req_sec = false;
+							if(this.visaApplyTbl.length>1){
+								this.visaTypeName = this.visaApplyTbl[0].visa_type+', '+this.visaApplyTbl[1].visa_type
+							}else{
+								this.visaTypeName = this.visaApplyTbl[0].visa_type
+							}
 							var cnt_id = data.to_country_slug_name;
 							this.tableViasaToggle = true;
 							this.tableRequired = false;
@@ -521,49 +536,40 @@ export class ApplyEVisaComponent implements OnInit {
 		}
 
 		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
-			this.title.setTitle('Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.of_country_name+' Visa from '+this.from_country_name+'');
-			this.meta.updateTag({ name:'title',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.of_country_name+' Visa from '+this.from_country_name+''});	
-			this.meta.updateTag({ name:'description',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.of_country_name+' Visa from '+this.from_country_name+'. Apply for '+this.of_country_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
-			this.meta.updateTag({ name:'keywords',content: 'No eVisa available for '+this.from_country_name+', Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', Visa through a '+this.of_country_name+' diplomatic mission, '+this.of_country_name+' regular Visa'});
+			this.title.setTitle('Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.to_country_alternate_name+' Visa from '+this.from_country_name+'');
+			this.meta.updateTag({ name:'title',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.to_country_alternate_name+' Visa from '+this.from_country_name+''});	
+			this.meta.updateTag({ name:'description',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.to_country_alternate_name+' Visa from '+this.from_country_name+'. Apply for '+this.to_country_alternate_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'No eVisa available for '+this.from_country_name+', Apply for '+this.to_country_alternate_name+' regular Visa, '+this.to_country_alternate_name+' Visa application from '+this.from_country_name+', Visa through a '+this.of_country_name+' diplomatic mission, '+this.to_country_alternate_name+' regular Visa'});
 		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
 			this.title.setTitle('No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.');
 			this.meta.updateTag({ name:'title',content:'No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});	
 			this.meta.updateTag({ name:'description',content:'hey, No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});
-			this.meta.updateTag({ name:'keywords',content: 'No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+', No '+this.of_country_name+' Visa, Visa free.'});
+			this.meta.updateTag({ name:'keywords',content: 'No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+', No '+this.to_country_alternate_name+' Visa, Visa free.'});		
 		}else{
-			this.title.setTitle( 'Apply '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online from '+this.from_country_name+'');
-			this.meta.updateTag({ name:'title',content: 'Apply '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online from '+this.from_country_name+''});	
-			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa, Apply for '+this.of_country_name+' eVisa application online, '+this.from_country_name+'ese Citizens can apply online for '+this.of_country_name+' e-visa. show first visa type, show second visa type,'});
-			this.meta.updateTag({ name:'keywords',content: 'Apply '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online from '+this.from_country_name+', '+this.of_country_name+' eVisa, show first visa type, show second visa type'});	
+			this.title.setTitle('Apply '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.to_country_alternate_name+' eVisa online from '+this.from_country_name+'');
+			this.meta.updateTag({ name:'title',content: 'Apply '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.to_country_alternate_name+' eVisa online from '+this.from_country_name+''});	
+			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa, Apply for '+this.to_country_alternate_name+' eVisa application online, '+this.from_country_alternate_name+'ese Citizens can apply online for '+this.to_country_alternate_name+' e-visa. '+this.visaTypeName});
+			this.meta.updateTag({ name:'keywords',content: 'Apply '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.to_country_alternate_name+' eVisa online from '+this.from_country_name+', '+this.to_country_alternate_name+' eVisa, '+this.visaTypeName});		
 		}
 	}
 
 	applyVisaTool(){
-
 		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
 			this.title.setTitle('Visa requirements Check, A regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.');
 			this.meta.updateTag({ name:'title',content:'Visa requirements Check, A regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});	
 			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, A '+this.of_country_name+' regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});
 			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', A regular Visa from '+this.from_country_name+'.'});	
 		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
-
 			this.title.setTitle('Visa requirements Check, No Visa required from '+this.from_country_name+' to travel '+this.of_country_name+'.');
 			this.meta.updateTag({ name:'title',content:'Visa requirements Check, No Visa required from '+this.from_country_name+' to travel '+this.of_country_name+'.'});	
 			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, No '+this.of_country_name+' Visa required from '+this.from_country_name+' to travel '+this.of_country_name+'.'});
 			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', No Visa from '+this.from_country_name+'.'});	
-
 		}else{
-
 			this.title.setTitle('Visa requirements Check, A eVisa from '+this.from_country_name+' to travel '+this.of_country_name+' required.');
 			this.meta.updateTag({ name:'title',content:'Visa requirements Check, A eVisa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});	
 			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, A '+this.of_country_name+' eVisa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});
-			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', A eVisa from '+this.from_country_name+'.'});	
-
-			
-		}
-
-
-		
+			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', A eVisa from '+this.from_country_name+'.'});		
+		}	
 	}
 
 }

@@ -99,42 +99,42 @@ export class HomePageComponent implements OnInit {
 	changeShapeOne(listName){
         this.loaderShow_second = true;
         this.nationality = listName.value;
-        this.countryTwo = this.country
-        let nationalityTwoPlaceObj = this.countryOne.filter(function(list){ return list.slug_country_name==listName.value;});
-        this.countryTwo = $.grep(this.countryTwo, function(item) {
-			if(nationalityTwoPlaceObj.length>0){
-				return item.name !== nationalityTwoPlaceObj[0].name;
-			}else{
-				return item.name;
-			}
-		});
-		this.visaTable()
-		this.topCntryTwo = this.topFiveCNtry;
-		let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-			if(nationalityTopTwoPlaceObj.length>0){
-				return item.name !== nationalityTopTwoPlaceObj[0].name;
-			}else{
-				return item.name;
-			}
-        });
+        // this.countryTwo = this.country
+        // let nationalityTwoPlaceObj = this.countryOne.filter(function(list){ return list.slug_country_name==listName.value;});
+        // this.countryTwo = $.grep(this.countryTwo, function(item) {
+		// 	if(nationalityTwoPlaceObj.length>0){
+		// 		return item.name !== nationalityTwoPlaceObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+		// });
+		// this.visaTable()
+		// this.topCntryTwo = this.topFiveCNtry;
+		// let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
+		// 	if(nationalityTopTwoPlaceObj.length>0){
+		// 		return item.name !== nationalityTopTwoPlaceObj[0].name;
+		// 	}else{
+		// 		return item.name;
+		// 	}
+        // });
         this.visaTable()
 	}
 	
 	changeShapeTwo(listName){
 		this.loaderShow_first = true;
 		this.travelling = listName.value;
-		this.countryOne = this.country
-		let nationalityOnePlaceObj = this.countryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.countryOne = $.grep(this.countryOne, function(item) { 
-            return item.name !== nationalityOnePlaceObj[0].name;
-		});
-		this.visaTable()
-		this.topCntryOne = this.topFiveCNtry;
-		let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
-		this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-            return item.name !== nationalityTopOnePlaceObj[0].name;
-        });
+		// this.countryOne = this.country
+		// let nationalityOnePlaceObj = this.countryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.countryOne = $.grep(this.countryOne, function(item) { 
+        //     return item.name !== nationalityOnePlaceObj[0].name;
+		// });
+		// this.visaTable()
+		// this.topCntryOne = this.topFiveCNtry;
+		// let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
+		// this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+        //     return item.name !== nationalityTopOnePlaceObj[0].name;
+        // });
         this.visaTable()
 	}
 

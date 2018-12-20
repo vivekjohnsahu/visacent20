@@ -46,7 +46,7 @@
     <div style="font-size: 18px;" class="col-md-10 col-md-offset-1">
       <p style="text-align: center;">Here lists all overseas <strong>Embassies and consular missions </strong>all diplomatic and consular representations in {{countryname}} which promote friendly relations between {{countryname}} and its represented country. There are total <strong>{{ttl_emb}}</strong> embassies, <strong>{{ttl_cons}}</strong> Deputy High Commission / Consulates General / Consulates (including Honorary Consulates) and <strong>{{ttl_rep}}</strong> other representations (outside of the capital city) in {{countryname}}.
       Currently, {{countryname}} maintains <strong>{{ttl_emb_of}}</strong> embassies and high commissions abroad as well as <strong>{{ttl_cons_of}}</strong> consulates and<strong> {{ttl_rep_of}}</strong> other representations.
-    </p><p style="font-size: 12px;position: relative;top: -13px;float: right;color:red">The page details were last updated on<strong>{{last_updated}}</strong></p>
+    </p><p style="font-size: 12px;position: relative;top: -13px;float: right;">The page details were last updated on <strong>{{last_updated}}</strong></p>
     
     </div>
   </div>
@@ -386,24 +386,29 @@
   </div> <!-- /container -->
 </section>
 <span style="display: none;" id="spn_ip"></span>
+
+
 <section *ngIf="form==0" class="section_30">
   <div class="container datafound scroll_msg">
-      <div>
-          <p style="text-align: left;width: 65%;margin-left: auto;margin-right: auto;">We maintain lists that contains the addresses, telephone numbers, email addresses, website addresses and more information for 
-              all types of diplomatic and consular missions around the world. The list as…<br>
-          </p>
-          <div style="font-size: 16px;text-align: left;margin-left: auto;margin-right: auto;width: 57%;">
-              1. The Embassies and High Commissions,<br>
-              2. Consulates-General<br>
-              3. Other Representations<br><br>
-          </div>
-          <div style="font-size: 16px;text-align: left;margin-left: auto;margin-right: auto;width: 65%;">
-              We try to update regularly directory of embassies, consulates and other diplomatic representations. 
-          </div><br>
-          <div style="text-align: center;font-size: 22px; margin-left: auto;margin-right: auto;width: 68%;color: #055ea5;">
-              Sorry, we don't have any detail regarding <strong style="text-transform: capitalize;"> {{countryname}}</strong>. If you have any detail, please send us.
-          </div>              
-      </div>
+
+  <div class="no_embassy_content">
+      <p class="p1">
+        We maintain lists that contains the addresses, telephone numbers, email addresses, website addresses and more information for 
+              all types of diplomatic and consular missions around the world. The list as…
+      </p>
+      <ul>
+          <li>1. The Embassies and High Commissions</li>
+          <li>2. Consulates-General</li>
+          <li>3. Other Representations</li>
+      </ul>
+      <p class="p2">
+        We try to update regularly directory of embassies, consulates and other diplomatic representations.
+      </p>
+      <p class="p3">
+        Sorry, we don't have any detail regarding <strong style="text-transform: capitalize;"> {{countryname}}</strong>. If you have any detail, please send us.
+      </p>
+  </div>
+
       <form class="user_emabassy" style="position:relative;"> 
           
           <div class="my_alert my_alert_pos myalert" *ngIf="success_msg_error">

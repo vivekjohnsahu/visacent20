@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { LoginService } from '../../services/login/login.service'
 import { ActivatedRoute, Router } from '@angular/router';
+import { Meta, Title} from '@angular/platform-browser';
+
+
+
 
 @Component({
   selector: 'app-login',
@@ -15,6 +19,8 @@ export class LoginComponent implements OnInit {
 	(
 		private loginService:LoginService,
 		private router : Router,
+		private meta: Meta,
+		private title:Title
 	) 
 	{
 		var user = JSON.parse(localStorage.getItem('user'));
@@ -48,6 +54,12 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
 		$('#profile_trans').hide();
+
+		this.title.setTitle('Login to Visacent account | Apply for a Visa | Visacent');
+		this.meta.updateTag({ name:'title',content:'Login to Visacent account | Apply for a Visa | Visacent'});
+		this.meta.updateTag({ name:'description',content:'Login to Visacent account | Apply for a Visa | Visacent'});
+		this.meta.updateTag({ name:'keywords',content:'Login to Visacent account | Apply for a Visa | Visacent'});
+
 	}
 	
 	loginUser(){

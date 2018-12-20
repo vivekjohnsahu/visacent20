@@ -260,8 +260,14 @@
                                                 <h3><span>Address: </span></h3>
                                                 <p [innerHTML]="details.Address">
                                                 </p>
+
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Phone:</label>
+                                            </div>
+                                            <div class="right">
                                                 <p style="margin-bottom:6px;">
-                                                    <strong>Phone: </strong>
+                                                    <strong> </strong>
                                                     <span *ngIf="details.lnthTelepone!=0">
                                                     <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
                                                     </span>
@@ -269,17 +275,32 @@
                                                     <span>NA</span>
                                                     </span>
                                                 </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Fax:</label>
+                                            </div>
+                                            <div class="right">
                                                 <p style="margin-bottom:6px;">
-                                                    <strong>Fax: </strong>
+                                                    <strong> </strong>
                                                     <span *ngIf="details.lnthFax!=0">
                                                     <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span></a>
                                                     </span> 
                                                     <span *ngIf="details.lnthFax==0">
                                                     <span>NA</span>
-                                                    </span>		
+                                                    </span>     
                                                 </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Email:</label>
+                                            </div>
+                                            <div class="right">
                                                 <p style="margin-bottom:6px;">
-                                                    <strong>Email: </strong>
                                                     <span *ngIf="details.lnthE_maiil!=0">
                                                     <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                                                     </span>
@@ -287,8 +308,15 @@
                                                     <span>NA</span>
                                                     </span>
                                                 </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Website:</label>
+                                            </div>
+                                            <div class="right">
                                                 <p style="margin-bottom:6px;">
-                                                    <strong>Website: </strong>
                                                     <span *ngIf="details.lnthwebsite!=0">
                                                     <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span></a>
                                                     </span>
@@ -297,6 +325,8 @@
                                                     </span>
                                                 </p>
                                             </div>
+                                        </div>
+                                    </div>
                                         </article>
                                     </div>
                                     <div class="emb_location_div" >
@@ -317,42 +347,72 @@
                                                 <h3><span>Address: </span></h3>
                                                 <p [innerHTML]="details.Address">
                                                 </p>
-                                                <p style="margin-bottom:6px;">
-                                                    <strong>Phone: </strong>
-                                                    <span *ngIf="details.lnthTelepone!=0">
-                                                    <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
-                                                    </span>
-                                                    <span *ngIf="details.lnthTelepone==0">
-                                                    <span>NA</span>
-                                                    </span>
-                                                </p>
-                                                <p style="margin-bottom:6px;">
-                                                    <strong>Fax: </strong>
-                                                    <span *ngIf="details.lnthFax!=0">
-                                                    <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
-                                                    </span> 
-                                                    <span *ngIf="details.lnthFax==0">
-                                                    <span>NA</span>
-                                                    </span>		
-                                                </p>
-                                                <p style="margin-bottom:6px;">
-                                                    <strong>Email: </strong>
-                                                    <span *ngIf="details.lnthE_maiil!=0">
-                                                    <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
-                                                    </span>
-                                                    <span *ngIf="details.lnthE_maiil==0">
-                                                    <span>NA</span>
-                                                    </span>
-                                                </p>
-                                                <p style="margin-bottom:6px;">
-                                                    <strong>Website: </strong>
-                                                    <span *ngIf="details.lnthwebsite!=0">
-                                                    <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
-                                                    </span>
-                                                    <span *ngIf="details.lnthwebsite==0">
-                                                    <span>NA</span>
-                                                    </span>
-                                                </p>
+
+                                                <div class="phone_box">
+                                                    <div class="left">
+                                                        <label>Phone:</label>
+                                                    </div>
+                                                    <div class="right">
+                                                        <p style="margin-bottom:6px;">
+                                                            <span *ngIf="details.lnthTelepone!=0">
+                                                            <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
+                                                            </span>
+                                                            <span *ngIf="details.lnthTelepone==0">
+                                                            <span>NA</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="phone_box">
+                                                    <div class="left">
+                                                        <label>Fax:</label>
+                                                    </div>
+                                                    <div class="right">
+                                                        <p style="margin-bottom:6px;">
+                                                            <strong> </strong>
+                                                            <span *ngIf="details.lnthFax!=0">
+                                                            <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
+                                                            </span> 
+                                                            <span *ngIf="details.lnthFax==0">
+                                                            <span>NA</span>
+                                                            </span>     
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="phone_box">
+                                                    <div class="left">
+                                                        <label>Email:</label>
+                                                    </div>
+                                                    <div class="right">
+                                                        <p style="margin-bottom:6px;">
+                                                            <span *ngIf="details.lnthE_maiil!=0">
+                                                            <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                                            </span>
+                                                            <span *ngIf="details.lnthE_maiil==0">
+                                                            <span>NA</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="phone_box">
+                                                    <div class="left">
+                                                        <label>Website:</label>
+                                                    </div>
+                                                    <div class="right">
+                                                        <p style="margin-bottom:6px;">
+                                                            <strong> </strong>
+                                                            <span *ngIf="details.lnthwebsite!=0">
+                                                            <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
+                                                            </span>
+                                                            <span *ngIf="details.lnthwebsite==0">
+                                                            <span>NA</span>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </article>
                                     </div>

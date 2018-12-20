@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { VisaStatusService } from '../../services/visa-stutas/visa-status.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Meta, Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-visa-status',
@@ -30,7 +31,15 @@ export class VisaStatusComponent implements OnInit {
 		private visaStatusService:VisaStatusService,
 		private routers : Router,
 		private router : ActivatedRoute,
-	) { }
+		private meta: Meta,
+		private title:Title
+
+	) { 
+		this.title.setTitle('Check Visa Status | Your Visa Application Status | Visa Application enquiry');
+		this.meta.updateTag({ name:'title',content:'Check Visa Status | Your Visa Application Status | Visa Application enquiry.'});
+		this.meta.updateTag({ name:'description',content:'Check your visa application status. You can track your visa status and process simply login with your application id. e-visa status can be used to know about visa status.'});
+		this.meta.updateTag({ name:'keywords',content:'Check Visa Status, Your Visa Application Status, Visa Application enquiry'});
+	}
 
 	ngOnInit() {
 		$('#profile_trans').hide();

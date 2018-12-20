@@ -16,9 +16,10 @@ export class RefferalComponent implements OnInit {
 	  private meta: Meta,
 	  private title:Title
   ) { 
-	this.title.setTitle('Refer a Friend || Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas');
-	this.meta.updateTag({ name:'title',content:'Refer a Friend || Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas'});	
-	
+	this.title.setTitle('Make money through network, invite your friends, Earn $10 for refer');
+	this.meta.updateTag({ name:'title',content:'Make money through network, invite your friends, Earn $10 for refer'});	
+	this.meta.updateTag({ name:'description',content:'Make money through your network, invite your friends and Earn $10 for every new applicant you refer, Nobody can tell the our story better than our customers. Get a friend to start apply for a visa today and earn $10 when they complete their first application. '});
+	this.meta.updateTag({ name:'keywords',content:'Make money through network, invite your friends, Earn $10 for refer'});	  
   }
 
   email:any;

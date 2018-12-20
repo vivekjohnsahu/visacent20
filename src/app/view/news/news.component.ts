@@ -28,7 +28,7 @@ import { Meta, Title} from '@angular/platform-browser';
 	newsList:any;
 
 	pages : any = [];
-	pageSize =2;
+	pageSize =3;
 	pageNumber : number = 0;
 	currentPage : number = 0;
 	pagesIndex : Array<number>;

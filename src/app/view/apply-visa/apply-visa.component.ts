@@ -67,6 +67,9 @@ export class ApplyVisaComponent implements OnInit {
 	selectCountry:any;
 	NewvisaReq:any;
 	flagCnt=0;
+	from_country_alternate_name:any;
+	to_country_alternate_name:any;
+	visaTypeName:any;
 
   	ngOnInit() {
 		this.ngProgress.start();
@@ -172,6 +175,8 @@ export class ApplyVisaComponent implements OnInit {
 			data => {
 				this.of_country_name = data.to_country_name;
 				this.from_country_name = data.from_country_name;
+				this.from_country_alternate_name = data.from_country_alternate_name;
+				this.to_country_alternate_name = data.to_country_alternate_name;
 				this.visa_flag = data.country_flag;
 				if(data.status=='SUCCUSS'){
 					this.ngProgress.done();
@@ -182,6 +187,11 @@ export class ApplyVisaComponent implements OnInit {
 						this.tableRequired = false;
 						this.tableRegular = true; 
 					}else if(this.visaApplyTbl[0].visa_type!= 0){
+						if(this.visaApplyTbl.length>1){
+							this.visaTypeName = this.visaApplyTbl[0].visa_type+', '+this.visaApplyTbl[1].visa_type
+						}else{
+							this.visaTypeName = this.visaApplyTbl[0].visa_type
+						}
 						this.tableViasaToggle = true;
 						this.tableRequired = false;
 						this.tableRegular = false;
@@ -301,23 +311,22 @@ export class ApplyVisaComponent implements OnInit {
 			$('#cnst_map__div_'+cidd).html(crl);
 		}
 	}
-
 	metaTags(){
-		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
-			this.title.setTitle('Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online');
-			this.meta.updateTag({ name:'title',content:'Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online'});	
-			this.meta.updateTag({ name:'description',content:'Apply for '+this.of_country_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
-			this.meta.updateTag({ name:'keywords',content: 'Apply for '+this.of_country_name+' regular Visa, '+this.of_country_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online, visa through a '+this.of_country_name+' diplomatic mission, '+this.of_country_name+' regular Visa'});
+		if(this.visaApplyTbl.length==0 || this.visaApplyTbl.length==2 || this.visaApplyTbl[0].visa_required!='0'){
+			this.title.setTitle('Apply for '+this.to_country_alternate_name+' regular Visa, '+this.to_country_alternate_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online');
+			this.meta.updateTag({ name:'title',content:'Apply for '+this.to_country_alternate_name+' regular Visa, '+this.to_country_alternate_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online'});	
+			this.meta.updateTag({ name:'description',content:'Apply for '+this.to_country_alternate_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'Apply for '+this.to_country_alternate_name+' regular Visa, '+this.to_country_alternate_name+' Visa application from '+this.from_country_name+', '+this.of_country_name+' Visa online, visa through a '+this.of_country_name+' diplomatic mission, '+this.to_country_alternate_name+' regular Visa'});
 		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
 			this.title.setTitle(''+this.from_country_name+' Citizens do not required a visa to travel '+this.of_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.');
 			this.meta.updateTag({ name:'title',content:''+this.from_country_name+' Citizens do not required a visa to travel '+this.of_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});	
 			this.meta.updateTag({ name:'description',content:'Good news, '+this.of_country_name+' Citizens do not required a visa to travel United State of America. No Visa visa required to travel to United State of America.'});
 			this.meta.updateTag({ name:'keywords',content: ''+this.of_country_name+' visa for '+this.from_country_name+', '+this.from_country_name+' Citizens travel '+this.of_country_name+', No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});
 		}else{
-			this.title.setTitle( 'Apply for '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online');
-			this.meta.updateTag({ name:'title',content: 'Apply for '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online'});	
-			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa online, '+this.from_country_name+' Citizens can get e-visa for '+this.of_country_name+' online, '+this.of_country_name+' visa for '+this.from_country_name+', show first visa type, show second visa type.'});
-			this.meta.updateTag({ name:'keywords',content: 'Apply for '+this.of_country_name+' eVisa, '+this.of_country_name+' eVisa application for '+this.from_country_name+', '+this.of_country_name+' eVisa online, show first visa type, show second visa type.'});	
+			this.title.setTitle( 'Apply for '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.of_country_name+' eVisa online');
+			this.meta.updateTag({ name:'title',content: 'Apply for '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.of_country_name+' eVisa online'});	
+			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa online, '+this.from_country_alternate_name+' Citizens can get e-visa for '+this.of_country_name+' online, '+this.of_country_name+' visa for '+this.from_country_name+', '+this.visaTypeName});
+			this.meta.updateTag({ name:'keywords',content: 'Apply for '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.of_country_name+' eVisa online, '+this.visaTypeName});	
 		}
 	}
 

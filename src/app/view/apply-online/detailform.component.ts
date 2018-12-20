@@ -4,10 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormDetailsService } from '../../services/form_details/form-details.service';
 import { RegisterFormService } from '../../services/register_form/register-form.service';
 import { NgProgress } from 'ngx-progressbar';
-import { NationalityPriceService } from '../../services/nationality_price/nationality-price.service'
+import { NationalityPriceService } from '../../services/nationality_price/nationality-price.service';
 import '../../../assets/js/intlTelInput.min.js';
-import { FlagValueService } from '../../services/flagValue/flag-value.service'
-import { LoginService } from '../../services/login/login.service'
+import { FlagValueService } from '../../services/flagValue/flag-value.service';
+import { LoginService } from '../../services/login/login.service';
+import { Meta, Title} from '@angular/platform-browser';
 
 export interface registerusers{
     name: any;
@@ -153,7 +154,10 @@ export class DetailformComponent implements OnInit  {
 		public ngProgress: NgProgress,
 		private nationalityPriceService:NationalityPriceService,
 		private flagValueService:FlagValueService,
-		private loginService:LoginService
+		private loginService:LoginService,
+		private meta: Meta,
+		private title:Title
+
 	) {
 		// var cmd=this;
 		// setTimeout(function(){
@@ -215,6 +219,10 @@ export class DetailformComponent implements OnInit  {
 			data => {
 				if(data!=null){
 					this.ngProgress.done();
+					this.title.setTitle(data.to_country_name +' '+ data.visa[0].visa_type +', '+ data.visa[0].no_of_entry +' entry, '+ data.visa[0].max_stay +' '+'visa application for'+' '+ data.from_country_name);
+					this.meta.updateTag({ name:'title',content:data.to_country_name +' '+ data.visa[0].visa_type +', '+ data.visa[0].no_of_entry +' entry, '+ data.visa[0].max_stay +' '+'visa application for'+' '+ data.from_country_name});	
+					this.meta.updateTag({ name:'description',content:data.to_country_name +' '+ data.visa[0].visa_type +', '+ data.visa[0].no_of_entry +' entry, '+ data.visa[0].max_stay +' '+'visa application for'+' '+ data.from_country_name});
+					this.meta.updateTag({ name:'keywords',content: data.to_country_name +' '+ data.visa[0].visa_type +', '+ data.visa[0].no_of_entry +' entry, '+ data.visa[0].max_stay +' '+'visa application for'+' '+ data.from_country_name});
 					this.pageHide = true;
 					this.details = data;
 					this.country = data.nationality

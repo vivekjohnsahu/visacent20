@@ -165,7 +165,7 @@ export class ConsulateGeneralComponent implements OnInit {
 							this.meta.updateTag({ name:'keywords',content:this.name+' '+this.in_cntname+'. '+this.of_country+' Consulates in '+this.in_cntname+', '+this.of_country+' Consulates General, '+this.of_country+' Consulates General address in '+this.in_cntname+'. '+this.of_country+' Consulates General address in '+this.in_cntname+'.'});
 
 							this.map = this.map=encodeURI(this.map);
-								$('#emb_map').html('<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
+								$('#emb_map').html('<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
 			
 							if(this.countydetails.in_coutnry_flag!=''){
 								this.in_coutnry_flag = this.countydetails.in_coutnry_flag; 
@@ -399,17 +399,17 @@ export class ConsulateGeneralComponent implements OnInit {
 
 	setemb_map(){
 		// this.map = this.map=encodeURI(this.map);
-		// $('#emb_map').html('<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');
+		// $('#emb_map').html('<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');
 
 		for(var i=0;i<this.EmbassyAd.length;i++){
 			var idd=this.EmbassyAd[i].id;
-			var rl='<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
+			var rl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
 			$('#emb_map__div_'+idd).html(rl);
 		}
 
 		for(var i=0;i<this.consulateAd.length;i++){
 			var cidd=this.consulateAd[i].id;
-			var crl='<iframe width="100%" height="300" style="height: 300px!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
+			var crl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
 			$('#cnst_map__div_'+cidd).html(crl);
 		}
 

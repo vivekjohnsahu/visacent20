@@ -113,25 +113,38 @@
 </div>
 </div>
 <span style="display: none;" id="spn_ip"></span>
+
+
+<section class="section_20" style="padding:0px;" *ngIf="pade_error_show || pageHide">
+    <div class="container">
+        <div class="link_btn">
+            <a [ngClass]="{'pull-right': pade_error_show }" routerLink="/embassies/{{ofCountrySlugName}}-in-{{inCountrySlugName}}">
+                <span style="text-transform: capitalize">{{of_name}}</span> Embassies in <span style="text-transform: capitalize">{{in_name}}</span>
+            </a>
+        </div>
+    </div>
+</section>
 <section *ngIf="pade_error_show" class="section_30 scroll_msg">
-        <div class="container datafound" style="position: relative;top: 15px;margin-bottom: 51px;">
+        <div class="container datafound" >
                 <h2 *ngIf="success_msg_error" class="my_alert my_alert_pos" style="width:40%!important;text-transform: capitalize!important;">{{success_msg}}</h2>
                 <h3 *ngIf="msg_error" style="color:red;text-align: center;">{{erro_msg}}</h3>
-            <div>
-                <p style="text-align: left;width: 65%;margin-left: auto;margin-right: auto;">We maintain lists that contains the addresses, telephone numbers, email addresses, website addresses and more information for 
-                    all types of diplomatic and consular missions around the world. The list as…<br>
+
+
+            <div class="no_embassy_content">
+                <p class="p1">
+                    We maintain lists that contains the addresses, telephone numbers, email addresses, website addresses and more information for 
+                    all types of diplomatic and consular missions around the world. The list as…
                 </p>
-                <div style="font-size: 16px;text-align: left;margin-left: auto;margin-right: auto;width: 57%;">
-                    1. The Embassies and High Commissions,<br>
-                    2. Consulates-General<br>
-                    3. Other Representations<br><br>
-                </div>
-                <div style="font-size: 16px;text-align: left;margin-left: auto;margin-right: auto;width: 65%;">
-                    We try to update regularly directory of embassies, consulates and other diplomatic representations. 
-                </div><br>
-                <div style="text-align: center;font-size: 22px; margin-left: auto;margin-right: auto;width: 68%;color: #055ea5;">
+                <ul>
+                    <li>1. The Embassies and High Commissions</li>
+                    <li>2. Consulates-General</li>
+                    <li>3. Other Representations</li>
+                </ul>
+                <p class="p2">We try to update regularly directory of embassies, consulates and other diplomatic representations.
+                </p>
+                <p class="p3">
                     Sorry, we don't have any detail regarding <strong style="text-transform: capitalize;"> {{country_name_f_replace}} </strong>embassy in <strong style="text-transform: capitalize;">{{country_name_s_replace}}</strong> . If you have any detail, please send us.
-                </div>              
+                </p>
             </div>
             <form class="user_emabassy">
                 <div class="row">
@@ -247,12 +260,4 @@
             </form>
         </div>
     </section>
-    <section class="section_20" style="padding:0px;" *ngIf="pade_error_show || pageHide">
-        <div class="container">
-            <div class="link_btn">
-                <a routerLink="/embassies/{{ofCountrySlugName}}-in-{{inCountrySlugName}}">
-                    <i class="fas fa-caret-right"></i>&nbsp;<span style="text-transform: capitalize">{{of_name}}</span> Embassies in <span style="text-transform: capitalize">{{in_name}}</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    

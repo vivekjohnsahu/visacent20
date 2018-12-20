@@ -21,7 +21,7 @@ export class NewsService {
       return this.http.get(`${this.NewsDetailsUrl}`+currentValue).map((res:Response) => res.json());
     }
 
-    private leaveRpysUrl = "";
+    private leaveRpysUrl = "https://visacent.com/la/api/news_comment";
 
     leaveData(leaveRpy){
       return this.http.post(`${this.leaveRpysUrl}`,leaveRpy).map((res:Response) => res.json());

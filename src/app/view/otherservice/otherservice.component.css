@@ -1,3 +1,18 @@
+.feel_free_h3
+{
+	margin-bottom: 35px;
+}
+@media (max-width:991px)
+{
+	.feel_free_h3
+	{
+		margin-bottom: 26px;
+	}
+	.web_link ul
+	{
+		margin-top:15px;
+	}
+}
 @media (max-width:767px) and (min-width:535px)
 {
 	.visa_country

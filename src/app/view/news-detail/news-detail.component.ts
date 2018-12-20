@@ -39,6 +39,7 @@ export class NewsDetailComponent implements OnInit {
 	grecaptcha:any;
 	captchaError:boolean;
 	captchaError_msg:string;
+	newsId:any;
 
 	ngOnInit() {
 		this.ngProgress.start();
@@ -48,6 +49,7 @@ export class NewsDetailComponent implements OnInit {
 		this.newsService.NewsCurrentValue(currentValue).subscribe(
 				data =>{
 					if(data.status == 'SUCCESS'){
+						this.newsId = data.news.id
 						this.ngProgress.done();
 						this.newsData = data.news;
 						this.title.setTitle(this.newsData.title);
@@ -86,7 +88,8 @@ export class NewsDetailComponent implements OnInit {
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
 			flag = 1;
-		}if(this.name =='' || this.name ==undefined){
+		}
+		if(this.name =='' || this.name ==undefined){
 			$('.nameBrd').addClass('borderCls');
 			flag = 1;
 		}if(this.email =='' || this.email ==undefined){
@@ -103,19 +106,20 @@ export class NewsDetailComponent implements OnInit {
 		this.leaveRpy = {
 			name:this.name,
 			email:this.email,
-			message:this.message
+			message:this.message,
+			newsId:this.newsId
 		}
 		this.newsService.leaveData(this.leaveRpy).subscribe(
 			data => {
-				if(data.status == 'SUCCESS'){
-					this.suce_sh = true;
-					this.suce_msg_sh = 'You have massage sent';
-				}else if(data.status == 'ERROR'){
-					this.suce_error_sh = true;
-					this.error_msg_sh = 'Massage not sent';
-				}else{
-					// Do nothing
-				}
+				this.suce_sh = true;
+				this.suce_msg_sh = 'Your reply successfully submit.';
+				setTimeout(() => {
+					$('#myalert').hide()
+					this.name=''
+					this.email=''
+					this.message=''
+					this.newsId=''
+				}, 1500);
 			})
 	}
 
