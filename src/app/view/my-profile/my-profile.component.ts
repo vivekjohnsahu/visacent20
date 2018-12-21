@@ -138,14 +138,11 @@ export class MyProfileComponent implements OnInit {
 				var cmt=this;
 				setTimeout(function(){
 					cmt.userDas()
-				},500)
+				},1000)
 				this.applicant()
 			})
 			this.flagDrop = this.flagValueService.flagMethod()	
-			var cmt=this;
-			setTimeout(function(){
-				cmt.dropDownToggle()
-			},5000);			
+						
 			
 	}
 	
@@ -219,6 +216,7 @@ userDas(){
 			this.pageHide = true;
 			this.AllApplication=true;
 			this.UnderProcessApplication=false;
+			this.dropDownToggle();
 			setTimeout(() => {
 				this.ComProcessAppli()
 			}, 1500);

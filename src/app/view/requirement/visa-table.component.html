@@ -231,19 +231,11 @@
                 </p>
             </div>
         </div>
-        <div class="below_country">
-            <p>
-<i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
+        <div class="below_country" *ngIf="tableRegular && (consulateAd.length>0 || EmbassyAd.length>0)">
+            <p><i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
         </div> 
     </article>
-
      <!--------------------- end Regular visa required ---------------->
-
-
-
-
-
-
         </div>
     </section>
                 <div [hidden]="!tableRegular" style="text-align: center;">
@@ -491,6 +483,138 @@
             </div>
         </section>
     </section>
+    <section class="section_30" *ngIf="countydetails=='' && countydetails=='' && docu_feq_data==''">
+            <div class="container datafound scroll_msg">
+          
+            <div class="no_embassy_content">
+                <p class="p1">
+                    We do not have good information about this, please help us by update correct information
+                    Show form like this
+                </p>
+            </div>
+          
+                <form class="user_emabassy" style="position:relative;"> 
+                    
+                    <div class="my_alert my_alert_pos myalert" *ngIf="success_msg_error">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <span class="sus" style="text-transform: none!important;">{{success_msg}}</span>
+                  </div>
+                    <div class="my_alert my_alert_pos my_alert_red myalert" *ngIf="msg_error">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <span class="sus" style="text-transform: none!important;">fghfgh gfhgfh {{erro_msg}}</span>
+                  </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="">
+                                <label>Name <i class="fas fa-pencil-alt"></i></label>
+                                <div id="namef" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveName()'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="">
+                                <label>Address</label>
+                                <div id="address" class="textareaaddress enable_white" style="min-height: 124px;" contenteditable (keyup)='ErrorRermoveAdd()'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Telephone <i class="fas fa-mobile-alt"></i></label>
+                                <div id="telephone" class="textarea enable_white" contenteditable (keyup)='ErrorRermovePhn()'></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Email <i class="far fa-envelope"></i></label>
+                                <div id="email" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveEml()'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Fax</label>
+                                <div id="fax" class="textarea enable_white" contenteditable></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Website</label>
+                                <div id="website" class="textarea enable_white" contenteditable></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Latitude</label>
+                                <div id="latitude" class="textarea enable_white" contenteditable></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Longitude</label>
+                                <div id="longitude" class="textarea enable_white" contenteditable></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Landmark / near by place</label>
+                                <div id="Landmark" class="textarea enable_white" contenteditable></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text_left">
+                                <label>Working time</label>
+                                <div id="WorkingTime" class="textarea enable_white" contenteditable></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"> 
+                        <div class="col-sm-12">
+                            <div class="">
+                                <label>
+                                    Comments
+                                </label>
+                            </div>
+                            <div class="element_container">                      
+                                <div style="min-height: 124px;" class="textarea enable_white comments" contenteditable id="comments"></div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row" style="margin-top:20px;">
+                        <div class="col-md-12" style="text-align: center;">
+                            <div class="label_container" style="margin-bottom: 10px; display: inline-block;">
+                                <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha>
+                                <div *ngIf="captchaError" style="color:red; position: relative; left: 0px; font-size: 14px;">*{{captchaError_msg}}</div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12" style="padding-right:7px;">
+                            <div class="element_container" style="text-align: center;">
+                                <button type="button" class="my_btn" (click)="update_btn()">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                  <div *ngIf="updating" class="preloader"> 
+                      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
+                          <g>
+                              <path d="M78.75 16.18V1.56a64.1 64.1 0 0 1 47.7 47.7H111.8a49.98 49.98 0 0 0-33.07-33.08zM16.43 49.25H1.8a64.1 64.1 0 0 1 47.7-47.7V16.2a49.98 49.98 0 0 0-33.07 33.07zm33.07 62.32v14.62A64.1 64.1 0 0 1 1.8 78.5h14.63a49.98 49.98 0 0 0 33.07 33.07zm62.32-33.07h14.62a64.1 64.1 0 0 1-47.7 47.7v-14.63a49.98 49.98 0 0 0 33.08-33.07z" fill="#005ea5" fill-opacity="1"/>
+                              <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="90 64 64" dur="1800ms" repeatCount="indefinite">
+                              </animateTransform>
+                          </g>
+                      </svg>
+                  </div> 
+                </form>
+            </div>
+          </section>
 </section>
 <div *ngIf="pade_error_show">
     <span>Data Not Found</span>

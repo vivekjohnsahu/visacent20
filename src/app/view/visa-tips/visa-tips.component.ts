@@ -7,12 +7,14 @@ import { CountriesListService } from '../../services/countries_list_home/countri
 import { Meta, Title} from '@angular/platform-browser';
 import { EmbassiesCityDetailsService } from '../../services/embassies_city_details/embassies-city-details.service'
 import { applyMixins } from 'rxjs/internal-compatibility';
+import { UserInputCntdetailsService } from '../../services/userInputCntdetails/user-input-cntdetails.service'
+
 
 @Component({
   selector: 'app-visa-tips',
   templateUrl: './visa-tips.component.html',
   styleUrls: ['./visa-tips.component.css'],
-  providers: [ CountriesListService, VisaApplicationService, EmbassiesCityDetailsService ]
+  providers: [ CountriesListService, VisaApplicationService, EmbassiesCityDetailsService, UserInputCntdetailsService ]
 })
 export class VisaTipsComponent implements OnInit {
 
@@ -70,6 +72,32 @@ export class VisaTipsComponent implements OnInit {
 	is_flg:any;
 	from_country_alternate_name:any;
 	to_country_alternate_name:any;
+	updating_msg:boolean;
+	Address:any;
+	Phone:any;
+	Fax:any;
+	Email:any;
+	Website:any;
+	comments:any;
+	nweipAddress
+	latitude:any;
+	longitude:any;
+	userFileData={}
+	updating:boolean;
+	success_msg_error:boolean;
+	success_msg:any;
+	msg_error:boolean;
+	erro_msg:any;
+	regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
+	numberRegEx = "^(0|[0-9][0-9]*)$";
+	grecaptcha:any;
+	captchaError:boolean;
+	captchaError_msg:any;
+	name:any;
+	Landmark:any;
+	WorkingTime:any;
+	to_country_slug_name:any;
+	from_country_slug_name:any;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -79,7 +107,8 @@ export class VisaTipsComponent implements OnInit {
 		private countriesListService:CountriesListService,
 		private meta: Meta,
 		private title:Title,
-		private embassiesCityDetailsService:EmbassiesCityDetailsService
+		private embassiesCityDetailsService:EmbassiesCityDetailsService,
+		private userInputCntdetailsService:UserInputCntdetailsService
 	) {}
 	
   ngOnInit() {
@@ -270,6 +299,8 @@ export class VisaTipsComponent implements OnInit {
 					this.to_country_alternate_name = data.to_country_alternate_name;
 					this.visa_req_sec=false;
 					this.cnt_emb=false;
+					this.to_country_slug_name= data.to_country_slug_name;
+					this.from_country_slug_name= data.from_country_slug_name;
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
@@ -398,7 +429,7 @@ export class VisaTipsComponent implements OnInit {
 					var ctl= this;
 					setTimeout(function(){
 						ctl.setemb_map();
-					},2000);
+					},1000);
 				}
 				else{
 					this.con_visa_req_sec=false;
@@ -414,9 +445,9 @@ export class VisaTipsComponent implements OnInit {
 
 	metaTags(){
 		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
-			this.title.setTitle('Tips for '+this.to_country_alternate_name+' visa application from '+this.from_country_name+', A regular visa required application required in advance.');
-			this.meta.updateTag({ name:'title',content:'Tips for '+this.to_country_alternate_name+' visa application from '+this.from_country_name+', A regular visa required application required in advance.'});	
-			this.meta.updateTag({ name:'description',content:'Tips for '+this.to_country_alternate_name+' visa application from '+this.from_country_name+'. Citizens of the '+this.from_country_name+' must obtain a visa in advance. You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
+			this.title.setTitle('Tips for '+this.to_country_alternate_name+' visa application from '+this.from_country_alternate_name+', A regular visa required application required in advance.');
+			this.meta.updateTag({ name:'title',content:'Tips for '+this.to_country_alternate_name+' visa application from '+this.from_country_alternate_name+', A regular visa required application required in advance.'});	
+			this.meta.updateTag({ name:'description',content:'Tips for '+this.to_country_alternate_name+' visa application from '+this.from_country_alternate_name+'. Citizens of the '+this.from_country_name+' must obtain a visa in advance. You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
 			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.to_country_alternate_name+' visa, '+this.of_country_name+' Visa, Apply for '+this.of_country_name+' Visa, '+this.of_country_name+' regular visa from '+this.from_country_name+', regular visa required, '+this.of_country_name+' visa.'});	
 		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
 			this.title.setTitle( this.from_country_alternate_name+' Citizens do not required a visa to travel '+this.of_country_name+'. Travel Visa requirements');
@@ -424,9 +455,9 @@ export class VisaTipsComponent implements OnInit {
 			this.meta.updateTag({ name:'description',content: this.from_country_alternate_name+' Citizens do not required a visa to travel '+this.of_country_name+'. No Visa visa required to travel to '+this.of_country_name+'.'});
 			this.meta.updateTag({ name:'keywords',content: this.from_country_alternate_name+' Citizens travel '+this.of_country_name+'. '+this.from_country_alternate_name+' Citizens visa for '+this.of_country_name+', visa for '+this.of_country_name+', '+this.of_country_name+' visa.'});	
 		}else{
-			this.title.setTitle('Tips for '+this.to_country_alternate_name+' e-visa application from '+this.from_country_name+', A e-visa required required in advance.');
-			this.meta.updateTag({ name:'title',content:'Tips for '+this.to_country_alternate_name+' e-visa application from '+this.from_country_name+', A e-visa required required in advance.'});	
-			this.meta.updateTag({ name:'description',content:'Tips for '+this.to_country_alternate_name+' e-visa application from '+this.from_country_name+'. Citizens of the '+this.from_country_name+' must obtain a visa in advance. You have to apply online or through a '+this.of_country_name+' diplomatic mission.'});
+			this.title.setTitle('Tips for '+this.to_country_alternate_name+' e-visa application from '+this.from_country_alternate_name+', A e-visa required in advance.');
+			this.meta.updateTag({ name:'title',content:'Tips for '+this.to_country_alternate_name+' e-visa application from '+this.from_country_alternate_name+', A e-visa required in advance.'});	
+			this.meta.updateTag({ name:'description',content:'Tips for '+this.to_country_alternate_name+' e-visa application from '+this.from_country_alternate_name+'. Citizens of the '+this.from_country_name+' must obtain a visa in advance. You have to apply online or through a '+this.of_country_name+' diplomatic mission.'});
 			this.meta.updateTag({ name:'keywords',content: 'Tips for '+this.to_country_alternate_name+' e-visa application, '+this.of_country_name+' e-Visa, Apply for '+this.of_country_name+' e-Visa, '+this.of_country_name+' e-visa from '+this.from_country_name+', '+this.of_country_name+' visa.'});
 		}
 	}
@@ -445,5 +476,111 @@ export class VisaTipsComponent implements OnInit {
 		}
 
 	}
+
+	resolved(captchaResponse: string) {
+		this.grecaptcha = captchaResponse;
+		this.captchaError = false;
+	}
+
+	update_btn(){
+		let flg=0;
+		if($('#namef').text()==''){
+			$('#namef').addClass('borderCls')
+			flg=1;
+		}if($('#address').text()==''){
+			$('#address').addClass('borderCls')
+			flg=1;
+		}if($('#telephone').text()!=''){
+			let p = $('#telephone').text()
+			if(!(p.match(this.numberRegEx))){
+				$('#telephone').addClass('borderCls')
+				flg=1;
+			}
+		}if($('#email').text()!=''){
+			let e = $('#email').text()
+			if(!(e.match(this.regExEmail))){
+				$('#email').addClass('borderCls')
+				flg=1;
+			}
+		}
+		if(this.grecaptcha === undefined){
+			this.captchaError = true;
+			this.captchaError_msg = "Please enter captcha"
+			flg=1;
+		}
+		if(flg==1){
+			return;
+		}else{
+			this.captchaError = false;
+			this.updating = true;
+			this.name =$('#namef').text();
+			this.Address =$('#address').text();
+			this.Phone =$('#telephone').text();
+			this.Fax =$('#fax').text();
+			this.Email =$('#email').text();
+			this.Website =$('#website').text();
+			this.comments =$('#comments').text();
+			this.latitude =$('#latitude').text();
+			this.longitude =$('#longitude').text();
+			this.nweipAddress=$('#spn_ip').text();
+			this.Landmark =$('#Landmark').html();
+			this.WorkingTime=$('#WorkingTime').text();
+		}
+		this.userFileData={
+			name:this.name,
+			address:this.Address,
+			phone:this.Phone,
+			fax:this.Fax,
+			email:this.Email,
+			website:this.Website,
+			comments:this.comments,
+			ipAddress:this.nweipAddress,
+			landmark:this.Landmark,
+			workingTime:this.WorkingTime,
+			to_country_slug_name:this.to_country_slug_name,
+			from_country_slug_name:this.from_country_slug_name,
+			slug:'',
+			emb_type:'',
+		}
+		this.userInputCntdetailsService.userInputData(this.userFileData).subscribe(
+			data => {
+				if(data='SUCCESS'){
+					this.updating = false;
+					this.success_msg_error = true;
+					this.success_msg = 'Thank you for sending your suggestions.'
+					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
+                    $(document).ready(function(){
+                    setTimeout(function(){
+                        $('.myalert').fadeOut('fast');}, 3000);
+                        $('.myalert').fadeIn();
+                    })
+				}else if(data='ERROR'){
+					this.updating = false;
+					this.msg_error = true;
+					this.erro_msg = 'Error! Information did not send!'
+                    $(document).ready(function(){
+                    setTimeout(function(){
+                        $('.myalert').fadeOut('fast');}, 3000);
+                        $('.myalert').fadeIn();
+                    })
+				}else{
+					// do nothing
+				}
+			})
+	}
+
+	ErrorRermoveAdd(){
+		$('#address').removeClass('borderCls')
+	}
+	ErrorRermoveName(){
+		$('#namef').removeClass('borderCls')
+	}
+	ErrorRermovePhn(){
+		$('#telephone').removeClass('borderCls')
+	}
+	ErrorRermoveEml(){
+		$('#email').removeClass('borderCls')
+	}
+
 
 }

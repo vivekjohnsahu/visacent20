@@ -3155,7 +3155,7 @@ ul.faq_ul ol li
 }
 .regular_visa_para
 {
-	flex-basis: 500px;
+	flex-basis: 720px;
 	text-align: justify;
 }
 .regular_visa_para>h4
@@ -3319,6 +3319,10 @@ ul.faq_ul ol li
         font-size: 37px;
     }
 /*-------------------- start bootstrap modal ------------*/
+	.modal
+	{
+		padding-right:0px!important;
+	}
 	.modal-dialog 
 	{
 	    width: 750px;

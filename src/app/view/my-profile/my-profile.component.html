@@ -130,7 +130,7 @@
                                     <h3 style="text-align:left!important;margin-top:15px;margin-bottom:8px;">Notes</h3>       
                                     <div class="notes" *ngFor="let activity of admin_activity">
                                         <div class="" [ngClass]="{'notes_background': activity.applicant==''}">
-                                            <h3 class="text-right"><span class="pull-left">{{activity.alert}}</span><span [hidden]="activity.applicant==''"> Appli Name: </span><label>{{activity.applicant}}</label></h3>
+                                            <h3 class="text-right"><span class="pull-left">{{activity.alert}}</span><span [hidden]="activity.applicant==''"> Applicant Name: </span><label>{{activity.applicant}}</label></h3>
                                             <div class="notes_date"><span>Order Date: {{activity.date_time}}</span><span >Order Id: {{activity.order_id}}</span></div>
                                         </div>  
                                     </div>
@@ -144,7 +144,7 @@
                                     <li><a data-toggle="modal" data-target="#mod1">Making an application</a></li>
                                     <li><a data-toggle="modal" data-target="#mod2">Uploading documents</a></li>
                                     <li><a data-toggle="modal" data-target="#mod3">Photographs</a></li>
-                                    <li><a routerLink="/my-profile/withdraw">your bouns</a></li>
+                                    <li><a routerLink="/my-profile/withdraw">Your bouns</a></li>
                                 </ul>
                             </div>    
                         </div>
@@ -250,10 +250,10 @@
                             <span class="pull left">Order Id: {{order1.order_id}} </span> <b>|</b>
                             <span class="pull left o_date"><i class="far fa-calendar-alt"></i> {{order1.order_date}}
                             </span> <b>|</b>
-                            <span>Visa Country: <strong *ngFor="let list of cntryList" [hidden]="list.id!=order1.visa_for_country" style="font-weight: normal;">{{list.name}}</strong></span>
+                            <span>Visa Application for: <strong *ngFor="let list of cntryList" [hidden]="list.id!=order1.visa_for_country" style="font-weight: normal;">{{list.name}}</strong></span>
                             <b>|</b>
-                            <span class="pull left pay_status" [hidden]="!(order1.payment_status=='done')" ><i class="far fa-credit-card"></i>&nbsp;<strong style="color:#41e256;text-transform: capitalize;font-weight:normal;"> {{order1.payment_status}} <i class="fas fa-check-square"></i></strong> </span> 
-                            <span class="pull left pay_status" [hidden]="!(order1.payment_status=='pending')" ><i class="far fa-credit-card"></i>&nbsp;<strong style="color:#ff684e;text-transform: capitalize;font-weight:normal;"> {{order1.payment_status}} <i class="fas fa-clock"></i></strong></span>                            
+                            <span class="pull left pay_status" [hidden]="!(order1.payment_status=='done')" ><i class="far fa-credit-card"></i>&nbsp;<strong style="color:#1ae017;text-transform: capitalize;font-weight:normal;"> {{order1.payment_status}} <i class="fas fa-check-square"></i></strong> </span> 
+                            <span class="pull left pay_status" [hidden]="!(order1.payment_status=='pending')" ><i class="far fa-credit-card"></i>&nbsp;<strong style="color:orange;text-transform: capitalize;font-weight:normal;"> {{order1.payment_status}} <i class="fas fa-clock"></i></strong></span>                            
                             <span class="pull-right icon">
                                 <i class="fas fa-chevron-down"></i>
                             </span>
@@ -284,10 +284,10 @@
                                     <strong class="left_label">Processing Type</strong>
                                 </div>
                                 <div class="col-xs-8" [hidden]="!(order1.processing_type=='Normal')">
-                                    <p class="processing_type nor"> {{order1.processing_type}}                                                              </p>
+                                    <p class="processing_type nor"> {{order1.processing_type}}</p>
                                 </div>
                                 <div class="col-xs-8" [hidden]="!(order1.processing_type=='Rush Processing')">
-                                    <p class="processing_type rush">{{order1.processing_type}}                               </p>
+                                    <p class="processing_type rush">{{order1.processing_type}} </p>
                                 </div>
                                 <div class="col-xs-8" [hidden]="!(order1.processing_type=='Super Rush Processing')">
                                     <p class="processing_type super">{{order1.processing_type}} <span><i class="fas fa-bullhorn"></i></span></p>
@@ -337,7 +337,7 @@
                                         <th style="text-align: center;">Passport No.</th>
                                         <th style="text-align: center;">Visa Status</th>
                                         <th style="text-align: center;">Visa Type</th>
-                                        <th style="text-align: center;">asdasd</th>
+                                        <th style="text-align: center;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -354,30 +354,31 @@
                                         <td>{{apli.passport_no}}</td>
                                         <td>
                                             {{apli.total_fee}}
-                                            <div [hidden]="(apli.visa_status=='pending' || apli.visa_status=='processing')">
-                                                <strong style="color:green">{{apli.visa_status}}</strong>
-                                                <span (click)="imageView(i,j,apli.name)" style="color:orange;cursor: pointer;position: relative;" [hidden]="apli.visas==undefined || apli.visas==null || apli.type=='pdf' || apli.type==null || apli.type==undefined">View Visa</span>
+                                            <div [hidden]="(apli.visa_status=='pending' || apli.visa_status=='processing' || apli.visa_status=='cancel')">
+                                                <strong style="color:#1ae017;text-transform: capitalize;">{{apli.visa_status}}</strong><br>
+                                                <span (click)="imageView(i,j,apli.name)" style="color:orange;cursor: pointer;position: relative;" [hidden]="(apli.visas==undefined || apli.visas==null || apli.type=='pdf' || apli.type==null || apli.type==undefined)">View Visa</span>
                                                 <span (click)="pdfView(i,j,apli.name)" style="color:orange;cursor: pointer;position: relative;" [hidden]="(apli.visas==undefined || apli.visas==null || apli.type!='pdf' || apli.type==undefined || apli.type==null)">View Visa</span>                                
                                             </div>
 
-                                            <div [hidden]="(apli.visa_status=='success' || apli.visa_status=='processing')">
+                                            <div [hidden]="(apli.visa_status=='success' || apli.visa_status=='processing' || apli.visa_status=='cancel')">
                                                 {{apli.total_fee}}
-                                                <strong style="color:red">{{apli.visa_status}}</strong>
+                                                <strong style="color:orange;text-transform: capitalize;">{{apli.visa_status}}</strong>
                                             </div>
 
-                                            <div [hidden]="(apli.visa_status=='pending' || apli.visa_status=='success')">
+                                            <div [hidden]="(apli.visa_status=='pending' || apli.visa_status=='success' || apli.visa_status=='cancel')">
                                                 {{apli.total_fee}}
-                                                <strong style="color:#8eec8e;">{{apli.visa_status}}</strong>
+                                                <strong style="color:cyan;text-transform: capitalize;">{{apli.visa_status}}</strong>
+                                            </div>
+
+                                            <div [hidden]="(apli.visa_status=='pending' || apli.visa_status=='success' || apli.visa_status=='processing')">
+                                                {{apli.total_fee}}
+                                                <strong style="color:red;text-transform: capitalize;">{{apli.visa_status}}</strong>
                                             </div>
                                         </td>
                                         <td>{{apli.visa_type}}</td>
-                                        <!-- <td [hidden]="!(order1.payment_status=='done')" class="bbbb">
-                                            <button (click)="amountPay(i,j)" class="my_btn my_btn_submit width_auto" style="padding-top: 6px;padding-bottom: 6px;">Detail <i class="fas fa-info-circle"></i></button>
-                                        </td> -->
                                         <td class="bbbb">
                                             <button (click)="amountPay(i,j)" class="my_btn my_btn_submit width_auto" style="padding-top: 6px;padding-bottom: 6px;">Add/View <i class="fas fa-info-circle"></i></button>
                                         </td>
-                                        <!-- <td [hidden]="!(order1.payment_status=='pending')"> Make payment to complete application</td> -->
                                     </tr>
                                 </tbody>
                             </table>

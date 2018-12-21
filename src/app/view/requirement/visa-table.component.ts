@@ -6,12 +6,13 @@ import * as $ from 'jquery';
 import { NgProgress } from 'ngx-progressbar';
 import { Meta, Title} from '@angular/platform-browser';
 import { EmbassiesCityDetailsService } from '../../services/embassies_city_details/embassies-city-details.service'
-
+import { UserInputCntdetailsService } from '../../services/userInputCntdetails/user-input-cntdetails.service'
+ 
 @Component({
   selector: 'app-visa-table',
   templateUrl: './visa-table.component.html',
   styleUrls: ['./visa-table.component.css'],
-  providers: [ VisaApplicationService, CountriesListService]
+  providers: [ VisaApplicationService, CountriesListService, UserInputCntdetailsService]
 })
 export class VisaTableComponent implements OnInit {
 
@@ -23,7 +24,8 @@ export class VisaTableComponent implements OnInit {
 		public ngProgress: NgProgress,
 		private meta: Meta,
 		private title:Title,
-		private embassiesCityDetailsService:EmbassiesCityDetailsService
+		private embassiesCityDetailsService:EmbassiesCityDetailsService,
+		private userInputCntdetailsService:UserInputCntdetailsService
 	) { 
 		this.title.setTitle('Check Visa Requirements | Visa Information | Visa Requirements and Online Applications');
 		this.meta.updateTag({ name:'description',content:'Check Visa Requirements, Visa Information, Visa Requirements,  Online Applications, business visa requirements, tourist visa requirements, visa requirements, visa requirements and fees, travel visa requirements'});
@@ -88,9 +90,36 @@ export class VisaTableComponent implements OnInit {
 	EmbassyAd:any;
 	Errortable:boolean;
 	country_ctn:any;
-	// of_country_name:any;
-	// from_country_name:any;
+	belowList:boolean;
 	map:any;
+	updating_msg:boolean;
+	Address:any;
+	Phone:any;
+	Fax:any;
+	Email:any;
+	Website:any;
+	comments:any;
+	nweipAddress
+	latitude:any;
+	longitude:any;
+	userFileData={}
+	updating:boolean;
+	success_msg_error:boolean;
+	success_msg:any;
+	msg_error:boolean;
+	erro_msg:any;
+	regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
+	numberRegEx = "^(0|[0-9][0-9]*)$";
+	grecaptcha:any;
+	captchaError:boolean;
+	captchaError_msg:any;
+	name:any;
+	Landmark:any;
+	WorkingTime:any;
+	to_country_slug_name:any;
+	from_country_slug_name:any;
+	docu_feq_data='';
+
 
   	ngOnInit(){
 		this.ngProgress.start();
@@ -141,7 +170,6 @@ export class VisaTableComponent implements OnInit {
 		let visaAllValue = this.routers.snapshot.params["value"]
 		this.visaApplicationService.visaTableList(visaAllValue).subscribe(
 			data => {
-				// this.visa_flag = 'assets/images/default1.png';
 				if(data!=null){
 					this.ngProgress.done();
 					this.pageHide = true;
@@ -156,10 +184,9 @@ export class VisaTableComponent implements OnInit {
 					this.travellingChangeName = data.to_country_name;
 					this.newTravellingCnt = this.inCountrySlugName;
 					this.requirementCountryName = this.travellingChange + '/' + this.nationalityChange;
-					this.country_ctn = data.to_country_name
-					// this.of_country_name = data.to_country_name;
-					// this.from_country_name = data.from_country_name;
-					// this.visa_flag = data.country_flag;
+					this.country_ctn = data.to_country_name;
+					this.to_country_slug_name= data.to_country_slug_name;
+					this.from_country_slug_name= data.from_country_slug_name;
 					if(this.visaTable.length == 0){
 						this.Errortable = true;
 						this.tableShow = false;
@@ -318,8 +345,6 @@ export class VisaTableComponent implements OnInit {
 
 	ChangeBottom(i){
 		this.visaTeblerequirements = this.visaTable[i]
-		// $('html, body').animate({
-		// 	scrollTop: $("#scrollTable").offset().top}, 1500);
 	}
 
 	getStartedApply(){
@@ -385,7 +410,7 @@ export class VisaTableComponent implements OnInit {
 					var ctl= this;
 					setTimeout(function(){
 						ctl.setemb_map();
-					},2000);
+					},1000);
 				}			
 			})
 	}
@@ -404,5 +429,111 @@ export class VisaTableComponent implements OnInit {
 		}
 
 	}
+
+	resolved(captchaResponse: string) {
+		this.grecaptcha = captchaResponse;
+		this.captchaError = false;
+	}
+
+	update_btn(){
+		let flg=0;
+		if($('#namef').text()==''){
+			$('#namef').addClass('borderCls')
+			flg=1;
+		}if($('#address').text()==''){
+			$('#address').addClass('borderCls')
+			flg=1;
+		}if($('#telephone').text()!=''){
+			let p = $('#telephone').text()
+			if(!(p.match(this.numberRegEx))){
+				$('#telephone').addClass('borderCls')
+				flg=1;
+			}
+		}if($('#email').text()!=''){
+			let e = $('#email').text()
+			if(!(e.match(this.regExEmail))){
+				$('#email').addClass('borderCls')
+				flg=1;
+			}
+		}
+		if(this.grecaptcha === undefined){
+			this.captchaError = true;
+			this.captchaError_msg = "Please enter captcha"
+			flg=1;
+		}
+		if(flg==1){
+			return;
+		}else{
+			this.captchaError = false;
+			this.updating = true;
+			this.name =$('#namef').text();
+			this.Address =$('#address').text();
+			this.Phone =$('#telephone').text();
+			this.Fax =$('#fax').text();
+			this.Email =$('#email').text();
+			this.Website =$('#website').text();
+			this.comments =$('#comments').text();
+			this.latitude =$('#latitude').text();
+			this.longitude =$('#longitude').text();
+			this.nweipAddress=$('#spn_ip').text();
+			this.Landmark =$('#Landmark').html();
+			this.WorkingTime=$('#WorkingTime').text();
+		}
+		this.userFileData={
+			name:this.name,
+			address:this.Address,
+			phone:this.Phone,
+			fax:this.Fax,
+			email:this.Email,
+			website:this.Website,
+			comments:this.comments,
+			ipAddress:this.nweipAddress,
+			landmark:this.Landmark,
+			workingTime:this.WorkingTime,
+			to_country_slug_name:this.to_country_slug_name,
+			from_country_slug_name:this.from_country_slug_name,
+			slug:'',
+			emb_type:'',
+		}
+		this.userInputCntdetailsService.userInputData(this.userFileData).subscribe(
+			data => {
+				if(data='SUCCESS'){
+					this.updating = false;
+					this.success_msg_error = true;
+					this.success_msg = 'Thank you for sending your suggestions.'
+					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
+                    $(document).ready(function(){
+                    setTimeout(function(){
+                        $('.myalert').fadeOut('fast');}, 3000);
+                        $('.myalert').fadeIn();
+                    })
+				}else if(data='ERROR'){
+					this.updating = false;
+					this.msg_error = true;
+					this.erro_msg = 'Error! Information did not send!'
+                    $(document).ready(function(){
+                    setTimeout(function(){
+                        $('.myalert').fadeOut('fast');}, 3000);
+                        $('.myalert').fadeIn();
+                    })
+				}else{
+					// do nothing
+				}
+			})
+	}
+
+	ErrorRermoveAdd(){
+		$('#address').removeClass('borderCls')
+	}
+	ErrorRermoveName(){
+		$('#namef').removeClass('borderCls')
+	}
+	ErrorRermovePhn(){
+		$('#telephone').removeClass('borderCls')
+	}
+	ErrorRermoveEml(){
+		$('#email').removeClass('borderCls')
+	}
+
 
 }

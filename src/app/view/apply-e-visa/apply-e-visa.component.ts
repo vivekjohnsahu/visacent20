@@ -6,12 +6,13 @@ import { VisaApplicationService } from '../../services/visa_application/visa-app
 import { CountriesListService } from '../../services/countries_list_home/countries-list.service';
 import { Meta, Title} from '@angular/platform-browser';
 import { EmbassiesCityDetailsService } from '../../services/embassies_city_details/embassies-city-details.service'
+import { UserInputCntdetailsService } from '../../services/userInputCntdetails/user-input-cntdetails.service'
 
 @Component({
   selector: 'app-apply-e-visa',
   templateUrl: './apply-e-visa.component.html',
   styleUrls: ['./apply-e-visa.component.css'],
-  providers: [ CountriesListService, EmbassiesCityDetailsService ]
+  providers: [ CountriesListService, EmbassiesCityDetailsService, UserInputCntdetailsService ]
 })
 export class ApplyEVisaComponent implements OnInit {
 
@@ -69,6 +70,33 @@ export class ApplyEVisaComponent implements OnInit {
 	to_country_alternate_name:any;
 	from_country_alternate_name:any;
 	visaTypeName:any;
+	updating_msg:boolean;
+	Address:any;
+	Phone:any;
+	Fax:any;
+	Email:any;
+	Website:any;
+	comments:any;
+	nweipAddress
+	latitude:any;
+	longitude:any;
+	userFileData={}
+	updating:boolean;
+	success_msg_error:boolean;
+	success_msg:any;
+	msg_error:boolean;
+	erro_msg:any;
+	regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
+	numberRegEx = "^(0|[0-9][0-9]*)$";
+	grecaptcha:any;
+	captchaError:boolean;
+	captchaError_msg:any;
+	name:any;
+	Landmark:any;
+	WorkingTime:any;
+	to_country_slug_name:any;
+	from_country_slug_name:any;
+
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -78,7 +106,8 @@ export class ApplyEVisaComponent implements OnInit {
 		private countriesListService:CountriesListService,
 		private meta: Meta,
 		private title:Title,
-		private embassiesCityDetailsService:EmbassiesCityDetailsService
+		private embassiesCityDetailsService:EmbassiesCityDetailsService,
+		private userInputCntdetailsService:UserInputCntdetailsService
 	) {
 		this.title.setTitle('Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas');
 		this.meta.updateTag({ name:'title',content:'Apply for a Visa | Online Visa Application | Expedited Visa Services | Most Sought Visas'});
@@ -369,6 +398,8 @@ export class ApplyEVisaComponent implements OnInit {
 					this.from_country_name = data.from_country_name;
 					this.from_country_alternate_name = data.from_country_alternate_name;
 					this.to_country_alternate_name = data.to_country_alternate_name;
+					this.to_country_slug_name= data.to_country_slug_name;
+					this.from_country_slug_name= data.from_country_slug_name;
 					if(data.status=='SUCCUSS'){
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
@@ -499,7 +530,7 @@ export class ApplyEVisaComponent implements OnInit {
 					var cmt=this;
 					setTimeout(function(){
 						cmt.setemb_map();
-					},2000);
+					},1000);
 				}
 				else{
 					this.con_visa_req_sec=false;
@@ -541,14 +572,14 @@ export class ApplyEVisaComponent implements OnInit {
 			this.meta.updateTag({ name:'description',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.to_country_alternate_name+' Visa from '+this.from_country_name+'. Apply for '+this.to_country_alternate_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
 			this.meta.updateTag({ name:'keywords',content: 'No eVisa available for '+this.from_country_name+', Apply for '+this.to_country_alternate_name+' regular Visa, '+this.to_country_alternate_name+' Visa application from '+this.from_country_name+', Visa through a '+this.of_country_name+' diplomatic mission, '+this.to_country_alternate_name+' regular Visa'});
 		}else if(this.visaApplyTbl[0].visa_not_required!='0'){
-			this.title.setTitle('No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.');
-			this.meta.updateTag({ name:'title',content:'No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});	
-			this.meta.updateTag({ name:'description',content:'hey, No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});
-			this.meta.updateTag({ name:'keywords',content: 'No eVisa to travel '+this.of_country_name+' form '+this.from_country_name+', No '+this.to_country_alternate_name+' Visa, Visa free.'});		
+			this.title.setTitle('No eVisa to travel '+this.of_country_name+' from '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.');
+			this.meta.updateTag({ name:'title',content:'No eVisa to travel '+this.of_country_name+' from '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});	
+			this.meta.updateTag({ name:'description',content:'hey, No eVisa to travel '+this.of_country_name+' from '+this.from_country_name+'. No visa required for '+this.of_country_name+' from '+this.from_country_name+'.'});
+			this.meta.updateTag({ name:'keywords',content: 'No eVisa to travel '+this.of_country_name+' from '+this.from_country_name+', No '+this.to_country_alternate_name+' Visa, Visa free.'});		
 		}else{
 			this.title.setTitle('Apply '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.to_country_alternate_name+' eVisa online from '+this.from_country_name+'');
 			this.meta.updateTag({ name:'title',content: 'Apply '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.to_country_alternate_name+' eVisa online from '+this.from_country_name+''});	
-			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa, Apply for '+this.to_country_alternate_name+' eVisa application online, '+this.from_country_alternate_name+'ese Citizens can apply online for '+this.to_country_alternate_name+' e-visa. '+this.visaTypeName});
+			this.meta.updateTag({ name:'description',content: 'Get '+this.of_country_name+' eVisa, Apply for '+this.to_country_alternate_name+' eVisa application online, '+this.from_country_alternate_name+' Citizens can apply online for '+this.to_country_alternate_name+' e-visa. '+this.visaTypeName});
 			this.meta.updateTag({ name:'keywords',content: 'Apply '+this.to_country_alternate_name+' eVisa, '+this.to_country_alternate_name+' eVisa application for '+this.from_country_alternate_name+', '+this.to_country_alternate_name+' eVisa online from '+this.from_country_name+', '+this.to_country_alternate_name+' eVisa, '+this.visaTypeName});		
 		}
 	}
@@ -570,6 +601,111 @@ export class ApplyEVisaComponent implements OnInit {
 			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, A '+this.of_country_name+' eVisa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});
 			this.meta.updateTag({ name:'keywords',content: 'Visa requirements Check, '+this.of_country_name+' Visa Check, Visa requirements from '+this.from_country_name+', A eVisa from '+this.from_country_name+'.'});		
 		}	
+	}
+
+	resolved(captchaResponse: string) {
+		this.grecaptcha = captchaResponse;
+		this.captchaError = false;
+	}
+
+	update_btn(){
+		let flg=0;
+		if($('#namef').text()==''){
+			$('#namef').addClass('borderCls')
+			flg=1;
+		}if($('#address').text()==''){
+			$('#address').addClass('borderCls')
+			flg=1;
+		}if($('#telephone').text()!=''){
+			let p = $('#telephone').text()
+			if(!(p.match(this.numberRegEx))){
+				$('#telephone').addClass('borderCls')
+				flg=1;
+			}
+		}if($('#email').text()!=''){
+			let e = $('#email').text()
+			if(!(e.match(this.regExEmail))){
+				$('#email').addClass('borderCls')
+				flg=1;
+			}
+		}
+		if(this.grecaptcha === undefined){
+			this.captchaError = true;
+			this.captchaError_msg = "Please enter captcha"
+			flg=1;
+		}
+		if(flg==1){
+			return;
+		}else{
+			this.captchaError = false;
+			this.updating = true;
+			this.name =$('#namef').text();
+			this.Address =$('#address').text();
+			this.Phone =$('#telephone').text();
+			this.Fax =$('#fax').text();
+			this.Email =$('#email').text();
+			this.Website =$('#website').text();
+			this.comments =$('#comments').text();
+			this.latitude =$('#latitude').text();
+			this.longitude =$('#longitude').text();
+			this.nweipAddress=$('#spn_ip').text();
+			this.Landmark =$('#Landmark').html();
+			this.WorkingTime=$('#WorkingTime').text();
+		}
+		this.userFileData={
+			name:this.name,
+			address:this.Address,
+			phone:this.Phone,
+			fax:this.Fax,
+			email:this.Email,
+			website:this.Website,
+			comments:this.comments,
+			ipAddress:this.nweipAddress,
+			landmark:this.Landmark,
+			workingTime:this.WorkingTime,
+			to_country_slug_name:this.to_country_slug_name,
+			from_country_slug_name:this.from_country_slug_name,
+			slug:'',
+			emb_type:'',
+		}
+		this.userInputCntdetailsService.userInputData(this.userFileData).subscribe(
+			data => {
+				if(data='SUCCESS'){
+					this.updating = false;
+					this.success_msg_error = true;
+					this.success_msg = 'Thank you for sending your suggestions.'
+					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
+                    $(document).ready(function(){
+                    setTimeout(function(){
+                        $('.myalert').fadeOut('fast');}, 3000);
+                        $('.myalert').fadeIn();
+                    })
+				}else if(data='ERROR'){
+					this.updating = false;
+					this.msg_error = true;
+					this.erro_msg = 'Error! Information did not send!'
+                    $(document).ready(function(){
+                    setTimeout(function(){
+                        $('.myalert').fadeOut('fast');}, 3000);
+                        $('.myalert').fadeIn();
+                    })
+				}else{
+					// do nothing
+				}
+			})
+	}
+
+	ErrorRermoveAdd(){
+		$('#address').removeClass('borderCls')
+	}
+	ErrorRermoveName(){
+		$('#namef').removeClass('borderCls')
+	}
+	ErrorRermovePhn(){
+		$('#telephone').removeClass('borderCls')
+	}
+	ErrorRermoveEml(){
+		$('#email').removeClass('borderCls')
 	}
 
 }

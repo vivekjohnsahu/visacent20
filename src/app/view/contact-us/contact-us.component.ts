@@ -141,6 +141,13 @@ export class ContactUsComponent implements OnInit {
 			{
 				fild='lbl_email'
 			}	
+		}if(this.nationalityNew=='' || this.nationalityNew==undefined){
+			$(".countryOne").addClass("borderColor");
+			flag=1;
+			if(fild=='')
+			{
+				fild='lbl_nationality'
+			}	
 		}if(this.contactU.mag == "" || this.contactU.mag == undefined){
 			$(".magOne").css('border-color','red');
 			flag=1;

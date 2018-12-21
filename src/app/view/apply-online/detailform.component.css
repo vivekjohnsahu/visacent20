@@ -212,10 +212,7 @@
 {
     width:600px;
 }
-.login_popup
-{
-    width:700px;
-}
+
 @media (max-width: 1400px)
 {
     .modal-dialog 
@@ -243,6 +240,10 @@
 
 
 /*----------------------- start login popup ---------------*/
+.login_popup
+{
+    width:500px;
+}
 .user_icon
 {
     text-align: center;
@@ -270,9 +271,16 @@
 }
 .login_div 
 {
-    width:100%;
+    width:87%;
     padding-top:0px;
     padding-top: 0px;
     padding-bottom: 50px;
+}
+@media (max-width: 600px)
+{
+    .login_popup
+    {
+        width:90%;
+    }
 }
 /*---------------- end login popup----------------------*/

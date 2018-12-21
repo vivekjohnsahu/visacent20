@@ -164,8 +164,8 @@ export class ConsulateGeneralComponent implements OnInit {
 							this.meta.updateTag({ name:'description',content:this.name+' '+this.in_cntname+', Get addresses, telephone numbers, email addresses, websites. '+this.of_country+' have '+ lenght+' Consulates General in other cities of '+this.in_cntname+'.'});
 							this.meta.updateTag({ name:'keywords',content:this.name+' '+this.in_cntname+'. '+this.of_country+' Consulates in '+this.in_cntname+', '+this.of_country+' Consulates General, '+this.of_country+' Consulates General address in '+this.in_cntname+'. '+this.of_country+' Consulates General address in '+this.in_cntname+'.'});
 
-							this.map = this.map=encodeURI(this.map);
-								$('#emb_map').html('<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
+							// this.map = this.map=encodeURI(this.map);
+								$('#emb_map').html('<iframe width="100%" style="height: 300px;!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
 			
 							if(this.countydetails.in_coutnry_flag!=''){
 								this.in_coutnry_flag = this.countydetails.in_coutnry_flag; 
@@ -398,8 +398,7 @@ export class ConsulateGeneralComponent implements OnInit {
 	}
 
 	setemb_map(){
-		// this.map = this.map=encodeURI(this.map);
-		// $('#emb_map').html('<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');
+		$('#emb_map').html('<iframe width="100%" style="height: 300px;!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
 
 		for(var i=0;i<this.EmbassyAd.length;i++){
 			var idd=this.EmbassyAd[i].id;

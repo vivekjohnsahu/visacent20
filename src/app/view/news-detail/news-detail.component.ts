@@ -84,11 +84,11 @@ export class NewsDetailComponent implements OnInit {
 
 	leaveReply(){
 		var flag = 0;
-		if(this.grecaptcha === undefined){
-			this.captchaError = true;
-			this.captchaError_msg = "Please enter captcha"
-			flag = 1;
-		}
+		// if(this.grecaptcha === undefined){
+		// 	this.captchaError = true;
+		// 	this.captchaError_msg = "Please enter captcha"
+		// 	flag = 1;
+		// }
 		if(this.name =='' || this.name ==undefined){
 			$('.nameBrd').addClass('borderCls');
 			flag = 1;
@@ -113,13 +113,14 @@ export class NewsDetailComponent implements OnInit {
 			data => {
 				this.suce_sh = true;
 				this.suce_msg_sh = 'Your reply successfully submit.';
+				$('html, body').animate({scrollTop: $("#scr_sus_msg").offset().top}, 800);
 				setTimeout(() => {
 					$('#myalert').hide()
 					this.name=''
 					this.email=''
 					this.message=''
-					this.newsId=''
-				}, 1500);
+				}, 2500);
+				$('#myalert').show()
 			})
 	}
 
