@@ -27,4 +27,10 @@ export class VisaApplicationService {
 		return this.http.get(`${this.eVisaSelectCntUrl}`+visaReq).map((res:Response) => res.json());
 	}
 
+	private visaEligibleUrl = "https://visacent.com/la/api/visa_eligible_countries/";
+
+	visa_eligible_country(country_eligible:any){
+		return this.http.get(`${this.visaEligibleUrl}`+country_eligible).map((res:Response) => res.json());
+	}
+
 }

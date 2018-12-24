@@ -352,7 +352,7 @@ export class VisaTableComponent implements OnInit {
 		this.router.navigate(["apply-online",this.moveForm]);
 		document.body.scrollTop = document.documentElement.scrollTop = 0;  
 	}
-	
+	belowAList:boolean;
 	requirementCountry(){
 		this.embassiesCityDetailsService.requirementCountryCtn(this.requirementCountryName).subscribe(
 			data =>{
@@ -360,12 +360,17 @@ export class VisaTableComponent implements OnInit {
 				this.countydetailsNew = data.data;
 				this.consulateAd=new Array();
 				this.EmbassyAd=new Array()
+				
+				if(this.consulateAd=='' && this.EmbassyAd==''){
+					this.belowAList=false
+				}
 				for(i=0;this.countydetails.length>i;i++){
 					if(data.data[i].name.indexOf("Consulate")>-1){
 						this.consulateAd.push(this.countydetails[i])
 					}else{
 						this.EmbassyAd.push(this.countydetails[i])
 					}	
+					this.belowAList=true
 				}
 				for(var i=0;i<this.countydetailsNew.length;i++){
 					if(this.countydetailsNew[i].Telepone!=null && $.trim(this.countydetailsNew[i].Telepone)!='' && $.trim(this.countydetailsNew[i].Telepone)!=' '){

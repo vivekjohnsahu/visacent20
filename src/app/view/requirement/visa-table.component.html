@@ -231,9 +231,11 @@
                 </p>
             </div>
         </div>
-        <div class="below_country" *ngIf="tableRegular && (consulateAd.length>0 || EmbassyAd.length>0)">
-            <p><i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
-        </div> 
+        <div *ngIf='belowAList'>
+            <div class="below_country" *ngIf="tableRegular && (consulateAd.length>0 || EmbassyAd.length>0)">
+                <p><i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
+            </div> 
+        </div>
     </article>
      <!--------------------- end Regular visa required ---------------->
         </div>
@@ -483,13 +485,12 @@
             </div>
         </section>
     </section>
-    <section class="section_30" *ngIf="countydetails=='' && countydetails=='' && docu_feq_data==''">
+    <section class="section_30" *ngIf="(countydetails=='' && countydetails=='' && docu_feq_data=='') || tableRequired">
             <div class="container datafound scroll_msg">
           
             <div class="no_embassy_content">
                 <p class="p1">
                     We do not have good information about this, please help us by update correct information
-                    Show form like this
                 </p>
             </div>
           

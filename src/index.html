@@ -28,7 +28,14 @@
 <body>
     <app-root></app-root>
     <script src="assets/bootstrap/js/bootstrap.js"></script> 
-    <script type="text/javascript">function add_chatinline(){var hccid=79908462;var nt=document.createElement("script");nt.async=true;nt.src="https://www.mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
-    add_chatinline();</script>
+    <script  type="text/javascript">
+        var cmt=this;
+        setTimeout(function(){
+            add_chatinline();
+        },7000);
+        function add_chatinline(){var hccid=79908462;var nt=document.createElement("script");nt.async=true;nt.src="https://www.mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+        // add_chatinline();
+    </script>
+    
 </body>
 </html>

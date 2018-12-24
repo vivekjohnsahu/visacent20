@@ -96,7 +96,8 @@ export class ApplyEVisaComponent implements OnInit {
 	WorkingTime:any;
 	to_country_slug_name:any;
 	from_country_slug_name:any;
-
+	form_show=false;
+	most_sought_visas:boolean;
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -132,14 +133,22 @@ export class ApplyEVisaComponent implements OnInit {
 			this.visaReq1 = this.routers.snapshot.params["a"];
 		})
 		if(this.router.url=='/apply-e-visa'){
+			this.most_sought_visas = false;
+			this.con_visa_req_sec = true;
 			this.pageName = 'Apply for e-Visa'
 		}else if(this.router.url=='/apply-visa-tool'){
-			this.pageName = 'Visa apply tool'
+			this.con_visa_req_sec = false;
+			this.most_sought_visas = true;
+			this.pageName = 'Visa apply tool, Check requirements for a visa'
 		}else if(this.router.url=='/visa-requirements'){
+			this.most_sought_visas = false;
+			this.con_visa_req_sec = true;
 			this.pageName = 'Requirement to apply e-Visa'
 		}
 	
 		if(this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+			this.most_sought_visas = false;
+			this.con_visa_req_sec = true;
 			this.pageName = 'Apply for e-Visa'
 			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
 				this.visaReqNead = this.visaReq;
@@ -154,7 +163,9 @@ export class ApplyEVisaComponent implements OnInit {
 				}	
 			}
 		}else if(this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
-			this.pageName = 'Visa apply tool'
+			this.con_visa_req_sec = false;
+			this.most_sought_visas = true;
+			this.pageName = 'Visa apply tool, Check requirements for a visa'
 			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
 				var NewvisaReq = this.visaReq.split('-visa-requirements-for-')
 				if(NewvisaReq.length==2){
@@ -165,9 +176,11 @@ export class ApplyEVisaComponent implements OnInit {
 				}	
 			}
 		}else if(this.router.url=='/visa-requirements'+'/'+this.visaReq){
+			this.most_sought_visas = false;
+			this.con_visa_req_sec = true;
 			this.pageName = 'Requirement to apply e-Visa'
 			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
-				var NewvisaReq = this.visaReq.split('-visa-requirements-for-')
+				var NewvisaReq = this.visaReq.split('-visa-for-')
 				if(NewvisaReq.length==2){
 					this.visaReqNead=NewvisaReq[0]
 					this.country_ctnSet = this.visaReqNead	
@@ -373,7 +386,7 @@ export class ApplyEVisaComponent implements OnInit {
 				this.visafor();
 			}
 			else if(this.router.url.indexOf('visa-requirements')>-1){
-				var url = this.country_ctnSet+"-visa-requirements-for-"+this.belongCnty;
+				var url = this.country_ctnSet+"-visa-for-"+this.belongCnty;
 				this.router.navigate(['/visa-requirements/'+url])
 				this.visafor();
 			}
@@ -409,7 +422,9 @@ export class ApplyEVisaComponent implements OnInit {
 						this.visa_flag = data.country_flag;
 						this.country_ctn = data.to_country_name
 						if(this.visaApplyTbl[0].visa_type!= 0){
+							this.form_show=false;
 							this.con_visa_req_sec = false;
+							this.most_sought_visas = false;
 							if(this.visaApplyTbl.length>1){
 								this.visaTypeName = this.visaApplyTbl[0].visa_type+', '+this.visaApplyTbl[1].visa_type
 							}else{
@@ -421,19 +436,29 @@ export class ApplyEVisaComponent implements OnInit {
 							this.tableRegular = false;
 							this.changeNeedVisa(cnt_id)
 						}else if(this.visaApplyTbl.length == 0){
+							this.form_show=false;
 							this.con_visa_req_sec=false;
+							this.most_sought_visas = false;
 							this.tableViasaToggle = false;
 							this.tableRequired = false;
 							this.tableRegular = true;  
 							this.requirementCountry()
 						}else if(this.visaApplyTbl[0].visa_not_required!= 0){
+							if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
+								this.most_sought_visas = true;
+								this.form_show=false;
+							}
+							if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+								this.most_sought_visas = false;
+								this.form_show=true;
+							}
 							this.con_visa_req_sec=false;
 							this.tableRequired = true;
 							this.tableRegular = false;
 							this.tableViasaToggle = false;
 							this.metaTags()
-							// this.requirementCountry()
 						}else{
+							this.most_sought_visas = false;
 							this.con_visa_req_sec=false;
 							this.tableRequired = false;
 							this.tableRegular = true; 
@@ -441,6 +466,14 @@ export class ApplyEVisaComponent implements OnInit {
 							this.requirementCountry()
 						}
 					}else if(data.status=='FAIL'){
+						if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
+							this.most_sought_visas = true;
+							this.form_show = false;
+						}
+						if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+							this.most_sought_visas = false;
+							this.form_show=false;
+						}
 						this.con_visa_req_sec=false;
 						this.ngProgress.done();
 						this.visaApplyTbl = data.visa
@@ -476,6 +509,22 @@ export class ApplyEVisaComponent implements OnInit {
 				this.EmbassyAd=new Array()
 				this.metaTags()
 				if(this.countydetails.length>0){
+					if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
+						if(this.countydetails.length>0){
+							this.most_sought_visas = false;
+							this.form_show = false;
+						}else{
+							this.most_sought_visas = true;
+							this.form_show = false;
+						}
+					}else if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+						this.most_sought_visas = false;
+						if(this.countydetails.length>0){
+							this.form_show=false;
+						}else{
+							this.form_show=true;
+						}
+					}
 					this.cnt_emb=true;
 					this.visa_req_sec=false;	
 					this.con_visa_req_sec=false;
@@ -533,6 +582,13 @@ export class ApplyEVisaComponent implements OnInit {
 					},1000);
 				}
 				else{
+					if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
+						this.most_sought_visas = true;
+						this.form_show = false;
+					}else if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+						this.most_sought_visas = false;
+						this.form_show=true;
+					}
 					this.con_visa_req_sec=false;
 					this.cnt_emb=false;
 					this.visa_req_sec=true;

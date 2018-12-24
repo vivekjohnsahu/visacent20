@@ -178,7 +178,6 @@
                 <!-------------------------- end duplicate tabel on mobile ---------------->
             </div>
         </section>
-
         <!--------------------- start no visa required ---------------->
         <div *ngIf="tableRequired" class="no_visa_req">
             <div class="no_visa_req_icon">
@@ -191,44 +190,35 @@
                 </p>
             </div>
         </div>
-
-     <!--------------------- end no visa required ---------------->
-
-
-
-     <!--------------------- start Regular visa required ---------------->
-     <article *ngIf="tableRegular">
-         <div class="regular_visa_req">
-            <div class="regular_visa_cont">
-                <img src="assets/images/regular.png" />
+        <!--------------------- end no visa required ---------------->
+        <!--------------------- start Regular visa required ---------------->
+        <article *ngIf="tableRegular">
+            <div class="regular_visa_req">
+                <div class="regular_visa_cont">
+                    <img src="assets/images/regular.png" />
+                </div>
+                <div class="regular_visa_para">
+                    <h4>Yes, a visa is required for your trip to {{of_country_name}}.</h4>
+                    <p>
+                        Citizens of <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
+                        its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink=
+                            '/contact-us'>contact us</a>.
+                    </p>
+                </div>
             </div>
-            <div class="regular_visa_para">
-                <h4>Yes, a visa is required for your trip to {{of_country_name}}.</h4>
-               <p>
-                   Citizens of <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
-                its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink=
-                '/contact-us'>contact us</a>.
-               </p>
+            <div class="below_country" *ngIf="cnt_emb">
+                <p>
+                    <i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.
+                </p>
             </div>
-        </div>
-        <div class="below_country" *ngIf="cnt_emb">
-            <p>
-            <i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
-        </div> 
-    </article> 
-
-     <!--------------------- end Regular visa required ---------------->
-
-
-
+        </article>
+        <!--------------------- end Regular visa required ---------------->
         <!-- <div [hidden]="!tableRegular" class="citizen_quoute" >
             <p>
                 <i class="fas fa-quote-left"></i> Citizens of the <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
                 its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. 
             </p>
-        </div> -->
-
-
+            </div> -->
     </div>
 </section>
 <section class="section_20 country_specification" *ngIf="visa_req_sec && !tableRegular">
@@ -245,7 +235,7 @@
             photographs and also pay for your application online. 
             It's faster and easier to apply online.
         </p>
-    </div> -->
+        </div> -->
     <section class="section_20" [hidden]="intro==null">
         <div class="container">
             <div class="intro_container" style="border-bottom: 1px solid #ddd;">
@@ -337,7 +327,177 @@
             Our unique online tool, which is one stop for processing all your visas needs.We take care Premium Validation, SSL Certificate which provides secure environment and online assurance.
         </div>
     </div>
+    <section class="step_sec section_30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center visa-apply-headding">
+                    <h2>Get your Visa in 3 simple steps</h2>
+    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                    <div class="visa-step-sec">
+                        <h2><span>1</span> <span> Step</span></h2>
+                        <div><span><i class="fas fa-mobile-alt"></i></span></div>
+                        <h3>Apply online</h3>
+                        <p>Secure, Hasslefree online application saves time and check status online.</p>
+    
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                    <div class="visa-step-sec">
+                        <h2><span>2</span> <span> Step</span></h2>
+                        <div><span><i class="fas fa-credit-card"></i></span></div>
+                        <h3>Upload documents & Payment</h3>
+                        <p>Submit your online application with required documents and make payments.</p>
+    
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                    <div class="visa-step-sec">
+                        <h2><span>3</span> <span> Step</span></h2>
+                        <div><span><i class="far fa-envelope-open"></i></span></div>
+                        <h3>Receive e-Visa on email</h3>
+                        <p>e-Visa will sent to your registered e-mail.</p>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </section>
+
+
+<section class="section_20" id="scrollTable" *ngIf="most_sought_visas">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="visa-sec">
+                    <h2 style="margin-bottom: 15px;">Most Sought Visas</h2>
+                    <div class="row flag_home">
+                        <div class="col-lg-3 col-md-4 col-sm-6" >
+                            <article class="visa_country">
+                                <a title="Indian Visa" routerLink="/apply-visa/india">
+                                    <aside>
+                                        <i class="india"></i>
+                                    </aside>
+                                    <h3>Indian Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" >
+                            <article class="visa_country" title="Vietnamese Visa">
+                                <a routerLink="/apply-visa/vietnam">
+                                    <aside>
+                                        <i class="vietnam"></i>
+                                    </aside>
+                                    <h3>Vietnamese Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" >
+                            <article class="visa_country">
+                                <a title="Myanmar Visa" routerLink="/apply-visa/myanmar">
+                                    <aside>
+                                        <i class="myanmar"></i>
+                                    </aside>
+                                    <h3>Myanmar Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 " >
+                            <article class="visa_country">
+                                <a title="Turkish Visa" routerLink="/apply-visa/turkey">
+                                    <aside>
+                                        <i class="turky"></i>
+                                    </aside>
+                                    <h3>Turkish Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" >
+                            <article class="visa_country">
+                                <a title="Malaysia Visa" routerLink="/apply-visa/malaysia">
+                                    <aside>
+                                        <i class="malaysia"></i>
+                                    </aside>
+                                    <h3>Malaysia Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" >
+                            <article class="visa_country">
+                                <a title="Australian Visa" routerLink="/apply-visa/australia">
+                                    <aside>
+                                        <i class="australia"></i>
+                                    </aside>
+                                    <h3>Australian Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" >
+                            <article class="visa_country">
+                                <a title="Srilanka Visa" routerLink="/apply-visa/sri-lanka">
+                                    <aside>
+                                        <i class="srilanka"></i>
+                                    </aside>
+                                    <h3>Sri Lanka Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" >
+                            <article class="visa_country">
+                                <a title="Taiwan Visa" routerLink="/apply-visa/taiwan">
+                                    <aside>
+                                        <i class="taiwan"></i>
+                                    </aside>
+                                    <h3>Taiwan Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-1 ukrain_flag" >
+                            <article class="visa_country">
+                                <a title="Ukraine Visa" routerLink="/apply-visa/ukraine">
+                                    <aside>
+                                        <i class="ukraine"></i>
+                                    </aside>
+                                    <h3>Ukraine Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-lg-offset-0 col-md-offset-2" >
+                            <article class="visa_country">
+                                <a title="Ethiopia Visa" routerLink="/apply-visa/ethiopia">
+                                    <aside>
+                                        <i class="ethiopia"></i>
+                                    </aside>
+
+                                    <h3>Ethiopia Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-0" >
+                            <article class="visa_country">
+                                <a routerLink="/apply-visa/singapore" title="Singapore Visa">
+                                    <aside>
+                                        <i class="singapore"></i>
+                                    </aside>
+
+                                    <h3>Singapore Visa</h3>
+                                </a>
+                            </article>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <div *ngIf="cnt_emb" style="text-align: center;">
     <div class="errorshow" style="color:#333;">
         <div class="my1">
@@ -352,8 +512,6 @@
                                 <h3><span>Address: </span></h3>
                                 <p [innerHTML]="details.Address">
                                 </p>
-
-
                                 <div class="phone_box">
                                     <div class="left">
                                         <label>Phone:</label>
@@ -369,8 +527,6 @@
                                         </p>
                                     </div>
                                 </div>
-
-
                                 <div class="phone_box">
                                     <div class="left">
                                         <label>Fax:</label>
@@ -386,8 +542,6 @@
                                         </p>
                                     </div>
                                 </div>
-
-
                                 <div class="phone_box">
                                     <div class="left">
                                         <label>Email:</label>
@@ -403,8 +557,6 @@
                                         </p>
                                     </div>
                                 </div>
-
-
                                 <div class="phone_box">
                                     <div class="left">
                                         <label>Website:</label>
@@ -441,8 +593,6 @@
                                 <h3><span>Address: </span></h3>
                                 <p [innerHTML]="details.Address">
                                 </p>
-
-
                                 <div class="phone_box">
                                     <div class="left">
                                         <label>Phone:</label>
@@ -458,8 +608,6 @@
                                         </p>
                                     </div>
                                 </div>
-
-
                                 <div class="phone_box">
                                     <div class="left">
                                         <label>Fax:</label>
@@ -475,14 +623,12 @@
                                         </p>
                                     </div>
                                 </div>
-
-
-                                    <div class="phone_box">
-                                      <div class="left">
-                                          <label>Email:</label>
-                                      </div>
-                                      <div class="right">
-                                          <p style="margin-bottom:6px;">
+                                <div class="phone_box">
+                                    <div class="left">
+                                        <label>Email:</label>
+                                    </div>
+                                    <div class="right">
+                                        <p style="margin-bottom:6px;">
                                             <strong> </strong>
                                             <span *ngIf="details.lnthE_maiil!=0">
                                             <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
@@ -491,10 +637,8 @@
                                             <span>NA</span>
                                             </span>
                                         </p>
-                                      </div>
                                     </div>
-
-
+                                </div>
                                 <div class="phone_box">
                                     <div class="left">
                                         <label>Website:</label>
@@ -509,7 +653,7 @@
                                             </span>
                                         </p>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                         </article>
                     </div>
@@ -521,29 +665,22 @@
         </div>
     </div>
 </div>
-
-
-<section class="section_30" *ngIf="countydetails=='' || tableRegular || tableRequired">
+<section class="section_30" *ngIf="form_show">
     <div class="container datafound scroll_msg">
-  
-    <div class="no_embassy_content">
-        <p class="p1">
-            We do not have good information about this, please help us by update correct information
-            Show form like this
-        </p>
-    </div>
-  
-        <form class="user_emabassy" style="position:relative;"> 
-            
+        <div class="no_embassy_content">
+            <p class="p1">
+                We do not have good information about this, please help us by update correct information
+            </p>
+        </div>
+        <form class="user_emabassy" style="position:relative;">
             <div class="my_alert my_alert_pos myalert" *ngIf="success_msg_error">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <span class="sus" style="text-transform: none!important;">{{success_msg}}</span>
-          </div>
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <span class="sus" style="text-transform: none!important;">{{success_msg}}</span>
+            </div>
             <div class="my_alert my_alert_pos my_alert_red myalert" *ngIf="msg_error">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <span class="sus" style="text-transform: none!important;">fghfgh gfhgfh {{erro_msg}}</span>
-          </div>
-            
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <span class="sus" style="text-transform: none!important;">fghfgh gfhgfh {{erro_msg}}</span>
+            </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="">
@@ -616,18 +753,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row"> 
+            <div class="row">
                 <div class="col-sm-12">
                     <div class="">
                         <label>
-                            Comments
+                        Comments
                         </label>
                     </div>
-                    <div class="element_container">                      
+                    <div class="element_container">
                         <div style="min-height: 124px;" class="textarea enable_white comments" contenteditable id="comments"></div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="row" style="margin-top:20px;">
                 <div class="col-md-12" style="text-align: center;">
                     <div class="label_container" style="margin-bottom: 10px; display: inline-block;">
@@ -635,7 +772,7 @@
                         <div *ngIf="captchaError" style="color:red; position: relative; left: 0px; font-size: 14px;">*{{captchaError_msg}}</div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="row">
                 <div class="col-sm-12 col-xs-12" style="padding-right:7px;">
                     <div class="element_container" style="text-align: center;">
@@ -643,15 +780,15 @@
                     </div>
                 </div>
             </div>
-          <div *ngIf="updating" class="preloader"> 
-              <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
-                  <g>
-                      <path d="M78.75 16.18V1.56a64.1 64.1 0 0 1 47.7 47.7H111.8a49.98 49.98 0 0 0-33.07-33.08zM16.43 49.25H1.8a64.1 64.1 0 0 1 47.7-47.7V16.2a49.98 49.98 0 0 0-33.07 33.07zm33.07 62.32v14.62A64.1 64.1 0 0 1 1.8 78.5h14.63a49.98 49.98 0 0 0 33.07 33.07zm62.32-33.07h14.62a64.1 64.1 0 0 1-47.7 47.7v-14.63a49.98 49.98 0 0 0 33.08-33.07z" fill="#005ea5" fill-opacity="1"/>
-                      <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="90 64 64" dur="1800ms" repeatCount="indefinite">
-                      </animateTransform>
-                  </g>
-              </svg>
-          </div> 
+            <div *ngIf="updating" class="preloader">
+                <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
+                    <g>
+                        <path d="M78.75 16.18V1.56a64.1 64.1 0 0 1 47.7 47.7H111.8a49.98 49.98 0 0 0-33.07-33.08zM16.43 49.25H1.8a64.1 64.1 0 0 1 47.7-47.7V16.2a49.98 49.98 0 0 0-33.07 33.07zm33.07 62.32v14.62A64.1 64.1 0 0 1 1.8 78.5h14.63a49.98 49.98 0 0 0 33.07 33.07zm62.32-33.07h14.62a64.1 64.1 0 0 1-47.7 47.7v-14.63a49.98 49.98 0 0 0 33.08-33.07z" fill="#005ea5" fill-opacity="1"/>
+                        <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="90 64 64" dur="1800ms" repeatCount="indefinite">
+                        </animateTransform>
+                    </g>
+                </svg>
+            </div>
         </form>
     </div>
-  </section>
+</section>

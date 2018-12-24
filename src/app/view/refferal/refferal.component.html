@@ -7,10 +7,10 @@
 			</div>
 			<p class="text-center">Make money through your network, invite your friends and</p>
 			<p class="text-center" style="font-size: 32px;" *ngIf="!isnewUser">
-				Earn $10 for every new applicant you refer
+				Earn ${{BonusAmount}} for every new applicant you refer
 			</p>
 			<p class="text-center">
-				<span style="cursor:auto;">Nobody can tell the our story better than our customers.</span> Get a friend to start apply for a visa today and earn $10 when they complete their first application.
+				<span style="cursor:auto;">Nobody can tell the our story better than our customers.</span> Get a friend to start apply for a visa today and earn ${{BonusAmount}} when they complete their first application.
 			</p>
 			<p *ngIf="isnewUser" class="text-center" style="color: #73d934;
 			padding: 4px 10px;
@@ -122,7 +122,7 @@
 				<article class="how_work">
 					<i class="fas fa-gift"></i>
 					<h3>Claim your reward</h3>
-					<p>Once your friend complete first booking, you'll receive a $10 reward!</p>
+					<p>Once your friend complete first booking, you'll receive a ${{BonusAmount}} reward!</p>
 				</article>
 			</div>
 		</div>
@@ -151,7 +151,7 @@
         <a href="javascript:void(0)" class='new'>When I may refer eligible to get bonus?
  <span><i class="fas fa-chevron-right"></i></span></a>
         <div class="open">
-           <p>Once your friends who sign up with your link, make their first Booking ( complete a payment for their visa application / tour packages / or other services. amount should be $50 USD or more) you'll be eligible for a bonus of $10 USD.
+           <p>Once your friends who sign up with your link, make their first Booking ( complete a payment for their visa application / tour packages / or other services. amount should be $50 USD or more) you'll be eligible for a bonus of ${{BonusAmount}} USD.
 			</p>
         </div>
 

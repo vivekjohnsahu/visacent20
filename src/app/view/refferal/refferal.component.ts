@@ -36,6 +36,7 @@ export class RefferalComponent implements OnInit {
   grecaptcha:any;
   captchaError:boolean;
   captchaError_msg:any;
+  BonusAmount:any;
 
 	ngOnInit() {
 		$(document).ready(function () {
@@ -52,6 +53,8 @@ export class RefferalComponent implements OnInit {
 				});
 			});
 		});
+
+		this.getBonusAmount()
 	}
 
 	refferalUser(){
@@ -128,6 +131,17 @@ export class RefferalComponent implements OnInit {
 	resolved(captchaResponse: string) {
 		this.grecaptcha = captchaResponse;
 		this.captchaError = false;
+	}
+
+	getBonusAmount(){
+		this.refferalService.bonusAmount().subscribe(
+			data =>{
+				if(data.status="status"){
+					this.BonusAmount = data.amount;
+				}else{
+					this.BonusAmount = '10';
+				}
+			})
 	}
 
 }

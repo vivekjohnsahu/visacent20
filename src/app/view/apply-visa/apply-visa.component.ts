@@ -99,6 +99,7 @@ export class ApplyVisaComponent implements OnInit {
 	to_country_slug_name:any;
 	from_country_slug_name:any;
 	docu_feq_data='';
+	eligibleCountries:any;
 
   	ngOnInit() {
 		this.ngProgress.start();
@@ -188,6 +189,7 @@ export class ApplyVisaComponent implements OnInit {
 				})
 		}
 
+		this.visaEligibleCountries(this.country_ctn)
 		
 	}
 	  
@@ -473,6 +475,14 @@ export class ApplyVisaComponent implements OnInit {
 	}
 	ErrorRermoveEml(){
 		$('#email').removeClass('borderCls')
+	}
+
+	visaEligibleCountries(country_eligible){
+		this.visaApplicationService.visa_eligible_country(country_eligible).subscribe(
+			data => {
+				this.eligibleCountries = data
+				console.log(this.eligibleCountries)
+			})
 	}
 	
 }

@@ -379,20 +379,37 @@
     </div>
 </section>
 <section class="section_20 country_specification" [hidden]="(tableRegular && countydetails!='')">
-    <div class="container">
-        <h2 class="text-center" style="text-transform: uppercase;">{{of_country_name}}</h2>
+    <section class="section_20" id="scrollTable" *ngIf="(documents_req==null && visa_req==null && faq==null) || intro==null">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="visa-sec">
+                        <h2 style="margin-bottom: 15px;">Visa Eligible Countries</h2>
+                        <!-- <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let eligible of eligibleCountries.e_visa">
+                            <a title="{{eligible.name}}">{{eligible.name}}</a>
+                        </div> -->
+                        <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let eligible of eligibleCountries.regular_visa">
+                            <a title="{{eligible.name}}">{{eligible.name}}</a>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let eligible of eligibleCountries.visa_not_required">
+                            <a title="{{eligible.name}}">{{eligible.name}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- <h2 class="text-center" style="text-transform: uppercase;">{{of_country_name}}</h2>
         <div class="row" *ngIf="(documents_req==null && visa_req==null && faq==null) || intro==null">
             <div class="col-md-12 countray_flag">
-                <!-- <h2 class="text-center" style="text-transform: uppercase;">{{country_ctn}}</h2> -->
                 <aside class="text-center">
                     <img src={{visa_flag}} class="" style="margin: 0 auto;" />
                 </aside>
             </div>
-        </div>
-        <p *ngIf="(intro==null && documents_req==null && visa_req==null && faq==null)" class="text-center" style="margin-top:25px;">"You can apply online for e-visas. You can upload supporting documents, 
+        </div> -->
+        <!-- <p *ngIf="(intro==null && documents_req==null && visa_req==null && faq==null)" class="text-center" style="margin-top:25px;">"You can apply online for e-visas. You can upload supporting documents, 
         photographs and also pay for your application online.
-        It's faster and easier to apply online."</p>
-    </div>
+        It's faster and easier to apply online."</p> -->
 
     <!-- <section class="section_20 country_specification" *ngIf="visa_req_sec">
     <div class="container">
@@ -500,7 +517,6 @@
     <div class="no_embassy_content">
         <p class="p1">
             We do not have good information about this, please help us by update correct information
-            Show form like this
         </p>
     </div>
   

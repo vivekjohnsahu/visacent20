@@ -1,3 +1,18 @@
+.visa-step-sec>div>span 
+{
+    color: #cacaca;
+    font-size: 70px;
+    display: inline-block;
+    background: #edeff1;
+    width: 125px;
+    height: 125px;
+    line-height: 125px;
+    border-radius: 50%;
+}
+.visa-step-sec>h3
+{
+    margin-top: 15px;
+}
 .e_visa
 {
     width:100%;

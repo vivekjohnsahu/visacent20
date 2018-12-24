@@ -14,5 +14,11 @@ export class RefferalService {
   refferalEmail(email:any){
       return this.http.post(`${this.refferalUrl}`,email).map((res:Response) => res.json());
   }
+
+  private  refferalAmountUrl = "https://visacent.com/la/api/bonus_amount"; 
+
+  bonusAmount(){
+    return this.http.get(`${this.refferalAmountUrl}`).map((res:Response) => res.json());
+  }
  
 }
