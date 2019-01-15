@@ -1,13 +1,22 @@
 .visa-step-sec>div>span 
 {
     color: #cacaca;
-    font-size: 70px;
+    font-size: 55px;
     display: inline-block;
     background: #edeff1;
     width: 125px;
     height: 125px;
     line-height: 125px;
     border-radius: 50%;
+    box-shadow: none;
+}
+.visa-step-sec:hover div>span>i
+{
+    color:#005ea5;
+}
+.visa-step-sec>h2
+{
+    font-size: 27px;
 }
 .visa-step-sec>h3
 {
@@ -54,7 +63,13 @@
         margin-left: auto;
         margin-right:auto;
     } 
+    .visa-step-sec 
+    {
+        border:none;
+    }
 }
+
+
 @media (min-width:1400px)
 {
     .select_cont select
@@ -97,4 +112,9 @@
 }
 .borderCls{
     border: 1px solid red;
+}
+@media (max-width: 1240px){
+    .visa-step-sec {
+        height: auto;
+    }
 }

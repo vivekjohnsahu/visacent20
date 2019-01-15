@@ -242,6 +242,7 @@
                             </div>
                         </div>
                     </div>
+                    <h1 class="text-center" *ngIf="noApplication" style="margin-top:20px;margin-bottom: 12px;font-size:30px;">No Applications</h1>
                     <h1 class="text-center" *ngIf="AllApplication" style="margin-top:20px;font-size:30px;">All Applications</h1>
                     <h1 class="text-center" *ngIf="UnderProcessApplication" style="margin-top:20px;font-size:30px;">Under Process Applications</h1>     
                 <div *ngFor="let order1 of UserOrders_user; let i = index" class="div_for_user row">
@@ -413,11 +414,11 @@
             <div class="form_wrapper" [hidden]="!my_profile">
                 <form class="update_profile">
                     <h1 style="margin-bottom: 15px;text-align: center;font-size: 30px;">Update Profile</h1>
-                    <div id="myalert" class="my_alert my_alert_pos" *ngIf="updated_suc">
+                    <div id="myalert" class="my_alert my_alert_pos my_alert_scr_er" *ngIf="updated_suc">
                         <button type="button" class="close" data-dismiss="myalert">&times;</button>
                         <span class="sus">Profile {{updated_suc_msg}}</span>
                     </div>
-                    <div id="myalert" class="my_alert my_alert_pos my_alert_red" *ngIf="updated_error">
+                    <div id="myalert" class="my_alert my_alert_pos my_alert_red my_alert_scr_er" *ngIf="updated_error">
                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                         <span class="sus">Profile{{updated_error_msg}}</span>
                     </div>
@@ -435,7 +436,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="label_container">
-                                        <label>Name <i _ngcontent-c7="" class="fas fa-pencil-alt"></i></label>
+                                        <label id="lbl_name">Name <i _ngcontent-c7="" class="fas fa-pencil-alt"></i></label>
                                     </div>
                                     <div class="element_container">
                                         <input type="text" class="nameOne enable_white" (keyup)="errorHideRed()" [(ngModel)]="name" name="name" id="user_name" value="">
@@ -445,7 +446,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="label_container">
-                                        <label>Phone <i _ngcontent-c7="" class="fas fa-mobile-alt"></i></label>
+                                        <label id="lbl_number">Phone <i _ngcontent-c7="" class="fas fa-mobile-alt"></i></label>
                                     </div>
                                     <div class="element_container phone_dropdown">
                                         <select name="" id="flagDropVlu" class="flagEr enable_white">    
@@ -496,8 +497,13 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
+                    <div class="row" style="margin-top:10px;">
+                        <div class="col-sm-12 " style="text-align: center;" id="lbl_captcha">
+                            <span style="display: inline-block;">
+                                <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha></span>
+                            <div *ngIf="captchaError" style="color:red;">*{{captchaError_msg}}</div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="element_container" style="margin-top:15px;text-align: center;">
@@ -511,18 +517,18 @@
                 <!-- <h3 style="margin-top: 0;">Change Password</h3> -->
                 <form class="change_pro_form">
                 <h1 style="margin-bottom: 15px;text-align: center;font-size: 30px;">Change Password</h1>
-                <div id="myalert" class="my_alert my_alert_pos" *ngIf="change_suc">
+                <div id="myalert" class="ed_alert_scr_er my_alert my_alert_pos" *ngIf="change_suc">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span class="sus">{{change_suc_msg}}</span>
                 </div>
-                <div id="myalert" class="my_alert my_alert_pos my_alert_red" *ngIf="change_error">
+                <div id="myalert" class="ed_alert_scr_er my_alert my_alert_pos my_alert_red" *ngIf="change_error">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <span class="sus">{{change_error_msg}}</span>
                 </div>   
                     <div class="row">
                         <div class="col-md-12">
                             <div class="label_container">
-                                <label width="30%">Current Password *
+                                <label width="30%" id="lbl_oldPassword">Current Password *
                                     <!-- <i class="fas fa-ellipsis-h"></i> -->
                                 </label>
                             </div>
@@ -532,7 +538,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="label_container">
-                                <label>New Password *
+                                <label id="lbl_newPassword">New Password *
                                     <!-- <i class="fas fa-ellipsis-h"></i> -->
                                 </label>
                             </div>
@@ -542,7 +548,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="label_container">
-                                <label>Confirm New Password *
+                                <label id="lbl_matchPassword">Confirm New Password *
                                     <!-- <i class="fas fa-ellipsis-h"></i> -->
                                 </label>
                             </div>
@@ -592,6 +598,8 @@
                     </div>
                 </div>
                 </div>
+                <p *ngIf="Withdraw_btn_hide" style="color:green;text-align: center;">Your request to withdrawal bonus has been submitted. Your bonus will be credit within 72 hour into your Paypal account. </p>
+
                 <div class="urls">
                     <div class="row">
                         <div class="col-md-12 text-center" style="padding-bottom: 20px;padding-top: 15px;">
@@ -635,9 +643,7 @@
 
                         </div> 
                     </div>
-                </div>
-                
-                <p *ngIf="Withdraw_btn_hide" style="color:green">Your request to withdrawal bonus has been submitted. Your bonus will be credit within 72 hour into your Paypal account. </p>
+                </div>    
                     <div class="col-lg-6" [hidden]="bonus_withdraw1==''">
                         <h3 class="text-center" style="margin-bottom: 10px;">Bonus</h3> 
                         <div class="bonus_table bonus_table1">
@@ -661,7 +667,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col-lg-6" [hidden]="withdraw_request1==''">
+                    <div class="col-lg-6" [hidden]="withdraw_request1==undefined || withdraw_request1==''">
                         <div class="text-center" >
                             <h3 style="margin-bottom: 10px;">Bonus Withdraw Request</h3>
                         </div>  
@@ -685,10 +691,10 @@
                                         <td *ngIf="bonus.credit_amount!=null">{{bonus.credit_amount}} USD <span style="font-size:11px;" *ngIf="!bonus.credit_date==''">({{bonus.credit_date}})</span></td>
                                         <td *ngIf="bonus.credit_amount==null">NA</td>
                                         <td>
-                                            <div *ngIf="bonus.comment!=''">
+                                            <div *ngIf="bonus.comment!='' || bonus.comment!=null">
                                                 {{bonus.comment}}
                                             </div>
-                                            <div *ngIf="bonus.comment==''">
+                                            <div *ngIf="bonus.comment=='' || bonus.comment==null">
                                                 NA
                                             </div>
                                         </td>

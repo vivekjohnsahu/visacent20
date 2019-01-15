@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="label_container">
-                                    <label class="pull-left">Email <i class="far fa-envelope"></i></label>
+                                    <label class="pull-left" id="lbl_email">Email <i class="far fa-envelope"></i></label>
                                 </div>
                                 <div class="element_container">
                                     <input type="text" title="Email" maxlength="40" placeholder="Email" class="removeGmail enable_white" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched)}" required #email="ngModel" name="email" [(ngModel)]="Email" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$" (focus)="cleanerror()" />
@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="label_container">
-                                    <label class="pull-left">Passowrd <i class="fas fa-unlock-alt"></i></label>
+                                    <label class="pull-left" id="lbl_password">Passowrd <i class="fas fa-unlock-alt"></i></label>
                                 </div>
                                 <div class="element_container">
                                     <input type="password" maxlength="30" title="Password" class="removePassword enable_white" placeholder="password" [ngClass]="{'borderColor': password.invalid && ( password.dirty || password.touched)}" #password="ngModel" name="password" [(ngModel)]="Password" (focus)="cleanerror1()" required />
@@ -66,16 +66,16 @@
                     <span  style="color: green"></span> 
                      
                     <form id="forget" class="login">
-                        <div id="myalert" class="my_alert my_alert_pos" *ngIf="forgot_msg_sus">
+                        <div id="myalert" class="my_alert my_alert_pos my_alert_scr" *ngIf="forgot_msg_sus">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <span class="sus">{{forgot_msg}}</span>
                         </div>
-                        <div id="myalert" class="my_alert my_alert_pos my_alert_red" *ngIf="forgot_msg_error">
+                        <div id="myalert" class="my_alert my_alert_pos my_alert_red my_alert_scr_er" *ngIf="forgot_msg_error">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <span class="sus">{{forgot_error_msg}}</span>
                         </div>
                         <div class="label_container">
-                            <label class="pull-left">Enter Your Email <i class="far fa-envelope"></i></label>
+                            <label class="pull-left" id="lbl_forgot_email">Enter Your Email <i class="far fa-envelope"></i></label>
                         </div>
                         <div class="element_container">
                             <input type="text" title="Email" placeholder="Email" class="removeGmailForgot enable_white" [ngClass]="{'borderColor': email.invalid && ( email.dirty || email.touched)}" required #email="ngModel" name="email" [(ngModel)]="EmailForgot" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" (focus)="cleanerrorForgot()" />

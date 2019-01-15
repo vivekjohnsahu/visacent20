@@ -48,13 +48,25 @@ export class VisaStatusComponent implements OnInit {
 
 	statusUser(){
 		let flag=0;
+		let fild='';
 		if(this.applicationId=='' || this.applicationId==null || this.applicationId==undefined){
 			$('.appliCls').addClass('borderColor');
 			flag=1;
+			if(fild=='')
+			{
+				fild='lbl_appliId';
+			}
 		}if(this.passportNo=='' || this.passportNo==null || this.passportNo==undefined ){
 			$('.passCls').addClass('borderColor');
 			flag=1;
+			if(fild=='')
+			{
+				fild='lbl_passNo';
+			}
 		}if(flag==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
 			return;
 		}
 		this.process = true;
@@ -72,10 +84,11 @@ export class VisaStatusComponent implements OnInit {
 		}
 		this.visaStatusService.visaStatus(this.key).subscribe(
 			data =>{
-				if(this.is_login_user == 0){
-					localStorage.setItem('user',JSON.stringify(data.user_data));
-				}
 				if(data.status=='SUCCESS'){
+					if(this.is_login_user == 0){
+						localStorage.setItem('user',JSON.stringify(data.user_data));
+					}
+					document.body.scrollTop = document.documentElement.scrollTop = 0;
 					this.formPage = true;
 					this.process = false;
 					this.applicationData = data.applicant_data;
@@ -93,9 +106,9 @@ export class VisaStatusComponent implements OnInit {
 					this.process = false;
 					this.StutasError = true;
 					this.StutasErrorMsg = data.msg;
-					if(this.StutasErrorMsg=='Application not found'){
-						localStorage.removeItem('user');
-					}
+					setTimeout(() => {
+						$('html, body').animate({scrollTop: $("#myalert").offset().top}, 800);						
+					}, 500);
                     $(document).ready(function(){
 						setTimeout(function(){
                             $('#myalert').fadeOut('fast');}, 3000);

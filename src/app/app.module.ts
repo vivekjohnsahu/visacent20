@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './view/home-page/home-page.component';
@@ -85,7 +86,6 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 		PaymentFailedComponent,
 		MakePaymentFailedComponent,
 		RefferalComponent,
-		// Autosize
 	],
 
 	imports: 
@@ -97,6 +97,7 @@ import { RefferalComponent } from './view/refferal/refferal.component';
 		RecaptchaModule.forRoot(),
 		NgProgressModule,
 		TextareaAutosizeModule,
+		JwSocialButtonsModule,
 	],
 
 	providers: [],

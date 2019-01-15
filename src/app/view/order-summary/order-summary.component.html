@@ -917,7 +917,6 @@
                                                                     </label>
                                                                     <div class="col-md-12 col-sm-3">
                                                                         <button disabled type="button" id="sub_btn" (click)="submit_form()" class="btn_sb my_btn my_btn_submit width_auto" style="cursor: no-drop; width: 130px!important; margin-top: 22px;">
-
                                                                             Submit
                                                                         </button>
                                                                     </div>
@@ -925,7 +924,7 @@
                                                             </form>
                                                         </div>
                                                         <div class="tab-pane fade" id="tab_detaile2">
-                                                            <div class="row">
+                                                            <div class="row" id="doc_win_sc">
                                                                 <div class="col-sm-6 col-md-3 file_col" *ngFor="let appli of document; let i = index">
                                                                         <label id="fieldName{{i}}" *ngIf="appli.is_required==1">{{appli.label}}<span style="color:red">*</span></label>
                                                                     <label id="fieldName{{i}}" *ngIf="appli.is_required==0">{{appli.label}}</label>

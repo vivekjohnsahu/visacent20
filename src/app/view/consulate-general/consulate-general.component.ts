@@ -87,6 +87,16 @@ export class ConsulateGeneralComponent implements OnInit {
 	of_country:any;
 	homescroolId="Most-Sought-Visas"
 	map:any;
+	leaveReply:boolean=false;
+	regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
+	replyManName:string;
+	replyManEmail:any
+	replyManMassage:string;
+	msg_user_reply_success:string;
+	user_reply_success:boolean;
+	user_reply_error:boolean;
+	msg_user_reply_error:string;
+	commentsReply:any;
 
 	constructor( 
 		private consulateGerneralService:ConsulateGerneralService,
@@ -127,9 +137,7 @@ export class ConsulateGeneralComponent implements OnInit {
                 $("#report_popup").hide();
                 $("body").css({"overflow-y":"scroll"});
 			});  
-			
-			
-			
+				
 		});
 		this.ngProgress.start();
 		this.countryAllData()
@@ -147,6 +155,9 @@ export class ConsulateGeneralComponent implements OnInit {
 							$("#emb_sec1").show();
 							$(".ReloadPageShow").hide();
 							this.countydetails = data;
+							if(data.comments!=null){
+								this.commentsReply = data.comments;
+							}
 							this.embassy_id = this.countydetails.embassy_detail.id;
 							this.clickCountry = data.embassy_detail;
 							this.name = this.clickCountry.name;
@@ -164,8 +175,7 @@ export class ConsulateGeneralComponent implements OnInit {
 							this.meta.updateTag({ name:'description',content:this.name+' '+this.in_cntname+', Get addresses, telephone numbers, email addresses, websites. '+this.of_country+' have '+ lenght+' Consulates General in other cities of '+this.in_cntname+'.'});
 							this.meta.updateTag({ name:'keywords',content:this.name+' '+this.in_cntname+'. '+this.of_country+' Consulates in '+this.in_cntname+', '+this.of_country+' Consulates General, '+this.of_country+' Consulates General address in '+this.in_cntname+'. '+this.of_country+' Consulates General address in '+this.in_cntname+'.'});
 
-							// this.map = this.map=encodeURI(this.map);
-								$('#emb_map').html('<iframe width="100%" style="height: 300px;!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
+							$('#emb_map').html('<iframe width="100%" style="height: 300px;!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');				
 			
 							if(this.countydetails.in_coutnry_flag!=''){
 								this.in_coutnry_flag = this.countydetails.in_coutnry_flag; 
@@ -178,13 +188,13 @@ export class ConsulateGeneralComponent implements OnInit {
 								this.of_coutnry_flag = "assets/images/default1.png";
 							}	
 
-							this.address1=this.clickCountry.Address
-							this.addressTag = this.clickCountry.Address
+							this.address1=this.clickCountry.Address;
+							this.addressTag = this.clickCountry.Address;
 							this.address = this.clickCountry.Address.replace(/(<([^>]+)>)/ig,"");
 							this.phone1 = this.clickCountry.Telepone;
-							this.phone = this.clickCountry.Telepone
-							this.fax1 = this.clickCountry.Fax
-							this.fax = this.clickCountry.Fax
+							this.phone = this.clickCountry.Telepone;
+							this.fax1 = this.clickCountry.Fax;
+							this.fax = this.clickCountry.Fax;
 							this.emai = this.clickCountry.E_maiil;
 							this.website = this.clickCountry.website;
 							this.Latitude = this.clickCountry.Latitude;
@@ -325,20 +335,20 @@ export class ConsulateGeneralComponent implements OnInit {
 		this.grecaptcha = captchaResponse;
 		this.captchaError = false;
     }
-
-	// topData(slug_name){
-	// 	this.routers.navigate(["consulate-general",slug_name]);
-	// 	$('html,body').animate({ scrollTop: 0 }, 'slow');
-	// }
 	
 	update_btn(){
+		let flg=0;
 		if($('#textarea').text()==''){
 			$('#textarea').addClass('borderCls')
-			return		
-		}else if(this.grecaptcha === undefined){
+			flg=1;
+			$("#report_popup").animate({scrollTop: 10}, 800);
+			return;
+		}
+		if(this.grecaptcha === undefined){
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
-			return false;
+			flg=1;
+			return;
 		}else{
 			this.captchaError = false;
 			this.updating_msg = true;
@@ -373,13 +383,14 @@ export class ConsulateGeneralComponent implements OnInit {
 			data => {
 				if(data.status="SUCCESS"){
 					this.success_msg_error = true;
+					$("#report_popup").animate({scrollTop: 0}, 800);
                     setTimeout(function(){
 					  	$('#mydiv').fadeOut('fast');
 							  $("#report_popup").hide();
 							  $("body").css({"overflow-y":"scroll"});
-                       	}, 1000);
+                       	}, 2000);
 					   	$('#mydiv').fadeIn('fast');
-							   $("#report_popup").show();
+						$("#report_popup").show();
 					this.updating_msg = false;
 					this.success_msg = "Your information has been updated."
 				}
@@ -412,6 +423,85 @@ export class ConsulateGeneralComponent implements OnInit {
 			$('#cnst_map__div_'+cidd).html(crl);
 		}
 
+	}
+
+	leaveReplyfun(){
+		this.leaveReply=true;
+		$('.ManMassageBrd').removeClass('borderCls');
+	}
+
+	leaveReplysubmit(){
+		var flag = 0;
+		let fild='';
+		if(this.replyManName =='' || this.replyManName ==undefined){
+			$('.ManNameBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManName';
+			}
+		}if(this.replyManEmail =='' || this.replyManEmail ==undefined){
+			$('.ManEmailBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManEmail';
+			}
+		}else if(!(this.replyManEmail=='') && !this.replyManEmail.match(this.regExEmail)){
+			$('.ManEmailBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManEmail';
+			}
+		}if(this.replyManMassage =='' || this.replyManMassage ==undefined){
+			$('.ManMassageBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManMassage';
+			}
+		}if(flag==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
+			return;
+		}
+
+		var userLeaveReply = {
+			emb_id:this.embassy_id,
+			name:this.replyManName,
+			email:this.replyManEmail,
+			msg:this.replyManMassage
+		}
+	
+		this.updateAddressService.save_emb_comment(userLeaveReply).subscribe(
+			data => {
+				if(data.status='SUCCESS'){
+					this.user_reply_success = true;
+					this.msg_user_reply_success = 'successfully reply';
+					setTimeout(() => {$('html, body').animate({scrollTop: $("#scr_sus_msg").offset().top}, 800);}, 200);
+					this.replyManName='';
+					this.replyManEmail='';
+					this.replyManMassage='';
+					setTimeout(() => {this.user_reply_success = false;}, 2000);
+				}else if(data.status="ERROR"){
+					this.user_reply_error = true;
+					this.msg_user_reply_error = "Don't sent you reply";
+					setTimeout(() => {$('html, body').animate({scrollTop: $("#scr_sus_msg").offset().top}, 800);}, 200);
+					setTimeout(() => {this.user_reply_success = false;}, 2000);
+
+				}
+			}
+		)
+	}
+
+	replyleaveName(){
+		$('.ManNameBrd').removeClass('borderCls');
+	}
+	
+	replyleaveEmail(){
+		$('.ManEmailBrd').removeClass('borderCls');
 	}
 
 }

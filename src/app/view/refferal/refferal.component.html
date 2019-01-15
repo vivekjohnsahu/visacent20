@@ -12,21 +12,13 @@
 			<p class="text-center">
 				<span style="cursor:auto;">Nobody can tell the our story better than our customers.</span> Get a friend to start apply for a visa today and earn ${{BonusAmount}} when they complete their first application.
 			</p>
-			<p *ngIf="isnewUser" class="text-center" style="color: #73d934;
-			padding: 4px 10px;
-			border-radius: 30px;
-			border:1px solid #73d934;
-			box-shadow: inset 0px 0px 20px #73d93478;width: 80%;
-    		margin-left: auto;
-    		margin-right: auto;">
+			<p *ngIf="isnewUser" class="text-center" style="color: #73d934;padding: 4px 10px;border-radius: 30px;border:1px solid #73d934;box-shadow: inset 0px 0px 20px #73d93478;width: 80%;margin-left: auto;margin-right: auto;">
 					Your account has been registered on Visacent. Your login credentials has been sent to your email. You can login using visacent.com/login and check your refferal bonus and update your information.
 			</p>
-			
-			
 		</div>
 	</div>
 </section>
-<section class="section_30" style="background: #e4e6e7;">
+<section class="section_30" style="background: #e4e6e7;" id="lbl_email">
 	<div class="container">
 		<form [hidden]="refferalShow" class="refer_form">
 			<div class="mail_div">
@@ -47,43 +39,57 @@
 					</div>
 				</div>
 			</div>
-		</form>
-		
+		</form>	
 		<div class="" [hidden]="!refferalShow" style="text-align: center;">
-			<div class="row url_row">
-			<div class="col-sm-5 url_col">
-				<p class="url_p url_p1">
-					<span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://visacent.com/">Visacent</a></span>
-				</p>
-			</div>
-			<div class="col-sm-7">
-				<p class="url_p">
-					<span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" data-toggle="tooltip"> https://visacent.com/apply-e-visa/?ref={{refferal}} &nbsp;<i class="fas fa-paste"></i></span>
-					<span *ngIf="textCopyCompleteCent" class="uncomplete copied">
-						Copied
-					</span>
-				</p>
-			</div>
-			</div>
-
+			<div style="padding-bottom: 25px;margin-bottom: 25px;border-bottom: 1px solid #cdcdcd;">	
 			<div class="row url_row">
 				<div class="col-sm-5 url_col">
 					<p class="url_p url_p1">
-						<span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://indiaevisas.org" target="_blank" >India e-Visa</a>
-						
+						<span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://visacent.com/">Visacent</a></span>
+					</p>
+				</div>
+				<div class="col-sm-7">
+					<p class="url_p">
+						<span id="p1" (click)="copyToClipboard('#p1')" title="Click to copy url" data-toggle="tooltip"> https://visacent.com/apply-e-visa/?ref={{refferal}} &nbsp;<i class="fas fa-paste"></i></span>
+						<span *ngIf="textCopyCompleteCent" class="uncomplete copied">
+							Copied
 						</span>
+					</p>
+				</div>
+			</div>
+			<h4 style="margin-top: 15px;margin-bottom: 3px;">Share Your Referral URL On Social Platform</h4>
+			<div class="text-center reffer_icon">
+				<a title="twitter" href="https://twitter.com/intent/tweet?url={{visacent_social_Url}}" target="_blank"><i class="fab fa-twitter"></i></a>
+				<a title="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{visacent_social_Url}}&ref=plugin&src=like&kid_directed_site=0" target="_blank"><i class="fab fa-facebook-f"></i></a>
+				<a title="google"  href="https://plus.google.com/share?app=110&url={{visacent_social_Url}}" target="_blank"><i class="fab fa-google-plus-g"></i></a>
+			</div>
+		</div>
+
+			<div >
+				
+			
+			<div class="row url_row">
+				<div class="col-sm-5 url_col">
+					<p class="url_p url_p1">
+						<span style="font-family: 'Hammersmith One';">Your Referral Url for <a href="https://indiaevisas.org" target="_blank" >India e-Visa</a></span>
 					</p>
 				</div>
 				<div class="col-sm-7">
 					<p class="url_p">
 						<span id="p2" (click)="copyToClipboar2('#p2')" title="Click to copy url"> https://indiaevisas.org/apply-visa/?ref={{indiaevisas_referral}} &nbsp;<i class="fas fa-paste"></i></span>
 						<span *ngIf="textCopyCompleteIndia" class="uncomplete copied">
-								Copied
+							Copied
 						</span>
 					</p>
 				</div>
 			</div>
-			
+			<h4 style="margin-top: 15px;margin-bottom: 3px;">Share Your Referral URL On Social Platform</h4>
+			<div class="text-center reffer_icon">
+				<a title="twitter"  href="https://twitter.com/intent/tweet?url={{indiavisa_social_Url}}" target="_blank"><i class="fab fa-twitter"></i></a>
+				<a title="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{indiavisa_social_Url}}&ref=plugin&src=like&kid_directed_site=0" target="_blank"><i class="fab fa-facebook-f"></i></a>
+				<a title="google"  href="https://plus.google.com/share?app=110&url={{indiavisa_social_Url}}" target="_blank"><i class="fab fa-google-plus-g"></i></a>
+			</div>
+			</div>
 		</div>
 	</div>
 </section>

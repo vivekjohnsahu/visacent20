@@ -40,17 +40,19 @@ export class NewsDetailComponent implements OnInit {
 	captchaError:boolean;
 	captchaError_msg:string;
 	newsId:any;
+	leatestComments:any;
 
 	ngOnInit() {
-		this.ngProgress.start();
 		$('#profile_trans').hide();
 		this.router.params.subscribe(val => {
 		let currentValue = this.router.snapshot.params["value"];
+		this.ngProgress.start();
 		this.newsService.NewsCurrentValue(currentValue).subscribe(
 				data =>{
+					this.ngProgress.done();
 					if(data.status == 'SUCCESS'){
-						this.newsId = data.news.id
-						this.ngProgress.done();
+						this.newsId = data.news.id;
+						this.leatestComments = data.news_comments;
 						this.newsData = data.news;
 						this.title.setTitle(this.newsData.title);
 						this.meta.updateTag({ name:'title',content:this.newsData.title});	
@@ -59,8 +61,22 @@ export class NewsDetailComponent implements OnInit {
 						this.newsData = new Array(this.newsData);
 						this.realted = data.news_list;
 						this.pageHide = true;
+						var ctrlscrol = false;
+						$(window).keydown(function(evt) {
+							if (evt.which == 17) { 
+								ctrlscrol = true;
+							}
+						}).keyup(function(evt) {
+							if (evt.which == 17) {
+								ctrlscrol = false;
+							}
+						});
+						$('Toproll').click(function(){	
+							if(!ctrlscrol){
+								$("html, body").animate({ scrollTop: 0 }, 1000);
+							}
+						});
 					}else if(data.status == 'ERROR'){
-						this.ngProgress.done();
 						this.Error_page = true;
 						this.Error_page_msg = 'Oops! News not found!';
 						this.pageHide = true;
@@ -71,11 +87,6 @@ export class NewsDetailComponent implements OnInit {
 		})
 	
 	}
-
-	// realtedPost(value){
-	// 	this.routers.navigate(['news',value]);
-	// 	$("html, body").animate({ scrollTop: 0 }, 1000);
-	// }
 	
 	resolved(captchaResponse: string) {
 		this.grecaptcha = captchaResponse;
@@ -84,43 +95,74 @@ export class NewsDetailComponent implements OnInit {
 
 	leaveReply(){
 		var flag = 0;
-		// if(this.grecaptcha === undefined){
-		// 	this.captchaError = true;
-		// 	this.captchaError_msg = "Please enter captcha"
-		// 	flag = 1;
-		// }
+		let fild='';
 		if(this.name =='' || this.name ==undefined){
 			$('.nameBrd').addClass('borderCls');
 			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_name';
+			}
 		}if(this.email =='' || this.email ==undefined){
 			$('.emailBrd').addClass('borderCls');
 			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_email';
+			}
 		}else if(!(this.email=='') && !this.email.match(this.regExEmail)){
 			$('.emailBrd').addClass('borderCls');
 			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_email';
+			}
 		}if(this.message =='' || this.message ==undefined){
 			$('.msgBrd').addClass('borderCls');
 			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_message';
+			}
+		}if(this.grecaptcha === undefined){
+			this.captchaError = true;
+			this.captchaError_msg = "Please enter captcha";
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_capcha';
+			}
 		}
-		if(flag == 1) return false;
+		if(flag==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
+			return;
+		}
+
 		this.leaveRpy = {
 			name:this.name,
 			email:this.email,
 			message:this.message,
 			newsId:this.newsId
 		}
+		
 		this.newsService.leaveData(this.leaveRpy).subscribe(
 			data => {
-				this.suce_sh = true;
-				this.suce_msg_sh = 'Your reply successfully submit.';
-				$('html, body').animate({scrollTop: $("#scr_sus_msg").offset().top}, 800);
-				setTimeout(() => {
-					$('#myalert').hide()
-					this.name=''
-					this.email=''
-					this.message=''
-				}, 2500);
-				$('#myalert').show()
+				if(data.status=="SUCCESS"){
+					this.suce_sh = true;
+					this.suce_msg_sh = 'Your reply successfully submit.';
+					$('html, body').animate({scrollTop: $("#scr_sus_msg").offset().top}, 800);
+					setTimeout(() => {
+						$('#myalert').hide()
+						this.name=''
+						this.email=''
+						this.message=''
+					}, 2500);
+					$('#myalert').show()
+				}else{
+					// do nothing
+				}
 			})
 	}
 

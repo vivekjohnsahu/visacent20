@@ -22,3 +22,26 @@
         text-align: center;
     }
 }
+.index_icon span{
+    background-color: #055da5;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+    margin-right: 7px;
+    font-size: 12px;
+}
+
+.index_icon p{
+    margin: 0 33px 10px!important;
+}
+.index_icon h4 b
+{
+    font-weight: normal;
+    font-size: 12px;
+    color: #333;
+    font-family: lato;
+}

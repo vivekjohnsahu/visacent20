@@ -48,7 +48,7 @@
         </div>      
     </div>
 </section>
-<section class="section_30"  *ngIf="formPage">
+<section class="section_30" *ngIf="formPage">
     <div class="container">
         <div class="main_heading main_heading_wbg">
             <h1 class="table_h">Visa Status</h1>
@@ -56,21 +56,24 @@
         </div> 
         <div class="row" *ngFor="let order of order_detail_data">
         	<div class="col-md-12">
+                
             	<div class="item">
+                    <h3 style="margin-bottom:6px;">Details</h3>
                 	<article>
+                            
      					<div class="my_row">
                         	<div class="my_col">Order Id</div>
                             <div class="my_col"><p>{{order.orderId}}</p></div>
                         </div>
                         <div class="my_row">
-                        	<div class="my_col">Arrival Date</div>
-                            <div class="my_col"><p>{{order.arrival_date}} (DD-MM-YYYY)</p></div>
+                            <div class="my_col">Visa For Country</div>
+                            <div class="my_col"><p>{{order.visa_for_country}}</p></div>
                         </div>
                     </article>
                     <article>
-                    	<div class="my_row">
-                        	<div class="my_col">Visa For Country</div>
-                            <div class="my_col"><p>{{order.visa_for_country}}</p></div>
+                        <div class="my_row">
+                            <div class="my_col">Arrival Date</div>
+                            <div class="my_col"><p>{{order.arrival_date}} (DD-MM-YYYY)</p></div>
                         </div>
                         <div class="my_row">
                         	<div class="my_col">Applicant No</div>
@@ -80,34 +83,12 @@
                 </div>
             </div>
         </div>
-       
     </div>
-    <div class="">
-<!--
-        <div class="account_css_scroll" >
-            <table id="appli_pass_tbl" class="table_order">
-                <thead >
-                    <tr style="background-color:#005ea5;color:white;font-size:18px;font-family: 'Hammersmith One';">
-                        <th style="text-align: center;">Full Name</th>
-                        <th style="text-align: center;">Nationality</th>
-                        <th style="text-align: center;">Passport No.</th>
-                        <th style="text-align: center;">Visa Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let apli of applicationData">
-                        <td align="center" style="text-transform: capitalize;">{{apli.givenname}}</td>
-                        <td align="center" style="text-transform: capitalize;">{{apli.acquire_nationality}}</td>
-                        <td align="center" style="text-transform: capitalize;">{{apli.passport_no}}</td>
-                        <td align="center" style="text-transform: capitalize;">{{apli.visa_status}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
---> <div class="status_div" style="margin-top:25px;">
+    
+    <div class="status_div" style="margin-top:25px;">
         <article *ngFor="let apli of applicationData">
             <div class="st_row" style="border-bottom: none;">
-                <div class="st_col" style="color:#005ea5;font-family: 'Hammersmith One';">Status</div>
+                <div class="st_col" style="color:white;font-size:19px;font-family: 'Hammersmith One';">Status</div>
                 <div class="st_col" style="color:#005ea5;font-family: 'Hammersmith One';"></div>
             </div>
             <div class="st_row">
@@ -124,10 +105,15 @@
             </div>
             <div class="st_row" style="border-bottom: none;">
                 <div class="st_col">Visa Status</div>
-                <div class="st_col" *ngIf="apli.visa_status=='pending'" style="color: red;text-align: right;">{{apli.visa_status}}</div>                
-                <div class="st_col" *ngIf="apli.visa_status=='success'" style="color: #3dce2d;text-align: right;">{{apli.visa_status}}</div>
-                <span (click)="imageView()" style="color: orange;cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==undefined || appli_visa==null || appli_visa.type=='JPG' || appli_visa==null || appli_visa.type=='jpeg' || appli_visa.type==undefined)">View Visa</span>
-                <span (click)="pdfView()" style="color: orange;cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==undefined || appli_visa==null || appli_visa.type=='pdf' || appli_visa.type==undefined)">View Visa</span>
+                <div class="st_col" *ngIf="apli.visa_status=='processing'" style="color: cyan;">{{apli.visa_status}}</div>
+                <div class="st_col" *ngIf="apli.visa_status=='pending'" style="color: orange;">{{apli.visa_status}}</div>                
+                <div class="st_col" *ngIf="apli.visa_status=='cancel'" style="color: red;">{{apli.visa_status}}</div>                
+                <div class="st_col" *ngIf="apli.visa_status=='success'" style="color: #1ae017;">{{apli.visa_status}}
+                    <div>
+                        <span (click)="imageView()" style="color: rgba(74, 4, 140, 0.71);cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==null || appli_visa.type=='jpg' || appli_visa.type==undefined || appli_visa.type=='jpeg')">View Visa</span>
+                        <span (click)="pdfView()" style="color: rgba(74, 4, 140, 0.71);cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==null || appli_visa.type=='pdf' || appli_visa.type==undefined)">View Visa</span>       
+                    </div>
+                </div>
             </div>
             <div class="container">
                 <button type="button" class="btn btn-info btn-lg hidden" id="popupImage" data-toggle="modal" data-target="#popupImg">Open Modal</button>
@@ -148,7 +134,6 @@
             </div>
         </article>
     </div>
-    </div>
 </section>
 <div *ngIf="process" class="preloader"> 
     <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
@@ -159,3 +144,64 @@
         </g>
     </svg>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="status_div" style="margin-top:25px;">
+        <article >
+            <div class="st_row" style="border-bottom: none;">
+                <div class="st_col" style="color:white;font-family: 'Hammersmith One';">Status</div>
+                <div class="st_col" style="color:#005ea5;font-family: 'Hammersmith One';"></div>
+            </div>
+            <div class="st_row">
+                <div class="st_col">Full Name</div>
+                <div class="st_col">{{apli.givenname}}</div>
+            </div>
+            <div class="st_row">
+                <div class="st_col">Nationality</div>
+                <div class="st_col">{{apli.nationality}}</div>
+            </div>
+            <div class="st_row">
+                <div class="st_col">Passport No</div>
+                <div class="st_col">{{apli.passport_no}}</div>
+            </div>
+            <div class="st_row" style="border-bottom: none;">
+                <div class="st_col">Visa Status</div>
+                <div class="st_col" *ngIf="apli.visa_status=='processing'" style="color: cyan;">{{apli.visa_status}}</div>
+                <div class="st_col" *ngIf="apli.visa_status=='pending'" style="color: orange;">{{apli.visa_status}}</div>                
+                <div class="st_col" *ngIf="apli.visa_status=='cancel'" style="color: red;">{{apli.visa_status}}</div>                
+                <div class="st_col" *ngIf="apli.visa_status=='success'" style="color: #1ae017;">{{apli.visa_status}}
+                    <div>
+                        <span (click)="imageView()" style="color: rgba(74, 4, 140, 0.71);cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==null || appli_visa.type=='jpg' || appli_visa.type==undefined || appli_visa.type=='jpeg')">View Visa</span>
+                        <span (click)="pdfView()" style="color: rgba(74, 4, 140, 0.71);cursor: pointer;position: relative;float: right;" *ngIf="(appli_visa==null || appli_visa.type=='pdf' || appli_visa.type==undefined)">View Visa</span>       
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <button type="button" class="btn btn-info btn-lg hidden" id="popupImage" data-toggle="modal" data-target="#popupImg">Open Modal</button>
+                <div class="modal fade" id="popupImg" role="dialog">
+                    <div class="modal-dialog pdf" >
+                        <div class="modal-content" style="text-align: center">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div *ngIf="!imageDownload" class="modal_body" style="padding-left: 15px; padding-right: 15px;height: 450px;"></div>
+                            <a *ngIf="imageDownload" href={{appli_visa.visas}} download="{{apli.givenname}}/visa" class="">
+                                <div class="modal_body" style="padding-left: 15px; padding-right: 15px;"></div>
+                                Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div> -->

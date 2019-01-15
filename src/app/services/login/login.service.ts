@@ -9,21 +9,20 @@ import 'rxjs/add/operator/map';
 export class LoginService {
 
   constructor(private http:Http) { }
-  // baseUrl= environment.apiUrl
   
-  private loginUrl = "https://visacent.com/la/api/login";
+  private loginUrl = environment.api_url+"/login";
 
     loginDetails(loginData:any) {
       return this.http.post(`${this.loginUrl}`,loginData).map((res:Response) => res.json());
     }
     
-    private forgotUrl = "https://visacent.com/la/api/password_recovery";
+    private forgotUrl = environment.api_url+"/password_recovery";
 
     forgotDetails(EmailForgot:any) {
       return this.http.post(`${this.forgotUrl}`,EmailForgot).map((res:Response) => res.json());
     }
 
-    private loginOtpUrl = "https://visacent.com/la/api/validate_otp";
+    private loginOtpUrl = environment.api_url+"/validate_otp";
 
     loginOtp(otpData){
       return this.http.post(`${this.loginOtpUrl}`,otpData).map((res:Response) => res.json());

@@ -25,7 +25,6 @@
                 <div class="drop_container embassy_of">
                     <h3 style="color:#005ea5;">I need visa for</h3>
                     <form>
-                        <!-- (change)="changeNeedVisa($event.target)" -->
                         <select (change)="visafor1($event.target)"  class="enable_white" style="border: 1px solid #ddd;">
                             <option disabled>Choose Country</option>
                             <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name" [selected]="list.slug_country_name==visaReqNead">{{list.name}}</option>
@@ -36,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <section class="table_section section_20" *ngIf='tableViasaToggle'>
+        <section class="table_section section_20 table_scroll_" *ngIf='tableViasaToggle'>
             <div class="table_data">
                 <div class=" table_div">
                     <div class="row">
@@ -162,24 +161,17 @@
                             </div>
                         </div>
                     </div>
-                    <div [hidden]="!tableRequired" style="text-align: center;">
+                    <div [hidden]="!tableRequired" class="table_scroll_" style="text-align: center;">
                         <div class="errorshow">
                             <p style="color:#8e8e8e;font-size: 33px;text-transform: capitalize;">visa not required</p>
                         </div>
                     </div>
-                    <!-- <div [hidden]="!tableRegular" class="citizen_quoute">
-                        <p class="container" style="color:#055da5;">
-                            <i class="fas fa-quote-left"></i> Citizens of the <span style="text-transform: capitalize;">{{belongCnty}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{country_ctnSet}}</span> diplomatic mission or one of 
-                            its authorized visa agents outside <span style="text-transform: capitalize;">{{country_ctnSet}}</span>. You will need to visit the Embassy in your country to process this visa. We can help you
-                            prepare the required documentation. <i class="fas fa-quote-left"></i>
-                        </p>
-                        </div> -->
                 </div>
                 <!-------------------------- end duplicate tabel on mobile ---------------->
             </div>
         </section>
         <!--------------------- start no visa required ---------------->
-        <div *ngIf="tableRequired" class="no_visa_req">
+        <div *ngIf="tableRequired" class="no_visa_req table_scroll_">
             <div class="no_visa_req_icon">
                 <i class="far fa-smile-wink"></i>
             </div>
@@ -192,7 +184,7 @@
         </div>
         <!--------------------- end no visa required ---------------->
         <!--------------------- start Regular visa required ---------------->
-        <article *ngIf="tableRegular">
+        <article *ngIf="tableRegular" class="table_scroll_">
             <div class="regular_visa_req">
                 <div class="regular_visa_cont">
                     <img src="assets/images/regular.png" />
@@ -201,41 +193,15 @@
                     <h4>Yes, a visa is required for your trip to {{of_country_name}}.</h4>
                     <p>
                         Citizens of <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
-                        its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink=
-                            '/contact-us'>contact us</a>.
+                        its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink='/contact-us'>contact us</a>.
                     </p>
                 </div>
             </div>
-            <div class="below_country" *ngIf="cnt_emb">
-                <p>
-                    <i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.
-                </p>
-            </div>
         </article>
         <!--------------------- end Regular visa required ---------------->
-        <!-- <div [hidden]="!tableRegular" class="citizen_quoute" >
-            <p>
-                <i class="fas fa-quote-left"></i> Citizens of the <span style="text-transform: capitalize;">{{from_country_name}}</span> must obtain a visa in advance. You have to apply for a visa through a <span style="text-transform: capitalize;">{{of_country_name}}</span> diplomatic mission or one of 
-                its authorized visa agents outside <span style="text-transform: capitalize;">{{of_country_name}}</span>. You will need to visit the Embassy in your country to process this visa. 
-            </p>
-            </div> -->
     </div>
 </section>
-<section class="section_20 country_specification" *ngIf="visa_req_sec && !tableRegular">
-    <!-- <div class="container">
-        <h2 class="text-center" style="text-transform: uppercase;">{{of_country_name}}</h2>
-        <div class="row" *ngIf="(documents_req==null && visa_req==null && faq==null) || intro==null">
-            <div class="col-md-12 countray_flag">
-                <aside class="text-center">
-                    <img src={{visa_flag}} class="" style="margin: 0 auto;" />
-                </aside>
-            </div>
-        </div>
-        <p *ngIf="(intro==null && documents_req==null && visa_req==null && faq==null)" style="margin-top:25px;">You can apply online for e-Visas. You can upload supporting documents,
-            photographs and also pay for your application online. 
-            It's faster and easier to apply online.
-        </p>
-        </div> -->
+<section class="section_20 country_specification table_scroll_" *ngIf="visa_req_sec">
     <section class="section_20" [hidden]="intro==null">
         <div class="container">
             <div class="intro_container" style="border-bottom: 1px solid #ddd;">
@@ -318,7 +284,7 @@
         </div>
     </section>
 </section>
-<section class="section_20" *ngIf="con_visa_req_sec">
+<section class="section_20 table_scroll_" *ngIf="con_visa_req_sec">
     <div class="container">
         <div class="row" style="font-size: 20px;text-align: center;">
             VisaCent commits to deliver open information on visa requirements for all the countries. The technical advancement represents the our mission to foster industry innovation.
@@ -327,49 +293,51 @@
             Our unique online tool, which is one stop for processing all your visas needs.We take care Premium Validation, SSL Certificate which provides secure environment and online assurance.
         </div>
     </div>
-    <section class="step_sec section_30">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center visa-apply-headding">
-                    <h2>Get your Visa in 3 simple steps</h2>
-    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center visa-apply-headding">
+                <h2>Get your Visa in 3 simple steps</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                <div class="visa-step-sec">
+                    <h2><span>1</span> <span> Step</span></h2>
+                    <div><span><i class="fas fa-mobile-alt"></i></span></div>
+                    <h3>Apply online</h3>
+                    <p>Make online application, fill simple forms and review details.</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                    <div class="visa-step-sec">
-                        <h2><span>1</span> <span> Step</span></h2>
-                        <div><span><i class="fas fa-mobile-alt"></i></span></div>
-                        <h3>Apply online</h3>
-                        <p>Secure, Hasslefree online application saves time and check status online.</p>
-    
-                    </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                <div class="visa-step-sec">
+                    <h2><span>2</span> <span> Step</span></h2>
+                    <div><span><i class="fas fa-credit-card"></i></span></div>
+                    <h3>Upload documents & Payment</h3>
+                    <p>Upload required documents for e-visa and make payments.</p>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                    <div class="visa-step-sec">
-                        <h2><span>2</span> <span> Step</span></h2>
-                        <div><span><i class="fas fa-credit-card"></i></span></div>
-                        <h3>Upload documents & Payment</h3>
-                        <p>Submit your online application with required documents and make payments.</p>
-    
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
-                    <div class="visa-step-sec">
-                        <h2><span>3</span> <span> Step</span></h2>
-                        <div><span><i class="far fa-envelope-open"></i></span></div>
-                        <h3>Receive e-Visa on email</h3>
-                        <p>e-Visa will sent to your registered e-mail.</p>
-    
-                    </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                <div class="visa-step-sec">
+                    <h2><span>3</span> <span> Step</span></h2>
+                    <div><span><i class="far fa-envelope-open"></i></span></div>
+                    <h3>Receive e-Visa on email</h3>
+                    <p>Check e-visa status online and e-Visa will be sent to your registered e-mail.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </section>
-
-
-<section class="section_20" id="scrollTable" *ngIf="most_sought_visas">
+<section class="section_20 table_scroll_" *ngIf="requirement_req_sec">
+    <div class="container">
+        <div class="row" style="font-size: 20px;text-align: center;">
+            <p>Find out if you need a visa, Most countries required a visa before entry or an Electronic Travel Authorization to travel. Citizen of some countries may only need their valid passport. Check out with our visa tool, right requirements for your travel to, or transit through, a particular country.</p>
+            <p>Assist and advice for migrants & employment. <strong><a routerLink="/contact-us" style="cursor: pointer;"> Contact us.</a></strong></p>
+            <p>Resources</p>
+            <strong><a routerLink="/embassy-and-consulate/worldwide" style="cursor: pointer;">Embassies and Consulates:</a></strong> Check List of diplomatic missions of any country.
+        </div>
+    </div>
+</section>
+<section class="section_20 table_scroll_" id="scrollTable" *ngIf="most_sought_visas">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -472,33 +440,33 @@
                                     <aside>
                                         <i class="ethiopia"></i>
                                     </aside>
-
                                     <h3>Ethiopia Visa</h3>
                                 </a>
                             </article>
                         </div>
-
                         <div class="col-lg-3 col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-0" >
                             <article class="visa_country">
                                 <a routerLink="/apply-visa/singapore" title="Singapore Visa">
                                     <aside>
                                         <i class="singapore"></i>
                                     </aside>
-
                                     <h3>Singapore Visa</h3>
                                 </a>
                             </article>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-<div *ngIf="cnt_emb" style="text-align: center;">
+<br />
+<div *ngIf="cnt_emb" class="table_scroll_">
+    <p style="text-align:center;margin-top: 18px;color: black;font-size: 19px;font-family: 'Hammersmith One';">
+        <i class="fas fa-hand-point-right"></i> &nbsp;Application for the Long Stay / employments Visas, contact to these embassy below
+    </p>
+</div>
+<div *ngIf="cnt_emb" class="table_scroll_" style="text-align: center;">
     <div class="errorshow" style="color:#333;">
         <div class="my1">
             <section class="section_20" *ngFor="let details of consulateAd">
@@ -549,7 +517,7 @@
                                     <div class="right">
                                         <p style="margin-bottom:6px;">
                                             <span *ngIf="details.lnthE_maiil!=0">
-                                            <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                            <a class="gmailhide" href="mailto:{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                                             </span>
                                             <span *ngIf="details.lnthE_maiil==0">
                                             <span>NA</span>
@@ -631,7 +599,7 @@
                                         <p style="margin-bottom:6px;">
                                             <strong> </strong>
                                             <span *ngIf="details.lnthE_maiil!=0">
-                                            <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                            <a class="gmailhide" href="mailto:{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                                             </span>
                                             <span *ngIf="details.lnthE_maiil==0">
                                             <span>NA</span>
@@ -665,26 +633,30 @@
         </div>
     </div>
 </div>
-<section class="section_30" *ngIf="form_show">
+<span style="display: none;" id="spn_ip"></span>
+<section class="section_30 table_scroll_" *ngIf="form_show">
     <div class="container datafound scroll_msg">
         <div class="no_embassy_content">
-            <p class="p1">
-                We do not have good information about this, please help us by update correct information
+            <p style="text-align:center;color: black;font-size: 19px;font-family: 'Hammersmith One';">
+                <i class="fas fa-hand-point-right"></i> &nbsp;Application for the Long Stay / employments Visas, contact to these embassy below
+            </p>
+            <p style="text-align:center;">
+                We do not have good information about their embassy, please help us by update correct information.
             </p>
         </div>
         <form class="user_emabassy" style="position:relative;">
-            <div class="my_alert my_alert_pos myalert" *ngIf="success_msg_error">
+            <div class="my_alert my_alert_pos myalert my_alert_scr" *ngIf="success_msg_error">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <span class="sus" style="text-transform: none!important;">{{success_msg}}</span>
             </div>
-            <div class="my_alert my_alert_pos my_alert_red myalert" *ngIf="msg_error">
+            <div class="my_alert my_alert_pos my_alert_red myalert my_alert_scr" *ngIf="msg_error">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <span class="sus" style="text-transform: none!important;">fghfgh gfhgfh {{erro_msg}}</span>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="">
-                        <label>Name <i class="fas fa-pencil-alt"></i></label>
+                        <label id="lbl_namef">Title <i class="fas fa-pencil-alt"></i></label>
                         <div id="namef" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveName()'></div>
                     </div>
                 </div>
@@ -692,7 +664,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="">
-                        <label>Address</label>
+                        <label id="lbl_address">Address</label>
                         <div id="address" class="textareaaddress enable_white" style="min-height: 124px;" contenteditable (keyup)='ErrorRermoveAdd()'></div>
                     </div>
                 </div>
@@ -700,13 +672,13 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="text_left">
-                        <label>Telephone <i class="fas fa-mobile-alt"></i></label>
+                        <label id="lbl_telephone">Telephone <i class="fas fa-mobile-alt"></i></label>
                         <div id="telephone" class="textarea enable_white" contenteditable (keyup)='ErrorRermovePhn()'></div>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="text_left">
-                        <label>Email <i class="far fa-envelope"></i></label>
+                        <label id="lbl_email">Email <i class="far fa-envelope"></i></label>
                         <div id="email" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveEml()'></div>
                     </div>
                 </div>
@@ -766,7 +738,7 @@
                 </div>
             </div>
             <div class="row" style="margin-top:20px;">
-                <div class="col-md-12" style="text-align: center;">
+                <div class="col-md-12" style="text-align: center;" id="lbl_captcha">
                     <div class="label_container" style="margin-bottom: 10px; display: inline-block;">
                         <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha>
                         <div *ngIf="captchaError" style="color:red; position: relative; left: 0px; font-size: 14px;">*{{captchaError_msg}}</div>

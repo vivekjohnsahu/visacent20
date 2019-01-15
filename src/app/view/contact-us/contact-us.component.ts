@@ -4,6 +4,7 @@ import { CountriesListService } from '../../services/countries_list_home/countri
 import { ContactUsService } from '../../services/contact_us/contact-us.service';
 import { FlagValueService } from '../../services/flagValue/flag-value.service';
 import { Meta, Title} from '@angular/platform-browser';
+import { CaptchaService } from '../../services/captcha/captcha.service'
 
 export interface contactUs{
     name: any;
@@ -16,7 +17,7 @@ export interface contactUs{
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css'],
-  providers: [ CountriesListService, ContactUsService, FlagValueService ]
+  providers: [ CountriesListService, ContactUsService, FlagValueService, CaptchaService ]
 })
 export class ContactUsComponent implements OnInit {
 
@@ -40,14 +41,28 @@ export class ContactUsComponent implements OnInit {
 	codeCnt:any;
 	contactNm:any;
 	processmy:boolean;
+	ipAddress:any;
+	code:any;
+	image_src:any;
+	captchaValue:any;
 
   	constructor(
 		  private countriesListService:CountriesListService,
 		  private contactUsService:ContactUsService,
 		  private flagValueService:FlagValueService,
 		  private meta: Meta,
-		  private title:Title
-	  ) {}
+		  private title:Title,
+		  private captchaService:CaptchaService
+	  ) {
+		  var cmt = this;
+		$.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(response) {
+			cmt.ipAddress=response;
+			cmt.ipAddress=response.geobytescountry;
+			if(cmt.ipAddress=='China'){
+				cmt.captchaInChina()
+			}
+		});	
+	  }
 
 	ngOnInit() {
 		this.title.setTitle('Contact Us | For Visa Related Services Contact Us');
@@ -86,9 +101,25 @@ export class ContactUsComponent implements OnInit {
 			mag:'',
 			phone:'',	
 		}
-
 		this.type = $('#RequestValue').html();
-		
+	}
+
+	captchaInChina(){
+		this.captchaService.captcha().subscribe(
+			data =>{
+				this.code = data.code;
+				this.code = atob(atob(atob(this.code)))
+				this.image_src = data.image_src;
+			}
+		)
+	}
+
+	refreshCaptcha(){
+		this.captchaInChina()
+	}
+
+	borderCorHide(){
+		$(".newcaptcha").css('border-color','#5d5b5b');
 	}
 
 	isNumberKey(evt){
@@ -98,7 +129,6 @@ export class ContactUsComponent implements OnInit {
 		return true;
 	}
 
-
 	resolved(captchaResponse: string) {
 		this.grecaptcha = captchaResponse;
 		this.captchaError = false;
@@ -106,6 +136,7 @@ export class ContactUsComponent implements OnInit {
 	
 	nationality(nationalitycity){
 		this.nationalityNew = nationalitycity.value;
+		$(".countryOne").removeClass("borderColor");
    	}	
 
 	type1(){
@@ -140,8 +171,8 @@ export class ContactUsComponent implements OnInit {
 			if(fild=='')
 			{
 				fild='lbl_email'
-			}	
-		}if(this.nationalityNew=='' || this.nationalityNew==undefined){
+			}		
+		}if(this.nationalityNew=='' || this.nationalityNew==undefined || this.nationalityNew==null){
 			$(".countryOne").addClass("borderColor");
 			flag=1;
 			if(fild=='')
@@ -155,10 +186,20 @@ export class ContactUsComponent implements OnInit {
 			{
 				fild='lbl_mag';
 			}
-		}if(this.grecaptcha === undefined){
-			this.captchaError = true;
-			this.captchaError_msg = "Please enter captcha"
-			flag=1;
+		}if(this.ipAddress!='China'){
+			if(this.grecaptcha === undefined){
+				this.captchaError = true;
+				this.captchaError_msg = "Please enter captcha"
+				flag=1;
+			}
+		}
+		if(this.ipAddress=='China'){
+			if(this.captchaValue==undefined){
+				$(".newcaptcha").css('border-color','red');
+			}else if(!(this.captchaValue.match(this.code))){
+				$(".newcaptcha").css('border-color','red');
+				flag=1;
+			}
 		}if(flag==1){
 			$('html, body').animate({
 				scrollTop: $("#"+fild).offset().top
@@ -191,6 +232,12 @@ export class ContactUsComponent implements OnInit {
 						$('#myalert').show()
 					})
 					$("html, body").animate({ scrollTop: 0}, 'slow');
+					this.contactU.name='';
+					this.contactU.email='';
+					this.contactU.phone='';
+					this.contactU.mag='';
+					$('#id_City').val("0");
+					this.nationalityNew=''
 				}else if(data.status == 'ERROR'){
 					this.chek_msg_error = true;
 					this.processmy=false;

@@ -14,7 +14,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="info_container" *ngFor="let List of current_product">
-                                <ul>
+                                <!-- <ul>
                                     <li style="background-color:#2cc5f0;" class="wow  bounce animated" data-wow-duration="3s" data-toggle="tooltip" data-placement="right" title="Twitter">
                                         <a><i class="fab fa-twitter"></i></a>
                                     </li>
@@ -24,16 +24,7 @@
                                     <li style="background-color:#f8694d;" class="wow  bounce animated" data-wow-duration="3s" data-toggle="tooltip" data-placement="right" title="Google+">
                                         <a><i class="fab fa-google-plus-g"></i></a>
                                     </li>
-                                    <li style="background-color:#2cc5f0;" class="wow  bounce animated" data-wow-duration="3s">
-                                        <a><i class="fab fa-twitter"></i></a>
-                                    </li>
-                                    <li style="background-color:#305891;" class="wow  bounce animated" data-wow-duration="3s">
-                                        <a><i class="fab fa-facebook-f"></i></a>
-                                    </li>
-                                    <li style="background-color:#f8694d;" class="wow  bounce animated" data-wow-duration="3s">
-                                        <a><i class="fab fa-google-plus-g"></i></a>
-                                    </li>
-                                </ul>
+                                </ul> -->
                                 <a routerLink="/news/{{List.slug_name}}">
                                     <img src="https://visacent.com/{{List.image}}" title="{{List.title}}" alt="{{List.slug_name}}" class="img-responsive" />
                                         <span>{{List.created_at}}</span>
@@ -54,7 +45,7 @@
                     <a routerLink="/news/{{List.slug_name}}">
                         <div class="media">
                             <div class="media-left">
-                              <img src="https://visacent.com/{{List.image}}" title="{{List.title}}" alt="{{List.slug_name}}" class="media-object" style="width:60px">
+                              <img src="https://visacent.com/{{List.image}}" title="{{List.title}}" alt="{{List.slug_name}}" class="media-object" style="width:60px;height:50px;">
                             </div>
                             <div class="media-body">
                               <p>{{List.title}}</p>

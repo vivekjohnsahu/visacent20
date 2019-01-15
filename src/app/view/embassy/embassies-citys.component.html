@@ -86,7 +86,7 @@
                                         <p>
                                             <strong>Email: </strong>
                                             <span *ngIf="emai!=0">
-                                            <a href="mailto::{{port}}" target="_black" title="{{port}}" *ngFor="let port of email"><span [innerHTML]="port"></span><br></a>
+                                            <a href="mailto:{{port}}" target="_black" title="{{port}}" *ngFor="let port of email"><span [innerHTML]="port"></span><br></a>
                                             </span>
                                             <span *ngIf="emai==0">
                                             <span>NA</span>
@@ -135,6 +135,57 @@
                                 <a title="Embassies in {{in_cntname}}" routerLink="/embassy-and-consulate-in/{{in_country_slug_name}}">Embassies in {{in_cntname}}</a><br />
                                 <a title="Embassies of {{of_cntname}}" routerLink="/embassy-and-consulate-of/{{of_country_slug_name}}">Embassies of {{of_cntname}}</a><br />
                                 <a title="Embassies in {{of_cntname}}" routerLink="/embassy-and-consulate-in/{{of_country_slug_name}}">Embassies in {{of_cntname}}</a><br />
+                            </div>
+
+                            <div class="emb_comment">
+                            <h3 [hidden]="commentsReply==null">Latest Comments</h3>
+                            <!-- <marquee width="100%" direction="up" height="400px;"> -->
+                                    <div class="media" *ngFor="let cmt of commentsReply">
+                                        <div class="media-left">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{cmt.user_name}}</h4>
+                                            <p>{{cmt.comments}}</p>
+                                            <p style="float: right;font-size: 10px;">{{cmt.created_at}}</p>
+                                        </div>
+                                        <hr>
+                                    </div>
+                            <!-- </marquee> -->    
+                                <span id="scr_sus_msg" *ngIf="user_reply_success" style="color:green;font-size: 20px;position: relative;left: 64px;">{{msg_user_reply_success}}</span> 
+                                <span id="scr_sus_msg" *ngIf="user_reply_error" style="color:red;font-size: 20px;position: relative;left: 64px;">{{msg_user_reply_error}}</span>       
+                                <form action="">
+                                    <h3 style="margin-bottom: 5px;">Leave a Reply</h3>
+                                    <div class="row" *ngIf="leaveReply">
+                                        <div class="col-sm-6 col-md-12 col-lg-12">
+                                            <div class="">
+                                                <label id="lbl_ManName">Name <i  class="fas fa-pencil-alt"></i></label>
+                                            </div>
+                                            <div class="element_container">
+                                                <input type="text" (keyup)="replyleaveName()" name="replyManName" [(ngModel)]="replyManName" class="ManNameBrd" placeholder="Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-12 col-lg-12">
+                                            <div class="">
+                                                <label id="lbl_ManEmail">Email <i class="far fa-envelope"></i></label>
+                                            </div>
+                                            <div class="element_container">
+                                                <input type="email" (keyup)="replyleaveEmail()" name="replyManEmail" [(ngModel)]="replyManEmail" class="ManEmailBrd" placeholder="Email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div *ngIf="leaveReply">
+                                                <label id="lbl_ManMassage">Message <i  class="fas fa-pencil-alt"></i></label>
+                                            </div>
+                                            <div class="element_container" style="margin-bottom: 2px;">
+                                                <textarea name="replyManMassage" [(ngModel)]="replyManMassage" class="ManMassageBrd" autosize style="min-height: 100px;" placeholder="Write your comment.." (keyup)="leaveReplyfun()"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="my_btn with_auto" (click)="leaveReplysubmit()">Send</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -202,7 +253,7 @@
                                 <div class="right">
                                     <p style="margin-bottom:6px;">
                                         <span *ngIf="multi.lnth!=0">
-                                        <a href="mailto::{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                        <a href="mailto:{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                                         </span>
                                         <span *ngIf="multi.lnth==0">
                                         <span>NA</span>
@@ -290,7 +341,7 @@
                                         <p style="margin-bottom:6px;">
                                             
                                             <span *ngIf="multi.lnth!=0">
-                                            <a href="mailto::{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                            <a href="mailto:{{portOne}}" title="{{portOne}}" *ngFor="let portOne of multi.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                                             </span>
                                             <span *ngIf="multi.lnth==0">
                                             <span>NA</span>

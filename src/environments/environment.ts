@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  // apiUrl:'https://visacent.com/la/api'
+  api_url:'https://visacent.com/la/api'
 };
 
 /*

@@ -81,6 +81,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 	) { }
 
 	ngOnInit(){
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
 		$('#profile_trans').hide();
 		this.ngProgress.start();
 		$.getJSON('https://jsonip.com?callback=?', function(response) {
@@ -183,32 +184,55 @@ export class EmbassiesDetailsComponent implements OnInit {
 		this.captchaError = false;
 	}
 	update_btn(){
-		let flg=0;
+		let flg = 0;
+		let fild='';
 		if($('#namef').text()==''){
 			$('#namef').addClass('borderCls')
 			flg=1;
+			if(fild=='')
+			{
+				fild='lbl_namef';
+			}
 		}if($('#address').text()==''){
 			$('#address').addClass('borderCls')
 			flg=1;
+			if(fild=='')
+			{
+				fild='lbl_address';
+			}
 		}if($('#telephone').text()!=''){
 			let p = $('#telephone').text()
 			if(!(p.match(this.numberRegEx))){
 				$('#telephone').addClass('borderCls')
 				flg=1;
+				if(fild=='')
+			{
+				fild='lbl_telephone';
+			}
 			}
 		}if($('#email').text()!=''){
 			let e = $('#email').text()
 			if(!(e.match(this.regExEmail))){
 				$('#email').addClass('borderCls')
 				flg=1;
+				if(fild=='')
+			{
+				fild='lbl_email';
+			}
 			}
 		}
 		if(this.grecaptcha === undefined){
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
 			flg=1;
-		}
-		if(flg==1){
+			if(fild=='')
+			{
+				fild='lbl_captcha';
+			}
+		}if(flg==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
 			return;
 		}else{
 			this.captchaError = false;
@@ -256,6 +280,7 @@ export class EmbassiesDetailsComponent implements OnInit {
 					this.updating = false;
 					this.msg_error = true;
 					this.erro_msg = 'you have any detail send'
+					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
 				}else{
 					// do nothing
 				}

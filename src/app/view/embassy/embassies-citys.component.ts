@@ -88,6 +88,16 @@ export class EmbassiesCitysComponent implements OnInit {
 	homescroolId="Most-Sought-Visas";
 	map:any;
 	url:any;
+	leaveReply:boolean=false;
+	regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
+	replyManName:string;
+	replyManEmail:any
+	replyManMassage:string;
+	msg_user_reply_success:string;
+	user_reply_success:boolean;
+	user_reply_error:boolean;
+	msg_user_reply_error:string;
+	commentsReply:any;
 
 	constructor( 
 		private embassiesCityDetailsService:EmbassiesCityDetailsService,
@@ -149,6 +159,9 @@ export class EmbassiesCitysComponent implements OnInit {
 						$("#emb_sec1").show();
 						$(".ReloadPageShow").hide();
 						this.countydetails = data;
+						if(data.comments!=null){
+							this.commentsReply = data.comments;
+						}
 						this.embassy_id = this.countydetails.embassy_detail.id;
 						this.clickCountry = data.embassy_detail;
 						this.name = this.clickCountry.name;
@@ -158,9 +171,9 @@ export class EmbassiesCitysComponent implements OnInit {
 						this.of_cntname_lower = data.of_country.toLowerCase();
 						this.in_country_slug_name = this.countydetails.in_country_slug_name;
 						this.of_country_slug_name = this.countydetails.of_country_slug_name;
-						this.of_country=this.countydetails.of_country
+						this.of_country=this.countydetails.of_country;
 						let lenght=this.multiCountry.length+1;
-						this.map = data.embassy_detail.maps
+						this.map = data.embassy_detail.maps;
 						this.title.setTitle(''+this.name+', '+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.');
 						this.meta.updateTag({ name:'title',content:''+this.name+', '+this.in_cntname+' '+'|'+' '+ this.of_country+' '+'Embassies in'+' '+ this.in_cntname+'.'});
 						this.meta.updateTag({ name:'description',content:this.name+' '+this.in_cntname+', Get addresses, telephone numbers, email addresses, websites. '+this.of_country+' have '+ lenght+' embassies/high commissions in other cities of '+this.in_cntname+'.'});
@@ -179,13 +192,13 @@ export class EmbassiesCitysComponent implements OnInit {
 							this.of_coutnry_flag = "assets/images/default1.png"
 						}	
 
-						this.address1=this.clickCountry.Address
-						this.addressTag = this.clickCountry.Address
+						this.address1=this.clickCountry.Address;
+						this.addressTag = this.clickCountry.Address;
 						this.address = this.clickCountry.Address.replace(/(<([^>]+)>)/ig,"");
-						this.phone1 = this.clickCountry.Telepone
-						this.phone = this.clickCountry.Telepone
-						this.fax1 = this.clickCountry.Fax
-						this.fax = this.clickCountry.Fax
+						this.phone1 = this.clickCountry.Telepone;
+						this.phone = this.clickCountry.Telepone;
+						this.fax1 = this.clickCountry.Fax;
+						this.fax = this.clickCountry.Fax;
 						this.emai = this.clickCountry.E_maiil;
 						this.website = this.clickCountry.website;
 						this.Latitude = this.clickCountry.Latitude;
@@ -331,8 +344,6 @@ export class EmbassiesCitysComponent implements OnInit {
     }
 
 	topData(slug_name){
-		// this.loaderShow = false;
-		// this.slug_name = this.multiCountry[i].slug_name;
 		this.routers.navigate(["embassy",slug_name]);
 		$('html,body').animate({ scrollTop: 0 }, 'slow');
 	}
@@ -340,11 +351,12 @@ export class EmbassiesCitysComponent implements OnInit {
 	update_btn(){
 		if($('#textarea').text()==''){
 			$('#textarea').addClass('borderCls')
-			return		
+			$("#report_popup").animate({scrollTop: 10}, 800);
+			return;	
 		}else if(this.grecaptcha === undefined){
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
-			return false;
+			return;
 		}else{
 			this.captchaError = false;
 			this.updating_msg = true;
@@ -381,8 +393,8 @@ export class EmbassiesCitysComponent implements OnInit {
 					this.success_msg_error = true;
                     this.updating_msg = false;
 					this.success_msg = "Your information has been updated."
+					$("#report_popup").animate({scrollTop: 0}, 800);
                     setTimeout(function(){
-                    
 					  	$('#myalert').fadeOut('fast');
 							  $("#report_popup").hide();
 							  $("body").css({"overflow-y":"scroll"});
@@ -408,20 +420,96 @@ export class EmbassiesCitysComponent implements OnInit {
 	setemb_map(){
 		this.map
 		$('#emb_map').html('<iframe width="100%" style="height: 300px;!important;" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.map+'&output=embed"></iframe>');
-
-
 		for(var i=0;i<this.EmbassyAd.length;i++){
 			var idd=this.EmbassyAd[i].id;
 			var rl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.EmbassyAd[i].maps+'&output=embed"></iframe>';
 			$('#emb_map__div_'+idd).html(rl);
 		}
-
 		for(var i=0;i<this.consulateAd.length;i++){
 			var cidd=this.consulateAd[i].id;
 			var crl='<iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
 			$('#cnst_map__div_'+cidd).html(crl);
 		}
 
+	}
+	
+	leaveReplyfun(){
+		this.leaveReply=true;
+		$('.ManMassageBrd').removeClass('borderCls');
+	}
+
+	leaveReplysubmit(){
+		var flag = 0;
+		let fild='';
+		if(this.replyManName =='' || this.replyManName ==undefined){
+			$('.ManNameBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManName';
+			}
+		}if(this.replyManEmail =='' || this.replyManEmail ==undefined){
+			$('.ManEmailBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManEmail';
+			}
+		}else if(!(this.replyManEmail=='') && !this.replyManEmail.match(this.regExEmail)){
+			$('.ManEmailBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManEmail';
+			}
+		}if(this.replyManMassage =='' || this.replyManMassage ==undefined){
+			$('.ManMassageBrd').addClass('borderCls');
+			flag = 1;
+			if(fild=='')
+			{
+				fild='lbl_ManMassage';
+			}
+		}if(flag==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
+			return;
+		}
+
+		var userLeaveReply = {
+			emb_id:this.embassy_id,
+			name:this.replyManName,
+			email:this.replyManEmail,
+			msg:this.replyManMassage
+		}
+	
+		this.updateAddressService.save_emb_comment(userLeaveReply).subscribe(
+			data => {
+				if(data.status='SUCCESS'){
+					this.user_reply_success = true;
+					this.msg_user_reply_success = 'successfully reply';
+					setTimeout(() => {$('html, body').animate({scrollTop: $("#scr_sus_msg").offset().top}, 800);}, 200);
+					this.replyManName='';
+					this.replyManEmail='';
+					this.replyManMassage='';
+					setTimeout(() => {this.user_reply_success = false;}, 2000);
+				}else if(data.status="ERROR"){
+					this.user_reply_error = true;
+					this.msg_user_reply_error = "Don't sent you reply";
+					setTimeout(() => {$('html, body').animate({scrollTop: $("#scr_sus_msg").offset().top}, 800);}, 200);
+					setTimeout(() => {this.user_reply_success = false;}, 2000);
+
+				}
+			}
+		)
+	}
+
+	replyleaveName(){
+		$('.ManNameBrd').removeClass('borderCls');
+	}
+	
+	replyleaveEmail(){
+		$('.ManEmailBrd').removeClass('borderCls');
 	}
 
 }

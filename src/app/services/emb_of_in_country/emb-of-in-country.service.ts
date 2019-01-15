@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Response,} from "@angular/http";
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class EmbOfInCountryService {
 	onecnt:any;
 	twocnt:any;
 
-	private baseUrl = "https://visacent.com/la/api/embassy_of_countries/";
+	private baseUrl = environment.api_url+"/embassy_of_countries/";
 
 	counrtyone(list:any) {
 		this.onecnt=list;

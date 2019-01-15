@@ -7,6 +7,7 @@ import { CountriesListService } from '../../services/countries_list_home/countri
 import { Meta, Title} from '@angular/platform-browser';
 import { EmbassiesCityDetailsService } from '../../services/embassies_city_details/embassies-city-details.service'
 import { UserInputCntdetailsService } from '../../services/userInputCntdetails/user-input-cntdetails.service'
+import { Tree } from '@angular/router/src/utils/tree';
 
 @Component({
   selector: 'app-apply-e-visa',
@@ -98,6 +99,11 @@ export class ApplyEVisaComponent implements OnInit {
 	from_country_slug_name:any;
 	form_show=false;
 	most_sought_visas:boolean;
+	con_visa_req_sec_1 = false;
+	requirement_req_sec:boolean;
+	ipAddress:any;
+	refUrl:any;
+	
 
 	constructor(
 		public ngProgress: NgProgress,
@@ -118,9 +124,20 @@ export class ApplyEVisaComponent implements OnInit {
 
 	ngOnInit() {
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
+		var cmt = this;
+		$.getJSON('https://jsonip.com?callback=?', function(response) {
+			cmt.ipAddress=response.ip
+			$('#spn_ip').text(cmt.ipAddress);
+		});	
 		this.cnt_emb=false;
 		this.visa_req_sec=false;
 		this.con_visa_req_sec=true;
+		this.tableViasaToggle=false;
+		this.tableRequired=false;
+		this.tableRegular=false;
+		this.requirement_req_sec=false;
+		this.most_sought_visas=false;
+		this.form_show=false;
 		this.ngProgress.start();
 		this.currentUrl = this.router.url.split('=');
 		this.currentUrl = this.currentUrl[1]
@@ -132,29 +149,58 @@ export class ApplyEVisaComponent implements OnInit {
 			this.visaReq = this.routers.snapshot.params["to"];
 			this.visaReq1 = this.routers.snapshot.params["a"];
 		})
+		var refUrlsp = this.router.url.split('=')[1];
+		if(refUrlsp!=undefined){
+			this.refUrl=this.router.url;
+		}
 		if(this.router.url=='/apply-e-visa'){
-			this.most_sought_visas = false;
-			this.con_visa_req_sec = true;
+			this.cnt_emb=false;
+			this.visa_req_sec=false;
+			this.con_visa_req_sec=true;
+			this.tableViasaToggle=false;
+			this.tableRequired=false;
+			this.tableRegular=false;
+			this.requirement_req_sec=false;
+			this.most_sought_visas=false;
+			this.form_show=false;
 			this.pageName = 'Apply for e-Visa'
 		}else if(this.router.url=='/apply-visa-tool'){
-			this.con_visa_req_sec = false;
-			this.most_sought_visas = true;
+			this.cnt_emb=false;
+			this.visa_req_sec=false;
+			this.con_visa_req_sec=false;
+			this.tableViasaToggle=false;
+			this.tableRequired=false;
+			this.tableRegular=false;
+			this.requirement_req_sec=false;
+			this.most_sought_visas=true;
+			this.form_show=false;
 			this.pageName = 'Visa apply tool, Check requirements for a visa'
 		}else if(this.router.url=='/visa-requirements'){
-			this.most_sought_visas = false;
-			this.con_visa_req_sec = true;
-			this.pageName = 'Requirement to apply e-Visa'
-		}
-	
-		if(this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
-			this.most_sought_visas = false;
-			this.con_visa_req_sec = true;
+			this.cnt_emb=false;
+			this.visa_req_sec=false;
+			this.con_visa_req_sec=false;
+			this.tableViasaToggle=false;
+			this.tableRequired=false;
+			this.tableRegular=false;
+			this.requirement_req_sec=true;
+			this.most_sought_visas=false;
+			this.form_show=false;
+			this.pageName = 'Explore Visa Requirement before apply'
+		}else if(this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1 || this.refUrl){
+			this.cnt_emb=false;
+			this.visa_req_sec=false;
+			this.con_visa_req_sec=true;
+			this.tableViasaToggle=false;
+			this.tableRequired=false;
+			this.tableRegular=false;
+			this.requirement_req_sec=false;
+			this.most_sought_visas=false;
+			this.form_show=false;
 			this.pageName = 'Apply for e-Visa'
 			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
 				this.visaReqNead = this.visaReq;
 				this.country_ctnSet = this.visaReqNead	
 			}
-	
 			if(this.visaReq1!='' && this.visaReq1!=null && this.visaReq1!=undefined){
 				var NewvisaReq = this.visaReq1.split('from-')
 				if(NewvisaReq.length==2){
@@ -163,8 +209,15 @@ export class ApplyEVisaComponent implements OnInit {
 				}	
 			}
 		}else if(this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
-			this.con_visa_req_sec = false;
-			this.most_sought_visas = true;
+			this.cnt_emb=false;
+			this.visa_req_sec=false;
+			this.con_visa_req_sec=false;
+			this.tableViasaToggle=false;
+			this.tableRequired=false;
+			this.tableRegular=false;
+			this.requirement_req_sec=false;
+			this.most_sought_visas=true;
+			this.form_show=false;
 			this.pageName = 'Visa apply tool, Check requirements for a visa'
 			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
 				var NewvisaReq = this.visaReq.split('-visa-requirements-for-')
@@ -176,9 +229,16 @@ export class ApplyEVisaComponent implements OnInit {
 				}	
 			}
 		}else if(this.router.url=='/visa-requirements'+'/'+this.visaReq){
-			this.most_sought_visas = false;
-			this.con_visa_req_sec = true;
-			this.pageName = 'Requirement to apply e-Visa'
+			this.cnt_emb=false;
+			this.visa_req_sec=false;
+			this.con_visa_req_sec=false;
+			this.tableViasaToggle=false;
+			this.tableRequired=false;
+			this.tableRegular=false;
+			this.requirement_req_sec=true;
+			this.most_sought_visas=false;
+			this.form_show=false;
+			this.pageName = 'Explore Visa Requirement before apply'
 			if(this.visaReq!='' && this.visaReq!=null && this.visaReq!=undefined){
 				var NewvisaReq = this.visaReq.split('-visa-for-')
 				if(NewvisaReq.length==2){
@@ -238,63 +298,69 @@ export class ApplyEVisaComponent implements OnInit {
 				})
 		}	
 
-
 		if(this.belongCnty!='' && this.belongCnty!=null && this.country_ctnSet!='' && this.country_ctnSet!=null)
 		{
-			
 			this.visafor()
-			// var cmd=this;
-			// let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==cmd.belongCnty;});
-			// this.need_visa_for = $.grep(this.need_visa_for, function(item){ return item.name !== BelongToObj[0].name;});
-			// this.topCntryTwo = this.topFiveCNtry;
-	
-			// let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==cmd.belongCnty;});
-			// this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-			// 	if(nationalityTopTwoPlaceObj.length>0){
-			// 		return item.name !== nationalityTopTwoPlaceObj[0].name;
-			// 	}else{
-			// 		return item.name;
-			// 	}
-			// });
+			var cmd=this;
+			let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==cmd.belongCnty;});
+			this.need_visa_for = $.grep(this.need_visa_for, function(item){
+				if(BelongToObj.length>0){
+					return item.name !== BelongToObj[0].name;
+				}else{
+					return item.name;
+				}
+			});	
+			this.topCntryTwo = this.topFiveCNtry;
+			let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==cmd.belongCnty;});
+			this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
+				if(nationalityTopTwoPlaceObj.length>0){
+					return item.name !== nationalityTopTwoPlaceObj[0].name;
+				}else{
+					return item.name;
+				}
+			});
 
-
-			// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
-			// this.belong_to = $.grep(this.belong_to, function(item){
-			// 	if(NeedVisaForObj.length>0){
-			// 		return item.name !== NeedVisaForObj[0].name;
-			// 	}else{
-			// 		return item.name;
-			// 	}	
-			// });
-			// this.topCntryOne = this.topFiveCNtry;
-			// let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
-			// this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-			// 	if(nationalityTopOnePlaceObj.length>0){
-			// 		return item.name !== nationalityTopOnePlaceObj[0].name;
-			// 	}else{
-			// 		return item.name;
-			// 	}
-			// });
-
+			let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+			this.belong_to = $.grep(this.belong_to, function(item){
+				if(NeedVisaForObj.length>0){
+					return item.name !== NeedVisaForObj[0].name;
+				}else{
+					return item.name;
+				}	
+			});
+			this.topCntryOne = this.topFiveCNtry;
+			let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+			this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+				if(nationalityTopOnePlaceObj.length>0){
+					return item.name !== nationalityTopOnePlaceObj[0].name;
+				}else{
+					return item.name;
+				}
+			});
 		}
 	}
 
   	changeBelong(listName){
-		 this.belongCnty = listName.value;
-		// this.need_visa_for = this.country
-		// let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==listName.value;});
-		// this.need_visa_for = $.grep(this.need_visa_for, function(item){ return item.name !== BelongToObj[0].name;});
-		// this.topCntryTwo = this.topFiveCNtry;
-		// // this.visafor()
-		// let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
-		// this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
-		// 	if(nationalityTopTwoPlaceObj.length>0){
-		// 		return item.name !== nationalityTopTwoPlaceObj[0].name;
-		// 	}else{
-		// 		return item.name;
-		// 	}
-        // });
-		// this.visafor()
+		this.belongCnty = listName.value;
+		this.need_visa_for = this.country
+		let BelongToObj = this.belong_to.filter(function(list){ return list.slug_country_name==listName.value;});
+		this.need_visa_for = $.grep(this.need_visa_for, function(item){
+			if(BelongToObj.length>0){
+				return item.name !== BelongToObj[0].name;
+			}else{
+				return item.name
+			}
+		});	
+		this.topCntryTwo = this.topFiveCNtry;
+		let nationalityTopTwoPlaceObj = this.topCntryOne.filter(function(list){ return list.slug_country_name==listName.value;});
+		this.topCntryTwo = $.grep(this.topCntryTwo, function(item) { 
+			if(nationalityTopTwoPlaceObj.length>0){
+				return item.name !== nationalityTopTwoPlaceObj[0].name;
+			}else{
+				return item.name;
+			}
+        });
+		this.visafor()
 		this.check_values();
 	}
 
@@ -305,67 +371,91 @@ export class ApplyEVisaComponent implements OnInit {
 				this.ngProgress.done();
 				this.metaTags()
 				this.visa_flag = data.country_flag;					
-				this.visa_req_sec=true;
-				this.cnt_emb=false;
 				this.documents_req = data.country_visa.documents_req;
 				var faqQuestionAnswer:any;
 				this.faqQuestionAnswArry=new Array;
 				this.faq = data.country_visa.faq;
 				this.intro = data.country_visa.intro;
 				this.visa_req = data.country_visa.visa_req;
-				if(this.faq!=null){
-					for(var i=0; this.faq.length>i;i++){
-						this.question=this.faq[i].question;
-						this.answer=this.faq[i].answer;
-						faqQuestionAnswer={
-							question:this.question,
-							answer:this.answer
+				if(data.country_visa==null || (data.country_visa.documents_req==null && data.country_visa.intro==null && data.country_visa.visa_req==null && data.country_visa.faq==null)){
+					
+					if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+						this.con_visa_req_sec=true;
+						this.cnt_emb=false;
+						this.visa_req_sec=false;
+						this.tableRequired=false;
+						this.tableRegular=false;
+						this.requirement_req_sec=false;
+						this.most_sought_visas=false;
+						this.form_show=false;
+					}
+					if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
+						this.con_visa_req_sec=false;
+						this.cnt_emb=false;
+						this.visa_req_sec=false;
+						this.tableRequired=false;
+						this.tableRegular=false;
+						this.requirement_req_sec=false;
+						this.most_sought_visas=true;
+						this.form_show=false;
+					}
+					if(this.router.url=='/visa-requirements' || this.router.url=='/visa-requirements'+'/'+this.visaReq){
+						this.con_visa_req_sec=false;
+						this.cnt_emb=false;
+						this.visa_req_sec=false;
+						this.tableRequired=false;
+						this.tableRegular=false;
+						this.requirement_req_sec=true;
+						this.most_sought_visas=false;
+						this.form_show=false;	
+					}
+
+				}else{
+					this.con_visa_req_sec=false;
+					this.cnt_emb=false;
+					this.visa_req_sec=true;
+					this.tableRequired=false;
+					this.tableRegular=false;
+					this.requirement_req_sec=false;
+					this.most_sought_visas=false;
+					this.form_show=false;
+				
+					if(this.faq!=null){
+						for(var i=0; this.faq.length>i;i++){
+							this.question=this.faq[i].question;
+							this.answer=this.faq[i].answer;
+							faqQuestionAnswer={
+								question:this.question,
+								answer:this.answer
+							}
+							this.faqQuestionAnswArry.push(faqQuestionAnswer)	
 						}
-						this.faqQuestionAnswArry.push(faqQuestionAnswer)	
 					}
 				}
+				
 			})
-		// this.belong_to = this.country
-		// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==listName.value;});
-		// this.belong_to = $.grep(this.belong_to, function(item){
-		// 	if(NeedVisaForObj.length>0){
-		// 		return item.name !== NeedVisaForObj[0].name;
-		// 	}else{
-		// 		return item.name;
-		// 	}	
-		// });
-		// this.topCntryOne = this.topFiveCNtry;
-		// let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==listName.value;});
-		// this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-		// 	if(nationalityTopOnePlaceObj.length>0){
-		// 		return item.name !== nationalityTopOnePlaceObj[0].name;
-		// 	}else{
-		// 		return item.name;
-		// 	}
-        // });
 	}
 
 	visafor1(listName){
 		this.country_ctnSet = listName.value;
-		// var cmd=this;
-		// let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
-		// 	this.belong_to = $.grep(this.belong_to, function(item){
-		// 		if(NeedVisaForObj.length>0){
-		// 			return item.name !== NeedVisaForObj[0].name;
-		// 		}else{
-		// 			return item.name;
-		// 		}	
-		// 	});
-		// 	this.topCntryOne = this.topFiveCNtry;
-		// 	let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
-		// 	this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
-		// 		if(nationalityTopOnePlaceObj.length>0){
-		// 			return item.name !== nationalityTopOnePlaceObj[0].name;
-		// 		}else{
-		// 			return item.name;
-		// 		}
-		// 	});
-		// this.visafor();
+		var cmd=this;
+		let NeedVisaForObj = this.need_visa_for.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+			this.belong_to = $.grep(this.belong_to, function(item){
+				if(NeedVisaForObj.length>0){
+					return item.name !== NeedVisaForObj[0].name;
+				}else{
+					return item.name;
+				}	
+			});
+			this.topCntryOne = this.topFiveCNtry;
+			let nationalityTopOnePlaceObj = this.topCntryTwo.filter(function(list){ return list.slug_country_name==cmd.country_ctnSet;});
+			this.topCntryOne = $.grep(this.topCntryOne, function(item) { 
+				if(nationalityTopOnePlaceObj.length>0){
+					return item.name !== nationalityTopOnePlaceObj[0].name;
+				}else{
+					return item.name;
+				}
+			});
 		this.check_values();
 	}
 
@@ -404,82 +494,106 @@ export class ApplyEVisaComponent implements OnInit {
 			this.requirementCountryName = this.country_ctnSet + "/" + this.belongCnty;
 			this.visaApplicationService.visaTableList(this.visaUrl).subscribe(
 				data => {
+					this.ngProgress.done();
 					this.visa_flag = 'assets/images/default1.png';
-					this.visa_req_sec=false;
-					this.cnt_emb=false;
 					this.of_country_name = data.to_country_name;
 					this.from_country_name = data.from_country_name;
 					this.from_country_alternate_name = data.from_country_alternate_name;
 					this.to_country_alternate_name = data.to_country_alternate_name;
 					this.to_country_slug_name= data.to_country_slug_name;
 					this.from_country_slug_name= data.from_country_slug_name;
-					if(data.status=='SUCCUSS'){
-						this.ngProgress.done();
-						this.visaApplyTbl = data.visa
-						this.tableViasaToggle = true;
+					if(data.status=='SUCCUSS'){	
+						this.visaApplyTbl = data.visa;
 						this.of_country_name = data.to_country_name;
 						this.from_country_name = data.from_country_name;
 						this.visa_flag = data.country_flag;
-						this.country_ctn = data.to_country_name
+						this.country_ctn = data.to_country_name;
+						setTimeout(() => {$('html, body').animate({scrollTop: $(".table_scroll_").offset().top}, 800);}, 1000);
 						if(this.visaApplyTbl[0].visa_type!= 0){
-							this.form_show=false;
-							this.con_visa_req_sec = false;
-							this.most_sought_visas = false;
+							this.tableViasaToggle = true;
+							if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
+								this.con_visa_req_sec=true;
+								this.cnt_emb=false;
+								this.visa_req_sec=false;
+								this.tableRequired=false;
+								this.tableRegular=false;
+								this.requirement_req_sec=false;
+								this.most_sought_visas=false;
+								this.form_show=false;
+							}
+							if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
+								this.con_visa_req_sec=false;
+								this.cnt_emb=false;
+								this.visa_req_sec=false;
+								this.tableRequired=false;
+								this.tableRegular=false;
+								this.requirement_req_sec=false;
+								this.most_sought_visas=true;
+								this.form_show=false;
+							}
+							if(this.router.url=='/visa-requirements' || this.router.url=='/visa-requirements'+'/'+this.visaReq){
+								this.con_visa_req_sec=false;
+								this.cnt_emb=false;
+								this.visa_req_sec=false;
+								this.tableRequired=false;
+								this.tableRegular=false;
+								this.requirement_req_sec=true;
+								this.most_sought_visas=false;
+								this.form_show=false;	
+							}
+							
 							if(this.visaApplyTbl.length>1){
 								this.visaTypeName = this.visaApplyTbl[0].visa_type+', '+this.visaApplyTbl[1].visa_type
 							}else{
 								this.visaTypeName = this.visaApplyTbl[0].visa_type
 							}
 							var cnt_id = data.to_country_slug_name;
-							this.tableViasaToggle = true;
-							this.tableRequired = false;
-							this.tableRegular = false;
 							this.changeNeedVisa(cnt_id)
+							
 						}else if(this.visaApplyTbl.length == 0){
-							this.form_show=false;
+							this.cnt_emb=false;
+							this.visa_req_sec=false;
 							this.con_visa_req_sec=false;
-							this.most_sought_visas = false;
-							this.tableViasaToggle = false;
-							this.tableRequired = false;
-							this.tableRegular = true;  
+							this.tableViasaToggle=false;
+							this.tableRequired=false;
+							this.tableRegular=true;
+							this.requirement_req_sec=false;
+							this.most_sought_visas=false;
+							this.form_show=false;
 							this.requirementCountry()
 						}else if(this.visaApplyTbl[0].visa_not_required!= 0){
-							if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
-								this.most_sought_visas = true;
-								this.form_show=false;
-							}
-							if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
-								this.most_sought_visas = false;
-								this.form_show=true;
-							}
+							this.cnt_emb=false;
+							this.visa_req_sec=false;
 							this.con_visa_req_sec=false;
-							this.tableRequired = true;
-							this.tableRegular = false;
-							this.tableViasaToggle = false;
-							this.metaTags()
+							this.tableViasaToggle=false;
+							this.tableRequired=true;
+							this.tableRegular=false;
+							this.requirement_req_sec=false;
+							this.most_sought_visas=false;
+							this.form_show=false;
+							this.requirementCountry()
 						}else{
-							this.most_sought_visas = false;
+							this.cnt_emb=false;
+							this.visa_req_sec=false;
 							this.con_visa_req_sec=false;
-							this.tableRequired = false;
-							this.tableRegular = true; 
-							this.tableViasaToggle = false;
+							this.tableViasaToggle=false;
+							this.tableRequired=false;
+							this.tableRegular=true;
+							this.requirement_req_sec=false;
+							this.most_sought_visas=false;
+							this.form_show=false;
 							this.requirementCountry()
 						}
 					}else if(data.status=='FAIL'){
-						if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
-							this.most_sought_visas = true;
-							this.form_show = false;
-						}
-						if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
-							this.most_sought_visas = false;
-							this.form_show=false;
-						}
+						this.cnt_emb=false;
+						this.visa_req_sec=false;
 						this.con_visa_req_sec=false;
-						this.ngProgress.done();
-						this.visaApplyTbl = data.visa
-						this.tableViasaToggle = false;
-						this.tableRequired = false;
-						this.tableRegular = true; 
+						this.tableViasaToggle=false;
+						this.tableRequired=false;
+						this.tableRegular=true;
+						this.requirement_req_sec=false;
+						this.most_sought_visas=false;
+						this.form_show=false;
 						this.requirementCountry()
 					}
 				})
@@ -509,25 +623,12 @@ export class ApplyEVisaComponent implements OnInit {
 				this.EmbassyAd=new Array()
 				this.metaTags()
 				if(this.countydetails.length>0){
-					if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
-						if(this.countydetails.length>0){
-							this.most_sought_visas = false;
-							this.form_show = false;
-						}else{
-							this.most_sought_visas = true;
-							this.form_show = false;
-						}
-					}else if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
-						this.most_sought_visas = false;
-						if(this.countydetails.length>0){
-							this.form_show=false;
-						}else{
-							this.form_show=true;
-						}
-					}
-					this.cnt_emb=true;
-					this.visa_req_sec=false;	
 					this.con_visa_req_sec=false;
+					this.cnt_emb=true;
+					this.visa_req_sec=false;
+					this.requirement_req_sec=false;
+					this.most_sought_visas=false;
+					this.form_show=false;
 					for(i=0;this.countydetails.length>i;i++){
 						if(data.data[i].name.indexOf("Consulate")>-1){
 							this.consulateAd.push(this.countydetails[i])
@@ -582,20 +683,12 @@ export class ApplyEVisaComponent implements OnInit {
 					},1000);
 				}
 				else{
-					if(this.router.url=='/apply-visa-tool'|| this.router.url=='/apply-visa-tool'+'/'+this.visaReq){
-						this.most_sought_visas = true;
-						this.form_show = false;
-					}else if(this.router.url=='/apply-e-visa' || this.router.url=='/apply-e-visa'+'/'+this.visaReq+'/'+this.visaReq1){
-						this.most_sought_visas = false;
-						this.form_show=true;
-					}
 					this.con_visa_req_sec=false;
 					this.cnt_emb=false;
-					this.visa_req_sec=true;
-					this.documents_req=null; 
-					this.visa_req=null;
-					this.faq=null
-					this.intro=null;
+					this.visa_req_sec=false;
+					this.requirement_req_sec=false;
+					this.most_sought_visas=false;
+					this.form_show=true;
 				}		
 			})
 	}
@@ -612,17 +705,14 @@ export class ApplyEVisaComponent implements OnInit {
 			var crl='<iframe rel="nofollow" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.it/maps?key=AIzaSyDhk_FjlzJ5Gn6JqJ9np-Z0XY-WBwDoogU&q='+this.consulateAd[i].maps+'&output=embed"></iframe>';
 			$('#cnst_map__div_'+cidd).html(crl);
 		}
-
 	}
 	
 	metaTags(){
-
 		if(this.router.url.indexOf('apply-visa-tool')>-1 || this.router.url.indexOf('visa-requirements')>-1){
 			this.applyVisaTool()
 			return true;
 		}
-
-		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
+		if(this.visaApplyTbl==undefined || this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
 			this.title.setTitle('Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.to_country_alternate_name+' Visa from '+this.from_country_name+'');
 			this.meta.updateTag({ name:'title',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.to_country_alternate_name+' Visa from '+this.from_country_name+''});	
 			this.meta.updateTag({ name:'description',content:'Sorry, No eVisa available for '+this.from_country_name+', Need a regular '+this.to_country_alternate_name+' Visa from '+this.from_country_name+'. Apply for '+this.to_country_alternate_name+' regular Visa from '+this.from_country_name+', You have to apply for a visa through a '+this.of_country_name+' diplomatic mission or one of its authorized visa agents outside '+this.of_country_name+'.'});
@@ -641,7 +731,7 @@ export class ApplyEVisaComponent implements OnInit {
 	}
 
 	applyVisaTool(){
-		if(this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
+		if(this.visaApplyTbl==undefined || this.visaApplyTbl.length==0 || this.visaApplyTbl[0].visa_required!='0'){
 			this.title.setTitle('Visa requirements Check, A regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.');
 			this.meta.updateTag({ name:'title',content:'Visa requirements Check, A regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});	
 			this.meta.updateTag({ name:'description',content:'We check your Visa requirements, A '+this.of_country_name+' regular Visa from '+this.from_country_name+' to travel '+this.of_country_name+' required.'});
@@ -666,31 +756,54 @@ export class ApplyEVisaComponent implements OnInit {
 
 	update_btn(){
 		let flg=0;
+		let fild='';
 		if($('#namef').text()==''){
 			$('#namef').addClass('borderCls')
 			flg=1;
+			if(fild=='')
+			{
+				fild='lbl_namef';
+			}
 		}if($('#address').text()==''){
 			$('#address').addClass('borderCls')
 			flg=1;
+			if(fild=='')
+			{
+				fild='lbl_address';
+			}
 		}if($('#telephone').text()!=''){
 			let p = $('#telephone').text()
-			if(!(p.match(this.numberRegEx))){
+			if(!p.match(this.numberRegEx)){
 				$('#telephone').addClass('borderCls')
 				flg=1;
+				if(fild=='')
+			{
+				fild='lbl_telephone';
+			}
 			}
 		}if($('#email').text()!=''){
 			let e = $('#email').text()
 			if(!(e.match(this.regExEmail))){
 				$('#email').addClass('borderCls')
 				flg=1;
+				if(fild=='')
+			{
+				fild='lbl_email';
+			}
 			}
 		}
 		if(this.grecaptcha === undefined){
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
 			flg=1;
-		}
-		if(flg==1){
+			if(fild=='')
+			{
+				fild='lbl_captcha';
+			}
+		}if(flg==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
 			return;
 		}else{
 			this.captchaError = false;
@@ -719,27 +832,29 @@ export class ApplyEVisaComponent implements OnInit {
 			ipAddress:this.nweipAddress,
 			landmark:this.Landmark,
 			workingTime:this.WorkingTime,
-			to_country_slug_name:this.to_country_slug_name,
-			from_country_slug_name:this.from_country_slug_name,
+			of_cn:this.to_country_slug_name,
+			in_cn:this.from_country_slug_name,
 			slug:'',
 			emb_type:'',
 		}
 		this.userInputCntdetailsService.userInputData(this.userFileData).subscribe(
 			data => {
-				if(data='SUCCESS'){
+				if(data.status='SUCCESS'){
 					this.updating = false;
 					this.success_msg_error = true;
 					this.success_msg = 'Thank you for sending your suggestions.'
+					setTimeout(() => {$('html, body').animate({scrollTop: $(".my_alert_scr").offset().top}, 800);}, 500);
 					$('html,body').animate({ scrollTop: $('.scroll_msg').offset().top},'fast'); 
                     $(document).ready(function(){
                     setTimeout(function(){
                         $('.myalert').fadeOut('fast');}, 3000);
                         $('.myalert').fadeIn();
                     })
-				}else if(data='ERROR'){
+				}else if(data.status='ERROR'){
 					this.updating = false;
 					this.msg_error = true;
 					this.erro_msg = 'Error! Information did not send!'
+					setTimeout(() => {$('html, body').animate({scrollTop: $(".my_alert_scr").offset().top}, 800);}, 500);
                     $(document).ready(function(){
                     setTimeout(function(){
                         $('.myalert').fadeOut('fast');}, 3000);
@@ -749,6 +864,7 @@ export class ApplyEVisaComponent implements OnInit {
 					// do nothing
 				}
 			})
+
 	}
 
 	ErrorRermoveAdd(){

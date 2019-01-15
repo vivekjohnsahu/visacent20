@@ -5,7 +5,6 @@ import { FormDetailsService } from '../../services/form_details/form-details.ser
 import { RegisterFormService } from '../../services/register_form/register-form.service';
 import { NgProgress } from 'ngx-progressbar';
 import { NationalityPriceService } from '../../services/nationality_price/nationality-price.service';
-import '../../../assets/js/intlTelInput.min.js';
 import { FlagValueService } from '../../services/flagValue/flag-value.service';
 import { LoginService } from '../../services/login/login.service';
 import { Meta, Title} from '@angular/platform-browser';
@@ -35,7 +34,6 @@ export class DetailformComponent implements OnInit  {
 	number:any;
 	passportRegEx="^(?!^0+$)[a-zA-Z0-9]{3,20}$"
 	arrival_date:any;
-	// departure_date:any;
 	firstname:any;
 	lastname:any;
 	bday_date:any;
@@ -1444,8 +1442,7 @@ export class DetailformComponent implements OnInit  {
 						fild='lbl_passport_expiration'+passport_Issue_ErrerHide;
 					}
 				}
-				else if(mn==curr_mon){
-					
+				else if(mn==curr_mon){	
 					if(dy<curr_day)
 					{
 						flag=1;
@@ -1488,17 +1485,6 @@ export class DetailformComponent implements OnInit  {
 			$('.my_btn_submit').attr("disabled", false);
 		}
 	}
-
-	// clickUpdatefour(){
-	// 	this.modify_btnfour = true;
-	// 	this.update_btnFour = false;
-	// 	$(".four").attr("disabled", true);
-	// 	$(".four").css({"background-color":"#ebebe5"});
-	// 	if(this.modify_btn == true && this.modify_btnTwo == true && this.modify_btnThree == true && this.modify_btn == true){
-	// 		$('.my_btn_submit').css("cursor", "pointer");
-	// 		$('.my_btn_submit').attr("disabled", false);
-	// 	}
-	// }
 
 	addUser(i){
 		this.users.push({
@@ -1632,37 +1618,6 @@ export class DetailformComponent implements OnInit  {
 		return true;
 	}
 
-	// add_phone_icon(){
-	// 	var regisTel = $(".phn_a");
-	// 	regisTel.intlTelInput({
-    //         autoPlaceholder: false,
-    //         formatOnDisplay:true,
-    //         initialCountry: "in",   
-    //         utilsScript: "assets/js/utils.js"
-	// 	});
-	// 	var cmd=this;
-    //     regisTel.on('blur',function(){
-    //     	cmd.phone_validation(regisTel);
-	// 	})
-	// }
-
-	// phone_validation(regisTel){
-	// 	var telMsg= $(".telMsg");
-	// 	if(regisTel.prop("value")<1){
-	// 		regisTel.addClass('err');
-	// 		telMsg.text("Enter a phone number!");
-	// 			return false;
-	// 	}else if(!regisTel.intlTelInput("isValidNumber")){
-	// 		regisTel.addClass('err');
-	// 		telMsg.text('This phone number format is not recognized.');
-	// 		return false;
-	// 	}else{
-	// 		var countryData = regisTel.intlTelInput("getSelectedCountryData");
-	// 		var phoneNum = regisTel.intlTelInput("getNumber");              
-	// 		telMsg.text("");
-	// 		regisTel.removeClass('err');
-	// 	}
-	// } 
 	chekHide(){
 		this.emailValidLoaderRight=false;
 	} 
@@ -1713,12 +1668,6 @@ export class DetailformComponent implements OnInit  {
 						this.nextBtn_dis=1
 						this.emailValidLoader = false;
 						this.emailValidLoaderRight = true;
-						// $('#otplVerifiedU').trigger('click');
-						// $("#otplVerifiedU").off( "click" );
-						// $('#otplVerifiedU').click(function(){
-						// 	cmt.otpPage=true;
-						// 	cmt.emailPage=false;
-						// })    
 					}	
 				}else if(data.status == 'ERROR'){
 					this.process=false;
@@ -1778,44 +1727,6 @@ export class DetailformComponent implements OnInit  {
 			})
 	}
 	
-	// otpSubmit(){
-	// 	this.process=true;
-	// 	var flagO =0;
-	// 	if(this.OTP == "" || this.OTP == undefined){
-	// 		$(".removeOtp").addClass("borderColor");
-	// 		flagO = 1;
-	// 	}
-	// 	if(flagO == 1)return false;
-	// 		var otpData={
-	// 			otp:this.OTP,
-	// 			email:this.registeruser.email
-	// 		}
-	// 	var cmt=this
-	// 	this.loginService.loginOtp(otpData).subscribe(
-	// 		data =>{
-	// 			if(data.status == 'SUCCESS'){
-	// 				this.nextBtn_dis=1
-	// 				this.process=false;
-	// 				$(".emailOne").attr("disabled", true);
-	// 				$(".emailOne").css({"background-color":"#ebebe5"});
-	// 				$('#popup_login_hide').trigger('click');
-	// 				$(".removeOtp").removeClass("borderColor");
-	// 				this.otp_msg_sus_user = true;
-	// 				this.otp_msg_sus_show = 'Email varification done.';
-	// 				this.otp_msg_sus = false;
-	// 				$(".emailOne").removeClass("borderColor");
-	// 				setTimeout(function(){
-	// 					$('#popupHideOtp').trigger('click');
-	// 						cmt.OTP=''
-	// 				},1000)
-	// 			}else if(data.status == 'ERROR'){
-	// 				this.process=false;
-	// 				this.otp_msg_sus = true
-	// 				this.otp_msg = 'otp is wrong.';
-	// 			}
-	// 		})
-	// }
-
 	forgot(){
 		this.EmailForgot=this.registeruser.email
 		$('.emailPage').css({"display":"none"});
@@ -1864,9 +1775,11 @@ export class DetailformComponent implements OnInit  {
 
 	cleanerrorEmail(){
 		$(".removeGmail").removeClass("borderColor");
+		this.login_msg_sus = false
 	}
 	cleanerrorPass(){
 		$(".removePassword").removeClass("borderColor");
+		this.login_msg_sus = false
 	}
 	cleanerrorOtp(){
 		$(".removeOtp").removeClass("borderColor");

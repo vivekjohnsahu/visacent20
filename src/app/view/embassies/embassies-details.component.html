@@ -73,7 +73,7 @@
                             <div class="right">
                                 <p style="margin-bottom:6px;" *ngIf="details.lnthE_maiil!=0">
                                     
-                                    <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                    <a class="gmailhide" href="mailto:{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
                                     
                                     <span *ngIf="details.lnthE_maiil==0">
                                         <span>NA</span>
@@ -156,7 +156,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="">
-                            <label>Name <i class="fas fa-pencil-alt"></i></label>
+                            <label id="lbl_namef">Title <i class="fas fa-pencil-alt"></i></label>
                             <div id="namef" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveName()'></div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="">
-                            <label>Address <i class="far fa-address-card"></i></label>
+                            <label id="lbl_address">Address <i class="far fa-address-card"></i></label>
                             <div id="address" class="textareaaddress enable_white" style="min-height: 124px;" contenteditable (keyup)='ErrorRermoveAdd()'></div>
                         </div>
                     </div>
@@ -172,13 +172,13 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class=" text_left">
-                            <label>Telephone <i class="fas fa-mobile-alt"></i></label>
+                            <label id="lbl_telephone">Telephone <i class="fas fa-mobile-alt"></i></label>
                             <div id="telephone" class="textarea enable_white" contenteditable (keyup)='ErrorRermovePhn()'></div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class=" text_left">
-                            <label>Email <i class="far fa-envelope"></i></label>
+                            <label id="lbl_email">Email <i class="far fa-envelope"></i></label>
                             <div id="email" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveEml()'></div>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top:20px;">
-                    <div class="col-md-12" style="text-align: center;">
+                    <div class="col-md-12" style="text-align: center;" id="lbl_captcha">
                         <div class="label_container" style="margin-bottom: 10px; display: inline-block;">
                             <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha>
                             <div *ngIf="captchaError" style="color:red; position: relative; left: 0px; font-size: 14px;">*{{captchaError_msg}}</div>

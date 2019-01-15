@@ -6,13 +6,15 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ConsulateGerneralService {
+export class CaptchaService {
 
   constructor(private http:Http) { }
 
-    private cityUrl = environment.api_url+"/countries_consulate_detail/";
+  private captchaUrl = environment.api_url+"/get_captcha";
 
-    countryConsulatenew(country_ctn:any){
-        return this.http.get(`${this.cityUrl}`+country_ctn).map((res:Response) => res.json());
+  captcha(){
+        return this.http.get(`${this.captchaUrl}`).map((res:Response) => res.json());
     }
 }
+
+

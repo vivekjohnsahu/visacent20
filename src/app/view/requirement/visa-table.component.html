@@ -7,35 +7,35 @@
                 <span></span>
             </div>
             <div class="row">
-                    <div class="col-sm-6">
-                        <div class="select_cont drop_container1 embassy_of">
-                            <h3 style="color:#005ea5;">Nationality</h3>
-                            <form>
-                                <select name="shape_id" (change)="changeShapeOne($event.target)" class="enable_white">
-                                    <option style="display: none;">{{nationalityChangeName}}</option>
-                                    <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name">{{list.name}}</option>
-                                    <option disabled>-----------</option>
-                                    <option *ngFor="let list of countryOne" [value]="list.slug_country_name">{{list.name}}</option>
-                                </select>
-                                <!-- list.slug_country_name=='travellingChange' -->
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="drop_container embassy_of">
-                            <h3 style="color:#005ea5;">Travelling to</h3>
-                            <form>
-                                <select name="shape_id" class="shape_hide enable_white" id="travling_cn" (change)="changeShapeTwo($event.target)" style="border: 1px solid #ddd;">
-                                    <option style="display: none;">{{travellingChangeName}}</option>
-                                    <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name">{{list.name}}</option>
-                                    <option disabled>-----------</option>
-                                    <option *ngFor="let list of countryTwo" [value]="list.slug_country_name">{{list.name}}</option>
-                                </select>
-                            </form>
-                        </div>
+                <div class="col-sm-6">
+                    <div class="select_cont drop_container1 embassy_of">
+                        <h3 style="color:#005ea5;">Nationality</h3>
+                        <form>
+                            <select name="shape_id" (change)="changeShapeOne($event.target)" class="enable_white">
+                                <option style="display: none;">{{nationalityChangeName}}</option>
+                                <option *ngFor="let list of topCntryOne" [value]="list.slug_country_name">{{list.name}}</option>
+                                <option disabled>-----------</option>
+                                <option *ngFor="let list of countryOne" [value]="list.slug_country_name">{{list.name}}</option>
+                            </select>
+                            <!-- list.slug_country_name=='travellingChange' -->
+                        </form>
                     </div>
                 </div>
-            <div class=" table_div" [hidden]="!tableShow">
+                <div class="col-sm-6">
+                    <div class="drop_container embassy_of">
+                        <h3 style="color:#005ea5;">Travelling to</h3>
+                        <form>
+                            <select name="shape_id" class="shape_hide enable_white" id="travling_cn" (change)="changeShapeTwo($event.target)" style="border: 1px solid #ddd;">
+                                <option style="display: none;">{{travellingChangeName}}</option>
+                                <option *ngFor="let list of topCntryTwo" [value]="list.slug_country_name">{{list.name}}</option>
+                                <option disabled>-----------</option>
+                                <option *ngFor="let list of countryTwo" [value]="list.slug_country_name">{{list.name}}</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="table_div table_scroll_" *ngIf="tableShow">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive table_cont">
@@ -54,207 +54,178 @@
                                 </thead>
                                 <tbody style="cursor: pointer;" *ngFor="let visaSummry of visaTable; let i = index" class="tableSelect">
                                     <tr class="active" (mouseenter)="radioChek()" (click)="ChangeBottom(i)">
-                                        <td>
-                                            <input [checked]="i === 0" type="radio" name="visaTable" style="margin-right: 8px;" />{{visaSummry.visa_type}}
-                                        </td>
-                                        <td>{{visaSummry.visa_cost}}</td>
-                                        <td>{{visaSummry.service_fee}}</td>
-                                        <td>{{visaSummry.no_of_entry}}</td>
-                                        <td>{{visaSummry.max_stay}}</td>
-                                        <td>{{visaSummry.visa_expire}}</td>
-                                        <td>{{visaSummry.processing_time}}</td>
-                                        <td>
-                                            <button type="button" (click)="formDetial(visaSummry.visa_type_slug)" class=" my_btn width_auto" style="font-size: 14px;padding-top:8px;padding-bottom:8px;">Apply</button>
-                                        </td>
+                                    <td>
+                                        <input [checked]="i === 0" type="radio" name="visaTable" style="margin-right: 8px;" />{{visaSummry.visa_type}}
+                                    </td>
+                                    <td>{{visaSummry.visa_cost}}</td>
+                                    <td>{{visaSummry.service_fee}}</td>
+                                    <td>{{visaSummry.no_of_entry}}</td>
+                                    <td>{{visaSummry.max_stay}}</td>
+                                    <td>{{visaSummry.visa_expire}}</td>
+                                    <td>{{visaSummry.processing_time}}</td>
+                                    <td>
+                                        <button type="button" (click)="formDetial(visaSummry.visa_type_slug)" class=" my_btn width_auto" style="font-size: 14px;padding-top:8px;padding-bottom:8px;">Apply</button>
+                                    </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                
-                <!-- <div [hidden]="!tableRegular" style="text-align: center;">
-                    <div class="errorshow" style="color:#333;"> -->
-                        <div [hidden]="!tableShow">
-                            <div class="table_2" *ngFor="let visaSummry of visaTable; let i = index">
-                                <div class="row" style="background: #055da5;color: white;font-size: 18px;">
-                                    <div class="col-sm-12">{{visaSummry.visa_type}}</div>
+                <div [hidden]="!tableShow" class="table_scroll_">
+                    <div class="table_2" *ngFor="let visaSummry of visaTable; let i = index">
+                        <div class="row" style="background: #055da5;color: white;font-size: 18px;">
+                            <div class="col-sm-12">{{visaSummry.visa_type}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8 tab_da1">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Visa Cost</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>{{visaSummry.visa_cost}}</p>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-8 tab_da1">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p>
-                                                    <label>Visa Cost</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p>{{visaSummry.visa_cost}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p>
-                                                    <label>Service Fee</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p>{{visaSummry.service_fee}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p>
-                                                    <label>Visa Type</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p>{{visaSummry.visa_type}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p>
-                                                    <label>Number Of Entries</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p>{{visaSummry.no_of_entry}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p>
-                                                    <label>Max Stay</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p>{{visaSummry.max_stay}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p>
-                                                    <label>Validity</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p>{{visaSummry.visa_expire}}</p>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <p>
-                                                    <label>Processing</label>
-                                                </p>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <p>{{visaSummry.processing_time}}</p>
-                                            </div>
-                                        </div>
-                                        <!-- <div class="row"> -->
-                                            <!-- <div class="col-sm-6">
-                                                    <p><label>Visa type</label>  </p>
-                                                </div> -->
-                                            <!-- <div class="col-sm-6">
-                                                <p><label>
-                                                    Tourist visa 
-                                                    <input [checked]="i === 0" type="radio" name="radioMobile" style="margin-right: 8px;"/>
-                                                    </label> 
-                                                </p>
-                                            </div> -->
-                                        <!-- </div> -->
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                            </div>
-                                        </div>
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Service Fee</label>
+                                        </p>
                                     </div>
-                                    <div class="col-sm-4 tab_da2">
-                                        <div class="b_cont">
-                                            <button type="button" class="my_btn my_btn_green" (click)="formDetial(visaSummry.visa_type_slug)">Apply</button>
-                                        </div>
+                                    <div class="col-sm-6">
+                                        <p>{{visaSummry.service_fee}}</p>
                                     </div>
                                 </div>
-
-                            <div [hidden]="!tableRequired" style="text-align: center;">
-                                <div class="no_visa_cont">
-                                    <i class="fas fa-id-badge" style="color:#005ea5;"></i>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Visa Type</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>{{visaSummry.visa_type}}</p>
+                                    </div>
                                 </div>
-                                <div class="errorshow">
-                                    <p style="color:#333;font-size: 33px;text-transform: capitalize;">visa not required</p>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Number Of Entries</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>{{visaSummry.no_of_entry}}</p>
+                                    </div>
                                 </div>
-                            </div>  
-
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Max Stay</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>{{visaSummry.max_stay}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Validity</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>{{visaSummry.visa_expire}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>
+                                            <label>Processing</label>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>{{visaSummry.processing_time}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 tab_da2">
+                                <div class="b_cont">
+                                    <button type="button" class="my_btn my_btn_green" (click)="formDetial(visaSummry.visa_type_slug)">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div [hidden]="!tableRequired" class="table_scroll_" style="text-align: center;">
+                            <div class="no_visa_cont">
+                                <i class="fas fa-id-badge" style="color:#005ea5;"></i>
+                            </div>
+                            <div class="errorshow">
+                                <p style="color:#333;font-size: 33px;text-transform: capitalize;">visa not required</p>
+                            </div>
                         </div>
                     </div>
+                </div>
             </div>
-
-            
-
-
-
- <!--------------------- start no visa required ---------------->
-    <div *ngIf="tableRequired" class="no_visa_req">
-        <div class="no_visa_req_icon">
-            <i class="far fa-smile-wink"></i>
+            <!--------------------- start no visa required ---------------->
+            <div *ngIf="tableRequired" class="no_visa_req table_scroll_">
+                <div class="no_visa_req_icon">
+                    <i class="far fa-smile-wink"></i>
+                </div>
+                <div class="no_visa_para">
+                    <h4>Woow, No Tourist Visa required on your trip to {{travellingChangeName}}.</h4>
+                    <p>
+                        Citizens of <span>{{nationalityChangeName}}</span> do not require visas for travel to <span>{{travellingChangeName}}</span> and as it is one of the visa exempt countries.
+                    </p>
+                </div>
+            </div>
+            <!--------------------- end no visa required ---------------->
+            <!--------------------- start Regular visa required ---------------->
+            <article *ngIf="tableRegular" class="table_scroll_">
+                <div class="regular_visa_req">
+                    <div class="regular_visa_cont">
+                        <img src="assets/images/regular.png" />
+                    </div>
+                    <div class="regular_visa_para">
+                        <h4>Yes, a visa is required for your trip to {{travellingChangeName}}.</h4>
+                        <p>
+                            Citizens of <span style="text-transform: capitalize;">{{nationalityChangeName}} </span> must obtain a visa in advance. You have to apply for visa through a <span style="text-transform: capitalize;">{{travellingChangeName}}</span> diplomatic mission or one of 
+                            its authorized visa agents outside <span style="text-transform: capitalize;">{{travellingChangeName}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink=
+                                '/contact-us'>contact us</a>.
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <!--------------------- end Regular visa required ---------------->
         </div>
-        <div class="no_visa_para">
-            <h4>Woow, No Tourist Visa required on your trip to {{travellingChangeName}}.</h4>
-            <p>
-                Citizens of <span>{{nationalityChangeName}}</span> do not require visas for travel to <span>{{travellingChangeName}}</span> and as it is one of the visa exempt countries.
+    </section>
+    <br />
+    <div *ngIf="cnt_emb" class="table_scroll_">
+        <div >
+            <p style="text-align:center;margin-top: 18px;color: black;font-size: 19px;font-family: 'Hammersmith One';">
+                <i class="fas fa-hand-point-right"></i> &nbsp;Application for the Long Stay / employments Visas, contact to these embassy below
             </p>
         </div>
     </div>
- <!--------------------- end no visa required ---------------->
-
-
-<!--  <div *ngIf="Errortable" class="citizen_quoute">
-    <p>
-        <i class="fas fa-quote-left"></i> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
-        {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation. <i class="fas fa-quote-left"></i>
-    </p> 
-</div> -->  
-
-<!--------------------- start Regular visa required ---------------->
-    <article *ngIf="Errortable">
-         <div class="regular_visa_req">
-            <div class="regular_visa_cont">
-                <img src="assets/images/regular.png" />
-            </div>
-            <div class="regular_visa_para">
-                <h4>Yes, a visa is required for your trip to {{travellingChangeName}}.</h4>
-                <p>
-                    Citizens of <span style="text-transform: capitalize;">{{nationalityChangeName}} </span> must obtain a visa in advance. You have to apply for visa through a <span style="text-transform: capitalize;">{{travellingChangeName}}</span> diplomatic mission or one of 
-                its authorized visa agents outside <span style="text-transform: capitalize;">{{travellingChangeName}}</span>. You will need to visit the Embassy in your country to process this visa. Need help in getting prepare the required documentation <a routerLink=
-                '/contact-us'>contact us</a>.
-                </p>
-            </div>
-        </div>
-        <div *ngIf='belowAList'>
-            <div class="below_country" *ngIf="tableRegular && (consulateAd.length>0 || EmbassyAd.length>0)">
-                <p><i class="fas fa-hand-point-right"></i> &nbsp;Below a list of embassies in your country.</p>
-            </div> 
-        </div>
-    </article>
-     <!--------------------- end Regular visa required ---------------->
-        </div>
-    </section>
-                <div [hidden]="!tableRegular" style="text-align: center;">
-                    <div class="errorshow" style="color:#333;">
-                        <div class="my1">
-                            <section class="section_20" *ngFor="let details of consulateAd">
-                                <div id="embassy_flex_cont">
-                                    <div>
-                                        <article class="embassy_info_left">
-                                            <div class="info_div" style="position: relative;text-align: left;">
-                                                <div class="city_name">
-                                                    <h3><a title="{{details.name}}" routerLink="/consulate-general/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
-                                                </div>
-                                                <h3><span>Address: </span></h3>
-                                                <p [innerHTML]="details.Address">
-                                                </p>
-
+    <section *ngIf="cnt_emb" style="padding: 15px!important;" class="table_scroll_">
+        <div  style="text-align: center;">
+            <div class="errorshow" style="color:#333;">
+                <div class="my1">
+                    <section class="section_20" *ngFor="let details of consulateAd">
+                        <div id="embassy_flex_cont">
+                            <div>
+                                <article class="embassy_info_left">
+                                    <div class="info_div" style="position: relative;text-align: left;">
+                                        <div class="city_name">
+                                            <h3><a title="{{details.name}}" routerLink="/consulate-general/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
+                                        </div>
+                                        <h3><span>Address: </span></h3>
+                                        <p [innerHTML]="details.Address">
+                                        </p>
                                         <div class="phone_box">
                                             <div class="left">
                                                 <label>Phone:</label>
@@ -271,7 +242,6 @@
                                                 </p>
                                             </div>
                                         </div>
-
                                         <div class="phone_box">
                                             <div class="left">
                                                 <label>Fax:</label>
@@ -288,7 +258,6 @@
                                                 </p>
                                             </div>
                                         </div>
-
                                         <div class="phone_box">
                                             <div class="left">
                                                 <label>Email:</label>
@@ -304,7 +273,6 @@
                                                 </p>
                                             </div>
                                         </div>
-
                                         <div class="phone_box">
                                             <div class="left">
                                                 <label>Website:</label>
@@ -321,301 +289,267 @@
                                             </div>
                                         </div>
                                     </div>
-                                        </article>
-                                    </div>
-                                    <div class="emb_location_div" >
-                                        <div class="map" id="cnst_map__div_{{details.id}}"></div>
-                                    </div>
-                                </div>
-                            </section>
+                                </article>
+                            </div>
+                            <div class="emb_location_div" >
+                                <div class="map" id="cnst_map__div_{{details.id}}"></div>
+                            </div>
                         </div>
-                        <div class="my1">
-                            <section class="section_20" *ngFor="let details of EmbassyAd">
-                                <div id="embassy_flex_cont">
-                                    <div>
-                                        <article class="embassy_info_left">
-                                            <div class="info_div" style="position: relative;text-align: left;">
-                                                <div class="city_name">
-                                                    <h3><a title="{{details.name}}" routerLink="/embassy/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
-                                                </div>
-                                                <h3><span>Address: </span></h3>
-                                                <p [innerHTML]="details.Address">
-                                                </p>
-
-                                                <div class="phone_box">
-                                                    <div class="left">
-                                                        <label>Phone:</label>
-                                                    </div>
-                                                    <div class="right">
-                                                        <p style="margin-bottom:6px;">
-                                                            <span *ngIf="details.lnthTelepone!=0">
-                                                            <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
-                                                            </span>
-                                                            <span *ngIf="details.lnthTelepone==0">
-                                                            <span>NA</span>
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="phone_box">
-                                                    <div class="left">
-                                                        <label>Fax:</label>
-                                                    </div>
-                                                    <div class="right">
-                                                        <p style="margin-bottom:6px;">
-                                                            <strong> </strong>
-                                                            <span *ngIf="details.lnthFax!=0">
-                                                            <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
-                                                            </span> 
-                                                            <span *ngIf="details.lnthFax==0">
-                                                            <span>NA</span>
-                                                            </span>     
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="phone_box">
-                                                    <div class="left">
-                                                        <label>Email:</label>
-                                                    </div>
-                                                    <div class="right">
-                                                        <p style="margin-bottom:6px;">
-                                                            <span *ngIf="details.lnthE_maiil!=0">
-                                                            <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
-                                                            </span>
-                                                            <span *ngIf="details.lnthE_maiil==0">
-                                                            <span>NA</span>
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="phone_box">
-                                                    <div class="left">
-                                                        <label>Website:</label>
-                                                    </div>
-                                                    <div class="right">
-                                                        <p style="margin-bottom:6px;">
-                                                            <strong> </strong>
-                                                            <span *ngIf="details.lnthwebsite!=0">
-                                                            <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
-                                                            </span>
-                                                            <span *ngIf="details.lnthwebsite==0">
-                                                            <span>NA</span>
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
+                    </section>
+                </div>
+                <div class="my1">
+                    <section class="section_20" *ngFor="let details of EmbassyAd">
+                        <div id="embassy_flex_cont">
+                            <div>
+                                <article class="embassy_info_left">
+                                    <div class="info_div" style="position: relative;text-align: left;">
+                                        <div class="city_name">
+                                            <h3><a title="{{details.name}}" routerLink="/embassy/{{details.slug_name}}" style="text-transform: capitalize;">{{details.name}}</a></h3>
+                                        </div>
+                                        <h3><span>Address: </span></h3>
+                                        <p [innerHTML]="details.Address">
+                                        </p>
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Phone:</label>
                                             </div>
-                                        </article>
+                                            <div class="right">
+                                                <p style="margin-bottom:6px;">
+                                                    <span *ngIf="details.lnthTelepone!=0">
+                                                    <a href="tel:+{{portOne}}" title="{{portOne}}" *ngFor="let portOne of details.phoneM1"><span [innerHTML]="portOne"></span><br></a>
+                                                    </span>
+                                                    <span *ngIf="details.lnthTelepone==0">
+                                                    <span>NA</span>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Fax:</label>
+                                            </div>
+                                            <div class="right">
+                                                <p style="margin-bottom:6px;">
+                                                    <strong> </strong>
+                                                    <span *ngIf="details.lnthFax!=0">
+                                                    <a href="tel:+{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.faxMultiM1"><span [innerHTML]="portOne"></span><br></a>
+                                                    </span> 
+                                                    <span *ngIf="details.lnthFax==0">
+                                                    <span>NA</span>
+                                                    </span>     
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Email:</label>
+                                            </div>
+                                            <div class="right">
+                                                <p style="margin-bottom:6px;">
+                                                    <span *ngIf="details.lnthE_maiil!=0">
+                                                    <a class="gmailhide" href="mailto::{{portOne}}" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.emaiM1"><span [innerHTML]="portOne"></span><br></a>
+                                                    </span>
+                                                    <span *ngIf="details.lnthE_maiil==0">
+                                                    <span>NA</span>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="phone_box">
+                                            <div class="left">
+                                                <label>Website:</label>
+                                            </div>
+                                            <div class="right">
+                                                <p style="margin-bottom:6px;">
+                                                    <strong> </strong>
+                                                    <span *ngIf="details.lnthwebsite!=0">
+                                                    <a href="http://{{portOne}}" rel="nofollow" target="_blank" title="{{portOne}}" *ngFor="let portOne of details.websiteM1"><span [innerHTML]="portOne"></span><br></a>
+                                                    </span>
+                                                    <span *ngIf="details.lnthwebsite==0">
+                                                    <span>NA</span>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="emb_location_div" >
-                                        <div class="map" id="emb_map__div_{{details.id}}"></div>
-                                    </div>
-                                </div>
-                            </section>
+                                </article>
+                            </div>
+                            <div class="emb_location_div" >
+                                <div class="map" id="emb_map__div_{{details.id}}"></div>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
-    <!-- <div *ngIf="Errortable" style="text-align: center;margin-top:15px;padding-left: 200px;padding-right: 200px;">
-        <div class="errorshow">
-            <p> Citizens of the {{nationalityChangeName}} must obtain a visa in advance. You have to apply for a visa through a {{travellingChangeName}} diplomatic mission or one of its authorized visa agents outside 
-                {{travellingChangeName}}. You will need to visit the Embassy in your country to process this visa. We can help you prepare the required documentation.</p>
+            </div>
         </div>
-    </div> -->
-    <!--------------------end table section ---------------------->
-    <section [hidden]="tableRegular">
-        <section class="section_20" [hidden]="documents_req==null">
-            <div class="container">
-                <div class="intro_container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <article class="instruction">
-                                <div>
-                                    <h2><i class="fas fa-clipboard-list"></i> Documents Required for <span style="text-transform: capitalize;">{{country_ctn}}</span> e-Visa</h2>
-                                </div>
-                                <ol style="padding-left:25px;">
-                                    <li><span [innerHTML]="documents_req"></span></li>
-                                </ol>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section_20" [hidden]="visa_req==null">
-            <div class="container">
-                <div class="intro_container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <article class="instruction">
-                                <div>
-                                    <h2><i class="fas fa-paste"></i> Entry Requirements for <span style="text-transform: capitalize;">{{country_ctn}}</span> e-Visa</h2>
-                                </div>
-                                <ol>
-                                    <li><span [innerHTML]="visa_req"></span></li>   
-                                </ol>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section_20" [hidden]="faq==null">
-            <div class="container">
-                <div class="intro_container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <article class="instruction">
-                                <div>
-                                    <h2><i class="fas fa-question-circle"></i> FAQs</h2>
-                                </div>
-                                <div *ngFor="let f of faqQuestionAnswArry;">
-                                        <!-- <label style="text-transform: capitalize;">Q. Define {{country_ctn}} ETA(Electronic Travel Authority)?</label> -->
-                                        <ul class="faq_list">
-                                            <li [innerHTML]="f.question"></li> 
-                                            <li [innerHTML]="f.answer"></li>    
-                                        </ul>
-                                    </div>    
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </section>
-    <section class="section_30" *ngIf="(countydetails=='' && countydetails=='' && docu_feq_data=='') || tableRequired">
-            <div class="container datafound scroll_msg">
-          
+    <!--------------------end table section ---------------------->
+    <span style="display: none;" id="spn_ip"></span>
+    <section class="section_30 table_scroll_" *ngIf="formPageShow">
+        <div class="container datafound scroll_msg">
             <div class="no_embassy_content">
-                <p class="p1">
-                    We do not have good information about this, please help us by update correct information
+                <p style="text-align:center;color: black;font-size: 19px;font-family: 'Hammersmith One';">
+                    <i class="fas fa-hand-point-right"></i> &nbsp;Application for the Long Stay / employments Visas, contact to these embassy below
+                </p>
+                <p style="text-align:center;">
+                    We do not have good information about their embassy, please help us by update correct information.
                 </p>
             </div>
-          
-                <form class="user_emabassy" style="position:relative;"> 
-                    
-                    <div class="my_alert my_alert_pos myalert" *ngIf="success_msg_error">
-                      <button type="button" class="close" data-dismiss="alert">&times;</button>
-                      <span class="sus" style="text-transform: none!important;">{{success_msg}}</span>
-                  </div>
-                    <div class="my_alert my_alert_pos my_alert_red myalert" *ngIf="msg_error">
-                      <button type="button" class="close" data-dismiss="alert">&times;</button>
-                      <span class="sus" style="text-transform: none!important;">fghfgh gfhgfh {{erro_msg}}</span>
-                  </div>
-                    
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="">
-                                <label>Name <i class="fas fa-pencil-alt"></i></label>
-                                <div id="namef" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveName()'></div>
-                            </div>
+            <form class="user_emabassy" style="position:relative;">
+                <div class="my_alert my_alert_pos myalert my_alert_scr" *ngIf="success_msg_error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span class="sus" style="text-transform: none!important;">{{success_msg}}</span>
+                </div>
+                <div class="my_alert my_alert_pos my_alert_red myalert my_alert_scr" *ngIf="msg_error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <span class="sus" style="text-transform: none!important;">{{erro_msg}}</span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="">
+                            <label id="lbl_namef">Title <i class="fas fa-pencil-alt"></i></label>
+                            <div id="namef" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveName()'></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="">
-                                <label>Address</label>
-                                <div id="address" class="textareaaddress enable_white" style="min-height: 124px;" contenteditable (keyup)='ErrorRermoveAdd()'></div>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="">
+                            <label id="lbl_address">Address</label>
+                            <div id="address" class="textareaaddress enable_white" style="min-height: 124px;" contenteditable (keyup)='ErrorRermoveAdd()'></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Telephone <i class="fas fa-mobile-alt"></i></label>
-                                <div id="telephone" class="textarea enable_white" contenteditable (keyup)='ErrorRermovePhn()'></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Email <i class="far fa-envelope"></i></label>
-                                <div id="email" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveEml()'></div>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label id="lbl_telephone">Telephone <i class="fas fa-mobile-alt"></i></label>
+                            <div id="telephone" class="textarea enable_white" contenteditable (keyup)='ErrorRermovePhn()'></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Fax</label>
-                                <div id="fax" class="textarea enable_white" contenteditable></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Website</label>
-                                <div id="website" class="textarea enable_white" contenteditable></div>
-                            </div>
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label id="lbl_email">Email <i class="far fa-envelope"></i></label>
+                            <div id="email" class="textarea enable_white" contenteditable (keyup)='ErrorRermoveEml()'></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Latitude</label>
-                                <div id="latitude" class="textarea enable_white" contenteditable></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Longitude</label>
-                                <div id="longitude" class="textarea enable_white" contenteditable></div>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label>Fax</label>
+                            <div id="fax" class="textarea enable_white" contenteditable></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Landmark / near by place</label>
-                                <div id="Landmark" class="textarea enable_white" contenteditable></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text_left">
-                                <label>Working time</label>
-                                <div id="WorkingTime" class="textarea enable_white" contenteditable></div>
-                            </div>
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label>Website</label>
+                            <div id="website" class="textarea enable_white" contenteditable></div>
                         </div>
                     </div>
-                    <div class="row"> 
-                        <div class="col-sm-12">
-                            <div class="">
-                                <label>
-                                    Comments
-                                </label>
-                            </div>
-                            <div class="element_container">                      
-                                <div style="min-height: 124px;" class="textarea enable_white comments" contenteditable id="comments"></div>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="row" style="margin-top:20px;">
-                        <div class="col-md-12" style="text-align: center;">
-                            <div class="label_container" style="margin-bottom: 10px; display: inline-block;">
-                                <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha>
-                                <div *ngIf="captchaError" style="color:red; position: relative; left: 0px; font-size: 14px;">*{{captchaError_msg}}</div>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="row">
-                        <div class="col-sm-12 col-xs-12" style="padding-right:7px;">
-                            <div class="element_container" style="text-align: center;">
-                                <button type="button" class="my_btn" (click)="update_btn()">Update</button>
-                            </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label>Latitude</label>
+                            <div id="latitude" class="textarea enable_white" contenteditable></div>
                         </div>
                     </div>
-                  <div *ngIf="updating" class="preloader"> 
-                      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
-                          <g>
-                              <path d="M78.75 16.18V1.56a64.1 64.1 0 0 1 47.7 47.7H111.8a49.98 49.98 0 0 0-33.07-33.08zM16.43 49.25H1.8a64.1 64.1 0 0 1 47.7-47.7V16.2a49.98 49.98 0 0 0-33.07 33.07zm33.07 62.32v14.62A64.1 64.1 0 0 1 1.8 78.5h14.63a49.98 49.98 0 0 0 33.07 33.07zm62.32-33.07h14.62a64.1 64.1 0 0 1-47.7 47.7v-14.63a49.98 49.98 0 0 0 33.08-33.07z" fill="#005ea5" fill-opacity="1"/>
-                              <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="90 64 64" dur="1800ms" repeatCount="indefinite">
-                              </animateTransform>
-                          </g>
-                      </svg>
-                  </div> 
-                </form>
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label>Longitude</label>
+                            <div id="longitude" class="textarea enable_white" contenteditable></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label>Landmark / near by place</label>
+                            <div id="Landmark" class="textarea enable_white" contenteditable></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text_left">
+                            <label>Working time</label>
+                            <div id="WorkingTime" class="textarea enable_white" contenteditable></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="">
+                            <label>
+                            Comments
+                            </label>
+                        </div>
+                        <div class="element_container">
+                            <div style="min-height: 124px;" class="textarea enable_white comments" contenteditable id="comments"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top:20px;">
+                    <div class="col-md-12" style="text-align: center;" id="lbl_captcha">
+                        <div class="label_container" style="margin-bottom: 10px; display: inline-block;">
+                            <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha>
+                            <div *ngIf="captchaError" style="color:red; position: relative; left: 0px; font-size: 14px;">*{{captchaError_msg}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12" style="padding-right:7px;">
+                        <div class="element_container" style="text-align: center;">
+                            <button type="button" class="my_btn" (click)="update_btn()">Update</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="updating" class="preloader">
+                    <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve">
+                        <g>
+                            <path d="M78.75 16.18V1.56a64.1 64.1 0 0 1 47.7 47.7H111.8a49.98 49.98 0 0 0-33.07-33.08zM16.43 49.25H1.8a64.1 64.1 0 0 1 47.7-47.7V16.2a49.98 49.98 0 0 0-33.07 33.07zm33.07 62.32v14.62A64.1 64.1 0 0 1 1.8 78.5h14.63a49.98 49.98 0 0 0 33.07 33.07zm62.32-33.07h14.62a64.1 64.1 0 0 1-47.7 47.7v-14.63a49.98 49.98 0 0 0 33.08-33.07z" fill="#005ea5" fill-opacity="1"/>
+                            <animateTransform attributeName="transform" type="rotate" from="0 64 64" to="90 64 64" dur="1800ms" repeatCount="indefinite">
+                            </animateTransform>
+                        </g>
+                    </svg>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="step_sec section_30" *ngIf="stepFollow">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-center visa-apply-headding">
+                    <h2>Get your Visa in 3 simple steps</h2>
+                </div>
             </div>
-          </section>
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                    <div class="visa-step-sec">
+                        <h2><span>1</span> <span> Step</span></h2>
+                        <div><span><i class="fas fa-mobile-alt"></i></span></div>
+                        <h3>Apply online</h3>
+                        <p>Make online application, fill simple forms and review details.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                    <div class="visa-step-sec">
+                        <h2><span>2</span> <span> Step</span></h2>
+                        <div><span><i class="fas fa-credit-card"></i></span></div>
+                        <h3>Upload documents & Payment</h3>
+                        <p>Upload required documents for e-visa and make payments.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                    <div class="visa-step-sec">
+                        <h2><span>3</span> <span> Step</span></h2>
+                        <div><span><i class="far fa-envelope-open"></i></span></div>
+                        <h3>Receive e-Visa on email</h3>
+                        <p>Check e-visa status online and e-Visa will be sent to your registered e-mail.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </section>
 <div *ngIf="pade_error_show">
     <span>Data Not Found</span>

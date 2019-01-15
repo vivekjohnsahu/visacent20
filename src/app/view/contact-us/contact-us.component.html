@@ -9,8 +9,6 @@
         </div>
     </div>
 </section>
-
-
 <section class="section_20 contact_sec" style="padding-top: 0px;">
 	<div class="container">
 		<div class="row">
@@ -21,11 +19,6 @@
                         <li><span id="ReportValue" (click)="type2()">Report an offence</span></li>
                         <li><span id="FindValue" (click)="type3()">Find immigration advice</span></li>
                     </ul>
-<!--
-                    <h3 id="RequestValue" (click)="type1()" ><span class="active_content">Request a callback</span></h3>
-                    <h3 id="ReportValue" (click)="type2()"><span>Report an offence</span></h3>
-                    <h3 id="FindValue" (click)="type3()"><span>Find immigration advice</span></h3>
--->
                 </div>
 			</div>
 			<div class="col-lg-6 col-md-8 col-lg-pull-4 col-md-pull-4 col-lg-offset-1">
@@ -40,9 +33,8 @@
                     <div id="myalert" class="my_alert my_alert_pos my_alert_red" *ngIf="chek_msg_error">
                         <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
                         <span class="sus">Error</span>
-                    </div>
-                    
-					<h3 id="contact_head_dy" style="margin-top:0px;">Request a callback</h3>
+                    </div> 
+                    <h3 id="contact_head_dy" style="margin-top:0px;">Request a callback</h3>
 					<form class="contact">
 						<div class="row">
 							<div class="col-sm-6">
@@ -50,7 +42,7 @@
                                     <label id="lbl_name">Name <i class="fas fa-pencil-alt"></i></label>
                                 </div>
 								<div class="element_container">
-                                    <input class="nameOne" type="text" maxlength="40" name="firstname" [(ngModel)]="contactU.name" required [ngClass]="{'borderColor': firstname.invalid && ( firstname.dirty || firstname.touched)}" #firstname="ngModel" (keyup)="cleanName()" />
+                                    <input class="nameOne" type="text" maxlength="40" name="firstname" [(ngModel)]="contactU.name" required  #firstname="ngModel" (keyup)="cleanName()" />
                                 </div>
 							</div>
 							<div class="col-sm-6">
@@ -58,7 +50,7 @@
                                     <label id="lbl_email">Email <i class="far fa-envelope"></i></label>
                                 </div>
 								<div class="label_container">
-                                    <input class="emailOne" type="text" maxlength="40" name="Email" [(ngModel)]="contactU.email" required [ngClass]="{'borderColor': Email.invalid && ( Email.dirty || Email.touched)}" #Email="ngModel" (keyup)="cleanGmail()" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$"/>
+                                    <input class="emailOne" type="text" maxlength="40" name="Email" [(ngModel)]="contactU.email" required  #Email="ngModel" (keyup)="cleanGmail()" pattern="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$"/>
                                 </div>
 							</div>
 						</div>
@@ -76,11 +68,11 @@
 							</div>
                             <div class="col-sm-6">
                                 <div class="label_container">
-                                    <label lbl_nationality>Nationality <i class="fas fa-globe"></i></label>
+                                    <label id='lbl_nationality'>Nationality <i class="fas fa-globe"></i></label>
                                 </div>
 								<div class="element_container">
                                     <select (change)="nationality($event.target)" id="id_City" class="enable_white countryOne">
-                                        <option disabled>Choose Country</option>
+                                        <option disabled value='0'>Choose Country</option>
                                         <option value="28">Austraila</option>
                                         <option value="72">China</option>
                                         <option value="29">Canada</option>
@@ -104,22 +96,33 @@
                                 </div>
 							</div>
 						</div>
-                        <div class="row">
+                        <div class="row" [hidden]="ipAddress=='China'">
                             <div class="col-sm-12 " style="text-align: center;">
                                 <span style="display: inline-block;">
                                 <re-captcha (resolved)="resolved($event)" siteKey="6LcPhVYUAAAAAELAie-U7clLL6AB0pZdKpO4OVwG"></re-captcha></span>
 								<div *ngIf="captchaError" style="color:red;">*{{captchaError_msg}}</div>
 							</div>
                         </div>
+                        <div class="row" style="text-align: center;" [hidden]="ipAddress!='China'">
+                            <div>
+                                <label>Type in the box below</label>
+                            </div>
+                            <div>
+                                <img src="https://visacent.com{{image_src}}"> 
+                            </div>
+                            <div style="padding: 2px 9px 2px 17px;margin: 0px 212px;background-color: #b5b5b5;">
+                                <input type="text" [(ngModel)]="captchaValue" (focus)="borderCorHide()" name="captcha" class="newcaptcha" style="width: 83%;position: relative;border: solid #939191;left: -34px;"/>
+                                <i class="fas fa-sync-alt" style="width: 22%;margin: -27px;padding: 9px;background-color: #ffffff;" title="Refresh I need another option" (click)="refreshCaptcha()"></i>
+                            </div>
+                        </div>
 						<div class="row">
 							<div class="col-sm-12 text-center" >
-								<button type="button" (click)="contactData()" class="my_btn " style="color:white;width:164px;display: inline-block;margin-top: 20px;">Submit</button>
+								<button type="button" (click)="contactData()" class="my_btn" style="color:white;width:164px;display:inline-block;margin-top:20px;">Submit</button>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
-            
 		</div>
 	</div>
 </section>

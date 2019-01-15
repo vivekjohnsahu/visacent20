@@ -15,12 +15,7 @@ export class RefferalComponent implements OnInit {
 	  private refferalService:RefferalService,
 	  private meta: Meta,
 	  private title:Title
-  ) { 
-	this.title.setTitle('Make money through network, invite your friends, Earn $10 for refer');
-	this.meta.updateTag({ name:'title',content:'Make money through network, invite your friends, Earn $10 for refer'});	
-	this.meta.updateTag({ name:'description',content:'Make money through your network, invite your friends and Earn $10 for every new applicant you refer, Nobody can tell the our story better than our customers. Get a friend to start apply for a visa today and earn $10 when they complete their first application. '});
-	this.meta.updateTag({ name:'keywords',content:'Make money through network, invite your friends, Earn $10 for refer'});	  
-  }
+  ) {}
 
   email:any;
   regExEmail="^([a-zA-Z0-9_.]+@[a-zA-Z0-9]+[.][.a-zA-Z]+)$";
@@ -37,6 +32,8 @@ export class RefferalComponent implements OnInit {
   captchaError:boolean;
   captchaError_msg:any;
   BonusAmount:any;
+  visacent_social_Url:any;
+  indiavisa_social_Url:any;
 
 	ngOnInit() {
 		$(document).ready(function () {
@@ -53,23 +50,38 @@ export class RefferalComponent implements OnInit {
 				});
 			});
 		});
-
 		this.getBonusAmount()
 	}
 
 	refferalUser(){
 		let flag=0;
+		let fild='';
 		if(this.email=='' || this.email==null || this.email==undefined){
 			$('.emailCls').addClass('borderColor');
 			flag=1;
+			if(fild=='')
+			{
+				fild='lbl_email';
+			}
 		}else if(!this.email.match(this.regExEmail)){
 			$(".emailCls").addClass("borderColor");
 			flag=1;
+			if(fild=='')
+			{
+				fild='lbl_email';
+			}
 		}if(this.grecaptcha === undefined){
 			this.captchaError = true;
 			this.captchaError_msg = "Please enter captcha"
 			flag=1;
+			if(fild=='')
+			{
+				fild='lbl_email';
+			}
 		}if(flag==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
 			return;
 		}
 
@@ -86,7 +98,10 @@ export class RefferalComponent implements OnInit {
 					this.refferalShow = true;
 					this.refferal = data.referral;
 					this.indiaevisas_referral = data.indiaevisas_referral;
+					this.visacent_social_Url = 'https://visacent.com/apply-e-visa/?ref='+this.refferal;
+					this.indiavisa_social_Url = 'https://indiaevisas.org/apply-visa/?ref='+this.indiaevisas_referral;
 					this.isN = data.isN;
+					$('.inlineBlock').hide()
 					if(this.isN==1){
 						this.isnewUser = true;
 					}
@@ -96,8 +111,7 @@ export class RefferalComponent implements OnInit {
 				}else{
 					// do nothing
 				}	
-			})
-			
+			})		
 	}
 
 	removclsAppli(){
@@ -136,10 +150,15 @@ export class RefferalComponent implements OnInit {
 	getBonusAmount(){
 		this.refferalService.bonusAmount().subscribe(
 			data =>{
-				if(data.status="status"){
+				if(data.status="SUCCESS"){
 					this.BonusAmount = data.amount;
+					this.title.setTitle('Make money through network, invite your friends, Earn $'+this.BonusAmount+' for refer');
+					this.meta.updateTag({ name:'title',content:'Make money through network, invite your friends, Earn $'+this.BonusAmount+' for refer'});	
+					this.meta.updateTag({ name:'description',content:'Make money through your network, invite your friends and Earn $'+this.BonusAmount+' for every new applicant you refer, Nobody can tell the our story better than our customers. Get a friend to start apply for a visa today and earn $'+this.BonusAmount+' when they complete their first application. '});
+					this.meta.updateTag({ name:'keywords',content:'Make money through network, invite your friends, Earn $'+this.BonusAmount+' for refer'});	  			
 				}else{
-					this.BonusAmount = '10';
+					// this.BonusAmount = '10';
+					// do nothing
 				}
 			})
 	}

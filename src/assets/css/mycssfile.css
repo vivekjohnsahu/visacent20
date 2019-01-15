@@ -1,4 +1,3 @@
-/*--------------- start global css ---------------------*/
 body
 {
 	font-family: 'Lato', sans-serif;
@@ -91,33 +90,38 @@ button
 
 .my_alert
 {
+	max-width: 100%;
     text-align: center;
-    border: 1px solid #73d934;
+    border: 1px solid #94e894;
     border-radius: 0px;
     border-radius: 33px;
-    color: #73d934;
-    font-size: 20px;
-    text-transform: uppercase;
-    padding:4px 35px;
-    box-shadow: inset 0px 0px 20px #73d93478;
-    background-color:white;
+    color: #4abd05;
+    font-size: 18px;
+    text-transform: capitalize;
+    padding: 4px 35px;
+    /* box-shadow: inset 0px 0px 20px #73d93478; */
+    background-color: white;
+    background: #e9ffe9;
 }
 .my_alert_red
 {
-    border: 1px solid red;
+    border: 1px solid #ff9b9b;
     color: red;
-    box-shadow: inset 0px 0px 20px red;
+    background: #ffefef;
 }
 .my_alert_pos
 {
-    //position: absolute;
-    width:100%;
+    /* position: absolute; */
     top:0px;
     left:0px;
     right:0px;
     margin-left:auto;
     margin-right:auto;
     z-index: 5;
+}
+.my_alert button.close
+{
+	display: none;
 }
 .modal-content
 {
@@ -330,7 +334,7 @@ width: auto!important;
 {
 	display:block;
 	padding:8px 10px;
-	font-size: 15px;
+	font-size: 17px;
 }
 
 .top_link li>a:hover
@@ -1222,6 +1226,77 @@ ul.emb_in
 	margin-bottom: 5px;
 	color: #005ea5;
 }
+
+
+
+.emb_comment
+{
+
+}
+.hidden_row_rep
+{
+    display: none;
+}
+.emb_comment>h3
+{
+    margin-bottom: 10px;
+    font-size:19px;
+    margin-top: 15px;
+}
+.emb_comment>form
+{
+    margin-bottom: 10px;
+}
+.emb_comment>form>h3
+{
+    margin-bottom: 10px;
+    font-size:19px;
+    margin-top: 15px;
+}
+.emb_comment>form textarea
+{
+    margin-bottom: 9px;
+}
+.emb_comment .media .media-left i
+{
+    background: #055ea5;
+    color: white;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 50%;
+}
+.emb_comment .media .media-body .media-heading
+{
+    margin-bottom: 2px;
+}
+.emb_comment .media .media-body p
+{
+    text-align: justify;
+}
+.emb_comment form{
+    max-width:500px;
+    margin:0 auto;
+}
+.emb_comment form .label_container
+{
+    text-align: left!important;
+    margin-bottom: 5px;
+}
+.emb_comment form .element_container
+{
+    margin-bottom: 12px;
+}
+@media (min-width:992px)
+{
+    .emb_comment form .label_container
+    {
+        display: none;
+    }
+}
+
 /*------------------------------- end embassy page css ----------------------------*/
 
 .container_div
@@ -1769,7 +1844,38 @@ ul.faq_ul ol li
 
 /*-------------------------- start news -----------------------*/
 
-
+.news_nav
+{
+    background-color: #edeff1;
+    padding: 18px 0px;
+    margin-top: -31px;
+    margin-bottom: 20px;
+}
+.news_nav ul
+{
+    padding:0px;
+    margin:0px;
+    list-style-type:none;
+    overflow: hidden;
+}
+.news_nav ul li
+{
+    float: left;
+    font-size: 17px;
+}
+.news_nav ul li:first-child
+{
+    width:60px;
+}
+.news_nav ul li:nth-of-type(2)
+{
+    width:calc(100% - 60px);
+    padding-left:5px;
+}
+.news_detail_div img
+{
+    width:100%;
+}
 .info_container
 {
 	margin-bottom:20px;
@@ -2349,7 +2455,7 @@ ul.faq_ul ol li
 .bonus_summary
 {
 	text-align: center;
-    //background: #edeff1;
+    /* background: #edeff1; */
     border-right: 1px solid #acabb5;
     padding: 15px 0px;
     margin-bottom: 15px;
@@ -2889,7 +2995,7 @@ ul.faq_ul ol li
 }
 .mail_div>div
 {
-	//float: left;
+	/* float: left; */
 }
 .mail_div .input_div
 {
@@ -4311,8 +4417,3 @@ ul.faq_ul ol li
 }
 /*---------------------- for index end --------------------------*/
 
-
-
-
-
-/*------------------------------- end media query ------------------------------

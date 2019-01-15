@@ -1,3 +1,9 @@
+.cot_heading
+{
+    margin-bottom: 15px;
+    margin-top: 42px;
+    font-size: 24px;
+}
 @media (max-width:767px)
 {
    .table_section 
@@ -41,4 +47,14 @@
 }
 .borderCls{
     border: 1px solid red;
+}
+.visa-sec a 
+{
+    float: left;
+    text-align: left;
+    color: #333;
+    font-size: 18px;
+}
+#scrollTable a{
+    cursor: text!important;
 }

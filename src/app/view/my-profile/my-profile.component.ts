@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderPageComponent } from '../header-page/header-page.component';
 import { MyprofileService } from '../../services/my_profile/myprofile.service';
 import { NgProgress } from 'ngx-progressbar';
-import '../../../assets/js/intlTelInput.min.js';
 import { FlagValueService } from '../../services/flagValue/flag-value.service';
 
 @Component({
@@ -99,6 +98,10 @@ export class MyProfileComponent implements OnInit {
 	userName:any;
 	withdraw_request:any;
 	withdraw_request1:boolean;
+	noApplication:boolean;
+	grecaptcha:any;
+	captchaError:boolean;
+	captchaError_msg:string;
 	
 	constructor(
 		private router : ActivatedRoute,
@@ -201,6 +204,15 @@ export class MyProfileComponent implements OnInit {
 	}
 
 userDas(){
+	$('#profile_option').click(function(){
+		$(".profile_opt_ul div").toggle();
+	});
+	$(".profile_opt_ul li a").click(function(){  
+		$(".profile_opt_ul li a").removeClass("profile_active");
+		$(this).addClass("profile_active");
+	});   
+	var $accord = $('.open');
+	
 	this.router.params.subscribe(val => {
 		let currentId = this.router.snapshot.params["value"];
 		if(currentId=='dashboard'){
@@ -215,11 +227,14 @@ userDas(){
 		}else if(currentId=='applications'){
 			this.pageHide = true;
 			this.AllApplication=true;
+			this.noApplication=false;
 			this.UnderProcessApplication=false;
-			this.dropDownToggle();
 			setTimeout(() => {
 				this.ComProcessAppli()
 			}, 1500);
+			setTimeout(() => {
+				this.dropDownToggle();
+			}, 1700);
 			this.withdraw_page=false;
 			this.my_account = true;
 			this.my_profile = false;
@@ -231,9 +246,13 @@ userDas(){
 			this.pageHide = true;
 			this.UnderProcessApplication=true;
 			this.AllApplication=false;
+			this.noApplication=false;
 			setTimeout(() => {
 				this.underProcessAppli()
 			}, 1500);
+			setTimeout(() => {
+				this.dropDownToggle();
+			}, 1700);
 			this.withdraw_page=false;
 			this.my_account = true;
 			this.my_profile = false;
@@ -281,7 +300,7 @@ userDas(){
 						this.total_page_bonus_ = data.total_bonus;
 						this.withdraw_request = data.withdraw_request;
 						if(this.withdraw_request!==''){
-							this.withdraw_request1 = data.bonus_withdraw;
+							this.withdraw_request1 = data.withdraw_request;
 						}
 					}else if(data.status=="ERROR"){
 						// do nothing
@@ -295,22 +314,11 @@ userDas(){
 }
 
 	dropDownToggle(){
-		$('#profile_option').click(function(){
-			$(".profile_opt_ul div").slideToggle();
-		});
-		$(".profile_opt_ul li a").click(function(){  
-			$(".profile_opt_ul li a").removeClass("profile_active");
-			$(this).addClass("profile_active");
-		});   
-		var $accord = $('.open');
+		$('.new').off('click');
 		$(".new").click(function () {
-
-		var $ans = $(this).next(".open").slideToggle();
+			var $ans = $(this).next(".open").toggle();
+			$(this).find("span").toggleClass("rotate");	
 		});
-
-		$(".new").click(function(){
-			$(this).find("span").toggleClass("rotate");				
-		});  
 	}
 
 	changeUrl(vla){
@@ -322,27 +330,63 @@ userDas(){
 		});
 	}
 
+	resolved(captchaResponse: string) {
+		this.grecaptcha = captchaResponse;
+		this.captchaError = false;
+	}
+
 	myProfileSub(){
 		$('#flagDropVlu').change(function(){
 			$(".flagEr").removeClass("borderColor");
 		})
 		let flagE=0;
+		let fild='';
 		if(this.email == "" || this.email == undefined){
 			$(".emailOne").addClass("borderColor");
 			flagE=1;
 		}if(this.name == "" || this.name == undefined){
 			$(".nameOne").addClass("borderColor");
 			flagE=1;
-		}if(this.number == "" || this.number == undefined){
+			if(fild=='')
+			{
+				fild='lbl_name';
+			}	
+		}
+		if(this.number == "" || this.number == undefined || this.number == null){
 			$(".numberVal").addClass("borderColor");
 			flagE=1;
-		}if(this.number.length < 6){
-			$(".numberVal").addClass("borderColor");
-			flagE=1;
+			if(fild=='')
+			{
+				fild='lbl_number';
+				alert('1')
+			}	
+		}
+		if(this.number != null){
+			console.log(this.number)
+			console.log(this.number.length)
+			if(this.number.length < 6){
+				$(".numberVal").addClass("borderColor");
+				flagE=1;
+				if(fild=='')
+				{
+					fild='lbl_number';
+				}
+			}
 		}if($('#flagDropVlu').val() == "" || $('#flagDropVlu').val() == undefined){
 			$(".flagEr").addClass("borderColor");
 			flagE=1;
+		}if(this.grecaptcha === undefined){
+			this.captchaError = true;
+			this.captchaError_msg = "Please enter captcha"
+			flagE=1;
+			if(fild=='')
+			{
+				fild='lbl_captcha';
+			}
 		}if(flagE==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
 			return;
 		}
 		this.processmy=true;
@@ -378,12 +422,18 @@ userDas(){
 						user_id:user.user_id
 					}
 					localStorage.setItem('user', JSON.stringify(formData));
+					setTimeout(() => {
+						$('html, body').animate({scrollTop: $(".my_alert_scr_er").offset().top}, 800);						
+					}, 500);
 				}
 				else if(data.status == 'ERROR'){
 					this.processmy=false;
 					this.updated_error = true;
 					this.updated_error_msg = 'Not update your profile please try again later';
 					setTimeout(function(){ cmt.updated_error = false;}, 3000);
+					setTimeout(() => {
+						$('html, body').animate({scrollTop: $(".my_alert_scr_er").offset().top}, 800);						
+					}, 500);
 				}
 				else{/*'do nothing'*/}
 			})
@@ -398,20 +448,35 @@ userDas(){
 	}
 
 	changePassSub(){
+		let fild='';
 		let flg=0;
 		if(this.oldPassword == "" || this.oldPassword == undefined){
 			$(".oldPass").addClass("borderColor");
 			flg=1;
+			if(fild=='')
+			{
+				fild='lbl_oldPassword';
+			}	
 		}if(this.newPassword == "" || this.newPassword == undefined){
 			$(".newPass").addClass("borderColor");
 			flg=1;
+			if(fild=='')
+			{
+				fild='lbl_newPassword';
+			}	
 		}if((this.matchPassword== "" || this.matchPassword == undefined) || !(this.matchPassword.match(this.newPassword))){
 			$(".matchPass").addClass("borderColor");
 			flg=1;
+			if(fild=='')
+			{
+				fild='lbl_matchPassword';
+			}	
 		}if(flg==1){
+			$('html, body').animate({
+				scrollTop: $("#"+fild).offset().top
+			}, 800);
 			return;
 		}
-
 		this.changePassData={
 			access_token:this.token,
 			old_password:this.oldPassword,
@@ -423,6 +488,9 @@ userDas(){
 				if(data.status == 'SUCCESS'){
 					this.change_suc = true;
 					this.change_suc_msg = data.msg;
+					setTimeout(() => {
+						$('html, body').animate({scrollTop: $(".ed_alert_scr_er").offset().top}, 800);						
+					}, 500);
 					setTimeout(function(){ cmt.change_suc = false;}, 3000);
 					this.oldPassword =''
 					this.newPassword =''
@@ -431,9 +499,14 @@ userDas(){
 				else if(data.status == 'ERROR'){
 					this.change_error = true;
 					this.change_error_msg = data.msg;
+					setTimeout(() => {
+						$('html, body').animate({scrollTop: $(".ed_alert_scr_er").offset().top}, 800);						
+					}, 500);
 					setTimeout(function(){ cmt.change_error = false;}, 3000);
 				}
-				else{/*'do nothing'*/}
+				else{
+					/*'do nothing'*/
+				}
 			})
 	}
 	
@@ -483,7 +556,6 @@ userDas(){
 			var access_token_get = access_token.access_token;
 			var token = btoa(access_token_get +'###'+ cmt.userId +'###'+ orderId+'###');
 			cmt.orders_user.splice(i,1)
-			// cmt.orders_user = cmt.orders_user;
 			cmt.UserOrders_user = cmt.orders_user;
 			cmt._deleteOrder.userDeleteOrd(token).subscribe(
 				data =>{
@@ -493,6 +565,11 @@ userDas(){
 						setTimeout(() => {
 							$('#modal_btn_dlt').trigger('click');
 						}, 2000);
+						if(cmt.UserOrders_user==''){
+							cmt.UnderProcessApplication=false;
+							cmt.AllApplication=false;
+							cmt.noApplication=true;
+						}
 					}else if(data.status == 'ERROR'){
 						cmt.successMsgDltUsr='Order not delete'
 						$('#modal_btn_delete_user').trigger('click');
@@ -513,20 +590,32 @@ userDas(){
 	confirmPasRed(){
 		$(".matchPass").removeClass("borderColor");
 	}
-
+	
 	ComProcessAppli(){
 		this.UserOrders_user=new Array
-		for(var i=0;this.orders_user.length>i;i++){
-			this.UserOrders_user.push(this.orders_user[i])			
+		if(this.orders_user!=undefined){
+			for(var i=0;this.orders_user.length>i;i++){
+				this.UserOrders_user.push(this.orders_user[i])			
+			}
+		}else{
+			this.UnderProcessApplication=false;
+			this.AllApplication=false;
+			this.noApplication=true;
 		}
 	}
 
 	underProcessAppli(){
 		this.UserOrders_user=new Array
-		for(var i=0;this.orders_user.length>i;i++){
-			if(this.orders_user[i].is_complete==0){
-				this.UserOrders_user.push(this.orders_user[i])
-			}			
+		if(this.orders_user!=undefined){
+			for(var i=0;this.orders_user.length>i;i++){
+				if(this.orders_user[i].is_complete==0){
+					this.UserOrders_user.push(this.orders_user[i])
+				}			
+			}
+		}else{
+			this.UnderProcessApplication=false;
+			this.AllApplication=false;
+			this.noApplication=true;
 		}
 	}
 

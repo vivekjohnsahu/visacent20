@@ -26,7 +26,6 @@ import { Meta, Title} from '@angular/platform-browser';
 	Error_page_msg:string;
 	pageHide:boolean;
 	newsList:any;
-
 	pages : any = [];
 	pageSize =3;
 	pageNumber : number = 0;
@@ -72,6 +71,9 @@ import { Meta, Title} from '@angular/platform-browser';
 	}
 
 	prevPage(){
+		if(this.currentPage != 1 && this.pageNumber != 0){
+			$('html, body').animate({scrollTop: $("#topScreen").offset().top}, 2000);
+		}
 		if(this.currentPage>1){
 		   this.currentPage --;
 		} 
@@ -83,6 +85,9 @@ import { Meta, Title} from '@angular/platform-browser';
 	}
 
 	nextPage(){
+		if(this.currentPage != this.pageNumber && this.pageNumber != 0){
+			$('html, body').animate({scrollTop: $("#topScreen").offset().top}, 2000);
+		}
 		if(this.currentPage < this.pageNumber){
 			  this.currentPage ++;
 		}

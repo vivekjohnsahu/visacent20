@@ -7,7 +7,6 @@ import { Alert } from 'selenium-webdriver';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 declare let result: any;
 import { CountriesListService } from '../../services/countries_list_home/countries-list.service';
-import '../../../assets/js/intlTelInput.min.js';
 import { FlagValueService } from '../../services/flagValue/flag-value.service';
 import { HeaderPageComponent } from '../../view/header-page/header-page.component';
 
@@ -168,6 +167,7 @@ export class OrderSummaryComponent implements OnInit {
 	  military_data_statusChek:any;
 	  Married_data_statusChek:any;
 	  specifiName:any;
+	  criminalRecord='No'
 
 	constructor(
 		private orderSummaryService:OrderSummaryService,
@@ -839,6 +839,11 @@ export class OrderSummaryComponent implements OnInit {
 	};
 
 	departureData(){
+		if(this.arrival_day.length>0 && 9>this.arrival_day){
+			this.arrival_day = this.arrival_day.split('0')[1];
+		}
+		var one = 1;
+		this.arrival_day = + this.arrival_day + one;
 		for (var i=this.arrival_day; i<=31; i++){
 			if(i==this.departure_day)
 				$('.day_departure_1').append('<option value="' + i + '" selected>' + i + '</option>');
@@ -947,7 +952,7 @@ export class OrderSummaryComponent implements OnInit {
 		$('input').on('click',function(){
 			$(this).css('border-color','#b5b5b5');	
 		})
-		$('html,body').animate({ scrollTop: $('#scroll_appli').offset().top},'fast');
+		$('html,body').animate({ scrollTop: $('#scroll_appli').offset().top},'slow');
 		var flg=0;
 		$('.'+cls).each(function(){
 			if($(this).val()=='')
@@ -965,12 +970,10 @@ export class OrderSummaryComponent implements OnInit {
 				var mon=$(this).find('.mon').val();
 				var year=$(this).find('.year').val();
 				var th=$(this);
-			
 				if($(this).hasClass(cls+'_date')){
 					if(dy=='0'){$(this).find('.day').css('border-color','red'); flg1=1;}
 					if(mon=='0'){$(this).find('.mon').css('border-color','red'); flg1=1;}
 					if(year=='0'){$(this).find('.year').css('border-color','red'); flg1=1;}	
-
 					if(flg1==0)
 						flg2= cmd.date_validation_later(dy,mon,year,th);
 					else
@@ -992,13 +995,10 @@ export class OrderSummaryComponent implements OnInit {
 				var mon=$(this).find('.mon').val();
 				var year=$(this).find('.year').val();
 				var th=$(this);
-				
 				if($(this).hasClass(cls+'_date')){
-					
 					if(dy=='0'){$(this).find('.day').css('border-color','red'); flg1=1;}
 					if(mon=='0'){$(this).find('.mon').css('border-color','red'); flg1=1;}
 					if(year=='0'){$(this).find('.year').css('border-color','red'); flg1=1;}	
-
 					if(flg1==0)
 					flg2= cmd.date_validation_before(dy,mon,year,th);
 				else
@@ -1009,25 +1009,18 @@ export class OrderSummaryComponent implements OnInit {
 					if(dy=='0'){$(this).find('.day').css('border-color','red'); flg1=1;}
 					if(mon=='0'){$(this).find('.mon').css('border-color','red'); flg1=1;}
 					if(year=='0'){$(this).find('.year').css('border-color','red'); flg1=1;}	
-
 					if(flg1==0)
 					flg2= cmd.date_validation_before(dy,mon,year,th);
 					else
 					flg2=1;
 				}	
 			}
-
 			if(flg==0)
 				flg=flg2;
-
 		})
-
-		
-
 		if(flg==1){
 			return false;
 		}
-
 		if(vl=='1')
 		{	
 			this.applicant_informaction = false;
@@ -1036,7 +1029,6 @@ export class OrderSummaryComponent implements OnInit {
 			this.applicant_father_informaction = false;
 			this.applicant_reference_informaction = false;
 			this.applicant_suought_infor = false;
-	
 			if(this.form_fields_applicant){
 				this.applicant_informaction = true;
 				this.next_btn_applicant=true;
@@ -1064,14 +1056,13 @@ export class OrderSummaryComponent implements OnInit {
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#genralTtemSclSbt").offset().top
-						}, 800);
+						}, 1500);
 					});
 			}	
 			var cmd=this;	
 		}
 		if(vl=='2')
 		{
-
 			this.next_btn_applicant=true;
 			var flg8=0;
 			this.numberval=$('.findNumber').val();
@@ -1091,14 +1082,12 @@ export class OrderSummaryComponent implements OnInit {
 				}
 			}
 			if(flg8==1)return false;
-			
 			this.applicant_personal_informaction = false;
 			this.general_information = false;
 			this.applicant_informaction = false;
 			this.applicant_father_informaction = false;
 			this.applicant_reference_informaction = false;
 			this.applicant_suought_infor = false;
-			
 			if(this.form_fields_applicant_personal){
 				this.applicant_personal_informaction = true;
 				this.next_btn_per_info=true;
@@ -1119,9 +1108,8 @@ export class OrderSummaryComponent implements OnInit {
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#applicantTtemSclSbt").offset().top
-						}, 800);
+						}, 1500);
 					});
-	
 			}
 			var cmd=this;	
 		}
@@ -1178,7 +1166,7 @@ export class OrderSummaryComponent implements OnInit {
 						setTimeout(() => {
 							$('html, body').animate({
 								scrollTop: $("#per_infoTtemSclSbt").offset().top
-							}, 800);
+							}, 1500);
 						});
 				}	
 				var cmd=this;	
@@ -1191,7 +1179,6 @@ export class OrderSummaryComponent implements OnInit {
 			this.general_information = false;
 			this.applicant_personal_informaction = false;
 			this.applicant_suought_infor = false;
-			
 				if(this.form_fields_reference){
 					this.applicant_reference_informaction = true;
 					this.next_refe_btn=true;
@@ -1199,14 +1186,14 @@ export class OrderSummaryComponent implements OnInit {
 					this.applicant_suought_infor = true;
 					this.next_btn_suought=true;
 				}else{
-				this.applicant_father_informaction = true;
+					this.applicant_father_informaction = true;
 				if(this.is_final_submit=='0')
 					this.submit_btn_show = true;
 					this.next_father_btn = false;
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#father_btnTtemSclSbt").offset().top
-						}, 800);
+						}, 1500);
 					});
 				}	
 		}
@@ -1239,7 +1226,6 @@ export class OrderSummaryComponent implements OnInit {
 			this.applicant_informaction = false;
 			this.general_information = false;
 			this.applicant_personal_informaction = false;	
-
 			if(this.form_fields_visa_sought){
 				this.applicant_suought_infor = true;
 				this.next_btn_suought=true;
@@ -1251,13 +1237,12 @@ export class OrderSummaryComponent implements OnInit {
 					setTimeout(() => {
 						$('html, body').animate({
 							scrollTop: $("#refe_btnTtemSclSbt").offset().top
-						}, 800);
+						}, 1500);
 					});
 			}	
 		} 
 		if(vl=='6')
-		{
-			
+		{		
 		var flg=0;
 		$('.'+cls).each(function(){
 			if($(this).val()=='')
@@ -1266,19 +1251,15 @@ export class OrderSummaryComponent implements OnInit {
 				flg=1;
 			}
 		})
-
 		var cmd=this;
 		$('.'+cls+'_dt').each(function(){
-
 			var flg1=0;
 			var flg2=0;
-
 			if($(this).hasClass('later_date')){
 				var dy=$(this).find('.day').val();
 				var mon=$(this).find('.mon').val();
 				var year=$(this).find('.year').val();
-				var th=$(this);
-			
+				var th=$(this);	
 				if($(this).hasClass(cls+'_date')){
 					if(dy=='0'){$(this).find('.day').css('border-color','red'); flg1=1; }
 					if(mon=='0'){$(this).find('.mon').css('border-color','red'); flg1=1;}
@@ -1305,13 +1286,10 @@ export class OrderSummaryComponent implements OnInit {
 				var mon=$(this).find('.mon').val();
 				var year=$(this).find('.year').val();
 				var th=$(this);
-				
-				if($(this).hasClass(cls+'_date')){
-					
+				if($(this).hasClass(cls+'_date')){	
 					if(dy=='0'){$(this).find('.day').css('border-color','red'); flg1=1;}
 					if(mon=='0'){$(this).find('.mon').css('border-color','red'); flg1=1;}
 					if(year=='0'){$(this).find('.year').css('border-color','red'); flg1=1;}	
-
 					if(flg1==0)
 					flg2= cmd.date_validation_before(dy,mon,year,th);
 				else
@@ -1329,7 +1307,6 @@ export class OrderSummaryComponent implements OnInit {
 					flg2=1;
 				}	
 			}
-
 			if(flg==0)
 				flg=flg2;
 		})
@@ -1353,7 +1330,6 @@ export class OrderSummaryComponent implements OnInit {
 			}	
 			if(flg5==1)return false;			
 		}
-		
 		if(flg==1){
 			return false;
 		}
@@ -1364,7 +1340,7 @@ export class OrderSummaryComponent implements OnInit {
 				setTimeout(() => {
 					$('html, body').animate({
 						scrollTop: $("#suoughtTtemSclSbt").offset().top
-					}, 800);
+					}, 1500);
 				});			
 		}
 
@@ -1449,7 +1425,7 @@ export class OrderSummaryComponent implements OnInit {
 	}
 
 	pre_form(pr){
-		$('html,body').animate({ scrollTop: $('#scroll_appli').offset().top},'fast');
+		$('html,body').animate({ scrollTop: $('#scroll_appli').offset().top},'slow');
 		if(pr=='1')
 		{	
 			this.general_information = false;
@@ -1566,11 +1542,9 @@ export class OrderSummaryComponent implements OnInit {
 		{
 			$('#progress_bar_li_'+i).addClass('completed');	
 		}
-		$('#progress_bar_li_'+this.progress_active).addClass('active');
-			
+			$('#progress_bar_li_'+this.progress_active).addClass('active');		
 	}
 
-	criminalRecord='No'
 	criminalRecordYes(){
 		this.criminalRecord='Yes'
 	}
@@ -1690,7 +1664,9 @@ export class OrderSummaryComponent implements OnInit {
 		$('#submit_modal_btn').trigger('click');
 		$("#submit_modal_btn_payPage").off( "click" );
 		$('#submit_modal_btn_payPage').click(function(){
-		document.body.scrollTop = document.documentElement.scrollTop = 0;
+			$('html, body').animate({
+				scrollTop: $("#doc_win_sc").offset().top
+			}, 1500);
 		cmt.appliCantInfo()	
 		})
 	}
@@ -1729,9 +1705,7 @@ export class OrderSummaryComponent implements OnInit {
 			this.fileSizeAndExt='invalid size minimum 10 KB and maximum 5 MB' 
 			$('#validExtension').trigger('click');
 		}else{
-
-			if(extns=='pdf')
-			{
+			if(extns=='pdf'){
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					$('#fileListUrl_pdf_'+i).html('<a>View pdf file</a>');
@@ -1746,8 +1720,7 @@ export class OrderSummaryComponent implements OnInit {
 				$('#fileListUrl_pdf_'+i).show();
 				$('#fileListUrl_img_'+i).hide();
 				$('#fileListUrl_blank_'+i).hide();
-			}else
-			{
+			}else{
 				var reader = new FileReader();
 				reader.onload = function(e) {
 					$('#fileListUrl_img_'+i).attr('src',reader.result); 
@@ -1784,10 +1757,8 @@ export class OrderSummaryComponent implements OnInit {
 					$('.btn_upload_txt_'+i).html('Re-Upload');
 					$('#btn_dis_'+i).attr('disabled', true);
 					$("#btn_dis_"+i).css({'background-color':'#5aa2d8', 'cursor':'no-drop;'});
-					
 					$('#apliImgupload_'+i).text('Document Uploaded Successfully.');
 					$('#flg_appli_doc_'+i).val(documentArr.input_img);
-					
 					var flg=0;
 					$('.cls_appli_doc').each(function(){
 						if($(this).hasClass('docreq')){
@@ -1835,7 +1806,7 @@ export class OrderSummaryComponent implements OnInit {
 								{
 									flg=0;
 									cmd.field_re(indx);
-									$('html,body').animate({ scrollTop: $('.appli_tab').offset().top},'fast'); 
+									$('html,body').animate({ scrollTop: $('.appli_tab').offset().top},'slow'); 
 									return false;
 								}
 								indx++;
@@ -1940,7 +1911,7 @@ export class OrderSummaryComponent implements OnInit {
 								{
 									flg=0;
 									cmd.field_re(indx);
-									$('html,body').animate({ scrollTop: $('.appli_tab').offset().top},'fast'); 
+									$('html,body').animate({ scrollTop: $('.appli_tab').offset().top},'slow'); 
 									return false;
 								}
 								indx++;

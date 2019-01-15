@@ -136,4 +136,29 @@ a.new>span
     }
 }
 
+.reffer_icon a
+{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    text-align: center;
+    color: white;
+    margin-right: 7px;
+    font-size: 18px;
+}
+.reffer_icon a:first-child
+{
+    background-color:#4AB3F4;
+}
+.reffer_icon a:nth-child(2)
+{
+    background-color:#29487d;
+}
+.reffer_icon a:last-child
+{
+    background-color:red;
+}
+
 /*------------------- end faq accordian -----------------*/

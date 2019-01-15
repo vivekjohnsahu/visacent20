@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Http, Response,} from "@angular/http";
 import 'rxjs/add/operator/map';
+import { environment } from '../../../environments/environment';
+import * as $ from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class CountriesListService {
 
 	constructor(private http:Http) { }
 
-	private countriesListUrl = "https://visacent.com/la/api/countries_list";
+	private countriesListUrl = environment.api_url+"/countries_list";
 	
 	countriesList() {
 		return this.http.get(`${this.countriesListUrl}`).map((res:Response) => res.json());
@@ -22,4 +24,5 @@ export class CountriesListService {
 	travellingParticularName(travelling:any){
 		return this.http.get(`${this.countriesListUrl}`+"/"+travelling).map((res:Response) => res.json());
 	}
+	
 }
